@@ -4,7 +4,7 @@
 
 ### Data Field
 
-1. UserNumber (Id)
+1. UserNo (Id)
 2. UserGithubInfo
     - github_id
     - name
@@ -21,7 +21,7 @@
 
 ### Data Field
 
-1. LibraryBookNumber (Id)
+1. LibraryBookNo (Id)
 2. LibraryBookCoverUrl
 3. LibraryBookInfo
     - title
@@ -34,7 +34,7 @@
 
 ### Data Field
 
-1. WishBookNumber (Id)
+1. WishBookNo (Id)
 2. WishBookCoverUrl
 3. WishBookInfo
     - title
@@ -43,7 +43,7 @@
     - isbn
     - desc
 4. WishBookRequestUser
-    - user_id
+    - UserNo (user_id)
 5. CreatedTime
 6. ModifiedTime
 7. DeletedTime
@@ -52,24 +52,25 @@
 
 1. Soft Delete
 
-## SerialNumber Domain
+## Serial Domain
 
 ### Data Field
 
-1. SerialNumber (Id)
-2. LibraryBookNumber
-    - book_id
-3. SerialNumberRentStatus
+1. SerialNo (Id)
+2. SerialRentStatus
+3. LibraryBook
+    - LibraryBookNo (book_id)
+
 
 ## RentHistory
 
 ### Data Field
 
-1. RentHistoryNumber (Id)
-2. RentSerialNumber
-    - serial_id
-3. RentUserNumber
-    - user_id
+1. RentHistoryNo (Id)
+2. RentSerial
+    - SerialNo (serial_id)
+3. RentUser
+    - UserNo (user_id)
 4. CreatedTime
 5. ModifiedTime
 6. DeletedTime
