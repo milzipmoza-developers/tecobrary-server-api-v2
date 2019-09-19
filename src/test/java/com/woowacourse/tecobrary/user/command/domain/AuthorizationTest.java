@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.domain;
+package com.woowacourse.tecobrary.user.command.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

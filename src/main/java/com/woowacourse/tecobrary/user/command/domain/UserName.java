@@ -1,6 +1,6 @@
-package com.woowacourse.tecobrary.user.domain;
+package com.woowacourse.tecobrary.user.command.domain;
 
-import com.woowacourse.tecobrary.user.domain.exception.UserNameLengthException;
+import com.woowacourse.tecobrary.user.command.domain.exception.UserNameLengthException;
 
 import javax.persistence.Embeddable;
 

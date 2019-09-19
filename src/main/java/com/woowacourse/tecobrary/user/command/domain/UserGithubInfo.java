@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.domain;
+package com.woowacourse.tecobrary.user.command.domain;
 
 import com.woowacourse.tecobrary.common.model.Email;
 import com.woowacourse.tecobrary.common.model.HttpsUrl;

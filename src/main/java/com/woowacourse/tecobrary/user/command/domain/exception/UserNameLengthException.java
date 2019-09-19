@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.domain.exception;
+package com.woowacourse.tecobrary.user.command.domain.exception;
 
 public class UserNameLengthException extends RuntimeException {
     public UserNameLengthException() {

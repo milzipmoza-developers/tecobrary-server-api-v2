@@ -2,11 +2,11 @@ package com.woowacourse.tecobrary.user.common;
 
 import com.woowacourse.tecobrary.common.model.Email;
 import com.woowacourse.tecobrary.common.model.HttpsUrl;
-import com.woowacourse.tecobrary.user.domain.Authorization;
-import com.woowacourse.tecobrary.user.domain.User;
-import com.woowacourse.tecobrary.user.domain.UserAuthorization;
-import com.woowacourse.tecobrary.user.domain.UserGithubInfo;
-import com.woowacourse.tecobrary.user.domain.UserName;
+import com.woowacourse.tecobrary.user.command.domain.Authorization;
+import com.woowacourse.tecobrary.user.command.domain.User;
+import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
+import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
+import com.woowacourse.tecobrary.user.command.domain.UserName;
 
 public interface UserStatics {
     String TEST_GITHUB_ID = "100";
