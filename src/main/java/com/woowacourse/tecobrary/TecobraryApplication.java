@@ -8,7 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @PropertySource(
         value = {
-                "classpath:github.yml"
+                "classpath:github.yml",
+                "classpath:jwtauth.yml"
         },
         ignoreResourceNotFound = true,
         factory = YamlPropertySourceFactory.class
