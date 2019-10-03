@@ -19,7 +19,7 @@ public class Email {
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    public String email;
+    private String email;
 
     public Email(String email) {
         checkEmailForm(email);
