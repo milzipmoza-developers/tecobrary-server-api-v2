@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
-public class IndexControllerTest {
+public class ApiIndexControllerTest {
 
     @LocalServerPort
     private int port;
