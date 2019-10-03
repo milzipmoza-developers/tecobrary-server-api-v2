@@ -17,7 +17,7 @@ public class UserService {
 
     public User getByGithubId(String githubId) {
         return userRepository.getUserByUserGithubInfo_GithubId(githubId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저"));
+                .orElseThrow(NotFoundGithubUserException::new);
     }
 
     public User save(User user) {
