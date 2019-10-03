@@ -1,10 +1,13 @@
 package com.woowacourse.tecobrary.user.ui;
 
+import com.woowacourse.tecobrary.user.command.application.NotFoundGithubUserException;
 import com.woowacourse.tecobrary.user.command.application.UserService;
-import com.woowacourse.tecobrary.user.command.domain.*;
-import com.woowacourse.tecobrary.user.infra.dto.GithubUserInfoDto;
+import com.woowacourse.tecobrary.user.command.domain.Authorization;
+import com.woowacourse.tecobrary.user.command.domain.User;
+import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
 import com.woowacourse.tecobrary.user.infra.util.GithubApiRequestClient;
 import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUtils;
+import com.woowacourse.tecobrary.user.infra.util.GithubUserParser;
 import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
@@ -36,17 +39,12 @@ public class GithubUserApiController {
     public ResponseEntity<UserResponseVo> getGithubUserInformation(@RequestParam String code) {
         String githubApiAccessToken = githubUserApiUtils.githubUserApiAccessToken(code);
 
-        User user = new User(
-                composeUserInfo(githubUserInfo(githubApiAccessToken), githubUserEmail(githubApiAccessToken)),
-                new UserAuthorization(Authorization.NONE)
-        );
-
-        User savedUser = userService.save(user);
+        User savedUser = savedGithubUserInfo(githubApiAccessToken);
 
         // TODO
         //  jwt 만들어 응답 responseVo 에 넣어 response 하는 작업이 필요함,
         //  Doamin 값들을 직접 꺼내오는 것에 대한 고찰이 필요
-        UserResponseVo userResponseVo =  new UserResponseVo(
+        UserResponseVo userResponseVo = new UserResponseVo(
                 savedUser.getUserEmail(),
                 savedUser.getUserName(),
                 savedUser.getUserAvatarUrl(),
@@ -56,20 +54,19 @@ public class GithubUserApiController {
         return ResponseEntity.ok(userResponseVo);
     }
 
-    private UserGithubInfo composeUserInfo(GithubUserInfoVo githubUserInfoVo, String primaryEmail) {
-        GithubUserInfoDto githubUserInfo = new GithubUserInfoDto(
-                githubUserInfoVo.getId(),
-                githubUserInfoVo.getName(),
-                primaryEmail,
-                githubUserInfoVo.getAvatar_url()
-        );
+    private User savedGithubUserInfo(String githubApiAccessToken) {
+        GithubUserInfoVo githubUserInfoVo = githubUserInfo(githubApiAccessToken);
 
-        return new UserGithubInfo(
-                githubUserInfo.getGithubId(),
-                githubUserInfo.getName(),
-                githubUserInfo.getEmail(),
-                githubUserInfo.getAvatarUrl()
-        );
+        try {
+            return userService.getByGithubId(githubUserInfoVo.getId());
+
+        } catch (NotFoundGithubUserException e) {
+            User user = new User(
+                    GithubUserParser.parse(githubUserInfoVo, githubUserEmail(githubApiAccessToken)),
+                    new UserAuthorization(Authorization.NONE)
+            );
+            return userService.save(user);
+        }
     }
 
     private GithubUserInfoVo githubUserInfo(String githubApiAccessToken) {
