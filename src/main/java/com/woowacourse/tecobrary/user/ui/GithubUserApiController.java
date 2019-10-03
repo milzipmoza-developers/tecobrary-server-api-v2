@@ -5,12 +5,10 @@ import com.woowacourse.tecobrary.user.command.application.UserService;
 import com.woowacourse.tecobrary.user.command.domain.Authorization;
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
-import com.woowacourse.tecobrary.user.infra.util.GithubApiRequestClient;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUtils;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserParser;
-import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
+import com.woowacourse.tecobrary.user.infra.util.*;
+import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
-import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
+import com.woowacourse.tecobrary.user.ui.vo.ResponseUserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,34 +22,27 @@ public class GithubUserApiController {
 
     private final GithubUserApiUtils githubUserApiUtils;
     private final GithubApiRequestClient githubApiRequestClient;
+    private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
 
     @Autowired
     public GithubUserApiController(GithubUserApiUtils githubUserApiUtils,
                                    GithubApiRequestClient githubApiRequestClient,
+                                   JwtTokenUtil jwtTokenUtil,
                                    UserService userService) {
         this.githubUserApiUtils = githubUserApiUtils;
         this.githubApiRequestClient = githubApiRequestClient;
+        this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
     }
 
     @GetMapping("/api")
-    public ResponseEntity<UserResponseVo> getGithubUserInformation(@RequestParam String code) {
+    public ResponseEntity<GithubApiResponseVo> getGithubUserInformation(@RequestParam String code) {
         String githubApiAccessToken = githubUserApiUtils.githubUserApiAccessToken(code);
 
         User savedUser = savedGithubUserInfo(githubApiAccessToken);
 
-        // TODO
-        //  jwt 만들어 응답 responseVo 에 넣어 response 하는 작업이 필요함,
-        //  Doamin 값들을 직접 꺼내오는 것에 대한 고찰이 필요
-        UserResponseVo userResponseVo = new UserResponseVo(
-                savedUser.getUserEmail(),
-                savedUser.getUserName(),
-                savedUser.getUserAvatarUrl(),
-                savedUser.getAuthorization()
-        );
-
-        return ResponseEntity.ok(userResponseVo);
+        return ResponseEntity.ok(buildGithubApiResponse(savedUser));
     }
 
     private User savedGithubUserInfo(String githubApiAccessToken) {
@@ -77,5 +68,19 @@ public class GithubUserApiController {
     private String githubUserEmail(String githubApiAccessToken) {
         return githubUserApiUtils.getPrimaryEmail(
                 githubApiRequestClient.userEmail(githubApiAccessToken));
+    }
+
+    private GithubApiResponseVo buildGithubApiResponse(User savedUser) {
+        ResponseUserVo responseUserVo = new ResponseUserVo(
+                savedUser.getUserNo(),
+                savedUser.getUserEmail(),
+                savedUser.getUserName(),
+                savedUser.getUserAvatarUrl(),
+                savedUser.getAuthorization()
+        );
+
+        String jwtToken = jwtTokenUtil.generateToken(responseUserVo);
+
+        return new GithubApiResponseVo(responseUserVo, jwtToken);
     }
 }
