@@ -2,21 +2,21 @@ package com.woowacourse.tecobrary.user.command.domain;
 
 import com.woowacourse.tecobrary.common.model.Email;
 import com.woowacourse.tecobrary.common.model.HttpsUrl;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
-
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Embeddable
 public class UserGithubInfo {
 
-    @Column(name = "github_id")
+    @Column(name = "github_id",
+            unique = true)
     private String githubId;
 
     @Embedded

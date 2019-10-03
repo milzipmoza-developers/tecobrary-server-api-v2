@@ -32,4 +32,4 @@ out/
 .vscode/
 
 ### properties ###
-./src/main/resources/github.yml
+/src/main/resources/github.yml
