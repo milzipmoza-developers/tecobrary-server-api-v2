@@ -42,7 +42,24 @@ public class User {
     public String updateUserName(String newName) {
         return userGithubInfo.updateName(newName);
     }
+
     public String updateAuthorization(String newAuthorization) {
         return userAuthorization.updateAuthorization(newAuthorization);
+    }
+
+    public String getUserEmail() {
+        return userGithubInfo.getEmailContent();
+    }
+
+    public String getUserName() {
+        return userGithubInfo.getNameContent();
+    }
+
+    public String getUserAvatarUrl() {
+        return userGithubInfo.getAvatarUrlContent();
+    }
+
+    public String getAuthorization() {
+        return userAuthorization.getAuthorizationContent();
     }
 }

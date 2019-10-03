@@ -42,4 +42,16 @@ public class UserGithubInfo {
         this.name = new UserName(newName);
         return name.getName();
     }
+
+    String getEmailContent() {
+        return email.getEmail();
+    }
+
+    String getNameContent() {
+        return name.getName();
+    }
+
+    String getAvatarUrlContent() {
+        return avatarUrl.getUrl();
+    }
 }

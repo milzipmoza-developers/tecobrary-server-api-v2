@@ -23,4 +23,8 @@ public class UserAuthorization {
         this.authorization = Authorization.valueOf(newAuthorization);
         return this.authorization.getAuthorization();
     }
+
+    String getAuthorizationContent() {
+        return authorization.name();
+    }
 }
