@@ -11,12 +11,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class JwtTokenUtilTest {
+class JwtUtilTest {
 
-    private static final Logger log = LoggerFactory.getLogger(JwtTokenUtilTest.class);
+    private static final Logger log = LoggerFactory.getLogger(JwtUtilTest.class);
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtil jwtUtil;
 
     @Test
     void name() {
@@ -27,7 +27,7 @@ class JwtTokenUtilTest {
                 "https://avatar.url/123",
                 "KING"
         );
-        String jwtToken = jwtTokenUtil.generateToken(responseUserVo);
+        String jwtToken = jwtUtil.generateToken(responseUserVo);
         log.debug("generated jwt token : {}", jwtToken);
     }
 }
