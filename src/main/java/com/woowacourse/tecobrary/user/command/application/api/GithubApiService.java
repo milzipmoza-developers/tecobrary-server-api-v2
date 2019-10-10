@@ -11,8 +11,6 @@
 
 package com.woowacourse.tecobrary.user.command.application.api;
 
-import com.woowacourse.tecobrary.user.infra.util.GithubApiClient;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserApi;
 import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import lombok.extern.slf4j.Slf4j;
