@@ -24,7 +24,7 @@ public class GithubApiClient {
     private static final String AUTHORIZATION_PREFIX = "token ";
     private static final String LOGIN_APP = "Login-App";
 
-    public String userInfo(String githubApiAccessToken) {
+    String userInfo(String githubApiAccessToken) {
         return buildUserInfoClient(githubApiAccessToken)
                 .get()
                 .retrieve()
@@ -32,7 +32,7 @@ public class GithubApiClient {
                 .block();
     }
 
-    public String userEmail(String githubApiAccessToken) {
+    String userEmail(String githubApiAccessToken) {
         return buildUserEmailClient(githubApiAccessToken)
                 .get()
                 .retrieve()

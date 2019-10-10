@@ -21,18 +21,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class GithubApiService {
 
-    private final GithubUserApi githubUserApiUtils;
+    private final GithubUserApi githubUserApi;
     private final GithubApiClient githubApiClient;
 
     @Autowired
-    public GithubApiService(GithubUserApi githubUserApiUtils,
+    public GithubApiService(GithubUserApi githubUserApi,
                             GithubApiClient githubApiClient) {
-        this.githubUserApiUtils = githubUserApiUtils;
+        this.githubUserApi = githubUserApi;
         this.githubApiClient = githubApiClient;
     }
 
     public String getGithubAccessToken(String code) {
-        return githubUserApiUtils.githubUserApiAccessToken(code);
+        return githubUserApi.githubUserApiAccessToken(code);
     }
 
     public GithubUserInfoVo githubUserInfo(String githubApiAccessToken) {
@@ -41,7 +41,7 @@ public class GithubApiService {
     }
 
     public String githubUserEmail(String githubApiAccessToken) {
-        return githubUserApiUtils.getPrimaryEmail(
+        return githubUserApi.getPrimaryEmail(
                 githubApiClient.userEmail(githubApiAccessToken));
     }
 }
