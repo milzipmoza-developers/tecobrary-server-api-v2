@@ -1,10 +1,21 @@
+/*
+ * @(#) GithubApiClient.java
+ *
+ * v 1.0.0
+ *
+ * 2019.10.10
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.user.infra.util;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class GithubApiRequestClient {
+public class GithubApiClient {
 
     private static final String GITHUB_API_BASE_URL = "https://api.github.com/user";
     private static final String EMAIL_API_ROUTE = "/emails";
@@ -21,6 +32,22 @@ public class GithubApiRequestClient {
                 .block();
     }
 
+    public String userEmail(String githubApiAccessToken) {
+        return buildUserEmailClient(githubApiAccessToken)
+                .get()
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+    }
+
+    String accessToken(String githubApiUrl) {
+        return WebClient.create(githubApiUrl)
+                .get()
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+    }
+
     private WebClient buildUserInfoClient(String githubApiAccessToken) {
         return WebClient
                 .builder()
@@ -28,14 +55,6 @@ public class GithubApiRequestClient {
                 .defaultHeader(AUTHORIZATION, AUTHORIZATION_PREFIX + githubApiAccessToken)
                 .defaultHeader(USER_AGENT, LOGIN_APP)
                 .build();
-    }
-
-    public String userEmail(String githubApiAccessToken) {
-        return buildUserEmailClient(githubApiAccessToken)
-                .get()
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
     }
 
     private WebClient buildUserEmailClient(String githubApiAccessToken) {

@@ -1,7 +1,18 @@
+/*
+ * @(#) GithubApiService.java
+ *
+ * v 1.0.0
+ *
+ * 2019.10.10
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.user.command.application.api;
 
-import com.woowacourse.tecobrary.user.infra.util.GithubApiRequestClient;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUtils;
+import com.woowacourse.tecobrary.user.infra.util.GithubApiClient;
+import com.woowacourse.tecobrary.user.infra.util.GithubUserApi;
 import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import lombok.extern.slf4j.Slf4j;
@@ -12,14 +23,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class GithubApiService {
 
-    private final GithubUserApiUtils githubUserApiUtils;
-    private final GithubApiRequestClient githubApiRequestClient;
+    private final GithubUserApi githubUserApiUtils;
+    private final GithubApiClient githubApiClient;
 
     @Autowired
-    public GithubApiService(GithubUserApiUtils githubUserApiUtils,
-                            GithubApiRequestClient githubApiRequestClient) {
+    public GithubApiService(GithubUserApi githubUserApiUtils,
+                            GithubApiClient githubApiClient) {
         this.githubUserApiUtils = githubUserApiUtils;
-        this.githubApiRequestClient = githubApiRequestClient;
+        this.githubApiClient = githubApiClient;
     }
 
     public String getGithubAccessToken(String code) {
@@ -28,11 +39,11 @@ public class GithubApiService {
 
     public GithubUserInfoVo githubUserInfo(String githubApiAccessToken) {
         return GsonUtils.parseUserInfo(
-                githubApiRequestClient.userInfo(githubApiAccessToken));
+                githubApiClient.userInfo(githubApiAccessToken));
     }
 
     public String githubUserEmail(String githubApiAccessToken) {
         return githubUserApiUtils.getPrimaryEmail(
-                githubApiRequestClient.userEmail(githubApiAccessToken));
+                githubApiClient.userEmail(githubApiAccessToken));
     }
 }
