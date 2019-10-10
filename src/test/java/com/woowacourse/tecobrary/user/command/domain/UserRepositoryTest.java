@@ -1,13 +1,14 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
+import com.woowacourse.tecobrary.user.command.application.NotFoundGithubUserException;
 import com.woowacourse.tecobrary.user.common.UserStatics;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 public class UserRepositoryTest implements UserStatics {
@@ -20,5 +21,16 @@ public class UserRepositoryTest implements UserStatics {
     void save() {
         User savedUser = userRepository.save(TEST_USER);
         assertNotNull(savedUser.getUserNo());
+    }
+
+    @DisplayName("getUserByGithubInfo_GithubId가 성공적으로 동작한다.")
+    @Test
+    void getUserByGithubInfo_GithubId() {
+        User savedUser = userRepository.save(TEST_USER);
+        assertEquals(
+                userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)
+                        .orElseThrow(NotFoundGithubUserException::new),
+                savedUser
+        );
     }
 }
