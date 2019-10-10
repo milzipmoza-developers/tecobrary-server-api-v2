@@ -2,10 +2,12 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.NotFoundGithubUserException;
 import com.woowacourse.tecobrary.user.command.application.UserService;
+import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.command.domain.Authorization;
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
-import com.woowacourse.tecobrary.user.infra.util.*;
+import com.woowacourse.tecobrary.user.infra.util.GithubUserMapper;
+import com.woowacourse.tecobrary.user.infra.util.JwtUtil;
 import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import com.woowacourse.tecobrary.user.ui.vo.ResponseUserVo;
@@ -20,54 +22,40 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/github/user")
 public class GithubUserApiController {
 
-    private final GithubUserApiUtils githubUserApiUtils;
-    private final GithubApiRequestClient githubApiRequestClient;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtUtil jwtUtil;
+    private final GithubApiService githubApiService;
     private final UserService userService;
 
     @Autowired
-    public GithubUserApiController(GithubUserApiUtils githubUserApiUtils,
-                                   GithubApiRequestClient githubApiRequestClient,
-                                   JwtTokenUtil jwtTokenUtil,
+    public GithubUserApiController(JwtUtil jwtUtil,
+                                   GithubApiService githubApiService,
                                    UserService userService) {
-        this.githubUserApiUtils = githubUserApiUtils;
-        this.githubApiRequestClient = githubApiRequestClient;
-        this.jwtTokenUtil = jwtTokenUtil;
+        this.jwtUtil = jwtUtil;
+        this.githubApiService = githubApiService;
         this.userService = userService;
     }
 
     @GetMapping("/api")
     public ResponseEntity<GithubApiResponseVo> getGithubUserInformation(@RequestParam String code) {
-        String githubApiAccessToken = githubUserApiUtils.githubUserApiAccessToken(code);
-
+        String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         User savedUser = savedGithubUserInfo(githubApiAccessToken);
-
         return ResponseEntity.ok(buildGithubApiResponse(savedUser));
     }
 
     private User savedGithubUserInfo(String githubApiAccessToken) {
-        GithubUserInfoVo githubUserInfoVo = githubUserInfo(githubApiAccessToken);
+        GithubUserInfoVo githubUserInfoVo = githubApiService.githubUserInfo(githubApiAccessToken);
 
         try {
             return userService.getByGithubId(githubUserInfoVo.getId());
 
         } catch (NotFoundGithubUserException e) {
             User user = new User(
-                    GithubUserParser.parse(githubUserInfoVo, githubUserEmail(githubApiAccessToken)),
+                    GithubUserMapper.map(githubUserInfoVo,
+                            githubApiService.githubUserEmail(githubApiAccessToken)),
                     new UserAuthorization(Authorization.NONE)
             );
             return userService.save(user);
         }
-    }
-
-    private GithubUserInfoVo githubUserInfo(String githubApiAccessToken) {
-        return GsonUtils.parseUserInfo(
-                githubApiRequestClient.userInfo(githubApiAccessToken));
-    }
-
-    private String githubUserEmail(String githubApiAccessToken) {
-        return githubUserApiUtils.getPrimaryEmail(
-                githubApiRequestClient.userEmail(githubApiAccessToken));
     }
 
     private GithubApiResponseVo buildGithubApiResponse(User savedUser) {
@@ -79,7 +67,7 @@ public class GithubUserApiController {
                 savedUser.getAuthorization()
         );
 
-        String jwtToken = jwtTokenUtil.generateToken(responseUserVo);
+        String jwtToken = jwtUtil.generateToken(responseUserVo);
 
         return new GithubApiResponseVo(responseUserVo, jwtToken);
     }
