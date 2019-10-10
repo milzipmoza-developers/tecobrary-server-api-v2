@@ -12,6 +12,7 @@
 package com.woowacourse.tecobrary.user.command.application.api;
 
 import com.woowacourse.tecobrary.common.util.BodyParser;
+import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUrlBuilder;
 import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
 import com.woowacourse.tecobrary.user.ui.vo.GithubEmailVo;
 import org.springframework.beans.factory.annotation.Autowired;
