@@ -31,6 +31,7 @@ dependencies {
 	testImplementation 'io.rest-assured:json-path:4.1.1'
 	testImplementation 'io.rest-assured:xml-path:4.1.1'
 	testImplementation 'io.rest-assured:json-schema-validator:4.1.1'
+	testImplementation 'io.rest-assured:spring-mock-mvc:4.1.1'
 
 	runtimeOnly 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 	
