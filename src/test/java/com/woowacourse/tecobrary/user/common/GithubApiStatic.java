@@ -24,5 +24,5 @@ public interface GithubApiStatic {
     String SCOPE_KEY = "scope";
     String SCOPE_VALUE = "user";
     String CODE_KEY = "code";
-    String CODE_NAME = "fake_code";
+    String CODE_VALUE = "fake_code";
 }

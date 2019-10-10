@@ -54,11 +54,11 @@ class GithubUserApiUrlBuilderTest implements GithubApiStatic {
     @Test
     void api() throws URISyntaxException {
         assertEquals(
-                githubUserApiUrlBuilder.api(CODE_NAME),
+                githubUserApiUrlBuilder.api(CODE_VALUE),
                 new URIBuilder(GITHUB_OAUTH_ACCESS_TOKEN_BASE_URL)
                         .addParameter(CLIENT_ID_KEY, CLIENT_ID_VALUE)
                         .addParameter(CLIENT_SECRET_KEY, CLIENT_SECRET_VALUE)
-                        .addParameter(CODE_KEY, CODE_NAME)
+                        .addParameter(CODE_KEY, CODE_VALUE)
                         .build().toString()
         );
     }
