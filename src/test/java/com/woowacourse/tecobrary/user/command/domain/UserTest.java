@@ -1,14 +1,13 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
-import com.woowacourse.tecobrary.user.common.UserStatics;
-
+import com.woowacourse.tecobrary.user.common.UserStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserTest implements UserStatics {
+public class UserTest implements UserStatic {
 
     private static final String UPDATED_NAME = "새로운 이름";
     private static final String UPDATED_AUTHORIZATION = "KING";

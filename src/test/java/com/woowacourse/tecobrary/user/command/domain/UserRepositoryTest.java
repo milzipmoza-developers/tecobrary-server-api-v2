@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
 import com.woowacourse.tecobrary.user.command.application.NotFoundGithubUserException;
-import com.woowacourse.tecobrary.user.common.UserStatics;
+import com.woowacourse.tecobrary.user.common.UserStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-public class UserRepositoryTest implements UserStatics {
+public class UserRepositoryTest implements UserStatic {
 
     @Autowired
     private UserRepository userRepository;

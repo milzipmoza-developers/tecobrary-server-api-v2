@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
-import com.woowacourse.tecobrary.user.common.UserStatics;
+import com.woowacourse.tecobrary.user.common.UserStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
-class UserServiceTest implements UserStatics {
+class UserServiceTest implements UserStatic {
 
     @Mock
     private UserRepository userRepository;
