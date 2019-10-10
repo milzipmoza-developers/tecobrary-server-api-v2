@@ -4,9 +4,9 @@ import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
 import com.woowacourse.tecobrary.user.infra.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 
-public class GithubUserParser {
+public class GithubUserMapper {
 
-    public static UserGithubInfo parse(GithubUserInfoVo githubUserInfoVo, String primaryEmail) {
+    public static UserGithubInfo map(GithubUserInfoVo githubUserInfoVo, String primaryEmail) {
         GithubUserInfoDto githubUserInfo = new GithubUserInfoDto(
                 githubUserInfoVo.getId(),
                 githubUserInfoVo.getName(),
