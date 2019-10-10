@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.user.ui.vo;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -7,6 +8,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
+@EqualsAndHashCode(of = "id")
 public class GithubUserInfoVo {
     private String id;
     private String avatar_url;
