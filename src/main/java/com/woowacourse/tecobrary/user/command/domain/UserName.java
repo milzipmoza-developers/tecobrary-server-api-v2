@@ -1,18 +1,21 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
 import com.woowacourse.tecobrary.user.command.domain.exception.UserNameLengthException;
-
-import javax.persistence.Embeddable;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Embeddable
 public class UserName {
 
+    @Column(name = "name",
+            nullable = true,
+            length = 100)
     private String name;
 
     public UserName(String name) {

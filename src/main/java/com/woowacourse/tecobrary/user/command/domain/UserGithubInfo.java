@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -16,26 +17,26 @@ import javax.persistence.Embedded;
 public class UserGithubInfo {
 
     @Column(name = "github_id",
-            unique = true)
+            unique = true,
+            nullable = false,
+            length = 100)
     private String githubId;
 
     @Embedded
-    @Column(name = "name")
     private UserName name;
 
     @Embedded
-    @Column(name = "email")
     private Email email;
 
     @Embedded
-    @Column(name = "avatar_url")
-    private HttpsUrl avatarUrl;
+    @AttributeOverride(name = "url", column = @Column(name = "avatar_url"))
+    private HttpsUrl httpsUrl;
 
-    public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl avatarUrl) {
+    public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl httpsUrl) {
         this.githubId = githubId;
         this.name = name;
         this.email = email;
-        this.avatarUrl = avatarUrl;
+        this.httpsUrl = httpsUrl;
     }
 
     String updateName(String newName) {
@@ -52,6 +53,6 @@ public class UserGithubInfo {
     }
 
     String getAvatarUrlContent() {
-        return avatarUrl.getUrl();
+        return httpsUrl.getUrl();
     }
 }
