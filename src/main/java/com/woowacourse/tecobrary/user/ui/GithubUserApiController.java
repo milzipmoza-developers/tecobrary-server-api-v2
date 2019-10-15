@@ -8,6 +8,7 @@ import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtil;
 import com.woowacourse.tecobrary.user.infra.util.UserGithubInfoMapper;
+import com.woowacourse.tecobrary.user.infra.util.UserResponseVoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
@@ -39,14 +40,16 @@ public class GithubUserApiController {
     public ResponseEntity<GithubApiResponseVo> getGithubUserInformation(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         User savedUser = savedGithubUserInfo(githubApiAccessToken);
-        return ResponseEntity.ok(getGithubApiResponseVoAndToken(savedUser));
+        UserResponseVo userResponseVo = UserResponseVoMapper.map(savedUser);
+        return ResponseEntity.ok(new GithubApiResponseVo(
+                userResponseVo, jwtUtil.generateToken(userResponseVo)));
     }
 
     private User savedGithubUserInfo(String githubApiAccessToken) {
         GithubUserInfoVo githubUserInfoVo = githubApiService.githubUserInfo(githubApiAccessToken);
 
         try {
-            return userService.getByGithubId(githubUserInfoVo.getId());
+            return userService.findByGithubId(githubUserInfoVo.getId());
 
         } catch (NotFoundGithubUserException e) {
             User user = new User(
@@ -56,19 +59,5 @@ public class GithubUserApiController {
             );
             return userService.save(user);
         }
-    }
-
-    private GithubApiResponseVo getGithubApiResponseVoAndToken(User savedUser) {
-        UserResponseVo userResponseVo = new UserResponseVo(
-                savedUser.getUserNo(),
-                savedUser.getUserEmail(),
-                savedUser.getUserName(),
-                savedUser.getUserAvatarUrl(),
-                savedUser.getAuthorization()
-        );
-
-        String jwtToken = jwtUtil.generateToken(userResponseVo);
-
-        return new GithubApiResponseVo(userResponseVo, jwtToken);
     }
 }
