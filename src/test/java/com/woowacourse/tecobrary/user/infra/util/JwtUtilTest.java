@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.infra.util;
 
-import com.woowacourse.tecobrary.user.ui.vo.ResponseUserVo;
+import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -20,14 +20,14 @@ class JwtUtilTest {
 
     @Test
     void name() {
-        ResponseUserVo responseUserVo = new ResponseUserVo(
+        UserResponseVo userResponseVo = new UserResponseVo(
                 1L,
                 "luffy@milzipdevs.com",
                 "luffy",
                 "https://avatar.url/123",
                 "KING"
         );
-        String jwtToken = jwtUtil.generateToken(responseUserVo);
+        String jwtToken = jwtUtil.generateToken(userResponseVo);
         log.debug("generated jwt token : {}", jwtToken);
     }
 }

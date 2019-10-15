@@ -8,10 +8,10 @@ import lombok.ToString;
 @Getter
 @ToString
 public class GithubApiResponseVo {
-    private ResponseUserVo user;
+    private UserResponseVo user;
     private String token;
 
-    public GithubApiResponseVo(ResponseUserVo user, String token) {
+    public GithubApiResponseVo(UserResponseVo user, String token) {
         this.user = user;
         this.token = token;
     }

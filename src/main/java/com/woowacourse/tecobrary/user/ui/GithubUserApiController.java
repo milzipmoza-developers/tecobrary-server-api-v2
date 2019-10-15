@@ -10,7 +10,7 @@ import com.woowacourse.tecobrary.user.infra.util.JwtUtil;
 import com.woowacourse.tecobrary.user.infra.util.UserGithubInfoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
-import com.woowacourse.tecobrary.user.ui.vo.ResponseUserVo;
+import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +59,7 @@ public class GithubUserApiController {
     }
 
     private GithubApiResponseVo getGithubApiResponseVoAndToken(User savedUser) {
-        ResponseUserVo responseUserVo = new ResponseUserVo(
+        UserResponseVo userResponseVo = new UserResponseVo(
                 savedUser.getUserNo(),
                 savedUser.getUserEmail(),
                 savedUser.getUserName(),
@@ -67,8 +67,8 @@ public class GithubUserApiController {
                 savedUser.getAuthorization()
         );
 
-        String jwtToken = jwtUtil.generateToken(responseUserVo);
+        String jwtToken = jwtUtil.generateToken(userResponseVo);
 
-        return new GithubApiResponseVo(responseUserVo, jwtToken);
+        return new GithubApiResponseVo(userResponseVo, jwtToken);
     }
 }
