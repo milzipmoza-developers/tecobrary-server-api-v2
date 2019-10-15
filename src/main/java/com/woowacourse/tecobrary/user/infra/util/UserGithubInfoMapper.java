@@ -1,13 +1,13 @@
 package com.woowacourse.tecobrary.user.infra.util;
 
 import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
-import com.woowacourse.tecobrary.user.infra.dto.GithubUserInfoDto;
+import com.woowacourse.tecobrary.user.infra.dto.UserGithubInfoDto;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 
-public class GithubUserMapper {
+public class UserGithubInfoMapper {
 
     public static UserGithubInfo map(GithubUserInfoVo githubUserInfoVo, String primaryEmail) {
-        GithubUserInfoDto githubUserInfo = new GithubUserInfoDto(
+        UserGithubInfoDto githubUserInfo = new UserGithubInfoDto(
                 githubUserInfoVo.getId(),
                 githubUserInfoVo.getName(),
                 primaryEmail,

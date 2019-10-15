@@ -6,8 +6,8 @@ import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.command.domain.Authorization;
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserMapper;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtil;
+import com.woowacourse.tecobrary.user.infra.util.UserGithubInfoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 import com.woowacourse.tecobrary.user.ui.vo.ResponseUserVo;
@@ -39,7 +39,7 @@ public class GithubUserApiController {
     public ResponseEntity<GithubApiResponseVo> getGithubUserInformation(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         User savedUser = savedGithubUserInfo(githubApiAccessToken);
-        return ResponseEntity.ok(buildGithubApiResponse(savedUser));
+        return ResponseEntity.ok(getGithubApiResponseVoAndToken(savedUser));
     }
 
     private User savedGithubUserInfo(String githubApiAccessToken) {
@@ -50,7 +50,7 @@ public class GithubUserApiController {
 
         } catch (NotFoundGithubUserException e) {
             User user = new User(
-                    GithubUserMapper.map(githubUserInfoVo,
+                    UserGithubInfoMapper.map(githubUserInfoVo,
                             githubApiService.githubUserEmail(githubApiAccessToken)),
                     new UserAuthorization(Authorization.NONE)
             );
@@ -58,7 +58,7 @@ public class GithubUserApiController {
         }
     }
 
-    private GithubApiResponseVo buildGithubApiResponse(User savedUser) {
+    private GithubApiResponseVo getGithubApiResponseVoAndToken(User savedUser) {
         ResponseUserVo responseUserVo = new ResponseUserVo(
                 savedUser.getUserNo(),
                 savedUser.getUserEmail(),
