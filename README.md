@@ -7,6 +7,38 @@
 * Tomcat 9.0.22
 * Gradle
 
+## Build 전 요구사항
+
+* ``src/main/resources`` 디렉토리에 다음 두 개의 파일을 생성해야 합니다.
+
+1. github.yml
+
+github oauth 를 이용하기 위해 필요한 환경 변수 입니다.
+
+```
+github:
+  user:
+    client_id: [user_github_api_client_id]
+    client_secret: [user_github_api_client_secret]
+    redirect_uri: [user_github_api_redirect_uri] // github oauth 설정 페이지와 동일해야 합니다.
+  manager:
+    client_id: [manager_github_api_client_id]
+    client_secret: [manager_github_api_client_secret]
+    redirect_uri: [manager_github_api_redirect_uri] // github oauth 설정 페이지와 동일해야 합니다.
+  api:
+    scope: user
+```
+
+2. jwtauth.yml
+
+jwt 생성을 위해 필요한 환경 변수 입니다.
+
+```
+jwt:
+  secret: [jwt_signature_secret]
+```
+
+
 ## 브랜치 관리 전략
 
 > 기본 브랜치 관리는 [여기](https://nvie.com/posts/a-successful-git-branching-model/) 의 문서를 기반으로 진행합니다.
@@ -29,12 +61,13 @@
 
 ## 기본 규칙
 1. TDD 로 개발을 진행합니다.
-2. 테스트 커버리지는 90% 를 목표로 합니다.
+2. 테스트 커버리지는 ~~90%~~ 70% 를 목표로 합니다.
 3. git commit 내역과 문서를 보고 미래의 작업자가 별다른 인수 인계 없이 코드 수정할 수 있도록 최대한 상세히 작성합니다.
-4. 모든 코드 작성 주기는 1주일로 합니다.
-5. 기본 규칙 4번을 바탕으로 프로젝트를 생성합니다.
-6. 코드 작성 주기 1주일은 월, 화, 수요일은 새로운 코드를 작성하고 목, 금요일은 해당 주기에 작성된 코드를 리팩토링하며 테스트를 보완합니다.
+4. ~~모든 코드 작성 주기는 1주일로 합니다.~~
+5. ~~기본 규칙 4번을 바탕으로 프로젝트를 생성합니다.~~
+6. ~~코드 작성 주기 1주일은 월, 화, 수요일은 새로운 코드를 작성하고 목, 금요일은 해당 주기에 작성된 코드를 리팩토링하며 테스트를 보완합니다.~~
 7. README.md 이외의 문서들은 모두 Wiki 에서 작성합니다.
+8. 5, 6, 7 번이 무리라는 것을 깨닫고 자유롭게 작성합니다.
 
 ## 코드 작성 규칙
 
