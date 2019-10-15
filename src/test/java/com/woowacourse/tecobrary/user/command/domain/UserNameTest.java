@@ -1,7 +1,5 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
-import com.woowacourse.tecobrary.user.command.domain.exception.UserNameLengthException;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

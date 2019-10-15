@@ -1,6 +1,5 @@
 package com.woowacourse.tecobrary.user.command.domain;
 
-import com.woowacourse.tecobrary.user.command.domain.exception.UserNameLengthException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
