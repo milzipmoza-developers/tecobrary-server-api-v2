@@ -36,6 +36,13 @@ public class GithubUserApi {
         this.githubApiClient = githubApiClient;
     }
 
+    public String githubUserApiAccessToken(String code) {
+        String githubApiUrl = githubUserApiUriBuilder.api(code);
+        String accessToken = githubApiClient.accessToken(githubApiUrl);
+        Map<String, String> response = BodyParser.parse(accessToken);
+        return response.get(ACCESS_TOKEN);
+    }
+
     public String getPrimaryEmail(String githubApiUserEmailClientResponse) {
         List<GithubEmailVo> githubEmailVo = GsonUtils.parseUserEmail(githubApiUserEmailClientResponse);
         return githubEmailVo.stream()
@@ -43,12 +50,5 @@ public class GithubUserApi {
                 .map(GithubEmailVo::getEmail)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 접근"));
-    }
-
-    public String githubUserApiAccessToken(String code) {
-        String githubApiUrl = githubUserApiUriBuilder.api(code);
-        String accessToken = githubApiClient.accessToken(githubApiUrl);
-        Map<String, String> response = BodyParser.parse(accessToken);
-        return response.get(ACCESS_TOKEN);
     }
 }
