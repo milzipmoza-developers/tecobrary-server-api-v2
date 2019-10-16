@@ -18,7 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class JwtUtilsTest {
 
     private static final Logger log = LoggerFactory.getLogger(JwtUtilsTest.class);
-    private static final String EXPIRED_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6Imx1ZmZ5QG1pbHppcGRldnMuY29tIiwibmFtZSI6Imx1ZmZ5IiwiYXV0aG9yaXphdGlvbiI6IktJTkciLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhci51cmwvMTIzIiwiaWF0IjoxNTcxMjI2MzYzLCJleHAiOjE1NzEyMjYzNjV9.w4kRk3C-3Visj-hFlm5fGGqTMr80IZdo7W8ML2IKN8Q";
+
+    private static final String EXPIRED_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+            "eyJpZCI6IjEiLCJlbWFpbCI6Imx1ZmZ5QG1pbHppcGRldnMuY29tIiwibmFtZSI6Imx1ZmZ5IiwiYXV0aG9yaXphdGlvbiI6IktJTkciLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhci51cmwvMTIzIiwiaWF0IjoxNTcxMjI2MzYzLCJleHAiOjE1NzEyMjYzNjV9." +
+            "w4kRk3C-3Visj-hFlm5fGGqTMr80IZdo7W8ML2IKN8Q";
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -39,7 +42,7 @@ class JwtUtilsTest {
         log.debug("token : {}", jwtToken);
     }
 
-    @DisplayName("")
+    @DisplayName("jwt token 가 userJwtInfoVo 로 생성된 유효한 토큰인지 확인한다.")
     @Test
     void validateToken() {
         assertTrue(jwtUtils.validateToken(jwtToken, userJwtInfoVo));
