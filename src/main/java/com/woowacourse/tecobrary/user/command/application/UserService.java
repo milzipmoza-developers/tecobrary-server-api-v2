@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getByGithubId(String githubId) {
+    public User findByGithubId(String githubId) {
         return userRepository.getUserByUserGithubInfo_GithubId(githubId)
                 .orElseThrow(NotFoundGithubUserException::new);
     }

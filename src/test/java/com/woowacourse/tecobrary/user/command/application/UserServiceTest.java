@@ -24,19 +24,19 @@ class UserServiceTest implements UserStatic {
     @InjectMocks
     private UserService userService;
 
-    @DisplayName("getByGithubId 가 성공적으로 작동한다.")
+    @DisplayName("findByGithubId 가 성공적으로 작동한다.")
     @Test
     void successGetByGithubId() {
         given(userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
 
-        assertEquals(userService.getByGithubId(TEST_GITHUB_ID), TEST_USER);
+        assertEquals(userService.findByGithubId(TEST_GITHUB_ID), TEST_USER);
     }
 
-    @DisplayName("없는 githubId 로 getByGithubId 를 호출하면 NotFoundGithubUserException 이 발생한다.")
+    @DisplayName("없는 githubId 로 findByGithubId 를 호출하면 NotFoundGithubUserException 이 발생한다.")
     @Test
     void failedGetByGithubId() {
         given(userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
 
-        assertThrows(NotFoundGithubUserException.class, () -> userService.getByGithubId("123"));
+        assertThrows(NotFoundGithubUserException.class, () -> userService.findByGithubId("123"));
     }
 }
