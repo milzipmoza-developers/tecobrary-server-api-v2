@@ -48,16 +48,6 @@ public class JwtUtils implements Serializable {
         return (userNo.equals(userJwtInfoVo.getUserNo()) && !isTokenExpired(token));
     }
 
-    private String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
-        return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .setHeader(headers)
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .compact();
-    }
-
     public Boolean isTokenExpired(String token) {
         try {
             final Date expiration = getExpirationDateFromToken(token);
@@ -69,6 +59,16 @@ public class JwtUtils implements Serializable {
 
     public String getUserIdFromToken(String token) {
         return (String) getClaimFromToken(token, claims -> claims.get("id"));
+    }
+
+    private String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
+        return Jwts.builder()
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .setHeader(headers)
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+                .compact();
     }
 
     private Date getExpirationDateFromToken(String token) {
