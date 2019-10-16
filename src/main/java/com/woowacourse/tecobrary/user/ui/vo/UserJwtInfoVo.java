@@ -7,7 +7,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class UserResponseVo {
+public class UserJwtInfoVo {
 
     private String userNo;
     private String email;
@@ -15,7 +15,7 @@ public class UserResponseVo {
     private String avatarUrl;
     private String authorization;
 
-    public UserResponseVo(Long userNo, String email, String name, String avatarUrl, String authorization) {
+    public UserJwtInfoVo(Long userNo, String email, String name, String avatarUrl, String authorization) {
         this.userNo = String.valueOf(userNo);
         this.email = email;
         this.name = name;

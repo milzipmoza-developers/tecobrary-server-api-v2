@@ -1,7 +1,8 @@
 package com.woowacourse.tecobrary.user.infra.util;
 
-import com.woowacourse.tecobrary.user.ui.vo.UserResponseVo;
+import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class JwtUtil implements Serializable {
+public class JwtUtils implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
 
@@ -24,17 +25,17 @@ public class JwtUtil implements Serializable {
     private final String secret;
 
     @Autowired
-    public JwtUtil(@Value("${jwt.secret}") String secret) {
+    public JwtUtils(@Value("${jwt.secret}") String secret) {
         this.secret = secret;
     }
 
-    public String generateToken(UserResponseVo userResponseVo) {
+    public String generateToken(UserJwtInfoVo userJwtInfoVo) {
         Map<String, Object> claims = new LinkedHashMap<>();
-        claims.put("id", userResponseVo.getUserNo());
-        claims.put("email", userResponseVo.getEmail());
-        claims.put("name", userResponseVo.getName());
-        claims.put("authorization", userResponseVo.getAuthorization());
-        claims.put("avatarUrl", userResponseVo.getAvatarUrl());
+        claims.put("id", userJwtInfoVo.getUserNo());
+        claims.put("email", userJwtInfoVo.getEmail());
+        claims.put("name", userJwtInfoVo.getName());
+        claims.put("authorization", userJwtInfoVo.getAuthorization());
+        claims.put("avatarUrl", userJwtInfoVo.getAvatarUrl());
 
         Map<String, Object> headers = new LinkedHashMap<>();
         headers.put("alg", "HS256");
@@ -42,9 +43,9 @@ public class JwtUtil implements Serializable {
         return doGenerateToken(claims, headers);
     }
 
-    public Boolean validateToken(String token, UserResponseVo userResponseVo) {
-        final String userNo = getUserNoFromToken(token);
-        return (userNo.equals(userResponseVo.getUserNo()) && !isTokenExpired(token));
+    public Boolean validateToken(String token, UserJwtInfoVo userJwtInfoVo) {
+        final String userNo = getUserIdFromToken(token);
+        return (userNo.equals(userJwtInfoVo.getUserNo()) && !isTokenExpired(token));
     }
 
     private String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
@@ -57,17 +58,21 @@ public class JwtUtil implements Serializable {
                 .compact();
     }
 
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+    public Boolean isTokenExpired(String token) {
+        try {
+            final Date expiration = getExpirationDateFromToken(token);
+            return expiration.before(new Date());
+        } catch (ExpiredJwtException e) {
+            return true;
+        }
+    }
+
+    public String getUserIdFromToken(String token) {
+        return (String) getClaimFromToken(token, claims -> claims.get("id"));
     }
 
     private Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
-    }
-
-    private String getUserNoFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
@@ -76,6 +81,9 @@ public class JwtUtil implements Serializable {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
