@@ -20,6 +20,11 @@ public class UserService {
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 
+    public User findById(String userNo) {
+        return userRepository.findById(Long.valueOf(userNo))
+                .orElseThrow(NotFoundGithubUserException::new);
+    }
+
     public User save(User user) {
         return userRepository.save(user);
     }
