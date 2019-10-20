@@ -23,7 +23,7 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-class GithubUserApiUrlBuilderTest implements GithubApiStatic {
+class GithubApiUrlBuilderTest implements GithubApiStatic {
 
     private GithubUserApiUrlBuilder githubUserApiUrlBuilder;
 

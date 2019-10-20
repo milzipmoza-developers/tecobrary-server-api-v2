@@ -64,7 +64,7 @@ class GithubApiServiceTest implements GithubApiStatic {
     private GithubApiService githubApiService;
 
     @Mock
-    private GithubUserApi githubUserApi;
+    private GithubApi githubApi;
 
     @Mock
     private GithubApiClient githubApiClient;
@@ -72,7 +72,7 @@ class GithubApiServiceTest implements GithubApiStatic {
     @DisplayName("getGithubAccessToken 메서드가 정상적으로 동작한다.")
     @Test
     void getGithubAccessToken() {
-        given(githubUserApi.githubUserApiAccessToken(CODE_VALUE)).willReturn(VIRTUAL_ACCESS_TOKEN);
+        given(githubApi.githubUserApiAccessToken(CODE_VALUE)).willReturn(VIRTUAL_ACCESS_TOKEN);
 
         assertEquals(githubApiService.getGithubAccessToken(CODE_VALUE), VIRTUAL_ACCESS_TOKEN);
     }
@@ -91,7 +91,7 @@ class GithubApiServiceTest implements GithubApiStatic {
     @Test
     void githubUserEmail() {
         given(githubApiClient.userEmail(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_EMAIL_RETURN);
-        given(githubUserApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@github.com");
+        given(githubApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@github.com");
 
         String expected = "octocat@github.com";
 

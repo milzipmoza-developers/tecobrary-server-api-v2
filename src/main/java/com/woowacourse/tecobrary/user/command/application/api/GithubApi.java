@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class GithubUserApi {
+public class GithubApi {
 
     private static final String ACCESS_TOKEN = "access_token";
 
@@ -30,8 +30,8 @@ public class GithubUserApi {
     private final GithubApiClient githubApiClient;
 
     @Autowired
-    public GithubUserApi(GithubUserApiUrlBuilder githubUserApiUriBuilder,
-                         GithubApiClient githubApiClient) {
+    public GithubApi(GithubUserApiUrlBuilder githubUserApiUriBuilder,
+                     GithubApiClient githubApiClient) {
         this.githubUserApiUriBuilder = githubUserApiUriBuilder;
         this.githubApiClient = githubApiClient;
     }
