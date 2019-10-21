@@ -22,11 +22,22 @@ public interface UserStatic {
     Email TEST_USER_EMAIL = new Email(TEST_USER_EMAIL_VALUE);
     HttpsUrl TEST_HTTPS_URL = new HttpsUrl(TEST_USER_AVATAR_URL_VALUE);
 
+    UserName SAVED_USER_NAME = new UserName(SAVED_USER_NAME_VALUE);
+    Email SAVED_USER_EMAIL = new Email(SAVED_USER_EMAIL_VALUE);
+    HttpsUrl SAVED_HTTPS_URL = new HttpsUrl(SAVED_USER_AVATAR_URL_VALUE);
+
     UserGithubInfo TEST_USER_GITHUB_INFO = new UserGithubInfo(
             TEST_GITHUB_ID,
             TEST_USER_NAME,
             TEST_USER_EMAIL,
             TEST_HTTPS_URL
+    );
+
+    UserGithubInfo SAVED_USER_GITHUB_INFO = new UserGithubInfo(
+            SAVED_GITHUB_ID,
+            SAVED_USER_NAME,
+            SAVED_USER_EMAIL,
+            SAVED_HTTPS_URL
     );
 
     GithubUserInfoVo TEST_GITHUB_USER_INFO_VO = new GithubUserInfoVo(
@@ -41,7 +52,11 @@ public interface UserStatic {
             SAVED_USER_NAME_VALUE
     );
 
-    UserAuthorization TEST_USER_AUTHORIZATION = new UserAuthorization(Authorization.USER);
+    UserAuthorization TEST_USER_AUTHORIZATION = new UserAuthorization(Authorization.NONE);
+
+    UserAuthorization SAVED_USER_AUTHORIZATION = new UserAuthorization(Authorization.KING);
 
     User TEST_USER = new User(TEST_USER_GITHUB_INFO, TEST_USER_AUTHORIZATION);
+
+    User SAVED_USER = new User(SAVED_USER_GITHUB_INFO, SAVED_USER_AUTHORIZATION);
 }
