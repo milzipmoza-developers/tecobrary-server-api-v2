@@ -14,3 +14,7 @@ spring:
 
 server:
   port: 9090
+  servlet:
+    session:
+      persistent: false
+      timeout: 0
