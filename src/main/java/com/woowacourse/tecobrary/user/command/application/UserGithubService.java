@@ -1,9 +1,7 @@
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
-import com.woowacourse.tecobrary.user.command.domain.Authorization;
 import com.woowacourse.tecobrary.user.command.domain.User;
-import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
 import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
 import com.woowacourse.tecobrary.user.infra.util.UserGithubInfoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
@@ -24,14 +22,16 @@ public class UserGithubService {
 
     public User getUserByGithubInfo(String githubApiAccessToken) {
         GithubUserInfoVo githubUserInfoVo = githubApiService.getGithubUserInfo(githubApiAccessToken);
-
         try {
             return userService.findByGithubId(githubUserInfoVo.getId());
-
         } catch (NotFoundGithubUserException e) {
-            UserGithubInfo userGithubInfo = UserGithubInfoMapper.map(githubUserInfoVo,
-                    githubApiService.getGithubUserEmail(githubApiAccessToken));
-            return userService.save(userGithubInfo, new UserAuthorization(Authorization.NONE));
+            return getNewUserAfterSave(githubApiAccessToken, githubUserInfoVo);
         }
+    }
+
+    private User getNewUserAfterSave(String githubApiAccessToken, GithubUserInfoVo githubUserInfoVo) {
+        UserGithubInfo userGithubInfo = UserGithubInfoMapper.map(githubUserInfoVo,
+                githubApiService.getGithubUserEmail(githubApiAccessToken));
+        return userService.save(userGithubInfo);
     }
 }

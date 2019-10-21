@@ -1,9 +1,6 @@
 package com.woowacourse.tecobrary.user.command.application;
 
-import com.woowacourse.tecobrary.user.command.domain.User;
-import com.woowacourse.tecobrary.user.command.domain.UserAuthorization;
-import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
-import com.woowacourse.tecobrary.user.command.domain.UserRepository;
+import com.woowacourse.tecobrary.user.command.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +28,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User save(UserGithubInfo userGithubInfo, UserAuthorization userAuthorization) {
-        return userRepository.save(new User(userGithubInfo, userAuthorization));
+    public User save(UserGithubInfo userGithubInfo) {
+        return userRepository.save(new User(userGithubInfo, new UserAuthorization(Authorization.NONE)));
     }
 }
