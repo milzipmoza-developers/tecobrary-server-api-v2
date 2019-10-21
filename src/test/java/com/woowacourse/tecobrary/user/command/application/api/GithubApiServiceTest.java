@@ -77,17 +77,17 @@ class GithubApiServiceTest implements GithubApiStatic {
         assertEquals(githubApiService.getGithubAccessToken(CODE_VALUE), VIRTUAL_ACCESS_TOKEN);
     }
 
-    @DisplayName("githubUserInfo 메서드가 정상적으로 동작한다.")
+    @DisplayName("getGithubUserInfo 메서드가 정상적으로 동작한다.")
     @Test
     void githubUserInfo() {
         given(githubApiClient.userInfo(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_USERS_RETURN);
 
         GithubUserInfoVo expected = new GithubUserInfoVo("1", "https://github.com/images/error/octocat_happy.gif", "octocat");
 
-        assertEquals(githubApiService.githubUserInfo(VIRTUAL_ACCESS_TOKEN), expected);
+        assertEquals(githubApiService.getGithubUserInfo(VIRTUAL_ACCESS_TOKEN), expected);
     }
 
-    @DisplayName("githubUserEmail 메서드가 정상적으로 동작한다.")
+    @DisplayName("getGithubUserEmail 메서드가 정상적으로 동작한다.")
     @Test
     void githubUserEmail() {
         given(githubApiClient.userEmail(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_EMAIL_RETURN);
@@ -95,6 +95,6 @@ class GithubApiServiceTest implements GithubApiStatic {
 
         String expected = "octocat@github.com";
 
-        assertEquals(githubApiService.githubUserEmail(VIRTUAL_ACCESS_TOKEN), expected);
+        assertEquals(githubApiService.getGithubUserEmail(VIRTUAL_ACCESS_TOKEN), expected);
     }
 }

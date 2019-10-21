@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @CrossOrigin(origins = "*")
-@RequestMapping("/github/user")
+@RequestMapping("/api/v1/tecobrary")
 public class GithubUserApiController {
 
     private final JwtUtils jwtUtils;
@@ -36,8 +36,8 @@ public class GithubUserApiController {
         this.userService = userService;
     }
 
-    @GetMapping("/api")
-    public ResponseEntity<GithubApiResponseVo> getGithubUserInformation(@RequestParam String code) {
+    @GetMapping("/auth")
+    public ResponseEntity<GithubApiResponseVo> tecobraryUserAuthentication(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         User savedUser = savedGithubUserInfo(githubApiAccessToken);
         UserJwtInfoVo userJwtInfoVo = UserJwtVoMapper.map(savedUser);
@@ -46,7 +46,7 @@ public class GithubUserApiController {
     }
 
     private User savedGithubUserInfo(String githubApiAccessToken) {
-        GithubUserInfoVo githubUserInfoVo = githubApiService.githubUserInfo(githubApiAccessToken);
+        GithubUserInfoVo githubUserInfoVo = githubApiService.getGithubUserInfo(githubApiAccessToken);
 
         try {
             return userService.findByGithubId(githubUserInfoVo.getId());
@@ -54,7 +54,7 @@ public class GithubUserApiController {
         } catch (NotFoundGithubUserException e) {
             User user = new User(
                     UserGithubInfoMapper.map(githubUserInfoVo,
-                            githubApiService.githubUserEmail(githubApiAccessToken)),
+                            githubApiService.getGithubUserEmail(githubApiAccessToken)),
                     new UserAuthorization(Authorization.NONE)
             );
             return userService.save(user);

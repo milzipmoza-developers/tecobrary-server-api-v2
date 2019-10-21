@@ -35,12 +35,12 @@ public class GithubApiService {
         return githubApi.githubUserApiAccessToken(code);
     }
 
-    public GithubUserInfoVo githubUserInfo(String githubApiAccessToken) {
+    public GithubUserInfoVo getGithubUserInfo(String githubApiAccessToken) {
         return GsonUtils.parseUserInfo(
                 githubApiClient.userInfo(githubApiAccessToken));
     }
 
-    public String githubUserEmail(String githubApiAccessToken) {
+    public String getGithubUserEmail(String githubApiAccessToken) {
         return githubApi.getPrimaryEmail(
                 githubApiClient.userEmail(githubApiAccessToken));
     }
