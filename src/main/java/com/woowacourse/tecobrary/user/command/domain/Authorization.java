@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public enum Authorization {
-    NONE("NONE"),
-    USER("USER"),
-    MANAGER("MANAGER"),
-    KING("KING");
+    NONE("none"),
+    USER("user"),
+    MANAGER("manager"),
+    KING("god");
 
     private String authorization;
 
