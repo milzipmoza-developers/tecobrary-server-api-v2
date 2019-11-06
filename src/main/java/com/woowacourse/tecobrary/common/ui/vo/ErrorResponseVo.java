@@ -6,9 +6,11 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ErrorResponseVo {
-    private final String s;
+    private final String message;
+    private final String description;
 
-    public ErrorResponseVo(String s) {
-        this.s = s;
+    public ErrorResponseVo(String message, String description) {
+        this.message = message;
+        this.description = description;
     }
 }
