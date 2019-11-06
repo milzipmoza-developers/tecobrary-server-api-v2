@@ -16,15 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tecobrary")
 public class GithubUserApiController {
 
-    private final JwtUtils jwtUtils;
     private final GithubApiService githubApiService;
     private final UserGithubService userGithubService;
 
     @Autowired
-    public GithubUserApiController(JwtUtils jwtUtils,
-                                   GithubApiService githubApiService,
+    public GithubUserApiController(GithubApiService githubApiService,
                                    UserGithubService userGithubService) {
-        this.jwtUtils = jwtUtils;
         this.githubApiService = githubApiService;
         this.userGithubService = userGithubService;
     }
@@ -33,6 +30,6 @@ public class GithubUserApiController {
     public ResponseEntity<GithubApiResponseVo> tecobraryUserAuthentication(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         UserJwtInfoVo userJwtInfoVo = userGithubService.getUserByGithubInfo(githubApiAccessToken);
-        return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, jwtUtils.generateToken(userJwtInfoVo)));
+        return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, JwtUtils.generateToken(userJwtInfoVo)));
     }
 }

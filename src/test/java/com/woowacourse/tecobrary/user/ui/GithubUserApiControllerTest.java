@@ -4,7 +4,6 @@ import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.common.UserStatic;
-import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,9 +21,6 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
     private static final String ACCESS_TOKEN_FOR_TEST = "test_access_token";
 
     @Mock
-    private JwtUtils jwtUtils;
-
-    @Mock
     private GithubApiService githubApiService;
 
     @Mock
@@ -32,7 +28,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
 
     @BeforeEach
     void initialiseRestAssuredMockMvcStandalone() {
-        RestAssuredMockMvc.standaloneSetup(new GithubUserApiController(jwtUtils, githubApiService, userGithubService));
+        RestAssuredMockMvc.standaloneSetup(new GithubUserApiController(githubApiService, userGithubService));
     }
 
     @DisplayName("[GET] /github/user/, data.sql 로 미리 저장하는 user 에 대한 json 이 성공적으로 반환된다.")
@@ -40,13 +36,13 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
     void getGithubUserInformationWithSavedUser() {
         when(githubApiService.getGithubAccessToken(CODE_FOR_TEST)).thenReturn(ACCESS_TOKEN_FOR_TEST);
         when(githubApiService.getGithubUserInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(SAVED_GITHUB_USER_INFO_VO);
-        when(userGithubService.getUserByGithubInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(SAVED_USER);
+        when(userGithubService.getUserByGithubInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(SAVED_USER_JWT_INFO_VO);
 
         given().
                 queryParam("code", CODE_FOR_TEST).
-                when().
+        when().
                 get(baseUrl() + "/tecobrary/auth").
-                then().
+        then().
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
@@ -62,7 +58,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         when(githubApiService.getGithubAccessToken(CODE_FOR_TEST)).thenReturn(ACCESS_TOKEN_FOR_TEST);
         when(githubApiService.getGithubUserInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(TEST_GITHUB_USER_INFO_VO);
         when(githubApiService.getGithubUserEmail(ACCESS_TOKEN_FOR_TEST)).thenReturn(TEST_USER_EMAIL_VALUE);
-        when(userGithubService.getUserByGithubInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(TEST_USER);
+        when(userGithubService.getUserByGithubInfo(ACCESS_TOKEN_FOR_TEST)).thenReturn(TEST_USER_JWT_INFO_VO);
 
         given().
                 queryParam("code", CODE_FOR_TEST).

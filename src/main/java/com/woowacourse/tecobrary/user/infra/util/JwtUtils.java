@@ -5,7 +5,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +21,14 @@ public class JwtUtils implements Serializable {
 
     private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 24 * 7; // one week
 
-    private final String secret;
+    private static String SECRET;
 
-    @Autowired
-    public JwtUtils(@Value("${jwt.secret}") String secret) {
-        this.secret = secret;
+    @Value("${jwt.secret}")
+    private void injectSecret(String secret) {
+        SECRET = secret;
     }
 
-    public String generateToken(UserJwtInfoVo userJwtInfoVo) {
+    public static String generateToken(UserJwtInfoVo userJwtInfoVo) {
         Map<String, Object> claims = new LinkedHashMap<>();
         claims.put("id", userJwtInfoVo.getUserNo());
         claims.put("email", userJwtInfoVo.getEmail());
@@ -43,12 +42,12 @@ public class JwtUtils implements Serializable {
         return doGenerateToken(claims, headers);
     }
 
-    public Boolean validateToken(String token, UserJwtInfoVo userJwtInfoVo) {
+    public static Boolean validateToken(String token, UserJwtInfoVo userJwtInfoVo) {
         final String userNo = getUserIdFromToken(token);
         return (userNo.equals(userJwtInfoVo.getUserNo()) && !isTokenExpired(token));
     }
 
-    public Boolean isTokenExpired(String token) {
+    public static Boolean isTokenExpired(String token) {
         try {
             final Date expiration = getExpirationDateFromToken(token);
             return expiration.before(new Date());
@@ -57,13 +56,13 @@ public class JwtUtils implements Serializable {
         }
     }
 
-    public String getUserIdFromToken(String token) {
+    public static String getUserIdFromToken(String token) {
         return (String) getClaimFromToken(token, claims -> claims.get("id"));
     }
 
-    private String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
+    private static String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.HS256, SECRET)
                 .setHeader(headers)
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -71,18 +70,18 @@ public class JwtUtils implements Serializable {
                 .compact();
     }
 
-    private Date getExpirationDateFromToken(String token) {
+    private static Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    private static <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
-    private Claims getAllClaimsFromToken(String token) {
+    private static Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(secret)
+                .setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
     }
