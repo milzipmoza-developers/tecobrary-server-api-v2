@@ -2,9 +2,7 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
-import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
-import com.woowacourse.tecobrary.user.infra.util.UserJwtVoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +32,7 @@ public class GithubUserApiController {
     @GetMapping("/auth")
     public ResponseEntity<GithubApiResponseVo> tecobraryUserAuthentication(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
-        User savedUser = userGithubService.getUserByGithubInfo(githubApiAccessToken);
-        UserJwtInfoVo userJwtInfoVo = UserJwtVoMapper.map(savedUser);
-        return ResponseEntity.ok(new GithubApiResponseVo(
-                userJwtInfoVo, jwtUtils.generateToken(userJwtInfoVo)));
+        UserJwtInfoVo userJwtInfoVo = userGithubService.getUserByGithubInfo(githubApiAccessToken);
+        return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, jwtUtils.generateToken(userJwtInfoVo)));
     }
 }
