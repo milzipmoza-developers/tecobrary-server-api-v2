@@ -23,7 +23,7 @@ public class UserAuthorization {
     }
 
     String updateAuthorization(String newAuthorization) {
-        this.authorization = Authorization.valueOf(newAuthorization);
+        this.authorization = Authorization.of(newAuthorization);
         return this.authorization.getAuthorization();
     }
 

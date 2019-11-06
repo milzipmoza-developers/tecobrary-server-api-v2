@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UserTest implements UserStatic {
 
     private static final String UPDATED_NAME = "새로운 이름";
-    private static final String UPDATED_AUTHORIZATION = "KING";
+    private static final String UPDATED_AUTHORIZATION = "god";
 
     @DisplayName("성공적으로 User 도메인 객체를 생성한다.")
     @Test
@@ -34,7 +34,7 @@ public class UserTest implements UserStatic {
         User user = new User(TEST_USER_GITHUB_INFO, TEST_USER_AUTHORIZATION);
         assertEquals(
                 UPDATED_AUTHORIZATION,
-                user.updateAuthorization("KING")
+                user.updateAuthorization("god")
         );
     }
 }

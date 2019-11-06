@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public enum Authorization {
@@ -16,6 +18,13 @@ public enum Authorization {
 
     Authorization(String authorization) {
         this.authorization = authorization;
+    }
+
+    public static Authorization of(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getAuthorization().equals(name))
+                .findFirst()
+                .orElseThrow(CannotFoundAuthorizationException::new);
     }
 
     public boolean hasUserPermission() {
