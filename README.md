@@ -7,6 +7,10 @@
 * Tomcat 9.0.22
 * Gradle
 
+## 배포시 URL 매핑
+
+* Nginx 를 프록시 서버로 두고 ``/api/v2/`` 로 ``/`` 를 매핑합니다. 
+
 ## Build 전 요구사항
 
 * ``src/main/resources`` 디렉토리에 다음 두 개의 파일을 생성해야 합니다.
