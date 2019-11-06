@@ -3,7 +3,8 @@ package com.woowacourse.tecobrary.user.command.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserAuthorizationTest {
 
@@ -11,7 +12,7 @@ class UserAuthorizationTest {
     @Test
     void updateAuthorization() {
         UserAuthorization authorization = new UserAuthorization(Authorization.NONE);
-        authorization.updateAuthorization("KING");
+        authorization.updateAuthorization("god");
         assertEquals(authorization.getAuthorization(), Authorization.KING);
     }
 
@@ -19,7 +20,8 @@ class UserAuthorizationTest {
     @Test
     void updateAuthorizationFailedDoesNotExist() {
         UserAuthorization authorization = new UserAuthorization(Authorization.NONE);
-        assertThrows(IllegalArgumentException.class, () -> authorization.updateAuthorization("NOHERE"));
+        assertThrows(CannotFoundAuthorizationException.class, () ->
+                authorization.updateAuthorization("NOHERE"));
 
     }
 }
