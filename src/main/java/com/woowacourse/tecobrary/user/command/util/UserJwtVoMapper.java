@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.infra.util;
+package com.woowacourse.tecobrary.user.command.util;
 
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;

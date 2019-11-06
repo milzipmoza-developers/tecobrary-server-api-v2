@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.infra.util;
+package com.woowacourse.tecobrary.user.command.util;
 
 import com.woowacourse.tecobrary.user.command.domain.UserGithubInfo;
 import com.woowacourse.tecobrary.user.infra.dto.UserGithubInfoDto;
