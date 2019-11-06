@@ -45,7 +45,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         given().
                 queryParam("code", CODE_FOR_TEST).
                 when().
-                get(baseUrl() + "/api/v1/tecobrary/auth").
+                get(baseUrl() + "/tecobrary/auth").
                 then().
                 log().ifValidationFails().
                 statusCode(200).
@@ -67,7 +67,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         given().
                 queryParam("code", CODE_FOR_TEST).
         when().
-                get(baseUrl() + "/api/v1/tecobrary/auth").
+                get(baseUrl() + "/tecobrary/auth").
         then().
                 log().ifValidationFails().
                 statusCode(200).

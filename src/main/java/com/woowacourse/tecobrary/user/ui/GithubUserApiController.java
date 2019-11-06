@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/tecobrary")
+@RequestMapping("/tecobrary")
 public class GithubUserApiController {
 
     private final JwtUtils jwtUtils;

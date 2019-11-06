@@ -27,7 +27,7 @@ public class GithubUserApiUrlBuilder {
     private static final String REDIRECT_URI = "redirect_uri";
     private static final String CODE = "code";
     private static final String SCOPE = "scope";
-    private static final String API_INDEX_CONTROLLER = "/api/v1";
+    private static final String API_INDEX_CONTROLLER = "/";
 
     private final String clientId;
     private final String clientSecret;
