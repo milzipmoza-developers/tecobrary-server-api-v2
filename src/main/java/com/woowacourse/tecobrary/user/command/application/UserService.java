@@ -1,6 +1,8 @@
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.*;
+import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +16,25 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByGithubId(String githubId) {
-        return userRepository.getUserByUserGithubInfo_GithubId(githubId)
-                .orElseThrow(NotFoundGithubUserException::new);
-    }
-
-    public User findById(String userNo) {
-        return userRepository.findById(Long.valueOf(userNo))
-                .orElseThrow(NotFoundGithubUserException::new);
-    }
-
     public User save(User user) {
         return userRepository.save(user);
     }
 
     public User save(UserGithubInfo userGithubInfo) {
         return userRepository.save(new User(userGithubInfo, new UserAuthorization(Authorization.NONE)));
+    }
+
+    public User findByGithubId(String githubId) {
+        return userRepository.getUserByUserGithubInfo_GithubId(githubId)
+                .orElseThrow(NotFoundGithubUserException::new);
+    }
+
+    public UserJwtInfoVo findUserJwtInfoByUserNo(String userNo) {
+        return UserJwtVoMapper.map(findById(userNo));
+    }
+
+    private User findById(String userNo) {
+        return userRepository.findById(Long.valueOf(userNo))
+                .orElseThrow(NotFoundGithubUserException::new);
     }
 }
