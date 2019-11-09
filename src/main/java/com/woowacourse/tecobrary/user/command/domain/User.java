@@ -4,8 +4,11 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -25,6 +28,14 @@ public class User {
 
     @Embedded
     private UserAuthorization userAuthorization;
+
+    @CreationTimestamp
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
 
     public User(UserGithubInfo userGithubInfo, UserAuthorization userAuthorization) {
         this.userGithubInfo = userGithubInfo;
@@ -53,5 +64,14 @@ public class User {
 
     public String getAuthorization() {
         return userAuthorization.getAuthorizationContent();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userNo=" + userNo +
+                ", userGithubInfo=" + userGithubInfo +
+                ", userAuthorization=" + userAuthorization +
+                '}';
     }
 }
