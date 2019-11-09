@@ -3,55 +3,56 @@ package com.woowacourse.tecobrary.user.command.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuthorizationTest {
 
-    @DisplayName("NONE 은 USER 권한을 가지지 않는다.")
+    @DisplayName("none 은 user 권한을 가지지 않는다.")
     @Test
     void noneHasNotUserPermission() {
-        assertFalse(Authorization.NONE.hasUserPermission());
+        assertFalse(Authorization.none.hasUserPermission());
     }
 
-    @DisplayName("USER 은 USER 권한을 가진다.")
+    @DisplayName("user 은 user 권한을 가진다.")
     @Test
     void userHasUserPermission() {
-        assertTrue(Authorization.USER.hasUserPermission());
+        assertTrue(Authorization.user.hasUserPermission());
     }
 
-    @DisplayName("MANAGER 은 USER 권한을 가진다.")
+    @DisplayName("manager 은 user 권한을 가진다.")
     @Test
     void managerHasUserPermission() {
-        assertTrue(Authorization.MANAGER.hasUserPermission());
+        assertTrue(Authorization.manager.hasUserPermission());
     }
 
-    @DisplayName("KING 은 USER 권한을 가진다.")
+    @DisplayName("god 은 user 권한을 가진다.")
     @Test
     void kingHasUserPermission() {
-        assertTrue(Authorization.KING.hasUserPermission());
+        assertTrue(Authorization.god.hasUserPermission());
     }
 
-    @DisplayName("NONE 은 MANAGER 권한을 가지지 않는다.")
+    @DisplayName("none 은 manager 권한을 가지지 않는다.")
     @Test
     void noneHasNotManagerPermission() {
-        assertFalse(Authorization.NONE.hasManagerPermission());
+        assertFalse(Authorization.none.hasManagerPermission());
     }
 
-    @DisplayName("USER 은 MANAGER 권한을 가지지 않는다.")
+    @DisplayName("user 은 manager 권한을 가지지 않는다.")
     @Test
     void userHasNotManagerPermission() {
-        assertFalse(Authorization.USER.hasManagerPermission());
+        assertFalse(Authorization.user.hasManagerPermission());
     }
 
-    @DisplayName("MANAGER 은 MANAGER 권한을 가진다.")
+    @DisplayName("manager 은 manager 권한을 가진다.")
     @Test
     void managerHasManagerPermission() {
-        assertTrue(Authorization.MANAGER.hasManagerPermission());
+        assertTrue(Authorization.manager.hasManagerPermission());
     }
 
-    @DisplayName("KING 은 MANAGER 권한을 가진다.")
+    @DisplayName("god 은 manager 권한을 가진다.")
     @Test
     void kingHasManagerPermission() {
-        assertTrue(Authorization.KING.hasManagerPermission());
+        assertTrue(Authorization.god.hasManagerPermission());
     }
 }

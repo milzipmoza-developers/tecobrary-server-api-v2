@@ -9,10 +9,10 @@ import java.util.Arrays;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public enum Authorization {
-    NONE("none"),
-    USER("user"),
-    MANAGER("manager"),
-    KING("god");
+    none("none"),
+    user("user"),
+    manager("manager"),
+    god("god");
 
     private String authorization;
 
@@ -28,10 +28,10 @@ public enum Authorization {
     }
 
     public boolean hasUserPermission() {
-        return this != NONE;
+        return this != none;
     }
 
     public boolean hasManagerPermission() {
-        return this != NONE && this != USER;
+        return this != none && this != user;
     }
 }

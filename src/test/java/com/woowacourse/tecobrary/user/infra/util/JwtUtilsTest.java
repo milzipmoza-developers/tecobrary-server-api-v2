@@ -32,7 +32,7 @@ class JwtUtilsTest {
                 "luffy@milzipdevs.com",
                 "luffy",
                 "https://avatar.url/123",
-                "KING"
+                "god"
         );
         jwtToken = JwtUtils.generateToken(userJwtInfoVo);
         log.debug("token : {}", jwtToken);
