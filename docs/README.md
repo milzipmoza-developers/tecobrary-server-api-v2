@@ -18,6 +18,6 @@
 
 ## GithubUserApiController
 
-1. ``/tecobrary/auth/user`` => map to nginx ``/api/v2/tecobrary/auth/user``
+1. ``/auth/user`` => map to nginx ``/api/v2/auth/user``
 
     * Tecobrary 유저 클라이언트 인증 기능
