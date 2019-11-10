@@ -14,7 +14,7 @@ public class ApiIndexControllerTest extends RestAssuredTestUtils {
     void home() {
         given().
         when().
-                get(baseUrl() + "/").
+                get(baseUrl("/")).
         then().
                 statusCode(200).
                 body(is("Hello. This is Tecobrary API v1. Welcome !"));

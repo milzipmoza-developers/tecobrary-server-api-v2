@@ -14,4 +14,8 @@ public class RestAssuredTestUtils {
     protected String baseUrl() {
         return "http://localhost:" + port;
     }
+
+    protected String baseUrl(String path) {
+        return baseUrl() + path;
+    }
 }
