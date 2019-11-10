@@ -12,7 +12,7 @@ public interface UserStatic {
     String TEST_USER_NAME_VALUE = "thedevluffy";
     String TEST_USER_EMAIL_VALUE = "thedevluffy@gmail.com";
     String TEST_USER_AVATAR_URL_VALUE = "https://avatars0.githubusercontent.com/u/52121827?s=460&v=4";
-    String TEST_USER_AUTH_VALUE = "NONE";
+    String TEST_USER_AUTH_VALUE = "none";
 
     Long SAVED_USER_NO = 1L;
     String SAVED_GITHUB_ID = "123456";
