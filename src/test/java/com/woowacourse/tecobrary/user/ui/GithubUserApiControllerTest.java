@@ -31,7 +31,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         RestAssuredMockMvc.standaloneSetup(new GithubUserApiController(githubApiService, userGithubService));
     }
 
-    @DisplayName("[GET] /tecobrary/auth, data.sql 로 미리 저장하는 user 에 대한 json 이 성공적으로 반환된다.")
+    @DisplayName("[GET] /auth/user, data.sql 로 미리 저장하는 user 에 대한 json 이 성공적으로 반환된다.")
     @Test
     void getGithubUserInformationWithSavedUser() {
         when(githubApiService.getGithubAccessToken(CODE_FOR_TEST)).thenReturn(ACCESS_TOKEN_FOR_TEST);
@@ -41,7 +41,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         given().
                 queryParam("code", CODE_FOR_TEST).
         when().
-                get(baseUrl("/tecobrary/auth")).
+                get(baseUrl("/auth/user")).
         then().
                 log().ifValidationFails().
                 statusCode(200).
@@ -52,7 +52,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
                 body("user.authorization", equalTo(SAVED_USER_AUTH_VALUE));
     }
 
-    @DisplayName("[GET] /tecobrary/auth, 새로 가입하는 user 에 대한 json 이 성공적으로 반환된다.")
+    @DisplayName("[GET] /auth/user, 새로 가입하는 user 에 대한 json 이 성공적으로 반환된다.")
     @Test
     void getGithubUserInformationWithNewUser() {
         when(githubApiService.getGithubAccessToken(CODE_FOR_TEST)).thenReturn(ACCESS_TOKEN_FOR_TEST);
@@ -63,7 +63,7 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
         given().
                 queryParam("code", CODE_FOR_TEST).
         when().
-                get(baseUrl("/tecobrary/auth")).
+                get(baseUrl("/auth/user")).
         then().
                 log().ifValidationFails().
                 statusCode(200).
