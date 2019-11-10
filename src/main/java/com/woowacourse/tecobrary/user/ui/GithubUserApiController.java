@@ -27,7 +27,7 @@ public class GithubUserApiController {
     }
 
     @GetMapping("/auth/user")
-    public ResponseEntity<GithubApiResponseVo> tecobraryUserAuthentication(@RequestParam String code) {
+    public ResponseEntity tecobraryUserAuthentication(@RequestParam String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         UserJwtInfoVo userJwtInfoVo = userGithubService.getUserByGithubInfo(githubApiAccessToken);
         return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, JwtUtils.generateToken(userJwtInfoVo)));
