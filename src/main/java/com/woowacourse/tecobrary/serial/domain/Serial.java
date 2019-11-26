@@ -21,13 +21,13 @@ public class Serial {
     private Long id;
 
     @Embedded
-    private LibraryBookId libraryBookId;
+    private SerialLibraryBook serialLibraryBook;
 
     @Embedded
     private SerialRentStatus serialRentStatus;
 
-    public Serial(LibraryBookId libraryBookId, SerialRentStatus serialRentStatus) {
-        this.libraryBookId = libraryBookId;
+    public Serial(SerialLibraryBook serialLibraryBook, SerialRentStatus serialRentStatus) {
+        this.serialLibraryBook = serialLibraryBook;
         this.serialRentStatus = serialRentStatus;
     }
 }

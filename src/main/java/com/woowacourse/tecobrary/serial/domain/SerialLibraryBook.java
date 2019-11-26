@@ -10,12 +10,12 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Embeddable
-public class LibraryBookId {
+public class SerialLibraryBook {
 
     @Column(name = "bookId")
     private Long bookId;
 
-    public LibraryBookId(Long bookId) {
+    public SerialLibraryBook(Long bookId) {
         this.bookId = bookId;
     }
 }
