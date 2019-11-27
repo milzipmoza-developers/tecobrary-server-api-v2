@@ -13,27 +13,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class BookInfo {
 
-    @Column(name = "title")
+    @Column(name = "title",
+            nullable = false)
     private String title;
 
-    @Column(name = "author")
+    @Column(name = "author",
+            nullable = false)
     private String author;
 
-    @Column(name = "publisher")
+    @Column(name = "publisher",
+            nullable = false)
     private String publisher;
 
-    @Column(name = "isbn", unique = true)
+    @Column(name = "isbn",
+            unique = true,
+            nullable = false)
     private String isbn;
 
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "description",
+            columnDefinition = "varchar(255) default '내용 없음'")
+    private String description;
 
     @Builder
-    public BookInfo(String title, String author, String publisher, String isbn, String desc) {
+    public BookInfo(String title, String author, String publisher, String isbn, String description) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.isbn = isbn;
-        this.desc = desc;
+        this.description = description;
     }
 }
