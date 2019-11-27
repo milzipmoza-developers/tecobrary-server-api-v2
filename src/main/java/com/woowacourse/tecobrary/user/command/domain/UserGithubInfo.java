@@ -16,7 +16,7 @@ import javax.persistence.Embedded;
 @Embeddable
 public class UserGithubInfo {
 
-    @Column(name = "github_id",
+    @Column(name = "githubId",
             unique = true,
             nullable = false,
             length = 100)
@@ -29,7 +29,7 @@ public class UserGithubInfo {
     private Email email;
 
     @Embedded
-    @AttributeOverride(name = "url", column = @Column(name = "avatar_url"))
+    @AttributeOverride(name = "url", column = @Column(name = "avatarUrl"))
     private HttpsUrl httpsUrl;
 
     public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl httpsUrl) {

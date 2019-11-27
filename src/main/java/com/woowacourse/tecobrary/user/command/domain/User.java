@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
-@EqualsAndHashCode(of = "userNo")
+@EqualsAndHashCode(of = "id")
 @Table(name = "Users")
 @Access(AccessType.FIELD)
 public class User {
@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long userNo;
+    private Long id;
 
     @Embedded
     private UserGithubInfo userGithubInfo;
@@ -69,7 +69,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userNo=" + userNo +
+                "id=" + id +
                 ", userGithubInfo=" + userGithubInfo +
                 ", userAuthorization=" + userAuthorization +
                 '}';

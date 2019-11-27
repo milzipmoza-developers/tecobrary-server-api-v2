@@ -7,7 +7,7 @@ public class UserJwtVoMapper {
 
     public static UserJwtInfoVo map(User user) {
         return new UserJwtInfoVo(
-                user.getUserNo(),
+                user.getId(),
                 user.getUserEmail(),
                 user.getUserName(),
                 user.getUserAvatarUrl(),
