@@ -1,15 +1,14 @@
 package com.woowacourse.tecobrary.common.model;
 
 import com.woowacourse.tecobrary.common.exception.MalformedEmailException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.persistence.Embeddable;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -19,7 +18,10 @@ public class Email {
     private static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    public String email;
+    @Column(name = "email",
+            nullable = false,
+            length = 100)
+    private String email;
 
     public Email(String email) {
         checkEmailForm(email);
