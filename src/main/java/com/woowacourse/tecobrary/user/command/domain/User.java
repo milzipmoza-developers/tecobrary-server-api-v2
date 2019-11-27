@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @EqualsAndHashCode(of = "userNo")
-@Table(name = "User")
+@Table(name = "Users")
 @Access(AccessType.FIELD)
 public class User {
 
