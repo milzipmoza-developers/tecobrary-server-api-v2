@@ -32,4 +32,8 @@ public class LibraryBook {
         this.libraryBookCoverUrl = libraryBookCoverUrl;
         this.libraryBookInfo = libraryBookInfo;
     }
+
+    public String getTitle() {
+        return libraryBookInfo.getTitle();
+    }
 }
