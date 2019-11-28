@@ -7,7 +7,7 @@ import com.woowacourse.tecobrary.librarybook.ui.LibraryBookDto;
 
 public class LibraryBookMapper {
 
-    public static LibraryBook map(LibraryBookDto libraryBookDto) {
+    public static LibraryBook map(final LibraryBookDto libraryBookDto) {
         return new LibraryBook(
                 new BookCoverUrl(libraryBookDto.getImage()),
                 new BookInfo(libraryBookDto.getTitle(),

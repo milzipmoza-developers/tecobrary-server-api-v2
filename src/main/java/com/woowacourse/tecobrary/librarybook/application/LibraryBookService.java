@@ -19,7 +19,7 @@ public class LibraryBookService {
         this.libraryBookRepository = libraryBookRepository;
     }
 
-    public LibraryBookCreateResponseDto save(LibraryBookDto libraryBookDto) {
+    public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
         checkExistLibraryBook(libraryBookDto);
 
         LibraryBook libraryBook = LibraryBookMapper.map(libraryBookDto);

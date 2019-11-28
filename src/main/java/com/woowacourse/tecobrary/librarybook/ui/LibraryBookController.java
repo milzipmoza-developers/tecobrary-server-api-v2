@@ -24,7 +24,7 @@ public class LibraryBookController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity createLibraryBook(@RequestBody LibraryBookDto libraryBookDto) {
+    public ResponseEntity createLibraryBook(@RequestBody final LibraryBookDto libraryBookDto) {
         log.debug("library book dto : {}", libraryBookDto);
         return ResponseEntity.ok(libraryBookService.save(libraryBookDto));
     }

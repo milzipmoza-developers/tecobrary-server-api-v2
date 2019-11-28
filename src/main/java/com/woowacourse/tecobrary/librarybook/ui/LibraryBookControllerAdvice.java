@@ -14,7 +14,7 @@ public class LibraryBookControllerAdvice {
     private static final Logger log = LoggerFactory.getLogger(LibraryBookControllerAdvice.class);
 
     @ExceptionHandler(DuplicatedLibraryBookException.class)
-    public ResponseEntity duplicatedLibraryBook(DuplicatedLibraryBookException e, Model model) {
+    public ResponseEntity duplicatedLibraryBook(final DuplicatedLibraryBookException e, final Model model) {
         log.error(e.getMessage());
         model.addAttribute("message", e.getMessage());
         return ResponseEntity.badRequest().body(model);
