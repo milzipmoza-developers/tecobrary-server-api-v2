@@ -7,6 +7,7 @@ import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.ui.LibraryBookCreateResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.LibraryBookDto;
+import com.woowacourse.tecobrary.librarybook.ui.LibraryBookTotalCountResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,7 @@ class LibraryBookServiceTest {
     private static final String PUBLISHER = "출판사";
     private static final String ISBN = "19930705";
     private static final String DESCRIPTION = "내용 없음";
+    private static final long TOTAL_COUNT = 1_000_000L;
 
     @Mock
     private LibraryBookRepository libraryBookRepository;
@@ -69,5 +71,15 @@ class LibraryBookServiceTest {
         given(libraryBookRepository.existsByLibraryBookInfoIsbn(any(String.class))).willReturn(true);
 
         assertThrows(DuplicatedLibraryBookException.class, () -> libraryBookService.save(libraryBookDto));
+    }
+
+    @DisplayName("총 도서 수를 조회한다.")
+    @Test
+    void readTotalCount() {
+        given(libraryBookRepository.count()).willReturn(TOTAL_COUNT);
+
+        LibraryBookTotalCountResponseDto libraryBookTotalCountResponseDto = libraryBookService.count();
+
+        assertThat(libraryBookTotalCountResponseDto.getTotal()).isEqualTo(TOTAL_COUNT);
     }
 }
