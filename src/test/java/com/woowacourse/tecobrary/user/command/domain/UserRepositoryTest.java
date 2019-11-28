@@ -20,7 +20,7 @@ public class UserRepositoryTest implements UserStatic {
     @Test
     void save() {
         User savedUser = userRepository.save(TEST_USER);
-        assertNotNull(savedUser.getUserNo());
+        assertNotNull(savedUser.getId());
     }
 
     @DisplayName("getUserByGithubInfo_GithubId가 성공적으로 동작한다.")
