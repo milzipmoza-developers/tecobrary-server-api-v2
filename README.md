@@ -6,6 +6,60 @@
 * Spring Framework 5.1.8.RELEASE
 * Tomcat 9.0.22
 * Gradle
+* Docker 
+  - [Dockerfile](./Dockerfile)
+  - [docker-compose.yml](./docker-compose.yml)
+
+## Docker MySql 설치 및 실행
+
+1. Docker MySql 이미지 설치
+
+8.0.17 버전의 mysql 이미지를 설치한다.
+
+```
+docker pull mysql:8.0.17
+```
+
+2. MySql 이미지 실행
+
+* tecobrary-mysql 라는 이름으로 도커 mysql:8.0.17 이미지를 실행한다.
+* 포트는 컨테이너의 3306 포트와 로컬호스트의 6033 포트를 연결한다.
+* MYSQL_ROOT_PASSWORD=tecobrary => tecobrary-mysql 의 root 의 비밀번호를 tecobrary 로 설정한다.
+
+```
+docker run -d -p 6033:3306 --name=tecobrary-mysql --env="MYSQL_ROOT_PASSWORD=tecobrary" --env="MYSQL_PASSWORD=tecobrary" --env="MYSQL_DATABASE=tecobrary" mysql:8.0.17
+```
+
+3. 실행된 Docker Mysql 의 bash 로 접속하기
+
+```
+docker exec -it tecobrary-mysql bash;
+```
+
+
+
+## Docker 실행 명령어
+
+1. Docker image 빌드 명령어
+```
+docker build --build-arg JAR_FILE=build/libs/*.jar -t tecobrary/tecobrary-api-server .
+```
+
+2. Docker image run 명령어
+```
+docker run -p 9090:9090 --name tecobrary-api-server tecobrary/tecobrary-api-server:latest
+```
+
+3. Docker 프로세스 확인하기
+```
+docker ps -a
+```
+
+4. Docker 프로세스 죽이기
+2번의 명령어로 실행하고 나면 이미 존재하는 tecobrary-api-server 이름의 프로세스가 존재하기 때문에 다음의 명령어를 통해 해당 프로세스를 삭제해야 한다.
+```
+docker rm tecobrary-api-server
+```
 
 ## 배포시 URL 매핑
 
