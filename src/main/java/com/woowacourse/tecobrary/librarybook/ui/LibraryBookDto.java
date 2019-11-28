@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class LibraryBookDto {
+
     private String image;
     private String title;
     private String author;
