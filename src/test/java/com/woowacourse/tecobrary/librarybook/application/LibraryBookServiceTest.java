@@ -24,6 +24,13 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(SpringExtension.class)
 class LibraryBookServiceTest {
 
+    private static final String IMAGE = "https://image.url";
+    private static final String TITLE = "제목";
+    private static final String AUTHOR = "작가";
+    private static final String PUBLISHER = "출판사";
+    private static final String ISBN = "19930705";
+    private static final String DESCRIPTION = "내용 없음";
+
     @Mock
     private LibraryBookRepository libraryBookRepository;
 
@@ -35,10 +42,10 @@ class LibraryBookServiceTest {
 
     @BeforeEach
     void setUp() {
-        libraryBookDto = new LibraryBookDto("https://image.url", "제목", "작가", "출판사", "19930705", "내용 없음");
+        libraryBookDto = new LibraryBookDto(IMAGE, TITLE, AUTHOR, PUBLISHER, ISBN, DESCRIPTION);
         libraryBook = new LibraryBook(
-                new BookCoverUrl("https://image.url"),
-                new BookInfo("제목", "작가", "출판사", "19930705", "내용 없음")
+                new BookCoverUrl(IMAGE),
+                new BookInfo(TITLE, AUTHOR, PUBLISHER, ISBN, DESCRIPTION)
         );
         ReflectionTestUtils.setField(libraryBook, "id", 1L);
     }
