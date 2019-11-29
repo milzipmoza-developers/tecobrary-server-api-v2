@@ -38,10 +38,6 @@ public class UserService {
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 
-    public int findCountOfUser() {
-        return userRepository.countUsers();
-    }
-
     public long countOfUser() {
         return userRepository.count();
     }
