@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
@@ -38,5 +39,15 @@ class UserServiceTest implements UserStatic {
         given(userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
 
         assertThrows(NotFoundGithubUserException.class, () -> userService.findByGithubId("123"));
+    }
+
+    @DisplayName("총 회원 수를 조회한다.")
+    @Test
+    void successfullyCountOfUser() {
+        given(userRepository.count()).willReturn(1L);
+
+        long userCount = userService.countOfUser();
+
+        assertThat(userCount).isEqualTo(1L);
     }
 }
