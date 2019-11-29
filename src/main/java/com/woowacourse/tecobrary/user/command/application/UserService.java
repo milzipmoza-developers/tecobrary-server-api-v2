@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User findByGithubId(String githubId) {
-        return userRepository.getUserByUserGithubInfo_GithubId(githubId)
+        return userRepository.getUserByUserGithubInfoGithubId(githubId)
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 

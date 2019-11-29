@@ -7,5 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> getUserByUserGithubInfo_GithubId(String githubId);
+
+    Optional<User> getUserByUserGithubInfoGithubId(String githubId);
 }
