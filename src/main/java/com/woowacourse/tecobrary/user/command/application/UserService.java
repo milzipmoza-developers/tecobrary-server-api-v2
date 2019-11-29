@@ -48,4 +48,8 @@ public class UserService {
         return userRepository.findById(Long.valueOf(userNo))
                 .orElseThrow(NotFoundGithubUserException::new);
     }
+
+    public long countOfUser() {
+        return userRepository.count();
+    }
 }
