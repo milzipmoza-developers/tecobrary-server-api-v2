@@ -12,6 +12,7 @@ import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +53,14 @@ public class LibraryBookService {
 
     public List<LibraryBookResponseDto> findAll(final int page, final int number) {
         Page<LibraryBook> libraryBooks = libraryBookRepository.findAll(PageRequest.of(page - 1, number));
+        return libraryBooks.stream()
+                .map(LibraryBookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<LibraryBookResponseDto> findAllByTitleContaining(final String title, final int page, final int number) {
+        Pageable pageable = PageRequest.of(page - 1, number);
+        Page<LibraryBook> libraryBooks = libraryBookRepository.findAllByLibraryBookInfoTitleContaining(title, pageable);
         return libraryBooks.stream()
                 .map(LibraryBookMapper::toDto)
                 .collect(Collectors.toList());

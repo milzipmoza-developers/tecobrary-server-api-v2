@@ -120,4 +120,20 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 log().ifError().
                 statusCode(400);
     }
+
+    @DisplayName("[GET] /books/search?title=제목&page=1&number=10, 제목에 맞는 도서 정보를 조회한다.")
+    @Test
+    void readLibraryBooksByTitle() {
+        given().
+                queryParam("page", "1").
+                queryParam("number", "10").
+                queryParam("title", "제목").
+        when().
+                get(baseUrl("/books/search")).
+        then().
+                log().ifError().
+                statusCode(200).
+                contentType(JSON).
+                body("size()", is(10));
+    }
 }
