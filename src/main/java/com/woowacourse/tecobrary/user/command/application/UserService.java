@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public User save(UserGithubInfo userGithubInfo) {
-        return userRepository.save(new User(userGithubInfo, new UserAuthorization(Authorization.none)));
+        return userRepository.save(new User(userGithubInfo, new UserAuthorization(Authorization.NONE)));
     }
 
     public User findByGithubId(String githubId) {
