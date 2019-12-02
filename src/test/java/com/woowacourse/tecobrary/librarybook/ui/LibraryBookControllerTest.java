@@ -50,7 +50,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 .title(TEST_TITLE)
                 .author(TEST_AUTHOR)
                 .publisher(TEST_PUBLISHER)
-                .isbn("0123")
+                .isbn(SAVED_ISBN_AT_ID_01)
                 .description(TEST_DESCRIPTION)
                 .build();
 
@@ -77,7 +77,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 log().ifError().
                 statusCode(200).
                 contentType(JSON).
-                body("total", is(10));
+                body("total", is(95));
     }
 
     @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
@@ -91,16 +91,16 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 log().ifError().
                 statusCode(200).
                 contentType(JSON).
-                body("id", is(SAVED_ID.intValue())).
-                body("image", is(SAVED_IMAGE)).
-                body("title", is(SAVED_TITLE)).
-                body("author", is(SAVED_AUTHOR)).
-                body("publisher", is(SAVED_PUBLISHER)).
-                body("isbn", is(SAVED_ISBN)).
-                body("description", is(SAVED_DESCRIPTION));
+                body("id", is(SAVED_ID_AT_ID_01.intValue())).
+                body("image", is(SAVED_IMAGE_AT_ID_01)).
+                body("title", is(SAVED_TITLE_AT_ID_01)).
+                body("author", is(SAVED_AUTHOR_AT_ID_01)).
+                body("publisher", is(SAVED_PUBLISHER_AT_ID_01)).
+                body("isbn", is(SAVED_ISBN_AT_ID_01)).
+                body("description", is(SAVED_DESCRIPTION_AT_ID_01));
     }
 
-    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, 조회를 실패한다.")
+    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, Bad Request 응답을 받는다.")
     @Test
     void failedReadLibraryBook() {
         given().
@@ -129,7 +129,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("size()", is(10));
     }
 
-    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, 조회를 실패한다.")
+    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, Bad Request 응답을 받는다.")
     @Test
     void failedReadLibraryBooks() {
         given().
@@ -142,19 +142,19 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /books/search?title=제목&page=1&number=10, 제목에 맞는 도서 정보를 조회한다.")
+    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 제목에 맞는 도서 정보를 조회한다. 테스트 DB 에서 객체를 검색하면 9개가 나온다.")
     @Test
     void readLibraryBooksByTitle() {
         given().
                 queryParam("page", "1").
                 queryParam("number", "10").
-                queryParam("title", "제목").
+                queryParam("title", "객체").
         when().
                 get(baseUrl("/books/search")).
         then().
                 log().ifError().
                 statusCode(200).
                 contentType(JSON).
-                body("size()", is(10));
+                body("size()", is(9));
     }
 }

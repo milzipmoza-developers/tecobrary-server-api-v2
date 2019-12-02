@@ -46,10 +46,10 @@ class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserSt
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("user.email", equalTo(SAVED_USER_EMAIL_VALUE)).
-                body("user.name", equalTo(SAVED_USER_NAME_VALUE)).
-                body("user.avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
-                body("user.authorization", equalTo(SAVED_USER_AUTH_VALUE));
+                body("user.email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_01)).
+                body("user.name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_01)).
+                body("user.avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
+                body("user.authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 
     @DisplayName("[GET] /auth/user, 새로 가입하는 user 에 대한 json 이 성공적으로 반환된다.")

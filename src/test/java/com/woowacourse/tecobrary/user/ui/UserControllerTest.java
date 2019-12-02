@@ -24,14 +24,15 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("total", is(2));
+                body("total", is(32));
     }
 
-    @DisplayName("[GET] /users?page=1&number=2, 2개씩 1페이지 회원 목록을 조회한다.")
+    @DisplayName("[GET] /users?page=1&number=10, 10개씩 1페이지 회원 목록을 조회한다.")
     @Test
     void successfullyFindUsers() {
         given().
-                params("page",1,"number", 2).
+                param("page",1).
+                param("number", 10).
                 accept(JSON).
         when().
                 get(baseUrl("/users")).
@@ -40,25 +41,26 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("size()", is(2)).
-                body("[0].githubId", equalTo(SAVED_GITHUB_ID)).
-                body("[0].email", equalTo(SAVED_USER_EMAIL_VALUE)).
-                body("[0].name", equalTo(SAVED_USER_NAME_VALUE)).
-                body("[0].avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
-                body("[0].authorization", equalTo(SAVED_USER_AUTH_VALUE)).
+                body("size()", is(10)).
+                body("[0].githubId", equalTo(SAVED_GITHUB_ID_AT_ID_01)).
+                body("[0].email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_01)).
+                body("[0].name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_01)).
+                body("[0].avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
+                body("[0].authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01)).
 
-                body("[1].githubId", equalTo(SECOND_SAVED_GITHUB_ID)).
-                body("[1].email", equalTo(SECOND_SAVED_USER_EMAIL_VALUE)).
-                body("[1].name", equalTo(SECOND_SAVED_USER_NAME_VALUE)).
-                body("[1].avatarUrl", equalTo(SECOND_SAVED_USER_AVATAR_URL_VALUE)).
-                body("[1].authorization", equalTo(SECOND_SAVED_USER_AUTH_VALUE));
+                body("[1].githubId", equalTo(SAVED_GITHUB_ID_AT_ID_02)).
+                body("[1].email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_02)).
+                body("[1].name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_02)).
+                body("[1].avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_02)).
+                body("[1].authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_02));
     }
 
-    @DisplayName("[GET] /users?page=2&number=2, 2개씩 2페이지 회원 목록을 조회하면 아무것도 없다.")
+    @DisplayName("[GET] /users?page=6&number=10, 10개씩 6페이지 회원 목록을 조회하면 아무것도 없다.")
     @Test
     void failFindUsers() {
         given().
-                params("page",2,"number", 2).
+                param("page",6).
+                param("number", 10).
                 accept(JSON).
         when().
                 get(baseUrl("/users")).
@@ -96,10 +98,10 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("githubId", equalTo(SAVED_GITHUB_ID)).
-                body("email", equalTo(SAVED_USER_EMAIL_VALUE)).
-                body("name", equalTo(SAVED_USER_NAME_VALUE)).
-                body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
-                body("authorization", equalTo(SAVED_USER_AUTH_VALUE));
+                body("githubId", equalTo(SAVED_GITHUB_ID_AT_ID_01)).
+                body("email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_01)).
+                body("name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_01)).
+                body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
+                body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 }
