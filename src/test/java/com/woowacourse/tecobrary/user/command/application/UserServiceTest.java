@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.user.command.application;
 
+import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import org.junit.jupiter.api.DisplayName;
@@ -7,13 +8,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
@@ -49,5 +55,14 @@ class UserServiceTest implements UserStatic {
         long userCount = userService.countOfUser();
 
         assertThat(userCount).isEqualTo(1L);
+    }
+
+    @Test
+    void successfullyFindUsersOnPage() {
+        List<User> mockUsers = Arrays.asList(TEST_USER, TEST_USER);
+        given(userRepository.findAll(any(PageRequest.class)))
+                .willReturn(new PageImpl<>(mockUsers, PageRequest.of(1, 2), 2));
+        List<User> users = userService.findUsersOnPage(1, 2);
+        assertThat(users).hasSize(2);
     }
 }

@@ -15,7 +15,11 @@ import com.woowacourse.tecobrary.user.command.domain.*;
 import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -51,5 +55,10 @@ public class UserService {
 
     public long countOfUser() {
         return userRepository.count();
+    }
+
+    public List<User> findUsersOnPage(int page, int number) {
+        Page<User> users = userRepository.findAll(PageRequest.of(page - 1, number));
+        return users.getContent();
     }
 }
