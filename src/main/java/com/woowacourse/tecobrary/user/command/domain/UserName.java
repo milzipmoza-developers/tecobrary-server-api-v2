@@ -24,7 +24,7 @@ import javax.persistence.Embeddable;
 public class UserName {
 
     @Column(name = "name",
-            nullable = true,
+            nullable = false,
             length = 100)
     private String name;
 
