@@ -1,5 +1,9 @@
 package com.woowacourse.tecobrary.librarybook.common;
 
+import com.woowacourse.tecobrary.common.model.BookCoverUrl;
+import com.woowacourse.tecobrary.common.model.BookInfo;
+import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+
 public interface LibraryBookStatic {
 
     String TEST_IMAGE = "https://image.url";
@@ -16,4 +20,7 @@ public interface LibraryBookStatic {
     String SAVED_PUBLISHER = "출판사";
     String SAVED_ISBN = "0123";
     String SAVED_DESCRIPTION = "요약";
+
+    LibraryBook TEST_LIBRARY_BOOK = new LibraryBook(new BookCoverUrl(TEST_IMAGE),
+            new BookInfo(TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION));
 }

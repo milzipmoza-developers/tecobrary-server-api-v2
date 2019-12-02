@@ -10,7 +10,12 @@ import com.woowacourse.tecobrary.librarybook.ui.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.LibraryBookTotalCountResponseDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LibraryBookService {
@@ -43,5 +48,12 @@ public class LibraryBookService {
     public LibraryBookResponseDto findById(final Long id) {
         LibraryBook libraryBook = libraryBookRepository.findById(id).orElseThrow(NotFoundLibraryBookException::new);
         return LibraryBookMapper.toDto(libraryBook);
+    }
+
+    public List<LibraryBookResponseDto> findAll(final int page, final int number) {
+        Page<LibraryBook> libraryBooks = libraryBookRepository.findAll(PageRequest.of(page - 1, number));
+        return libraryBooks.stream()
+                .map(LibraryBookMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

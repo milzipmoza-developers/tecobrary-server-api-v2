@@ -35,4 +35,9 @@ public class LibraryBookController {
     public ResponseEntity readLibraryBook(@PathVariable Long id) {
         return ResponseEntity.ok(libraryBookService.findById(id));
     }
+
+    @GetMapping("/books")
+    public ResponseEntity readLibraryBooks(@RequestParam int page,@RequestParam int number) {
+        return ResponseEntity.ok(libraryBookService.findAll(page, number));
+    }
 }
