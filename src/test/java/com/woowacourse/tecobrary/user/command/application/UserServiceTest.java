@@ -3,6 +3,7 @@ package com.woowacourse.tecobrary.user.command.application;
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
 import com.woowacourse.tecobrary.user.common.UserStatic;
+import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,7 +63,7 @@ class UserServiceTest implements UserStatic {
         List<User> mockUsers = Arrays.asList(TEST_USER, TEST_USER);
         given(userRepository.findAll(any(PageRequest.class)))
                 .willReturn(new PageImpl<>(mockUsers, PageRequest.of(1, 2), 2));
-        List<User> users = userService.findUsersOnPage(1, 2);
+        List<UserInfoDto> users = userService.findUsersOnPage(1, 2);
         assertThat(users).hasSize(2);
     }
 }

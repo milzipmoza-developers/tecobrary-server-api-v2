@@ -12,7 +12,9 @@
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.*;
+import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserService {
@@ -57,8 +61,11 @@ public class UserService {
         return userRepository.count();
     }
 
-    public List<User> findUsersOnPage(int page, int number) {
-        Page<User> users = userRepository.findAll(PageRequest.of(page - 1, number));
-        return users.getContent();
+    public List<UserInfoDto> findUsersOnPage(int page, int number) {
+        Page<User> pageUsers = userRepository.findAll(PageRequest.of(page - 1, number));
+        return pageUsers.getContent()
+                .stream()
+                .map(UserInfoDtoMapper::map)
+                .collect(toList());
     }
 }

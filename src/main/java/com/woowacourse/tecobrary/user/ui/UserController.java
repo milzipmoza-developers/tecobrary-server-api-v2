@@ -1,7 +1,19 @@
+/*
+ * @(#) UserController.java
+ *
+ * v 1.0.0
+ *
+ * 2019.11.29
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy, gch01410, LeeYounghyeon
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
 import com.woowacourse.tecobrary.user.command.domain.User;
+import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -31,7 +43,7 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity findUsers(@RequestParam int page, @RequestParam int number, Model model) {
-        List<User> users = userService.findUsersOnPage(page, number);
+        List<UserInfoDto> users = userService.findUsersOnPage(page, number);
         model.addAttribute("users", users);
         return ResponseEntity.ok().body(model);
     }
