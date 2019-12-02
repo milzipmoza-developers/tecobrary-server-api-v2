@@ -40,18 +40,18 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("users.size()", is(2)).
-                body("users[0].githubId", equalTo(SAVED_GITHUB_ID)).
-                body("users[0].email", equalTo(SAVED_USER_EMAIL_VALUE)).
-                body("users[0].name", equalTo(SAVED_USER_NAME_VALUE)).
-                body("users[0].avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
-                body("users[0].authorization", equalTo(SAVED_USER_AUTH_VALUE)).
+                body("size()", is(2)).
+                body("[0].githubId", equalTo(SAVED_GITHUB_ID)).
+                body("[0].email", equalTo(SAVED_USER_EMAIL_VALUE)).
+                body("[0].name", equalTo(SAVED_USER_NAME_VALUE)).
+                body("[0].avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
+                body("[0].authorization", equalTo(SAVED_USER_AUTH_VALUE)).
 
-                body("users[1].githubId", equalTo(SECOND_SAVED_GITHUB_ID)).
-                body("users[1].email", equalTo(SECOND_SAVED_USER_EMAIL_VALUE)).
-                body("users[1].name", equalTo(SECOND_SAVED_USER_NAME_VALUE)).
-                body("users[1].avatarUrl", equalTo(SECOND_SAVED_USER_AVATAR_URL_VALUE)).
-                body("users[1].authorization", equalTo(SECOND_SAVED_USER_AUTH_VALUE));
+                body("[1].githubId", equalTo(SECOND_SAVED_GITHUB_ID)).
+                body("[1].email", equalTo(SECOND_SAVED_USER_EMAIL_VALUE)).
+                body("[1].name", equalTo(SECOND_SAVED_USER_NAME_VALUE)).
+                body("[1].avatarUrl", equalTo(SECOND_SAVED_USER_AVATAR_URL_VALUE)).
+                body("[1].authorization", equalTo(SECOND_SAVED_USER_AUTH_VALUE));
     }
 
     @DisplayName("[GET] /users?page=2&number=2, 2개씩 2페이지 회원 목록을 조회하면 아무것도 없다.")
@@ -72,7 +72,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
 
     @DisplayName("[GET] /users?page=string&number=string, 적절하지 않은 쿼리 파라미터 값을 보내면 Bad Request 응답을 받는다.")
     @Test
-    void failFindUsers2() {
+    void failFindUsersInvalidParams() {
         given().
                 params("page","string","number", "string").
                 accept(JSON).
@@ -96,10 +96,10 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
-                body("user.githubId", equalTo(SAVED_GITHUB_ID)).
-                body("user.email", equalTo(SAVED_USER_EMAIL_VALUE)).
-                body("user.name", equalTo(SAVED_USER_NAME_VALUE)).
-                body("user.avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
-                body("user.authorization", equalTo(SAVED_USER_AUTH_VALUE));
+                body("githubId", equalTo(SAVED_GITHUB_ID)).
+                body("email", equalTo(SAVED_USER_EMAIL_VALUE)).
+                body("name", equalTo(SAVED_USER_NAME_VALUE)).
+                body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
+                body("authorization", equalTo(SAVED_USER_AUTH_VALUE));
     }
 }

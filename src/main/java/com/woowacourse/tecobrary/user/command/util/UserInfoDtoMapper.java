@@ -16,7 +16,7 @@ import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 
 public class UserInfoDtoMapper {
 
-    public static UserInfoDto map(User user) {
+    public static UserInfoDto toDto(final User user) {
         return UserInfoDto.builder()
                 .githubId(user.getGithubId())
                 .email(user.getUserEmail())

@@ -2,7 +2,6 @@ package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
-import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.junit.jupiter.api.DisplayName;
@@ -73,8 +72,13 @@ class UserServiceTest implements UserStatic {
     @Test
     void successfullyFindUserById() {
         given(userRepository.findById(1L)).willReturn(Optional.of(TEST_USER));
+        UserInfoDto userInfoDto = userService.findUserById(1L);
 
-        assertEquals(userService.findUserById(1L), UserInfoDtoMapper.map(TEST_USER));
+        assertEquals(userInfoDto.getGithubId(), TEST_GITHUB_ID);
+        assertEquals(userInfoDto.getEmail(), TEST_USER_EMAIL_VALUE);
+        assertEquals(userInfoDto.getName(), TEST_USER_NAME_VALUE);
+        assertEquals(userInfoDto.getAvatarUrl(), TEST_USER_AVATAR_URL_VALUE);
+        assertEquals(userInfoDto.getAuthorization(), TEST_USER_AUTH_VALUE);
     }
 
     @DisplayName("없는 id 로 findUserById 를 호출하면 NotFoundUserException 이 발생한다.")

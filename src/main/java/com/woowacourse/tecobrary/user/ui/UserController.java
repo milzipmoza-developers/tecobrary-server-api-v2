@@ -12,13 +12,10 @@
 package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
-import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -34,19 +31,16 @@ public class UserController {
     @GetMapping("/users/all")
     public ResponseEntity countOfUser(Model model) {
         model.addAttribute("total", userService.countOfUser());
-        return ResponseEntity.ok().body(model);
+        return ResponseEntity.ok(model);
     }
 
     @GetMapping("/users")
-    public ResponseEntity findUsers(@RequestParam int page, @RequestParam int number, Model model) {
-        List<UserInfoDto> users = userService.findUsersOnPage(page, number);
-        model.addAttribute("users", users);
-        return ResponseEntity.ok().body(model);
+    public ResponseEntity findUsers(@RequestParam final int page, @RequestParam final int number) {
+        return ResponseEntity.ok(userService.findUsersOnPage(page, number));
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity findUserById(@PathVariable int id, Model model) {
-        model.addAttribute("user", userService.findUserById(id));
-        return ResponseEntity.ok().body(model);
+    public ResponseEntity findUserById(@PathVariable final int id) {
+        return ResponseEntity.ok(userService.findUserById(id));
     }
 }

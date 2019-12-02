@@ -16,7 +16,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString
-@EqualsAndHashCode
 public class UserInfoDto {
 
     private String githubId;
@@ -26,7 +25,7 @@ public class UserInfoDto {
     private String authorization;
 
     @Builder
-    public UserInfoDto(String githubId, String email, String name, String avatarUrl, String authorization) {
+    private UserInfoDto(final String githubId, final String email, final String name, final String avatarUrl, final String authorization) {
         this.githubId = githubId;
         this.email = email;
         this.name = name;
