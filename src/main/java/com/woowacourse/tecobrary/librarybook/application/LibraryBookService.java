@@ -3,8 +3,10 @@ package com.woowacourse.tecobrary.librarybook.application;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
+import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.ui.LibraryBookCreateResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.LibraryBookDto;
+import com.woowacourse.tecobrary.librarybook.ui.LibraryBookRequestDto;
+import com.woowacourse.tecobrary.librarybook.ui.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.LibraryBookTotalCountResponseDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,26 @@ public class LibraryBookService {
         this.libraryBookRepository = libraryBookRepository;
     }
 
-    public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
-        checkExistLibraryBook(libraryBookDto);
+    public LibraryBookCreateResponseDto save(final LibraryBookRequestDto libraryBookRequestDto) {
+        checkExistLibraryBook(libraryBookRequestDto);
 
-        LibraryBook libraryBook = LibraryBookMapper.map(libraryBookDto);
+        LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookRequestDto);
         LibraryBook savedLibraryBook = libraryBookRepository.save(libraryBook);
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 
-    private void checkExistLibraryBook(final LibraryBookDto libraryBookDto) {
-        if (libraryBookRepository.existsByLibraryBookInfoIsbn(libraryBookDto.getIsbn())) {
-            throw new DuplicatedLibraryBookException(libraryBookDto.getTitle());
+    private void checkExistLibraryBook(final LibraryBookRequestDto libraryBookRequestDto) {
+        if (libraryBookRepository.existsByLibraryBookInfoIsbn(libraryBookRequestDto.getIsbn())) {
+            throw new DuplicatedLibraryBookException(libraryBookRequestDto.getTitle());
         }
     }
 
     public LibraryBookTotalCountResponseDto count() {
         return new LibraryBookTotalCountResponseDto(libraryBookRepository.count());
+    }
+
+    public LibraryBookResponseDto findById(final Long id) {
+        LibraryBook libraryBook = libraryBookRepository.findById(id).orElseThrow(NotFoundLibraryBookException::new);
+        return LibraryBookMapper.toDto(libraryBook);
     }
 }

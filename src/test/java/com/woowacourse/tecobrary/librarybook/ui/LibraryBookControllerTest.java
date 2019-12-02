@@ -1,31 +1,33 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException.NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-class LibraryBookControllerTest extends RestAssuredTestUtils {
+class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
 
     @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
     @Test
     void successfullyCreateLibraryBook() {
         given().
                 contentType(JSON).
-                body(new LibraryBookDto("https://image.url/book", "양파껍질학습법", "박재성", "우아한테크코스", "19700514", "이책은 사서 보는게 최고다")).
-        when().
+                body(new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION)).
+                when().
                 post(baseUrl("/books")).
-        then().
+                then().
                 log().ifError().
                 log().ifValidationFails().
                 statusCode(200).
                 contentType(JSON).
                 body("id", notNullValue()).
-                body("message", is("양파껍질학습법 register succeed"));
+                body("message", is(TEST_TITLE + " register succeed"));
     }
 
     @DisplayName("[POST] /books, isbn이 같은 도서가 이미 존재할 때, 등록을 실패한다.")
@@ -33,7 +35,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils {
     void failedCreateLibraryBook() {
         given().
                 contentType(JSON).
-                body(new LibraryBookDto("https://image.url/book", "양파껍질학습법", "박재성", "우아한테크코스", "0123", "이책은 사서 보는게 최고다")).
+                body(new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, "0123", TEST_DESCRIPTION)).
         when().
                 post(baseUrl("/books")).
         then().
@@ -41,7 +43,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils {
                 log().ifValidationFails().
                 statusCode(400).
                 contentType(JSON).
-                body("message", is("양파껍질학습법 register failed"));
+                body("message", is(TEST_TITLE + " register failed"));
     }
 
     @DisplayName("[GET] /books/all, 총 도서 수를 조회한다.")
@@ -55,5 +57,39 @@ class LibraryBookControllerTest extends RestAssuredTestUtils {
                 statusCode(200).
                 contentType(JSON).
                 body("total", is(1));
+    }
+
+    @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
+    @Test
+    void readLibraryBook() {
+        given().
+                pathParam("id", 1L).
+        when().
+                get(baseUrl("/books/{id}")).
+        then().
+                log().ifError().
+                statusCode(200).
+                contentType(JSON).
+                body("id", is(SAVED_ID.intValue())).
+                body("image", is(SAVED_IMAGE)).
+                body("title", is(SAVED_TITLE)).
+                body("author", is(SAVED_AUTHOR)).
+                body("publisher", is(SAVED_PUBLISHER)).
+                body("isbn", is(SAVED_ISBN)).
+                body("description", is(SAVED_DESCRIPTION));
+    }
+
+    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, 조회를 실패한다.")
+    @Test
+    void failedReadLibraryBook() {
+        given().
+                pathParam("id", 2L).
+        when().
+                get(baseUrl("/books/{id}")).
+        then().
+                log().ifError().
+                statusCode(400).
+                contentType(JSON).
+                body("message", is(NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE));
     }
 }

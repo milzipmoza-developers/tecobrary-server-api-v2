@@ -36,4 +36,24 @@ public class LibraryBook {
     public String getTitle() {
         return libraryBookInfo.getTitle();
     }
+
+    public String getAuthor() {
+        return libraryBookInfo.getAuthor();
+    }
+
+    public String getPublisher() {
+        return libraryBookInfo.getPublisher();
+    }
+
+    public String getIsbn() {
+        return libraryBookInfo.getIsbn();
+    }
+
+    public String getDescription() {
+        return libraryBookInfo.getDescription();
+    }
+
+    public String getImage() {
+        return libraryBookCoverUrl.getImage();
+    }
 }
