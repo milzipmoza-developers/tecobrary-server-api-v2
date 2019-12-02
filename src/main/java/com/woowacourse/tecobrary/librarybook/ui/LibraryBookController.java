@@ -21,13 +21,18 @@ public class LibraryBookController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity createLibraryBook(@RequestBody final LibraryBookDto libraryBookDto) {
-        log.debug("library book dto : {}", libraryBookDto);
-        return ResponseEntity.ok(libraryBookService.save(libraryBookDto));
+    public ResponseEntity createLibraryBook(@RequestBody final LibraryBookRequestDto libraryBookRequestDto) {
+        log.debug("library book dto : {}", libraryBookRequestDto);
+        return ResponseEntity.ok(libraryBookService.save(libraryBookRequestDto));
     }
 
     @GetMapping("/books/all")
     public ResponseEntity readLibraryBookTotalCount() {
         return ResponseEntity.ok(libraryBookService.count());
+    }
+
+    @GetMapping("/books/{id}")
+    public ResponseEntity readLibraryBook(@PathVariable Long id) {
+        return ResponseEntity.ok(libraryBookService.findById(id));
     }
 }

@@ -1,14 +1,12 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@NoArgsConstructor
 @Getter
 @ToString
-public class LibraryBookDto {
-
+public class LibraryBookResponseDto {
+    private Long id;
     private String image;
     private String title;
     private String author;
@@ -16,7 +14,8 @@ public class LibraryBookDto {
     private String isbn;
     private String description;
 
-    public LibraryBookDto(String image, String title, String author, String publisher, String isbn, String description) {
+    public LibraryBookResponseDto(final Long id, final String image, final String title, final String author, final String publisher, final String isbn, final String description) {
+        this.id = id;
         this.image = image;
         this.title = title;
         this.author = author;
