@@ -37,7 +37,7 @@ public class LibraryBookController {
     }
 
     @GetMapping("/books")
-    public ResponseEntity readLibraryBooks(@RequestParam int page,@RequestParam int number) {
+    public ResponseEntity readLibraryBooks(@RequestParam int page, @RequestParam int number) {
         return ResponseEntity.ok(libraryBookService.findAll(page, number));
     }
 
