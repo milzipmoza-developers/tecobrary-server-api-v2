@@ -83,4 +83,23 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 log().ifValidationFails().
                 statusCode(400);
     }
+
+    @DisplayName("[GET] /users/:id, id로 특정 유저 조회를 한다.")
+    @Test
+    void successfullyFindUserById() {
+        given().
+                accept(JSON).
+        when().
+                get(baseUrl("/users/{id}"),1).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("user.githubId", equalTo(SAVED_GITHUB_ID)).
+                body("user.email", equalTo(SAVED_USER_EMAIL_VALUE)).
+                body("user.name", equalTo(SAVED_USER_NAME_VALUE)).
+                body("user.avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE)).
+                body("user.authorization", equalTo(SAVED_USER_AUTH_VALUE));
+    }
 }

@@ -12,15 +12,11 @@
 package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
-import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,6 +41,12 @@ public class UserController {
     public ResponseEntity findUsers(@RequestParam int page, @RequestParam int number, Model model) {
         List<UserInfoDto> users = userService.findUsersOnPage(page, number);
         model.addAttribute("users", users);
+        return ResponseEntity.ok().body(model);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity findUserById(@PathVariable int id, Model model) {
+        model.addAttribute("user", userService.findUserById(id));
         return ResponseEntity.ok().body(model);
     }
 }
