@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class YamlPropertiesProcessor extends YamlProcessor {
+
     public YamlPropertiesProcessor(Resource resource) throws IOException {
         if (!resource.exists()) {
             throw new FileNotFoundException();

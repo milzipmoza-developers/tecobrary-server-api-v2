@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
@@ -27,7 +28,7 @@ class UserServiceTest implements UserStatic {
     @DisplayName("findByGithubId 가 성공적으로 작동한다.")
     @Test
     void successGetByGithubId() {
-        given(userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
+        given(userRepository.getUserByUserGithubInfoGithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
 
         assertEquals(userService.findByGithubId(TEST_GITHUB_ID), TEST_USER);
     }
@@ -35,8 +36,18 @@ class UserServiceTest implements UserStatic {
     @DisplayName("없는 githubId 로 findByGithubId 를 호출하면 NotFoundGithubUserException 이 발생한다.")
     @Test
     void failedGetByGithubId() {
-        given(userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
+        given(userRepository.getUserByUserGithubInfoGithubId(TEST_GITHUB_ID)).willReturn(Optional.of(TEST_USER));
 
         assertThrows(NotFoundGithubUserException.class, () -> userService.findByGithubId("123"));
+    }
+
+    @DisplayName("총 회원 수를 조회한다.")
+    @Test
+    void successfullyCountOfUser() {
+        given(userRepository.count()).willReturn(1L);
+
+        long userCount = userService.countOfUser();
+
+        assertThat(userCount).isEqualTo(1L);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 public class YamlPropertySourceFactory implements PropertySourceFactory {
+
     private static final String YML_FILE_EXTENSION = ".yml";
 
     @Override

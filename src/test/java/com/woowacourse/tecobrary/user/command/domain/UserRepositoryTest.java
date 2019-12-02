@@ -28,7 +28,7 @@ public class UserRepositoryTest implements UserStatic {
     void getUserByGithubInfo_GithubId() {
         User savedUser = userRepository.save(TEST_USER);
         assertEquals(
-                userRepository.getUserByUserGithubInfo_GithubId(TEST_GITHUB_ID)
+                userRepository.getUserByUserGithubInfoGithubId(TEST_GITHUB_ID)
                         .orElseThrow(NotFoundGithubUserException::new),
                 savedUser
         );
