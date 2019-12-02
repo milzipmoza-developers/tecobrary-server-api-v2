@@ -1,3 +1,14 @@
+/*
+ * @(#) UserService.java
+ *
+ * v 1.0.0
+ *
+ * 2019.11.29
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.*;
@@ -25,7 +36,7 @@ public class UserService {
     }
 
     public User findByGithubId(String githubId) {
-        return userRepository.getUserByUserGithubInfo_GithubId(githubId)
+        return userRepository.getUserByUserGithubInfoGithubId(githubId)
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 
@@ -36,5 +47,9 @@ public class UserService {
     private User findById(String userNo) {
         return userRepository.findById(Long.valueOf(userNo))
                 .orElseThrow(NotFoundGithubUserException::new);
+    }
+
+    public long countOfUser() {
+        return userRepository.count();
     }
 }
