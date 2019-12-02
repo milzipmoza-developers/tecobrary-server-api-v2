@@ -19,9 +19,9 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
         given().
                 contentType(JSON).
                 body(new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION)).
-                when().
+        when().
                 post(baseUrl("/books")).
-                then().
+        then().
                 log().ifError().
                 log().ifValidationFails().
                 statusCode(200).
@@ -91,5 +91,33 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 statusCode(400).
                 contentType(JSON).
                 body("message", is(NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE));
+    }
+
+    @DisplayName("[GET] /books?page=1&number=10, 해당 page 에 해당하는 number 개의 도서 list 로 반환한다.")
+    @Test
+    void readLibraryBooks() {
+        given().
+                queryParam("page", "1").
+                queryParam("number", "10").
+        when().
+                get(baseUrl("/books")).
+        then().
+                log().ifError().
+                statusCode(200).
+                contentType(JSON).
+                body("size()", is(10));
+    }
+
+    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, 조회를 실패한다.")
+    @Test
+    void failedReadLibraryBooks() {
+        given().
+                queryParam("page", "a").
+                queryParam("number", "b").
+        when().
+                get(baseUrl("/books")).
+        then().
+                log().ifError().
+                statusCode(400);
     }
 }

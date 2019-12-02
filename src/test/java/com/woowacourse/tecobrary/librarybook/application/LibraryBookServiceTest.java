@@ -16,9 +16,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,6 +85,7 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         assertThat(libraryBookTotalCountResponseDto.getTotal()).isEqualTo(TOTAL_COUNT);
     }
 
+    @DisplayName("id에 해당하는 도서를 조회한다.")
     @Test
     void readLibraryBook() {
         given(libraryBookRepository.findById(1L)).willReturn(Optional.of(libraryBook));
@@ -94,5 +99,15 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         assertThat(libraryBookResponseDto.getPublisher()).isEqualTo(TEST_PUBLISHER);
         assertThat(libraryBookResponseDto.getIsbn()).isEqualTo(TEST_ISBN);
         assertThat(libraryBookResponseDto.getDescription()).isEqualTo(TEST_DESCRIPTION);
+    }
+
+    @DisplayName("페이지에 해당하는 도서들을 조회한다.")
+    @Test
+    void readLibraryBooks() {
+        List<LibraryBook> mockLibraryBooks = Arrays.asList(TEST_LIBRARY_BOOK, TEST_LIBRARY_BOOK);
+        given(libraryBookRepository.findAll(any(PageRequest.class)))
+                .willReturn(new PageImpl<>(mockLibraryBooks, PageRequest.of(1, 2), 2));
+        List<LibraryBookResponseDto> libraryBooks = libraryBookService.findAll(1, 2);
+        assertThat(libraryBooks).hasSize(2);
     }
 }
