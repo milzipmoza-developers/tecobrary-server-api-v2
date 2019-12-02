@@ -12,7 +12,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class WishBookRequestUser {
 
-    @Column(name = "userId")
+    @Column(name = "userId",
+            nullable = false)
     private Long userId;
 
     public WishBookRequestUser(Long userId) {
