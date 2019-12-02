@@ -22,7 +22,7 @@ public interface GithubApiStatic {
     String REDIRECT_URI_KEY = "redirect_uri";
     String REDIRECT_URI_VALUE = "http://localhost:8080/auth";
     String SCOPE_KEY = "scope";
-    String SCOPE_VALUE = "USER";
+    String SCOPE_VALUE = "user";
     String CODE_KEY = "code";
     String CODE_VALUE = "fake_code";
 }

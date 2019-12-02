@@ -5,7 +5,7 @@
  *
  * 2019.11.29
  *
- * Copyright (c) 2019 woowacourse, thedevluffy
+ * Copyright (c) 2019 woowacourse, thedevluffy, gch01410, LeeYounghyeon
  * All rights reserved
  */
 
@@ -59,6 +59,10 @@ public class User {
 
     public String updateAuthorization(String newAuthorization) {
         return userAuthorization.updateAuthorization(newAuthorization);
+    }
+
+    public String getGithubId() {
+        return userGithubInfo.getGithubId();
     }
 
     public String getUserEmail() {

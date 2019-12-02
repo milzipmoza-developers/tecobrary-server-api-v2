@@ -1,12 +1,21 @@
+/*
+ * @(#) UserController.java
+ *
+ * v 1.0.0
+ *
+ * 2019.11.29
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy, gch01410, LeeYounghyeon
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -22,6 +31,16 @@ public class UserController {
     @GetMapping("/users/all")
     public ResponseEntity countOfUser(Model model) {
         model.addAttribute("total", userService.countOfUser());
-        return ResponseEntity.ok().body(model);
+        return ResponseEntity.ok(model);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity findUsers(@RequestParam final int page, @RequestParam final int number) {
+        return ResponseEntity.ok(userService.findUsersOnPage(page, number));
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity findUserById(@PathVariable final int id) {
+        return ResponseEntity.ok(userService.findUserById(id));
     }
 }

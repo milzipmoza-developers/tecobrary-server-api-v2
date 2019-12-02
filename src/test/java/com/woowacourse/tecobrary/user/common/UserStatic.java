@@ -21,6 +21,12 @@ public interface UserStatic {
     String SAVED_USER_AVATAR_URL_VALUE = "https://temp.avatarl.url";
     String SAVED_USER_AUTH_VALUE = "KING";
 
+    String SECOND_SAVED_GITHUB_ID = "940720";
+    String SECOND_SAVED_USER_EMAIL_VALUE = "gch01410@gmail.com";
+    String SECOND_SAVED_USER_NAME_VALUE = "done";
+    String SECOND_SAVED_USER_AVATAR_URL_VALUE = "https://temp.avatarl.url";
+    String SECOND_SAVED_USER_AUTH_VALUE = "KING";
+
     UserName TEST_USER_NAME = new UserName(TEST_USER_NAME_VALUE);
     Email TEST_USER_EMAIL = new Email(TEST_USER_EMAIL_VALUE);
     HttpsUrl TEST_HTTPS_URL = new HttpsUrl(TEST_USER_AVATAR_URL_VALUE);
