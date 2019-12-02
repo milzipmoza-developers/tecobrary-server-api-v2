@@ -21,10 +21,10 @@ import java.util.Arrays;
 @Getter
 public enum Authorization {
 
-    none("none"),
-    user("user"),
-    manager("manager"),
-    god("god");
+    NONE("NONE"),
+    USER("USER"),
+    MANAGER("MANAGER"),
+    KING("KING");
 
     private String authorization;
 
@@ -40,10 +40,10 @@ public enum Authorization {
     }
 
     public boolean hasUserPermission() {
-        return this != none;
+        return this != NONE;
     }
 
     public boolean hasManagerPermission() {
-        return this != none && this != user;
+        return this != NONE && this != USER;
     }
 }

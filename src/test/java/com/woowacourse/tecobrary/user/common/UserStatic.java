@@ -12,14 +12,14 @@ public interface UserStatic {
     String TEST_USER_NAME_VALUE = "thedevluffy";
     String TEST_USER_EMAIL_VALUE = "thedevluffy@gmail.com";
     String TEST_USER_AVATAR_URL_VALUE = "https://avatars0.githubusercontent.com/u/52121827?s=460&v=4";
-    String TEST_USER_AUTH_VALUE = "none";
+    String TEST_USER_AUTH_VALUE = "NONE";
 
     Long SAVED_USER_NO = 1L;
     String SAVED_GITHUB_ID = "123456";
     String SAVED_USER_NAME_VALUE = "kwonmc";
     String SAVED_USER_EMAIL_VALUE = "erased11@gmail.com";
     String SAVED_USER_AVATAR_URL_VALUE = "https://temp.avatarl.url";
-    String SAVED_USER_AUTH_VALUE = "god";
+    String SAVED_USER_AUTH_VALUE = "KING";
 
     UserName TEST_USER_NAME = new UserName(TEST_USER_NAME_VALUE);
     Email TEST_USER_EMAIL = new Email(TEST_USER_EMAIL_VALUE);
@@ -55,9 +55,9 @@ public interface UserStatic {
             SAVED_USER_NAME_VALUE
     );
 
-    UserAuthorization TEST_USER_AUTHORIZATION = new UserAuthorization(Authorization.none);
+    UserAuthorization TEST_USER_AUTHORIZATION = new UserAuthorization(Authorization.NONE);
 
-    UserAuthorization SAVED_USER_AUTHORIZATION = new UserAuthorization(Authorization.god);
+    UserAuthorization SAVED_USER_AUTHORIZATION = new UserAuthorization(Authorization.KING);
 
     User TEST_USER = new User(TEST_USER_GITHUB_INFO, TEST_USER_AUTHORIZATION);
 
