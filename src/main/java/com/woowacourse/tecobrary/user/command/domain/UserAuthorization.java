@@ -26,7 +26,8 @@ import javax.persistence.Enumerated;
 public class UserAuthorization {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "authorization")
+    @Column(name = "authorization",
+            nullable = false)
     private Authorization authorization;
 
     public UserAuthorization(Authorization authorization) {
