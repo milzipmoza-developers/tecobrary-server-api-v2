@@ -4,8 +4,11 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -25,6 +28,17 @@ public class Serial {
 
     @Embedded
     private SerialRentStatus serialRentStatus;
+
+    @CreationTimestamp
+    @Column(name = "createdAt",
+            updatable = false,
+            nullable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAt",
+            nullable = false)
+    private LocalDateTime updatedAt;
 
     public Serial(SerialLibraryBook serialLibraryBook, SerialRentStatus serialRentStatus) {
         this.serialLibraryBook = serialLibraryBook;

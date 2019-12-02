@@ -6,8 +6,11 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -27,6 +30,17 @@ public class LibraryBook {
 
     @Embedded
     private BookInfo libraryBookInfo;
+
+    @CreationTimestamp
+    @Column(name = "createdAt",
+            updatable = false,
+            nullable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAt",
+            nullable = false)
+    private LocalDateTime updatedAt;
 
     public LibraryBook(BookCoverUrl libraryBookCoverUrl, BookInfo libraryBookInfo) {
         this.libraryBookCoverUrl = libraryBookCoverUrl;
