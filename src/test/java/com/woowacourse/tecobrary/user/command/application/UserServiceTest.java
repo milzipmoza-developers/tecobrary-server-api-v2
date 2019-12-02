@@ -2,6 +2,7 @@ package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
+import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import org.junit.jupiter.api.DisplayName;
@@ -58,6 +59,7 @@ class UserServiceTest implements UserStatic {
         assertThat(userCount).isEqualTo(1L);
     }
 
+    @DisplayName("페이징 후 모든 유저를 조회한다.")
     @Test
     void successfullyFindUsersOnPage() {
         List<User> mockUsers = Arrays.asList(TEST_USER, TEST_USER);
@@ -65,5 +67,21 @@ class UserServiceTest implements UserStatic {
                 .willReturn(new PageImpl<>(mockUsers, PageRequest.of(1, 2), 2));
         List<UserInfoDto> users = userService.findUsersOnPage(1, 2);
         assertThat(users).hasSize(2);
+    }
+
+    @DisplayName("id로 회원을 조회한다.")
+    @Test
+    void successfullyFindUserById() {
+        given(userRepository.findById(1L)).willReturn(Optional.of(TEST_USER));
+
+        assertEquals(userService.findUserById(1L), UserInfoDtoMapper.map(TEST_USER));
+    }
+
+    @DisplayName("없는 id 로 findUserById 를 호출하면 NotFoundUserException 이 발생한다.")
+    @Test
+    void failedGetById() {
+        given(userRepository.findById(1L)).willReturn(Optional.empty());
+
+        assertThrows(NotFoundUserException.class, () -> userService.findUserById(1L));
     }
 }

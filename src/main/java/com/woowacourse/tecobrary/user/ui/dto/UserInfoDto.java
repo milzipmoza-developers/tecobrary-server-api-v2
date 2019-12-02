@@ -11,14 +11,12 @@
 
 package com.woowacourse.tecobrary.user.ui.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @ToString
+@EqualsAndHashCode
 public class UserInfoDto {
 
     private String githubId;

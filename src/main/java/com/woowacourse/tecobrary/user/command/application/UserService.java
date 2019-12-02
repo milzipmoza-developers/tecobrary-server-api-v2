@@ -68,4 +68,9 @@ public class UserService {
                 .map(UserInfoDtoMapper::map)
                 .collect(toList());
     }
+
+    public UserInfoDto findUserById(long id) {
+        User user = userRepository.findById(id).orElseThrow(NotFoundUserException::new);
+        return UserInfoDtoMapper.map(user);
+    }
 }
