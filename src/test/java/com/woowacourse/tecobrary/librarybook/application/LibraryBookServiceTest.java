@@ -110,4 +110,14 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         List<LibraryBookResponseDto> libraryBooks = libraryBookService.findAll(1, 2);
         assertThat(libraryBooks).hasSize(2);
     }
+
+    @DisplayName("제목에 맞는 도서 정보들을 조회한다.")
+    @Test
+    void readLibraryBooksByTitle() {
+        List<LibraryBook> mockLibraryBooks = Arrays.asList(TEST_LIBRARY_BOOK, TEST_LIBRARY_BOOK);
+        given(libraryBookRepository.findAllByLibraryBookInfoTitleContaining(any(String.class), any(PageRequest.class)))
+                .willReturn(new PageImpl<>(mockLibraryBooks, PageRequest.of(1, 2), 2));
+        List<LibraryBookResponseDto> libraryBooks = libraryBookService.findAllByTitleContaining(TEST_TITLE, 1, 2);
+        assertThat(libraryBooks).hasSize(2);
+    }
 }

@@ -40,4 +40,9 @@ public class LibraryBookController {
     public ResponseEntity readLibraryBooks(@RequestParam int page,@RequestParam int number) {
         return ResponseEntity.ok(libraryBookService.findAll(page, number));
     }
+
+    @GetMapping("/books/search")
+    public ResponseEntity readLibraryBooksByTitle(@RequestParam int page, @RequestParam int number, @RequestParam String title) {
+        return ResponseEntity.ok(libraryBookService.findAllByTitleContaining(title, page, number));
+    }
 }
