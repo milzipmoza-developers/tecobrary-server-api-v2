@@ -2,8 +2,10 @@ package com.woowacourse.tecobrary.librarybook.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException.NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -14,11 +16,21 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
 
     @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
+    @DirtiesContext
     @Test
     void successfullyCreateLibraryBook() {
+        LibraryBookRequestDto libraryBookRequestDto = LibraryBookRequestDto.builder()
+                .image(TEST_IMAGE)
+                .title(TEST_TITLE)
+                .author(TEST_AUTHOR)
+                .publisher(TEST_PUBLISHER)
+                .isbn(TEST_ISBN)
+                .description(TEST_DESCRIPTION)
+                .build();
+
         given().
                 contentType(JSON).
-                body(new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION)).
+                body(libraryBookRequestDto).
         when().
                 post(baseUrl("/books")).
         then().
@@ -33,9 +45,18 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
     @DisplayName("[POST] /books, isbn이 같은 도서가 이미 존재할 때, 등록을 실패한다.")
     @Test
     void failedCreateLibraryBook() {
+        LibraryBookRequestDto libraryBookRequestDto = LibraryBookRequestDto.builder()
+                .image(TEST_IMAGE)
+                .title(TEST_TITLE)
+                .author(TEST_AUTHOR)
+                .publisher(TEST_PUBLISHER)
+                .isbn("0123")
+                .description(TEST_DESCRIPTION)
+                .build();
+
         given().
                 contentType(JSON).
-                body(new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, "0123", TEST_DESCRIPTION)).
+                body(libraryBookRequestDto).
         when().
                 post(baseUrl("/books")).
         then().
@@ -56,7 +77,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 log().ifError().
                 statusCode(200).
                 contentType(JSON).
-                body("total", is(1));
+                body("total", is(10));
     }
 
     @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
@@ -83,7 +104,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
     @Test
     void failedReadLibraryBook() {
         given().
-                pathParam("id", 2L).
+                pathParam("id", 1_000_000).
         when().
                 get(baseUrl("/books/{id}")).
         then().

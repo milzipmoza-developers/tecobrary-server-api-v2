@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.librarybook.ui;
+package com.woowacourse.tecobrary.librarybook.ui.dto;
 
 import lombok.Getter;
 import lombok.ToString;

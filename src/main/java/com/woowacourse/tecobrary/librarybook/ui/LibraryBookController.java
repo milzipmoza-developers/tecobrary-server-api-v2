@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,10 +6,10 @@ import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
-import com.woowacourse.tecobrary.librarybook.ui.LibraryBookCreateResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.LibraryBookRequestDto;
-import com.woowacourse.tecobrary.librarybook.ui.LibraryBookResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.LibraryBookTotalCountResponseDto;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,11 +46,20 @@ class LibraryBookServiceTest implements LibraryBookStatic {
 
     @BeforeEach
     void setUp() {
-        libraryBookRequestDto = new LibraryBookRequestDto(TEST_IMAGE, TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION);
+        libraryBookRequestDto = LibraryBookRequestDto.builder()
+                .image(TEST_IMAGE)
+                .title(TEST_TITLE)
+                .author(TEST_AUTHOR)
+                .publisher(TEST_PUBLISHER)
+                .isbn(TEST_ISBN)
+                .description(TEST_DESCRIPTION)
+                .build();
+
         libraryBook = new LibraryBook(
                 new BookCoverUrl(TEST_IMAGE),
                 new BookInfo(TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION)
         );
+
         ReflectionTestUtils.setField(libraryBook, "id", 1L);
     }
 
