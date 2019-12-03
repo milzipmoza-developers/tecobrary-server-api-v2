@@ -48,4 +48,16 @@ public class Serial {
         this.serialLibraryBook = serialLibraryBook;
         this.serialRentStatus = serialRentStatus;
     }
+
+    public Long getSerialNumber() {
+        return serialNumber.getSerialNumber();
+    }
+
+    public Long getBookId() {
+        return serialLibraryBook.getBookId();
+    }
+
+    public boolean getStatus() {
+        return serialRentStatus.isStatus();
+    }
 }
