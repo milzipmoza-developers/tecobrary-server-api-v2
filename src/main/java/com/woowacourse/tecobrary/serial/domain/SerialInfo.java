@@ -10,12 +10,12 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Embeddable
-public class SerialNumber {
+public class SerialInfo {
 
     @Column(name = "serialNumber", unique = true, nullable = false)
     private Long serialNumber;
 
-    public SerialNumber(final Long serialNumber) {
+    public SerialInfo(final Long serialNumber) {
         this.serialNumber = serialNumber;
     }
 }

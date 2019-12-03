@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException.NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE;
+import static com.woowacourse.tecobrary.serial.exception.UniqueConstraintException.UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
@@ -50,5 +51,22 @@ class SerialCreateControllerTest extends RestAssuredTestUtils {
                 statusCode(400).
                 contentType(JSON).
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
+    }
+
+    @DisplayName("[post] /serials, 일련번호가 존재하는 경우 serial 등록에 실패한다.")
+    @Test
+    void failedCreateSerial_UniqueConstraint() {
+        SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1L);
+        given().
+                contentType(JSON).
+                body(serialCreateRequestDto).
+        when().
+                post(baseUrl("/serials")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(400).
+                contentType(JSON).
+                body("message", is(UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE));
     }
 }

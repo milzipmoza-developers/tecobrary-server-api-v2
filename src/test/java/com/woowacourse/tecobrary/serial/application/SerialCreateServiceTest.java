@@ -2,10 +2,11 @@ package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.serial.domain.Serial;
+import com.woowacourse.tecobrary.serial.domain.SerialInfo;
 import com.woowacourse.tecobrary.serial.domain.SerialLibraryBook;
-import com.woowacourse.tecobrary.serial.domain.SerialNumber;
 import com.woowacourse.tecobrary.serial.domain.SerialRentStatus;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
+import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateResponseDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +39,7 @@ class SerialCreateServiceTest {
 
     @BeforeEach
     void setUp() {
-        serial = new Serial(new SerialNumber(1L), new SerialLibraryBook(1L), new SerialRentStatus(false));
+        serial = new Serial(new SerialInfo(1L), new SerialLibraryBook(1L), new SerialRentStatus(false));
         serialCreateRequestDto = new SerialCreateRequestDto(1L, 1L);
     }
 
@@ -47,6 +48,7 @@ class SerialCreateServiceTest {
     void saveSuccess() {
         given(serialService.save(any(Serial.class))).willReturn(serial);
         given(libraryBookService.existsById(1L)).willReturn(true);
+        given(serialService.existsBySerialNumber(1L)).willReturn(false);
 
         SerialCreateResponseDto serialCreateResponseDto = serialCreateService.save(serialCreateRequestDto);
 
@@ -61,7 +63,18 @@ class SerialCreateServiceTest {
     void saveFailed_NotFoundSerialTarget() {
         given(serialService.save(any(Serial.class))).willReturn(serial);
         given(libraryBookService.existsById(1L)).willReturn(false);
+        given(serialService.existsBySerialNumber(1L)).willReturn(false);
 
         assertThrows(NotFoundSerialTargetException.class, () -> serialCreateService.save(serialCreateRequestDto));
+    }
+
+    @DisplayName("일련번호가 동일한 경우 실패한다.")
+    @Test
+    void saveFailed_UniqueConstraint() {
+        given(serialService.save(any(Serial.class))).willReturn(serial);
+        given(libraryBookService.existsById(1L)).willReturn(true);
+        given(serialService.existsBySerialNumber(1L)).willReturn(true);
+
+        assertThrows(UniqueConstraintException.class, () -> serialCreateService.save(serialCreateRequestDto));
     }
 }

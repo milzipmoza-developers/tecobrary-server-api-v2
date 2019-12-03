@@ -18,4 +18,8 @@ public class SerialService {
     public Serial save(final Serial serial) {
         return serialRepository.save(serial);
     }
+
+    public boolean existsBySerialNumber(final Long serialNumber) {
+        return serialRepository.existsBySerialInfoSerialNumber(serialNumber);
+    }
 }

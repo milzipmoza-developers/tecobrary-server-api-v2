@@ -3,6 +3,7 @@ package com.woowacourse.tecobrary.serial.application;
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.serial.domain.Serial;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
+import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateResponseDto;
 import com.woowacourse.tecobrary.serial.util.SerialMapper;
@@ -24,6 +25,10 @@ public class SerialCreateService {
     public SerialCreateResponseDto save(final SerialCreateRequestDto serialCreateRequestDto) {
         if (!libraryBookService.existsById(serialCreateRequestDto.getBookId())) {
             throw new NotFoundSerialTargetException();
+        }
+
+        if (serialService.existsBySerialNumber(serialCreateRequestDto.getSerialNumber())) {
+            throw new UniqueConstraintException();
         }
 
         Serial serial = SerialMapper.toEntity(serialCreateRequestDto);
