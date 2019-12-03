@@ -14,6 +14,7 @@ package com.woowacourse.tecobrary.user.command.application;
 import com.woowacourse.tecobrary.user.command.domain.*;
 import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,12 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(NotFoundUserException::new);
         return UserInfoDtoMapper.toDto(user);
+    }
+
+    public Long updateUserAuth(final UserAuthDto userAuthDto) {
+        User user = userRepository.findById(userAuthDto.getId())
+                .orElseThrow(NotFoundUserException::new);
+        user.updateAuthorization(userAuthDto.getAuthorization());
+        return user.getId();
     }
 }
