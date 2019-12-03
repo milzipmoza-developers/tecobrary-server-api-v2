@@ -7,13 +7,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class UserNameDto {
+public class UserAuthDto {
 
     private Long id;
-    private String newName;
+    private String authorization;
 
-    public UserNameDto(final Long id, final String newName) {
+    public UserAuthDto(final Long id, final String authorization) {
         this.id = id;
-        this.newName = newName;
+        this.authorization = authorization;
     }
 }
