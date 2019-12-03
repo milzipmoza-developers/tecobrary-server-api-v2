@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 class SerialCreateControllerTest extends RestAssuredTestUtils {
 
-    @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가")
+    @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가한다.")
     @Test
     void successfullyCreateSerial() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1000L);
