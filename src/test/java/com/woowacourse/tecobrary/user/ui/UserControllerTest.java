@@ -2,12 +2,12 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.user.common.UserStatic;
-import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
+import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
-import static com.woowacourse.tecobrary.user.command.domain.Authorization.MANAGER;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -109,6 +109,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     }
 
     @DisplayName("[PATCH] /users, 유저 닉네임을 업데이트한다.")
+    @DirtiesContext
     @Test
     void successfullyUpdateUserNickName() {
         UserNameDto userNameDto = new UserNameDto(1L, "조로");
@@ -132,6 +133,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     }
 
     @DisplayName("[POST] /users, 회원의 권한을 업데이트한다.")
+    @DirtiesContext
     @Test
     void successfullyUpdateUserAuth() {
         UserAuthDto userAuthDto = new UserAuthDto(1L, "MANAGER");

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class UserNameDto {
+
     private Long id;
     private String newName;
 
