@@ -23,16 +23,24 @@ public class SerialCreateService {
     }
 
     public SerialCreateResponseDto save(final SerialCreateRequestDto serialCreateRequestDto) {
-        if (!libraryBookService.existsById(serialCreateRequestDto.getBookId())) {
-            throw new NotFoundSerialTargetException();
-        }
+        checkExistsLibraryBookId(serialCreateRequestDto.getBookId());
 
-        if (serialService.existsBySerialNumber(serialCreateRequestDto.getSerialNumber())) {
-            throw new UniqueConstraintException();
-        }
+        checkNotExistsSerialNumber(serialCreateRequestDto.getSerialNumber());
 
         Serial serial = SerialMapper.toEntity(serialCreateRequestDto);
         Serial savedSerial = serialService.save(serial);
         return SerialMapper.toDto(savedSerial, "등록에 성공하였습니다.");
+    }
+
+    private void checkExistsLibraryBookId(Long bookId) {
+        if (!libraryBookService.existsById(bookId)) {
+            throw new NotFoundSerialTargetException();
+        }
+    }
+
+    private void checkNotExistsSerialNumber(Long serialNumber) {
+        if (serialService.existsBySerialNumber(serialNumber)) {
+            throw new UniqueConstraintException();
+        }
     }
 }
