@@ -41,11 +41,14 @@ public class User {
     private UserAuthorization userAuthorization;
 
     @CreationTimestamp
-    @Column(name = "createdAt", updatable = false)
+    @Column(name = "createdAt",
+            updatable = false,
+            nullable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updatedAt")
+    @Column(name = "updatedAt",
+            nullable = false)
     private LocalDateTime updatedAt;
 
     public User(UserGithubInfo userGithubInfo, UserAuthorization userAuthorization) {

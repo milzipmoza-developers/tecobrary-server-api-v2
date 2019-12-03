@@ -15,25 +15,25 @@ public interface UserStatic {
     String TEST_USER_AUTH_VALUE = "NONE";
 
     Long SAVED_USER_NO = 1L;
-    String SAVED_GITHUB_ID = "123456";
-    String SAVED_USER_NAME_VALUE = "kwonmc";
-    String SAVED_USER_EMAIL_VALUE = "erased11@gmail.com";
-    String SAVED_USER_AVATAR_URL_VALUE = "https://temp.avatarl.url";
-    String SAVED_USER_AUTH_VALUE = "KING";
+    String SAVED_GITHUB_ID_AT_ID_01 = "12345678";
+    String SAVED_USER_NAME_VALUE_AT_ID_01 = "루피";
+    String SAVED_USER_EMAIL_VALUE_AT_ID_01 = "erasede@tecobrary.com";
+    String SAVED_USER_AVATAR_URL_VALUE_AT_ID_01 = "https://avatars3.githubusercontent.com/u/32266963?v=4";
+    String SAVED_USER_AUTH_VALUE_AT_ID_01 = "KING";
 
-    String SECOND_SAVED_GITHUB_ID = "940720";
-    String SECOND_SAVED_USER_EMAIL_VALUE = "gch01410@gmail.com";
-    String SECOND_SAVED_USER_NAME_VALUE = "done";
-    String SECOND_SAVED_USER_AVATAR_URL_VALUE = "https://temp.avatarl.url";
-    String SECOND_SAVED_USER_AUTH_VALUE = "KING";
+    String SAVED_GITHUB_ID_AT_ID_02 = "91011121";
+    String SAVED_USER_EMAIL_VALUE_AT_ID_02 = "qweqwew@tecobrary.com";
+    String SAVED_USER_NAME_VALUE_AT_ID_02 = "던던";
+    String SAVED_USER_AVATAR_URL_VALUE_AT_ID_02 = "https://avatars3.githubusercontent.com/u/32266963?v=4";
+    String SAVED_USER_AUTH_VALUE_AT_ID_02 = "USER";
 
     UserName TEST_USER_NAME = new UserName(TEST_USER_NAME_VALUE);
     Email TEST_USER_EMAIL = new Email(TEST_USER_EMAIL_VALUE);
     HttpsUrl TEST_HTTPS_URL = new HttpsUrl(TEST_USER_AVATAR_URL_VALUE);
 
-    UserName SAVED_USER_NAME = new UserName(SAVED_USER_NAME_VALUE);
-    Email SAVED_USER_EMAIL = new Email(SAVED_USER_EMAIL_VALUE);
-    HttpsUrl SAVED_HTTPS_URL = new HttpsUrl(SAVED_USER_AVATAR_URL_VALUE);
+    UserName SAVED_USER_NAME = new UserName(SAVED_USER_NAME_VALUE_AT_ID_01);
+    Email SAVED_USER_EMAIL = new Email(SAVED_USER_EMAIL_VALUE_AT_ID_01);
+    HttpsUrl SAVED_HTTPS_URL = new HttpsUrl(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01);
 
     UserGithubInfo TEST_USER_GITHUB_INFO = new UserGithubInfo(
             TEST_GITHUB_ID,
@@ -43,7 +43,7 @@ public interface UserStatic {
     );
 
     UserGithubInfo SAVED_USER_GITHUB_INFO = new UserGithubInfo(
-            SAVED_GITHUB_ID,
+            SAVED_GITHUB_ID_AT_ID_01,
             SAVED_USER_NAME,
             SAVED_USER_EMAIL,
             SAVED_HTTPS_URL
@@ -56,9 +56,9 @@ public interface UserStatic {
     );
 
     GithubUserInfoVo SAVED_GITHUB_USER_INFO_VO = new GithubUserInfoVo(
-            SAVED_GITHUB_ID,
-            SAVED_USER_AVATAR_URL_VALUE,
-            SAVED_USER_NAME_VALUE
+            SAVED_GITHUB_ID_AT_ID_01,
+            SAVED_USER_AVATAR_URL_VALUE_AT_ID_01,
+            SAVED_USER_NAME_VALUE_AT_ID_01
     );
 
     UserAuthorization TEST_USER_AUTHORIZATION = new UserAuthorization(Authorization.NONE);
@@ -71,10 +71,10 @@ public interface UserStatic {
 
     UserJwtInfoVo SAVED_USER_JWT_INFO_VO = new UserJwtInfoVo(
             SAVED_USER_NO,
-            SAVED_USER_EMAIL_VALUE,
-            SAVED_USER_NAME_VALUE,
-            SAVED_USER_AVATAR_URL_VALUE,
-            SAVED_USER_AUTH_VALUE
+            SAVED_USER_EMAIL_VALUE_AT_ID_01,
+            SAVED_USER_NAME_VALUE_AT_ID_01,
+            SAVED_USER_AVATAR_URL_VALUE_AT_ID_01,
+            SAVED_USER_AUTH_VALUE_AT_ID_01
     );
 
     UserJwtInfoVo TEST_USER_JWT_INFO_VO = new UserJwtInfoVo(

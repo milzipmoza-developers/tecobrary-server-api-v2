@@ -40,7 +40,9 @@ public class UserGithubInfo {
     private Email email;
 
     @Embedded
-    @AttributeOverride(name = "url", column = @Column(name = "avatarUrl"))
+    @AttributeOverride(
+            name = "url",
+            column = @Column(name = "avatarUrl", nullable = false))
     private HttpsUrl httpsUrl;
 
     public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl httpsUrl) {

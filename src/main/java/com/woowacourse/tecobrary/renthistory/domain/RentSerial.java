@@ -12,7 +12,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RentSerial {
 
-    @Column(name = "serialId")
+    @Column(name = "serialId",
+            nullable = false)
     private Long serialId;
 
     public RentSerial(Long serialId) {

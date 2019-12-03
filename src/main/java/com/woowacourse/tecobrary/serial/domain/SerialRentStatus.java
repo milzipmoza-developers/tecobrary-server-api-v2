@@ -3,6 +3,7 @@ package com.woowacourse.tecobrary.serial.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,7 +13,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SerialRentStatus {
 
-    @Column(name = "status")
+    @Column(name = "status",
+            columnDefinition = "TINYINT(1)")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean status;
 
     public SerialRentStatus(boolean status) {

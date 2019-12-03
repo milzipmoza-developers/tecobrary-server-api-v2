@@ -21,8 +21,7 @@ public class BookInfo {
             nullable = false)
     private String author;
 
-    @Column(name = "publisher",
-            nullable = false)
+    @Column(name = "publisher")
     private String publisher;
 
     @Column(name = "isbn",
