@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 class SerialCreateControllerTest extends RestAssuredTestUtils {
 
-    @DisplayName("[post] /serials, id 에 해당하는 도서에 serial 을 추가")
+    @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가")
     @Test
     void successfullyCreateSerial() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1000L);
@@ -36,7 +36,7 @@ class SerialCreateControllerTest extends RestAssuredTestUtils {
                 body("serial.createdAt", notNullValue());
     }
 
-    @DisplayName("[post] /serials, id에 해당하는 도서가 없을 경우 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, id에 해당하는 도서가 없을 경우 serial 등록에 실패한다.")
     @Test
     void failedCreateSerial_NotFoundSerialTarget() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1_000_000L, 1000L);
@@ -53,7 +53,7 @@ class SerialCreateControllerTest extends RestAssuredTestUtils {
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[post] /serials, 일련번호가 존재하는 경우 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, 일련번호가 존재하는 경우 serial 등록에 실패한다.")
     @Test
     void failedCreateSerial_UniqueConstraint() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1L);
