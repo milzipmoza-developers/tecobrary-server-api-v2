@@ -77,4 +77,10 @@ class SerialCreateReadServiceTest {
 
         assertThrows(UniqueConstraintException.class, () -> serialCreateReadService.save(serialCreateRequestDto));
     }
+
+    @DisplayName("BookId 에 해당하는 Serial 리스트를 반환한다.")
+    @Test
+    void successfullyFindSerialsByBookId() {
+
+    }
 }
