@@ -9,6 +9,7 @@ import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
+import com.woowacourse.tecobrary.serial.domain.SerialLibraryBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -68,5 +69,10 @@ public class LibraryBookService {
 
     public boolean existsById(final long id) {
         return libraryBookRepository.existsById(id);
+    }
+
+    public LibraryBook findBySerialLibraryBook(final SerialLibraryBook serialLibraryBook) {
+        return libraryBookRepository.findById(serialLibraryBook.getBookId())
+                .orElseThrow(NotFoundLibraryBookException::new);
     }
 }
