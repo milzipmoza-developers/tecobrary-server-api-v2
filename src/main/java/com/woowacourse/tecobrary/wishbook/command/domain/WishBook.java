@@ -65,30 +65,30 @@ public class WishBook {
     }
 
     public String getImage() {
-        return getWishBookCoverUrl().getImage();
+        return wishBookCoverUrl.getImage();
     }
 
     public String getTitle() {
-        return getWishBookInfo().getTitle();
+        return wishBookInfo.getTitle();
     }
 
     public String getAuthor() {
-        return getWishBookInfo().getAuthor();
+        return wishBookInfo.getAuthor();
     }
 
     public String getPublisher() {
-        return getWishBookInfo().getPublisher();
+        return wishBookInfo.getPublisher();
     }
 
     public String getIsbn() {
-        return getWishBookInfo().getIsbn();
+        return wishBookInfo.getIsbn();
     }
 
     public String getDescription() {
-        return getWishBookInfo().getDescription();
+        return wishBookInfo.getDescription();
     }
 
     public Long getUserId() {
-        return getWishBookRequestUser().getUserId();
+        return wishBookRequestUser.getUserId();
     }
 }
