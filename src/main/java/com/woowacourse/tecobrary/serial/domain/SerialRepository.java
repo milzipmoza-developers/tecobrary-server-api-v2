@@ -11,4 +11,6 @@ public interface SerialRepository extends JpaRepository<Serial, Long> {
     boolean existsBySerialInfoSerialNumber(Long serialNumber);
 
     List<Serial> findAllBySerialLibraryBookBookId(Long bookId);
+
+    void deleteBySerialInfoSerialNumber(Long serialNumber);
 }

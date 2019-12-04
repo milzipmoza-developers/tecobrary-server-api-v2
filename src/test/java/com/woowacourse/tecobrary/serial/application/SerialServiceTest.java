@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.serial.domain.*;
+import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 class SerialServiceTest {
@@ -60,5 +63,23 @@ class SerialServiceTest {
         given(serialRepository.findAllBySerialLibraryBookBookId(1L)).willReturn(Collections.emptyList());
 
         assertThat(serialService.findSerialsByBookId(1L)).isNotNull();
+    }
+
+    @DisplayName("deleteBySerialNumber 메서드가 성공적으로 동작한다.")
+    @Test
+    void successfullyDeleteBySerialNumber() {
+        given(serialRepository.existsBySerialInfoSerialNumber(any(Long.class))).willReturn(true);
+
+        serialService.deleteBySerialNumber(1L);
+
+        verify(serialRepository).deleteBySerialInfoSerialNumber(1L);
+    }
+
+    @DisplayName("deleteBySerialNumber 메서드가 존재하지 않는 serialNumber 에 대해 Exception 을 발생시킨다.")
+    @Test
+    void failedDeleteBySerialNumberNotExistSerialId() {
+        given(serialRepository.existsBySerialInfoSerialNumber(any(Long.class))).willReturn(false);
+
+        assertThrows(NotFoundSerialNumberException.class, () -> serialService.deleteBySerialNumber(1L));
     }
 }
