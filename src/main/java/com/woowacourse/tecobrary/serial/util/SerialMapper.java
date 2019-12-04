@@ -7,6 +7,7 @@ import com.woowacourse.tecobrary.serial.domain.SerialRentStatus;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateResponseDto;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialResponseDto;
+import com.woowacourse.tecobrary.serial.ui.dto.SerialsResponseDto;
 
 public class SerialMapper {
 
@@ -25,5 +26,12 @@ public class SerialMapper {
                 .createdAt(serial.getCreatedAt())
                 .updatedAt(serial.getUpdatedAt())
                 .build());
+    }
+
+    public static SerialsResponseDto toDto(Serial serial) {
+        return new SerialsResponseDto(
+                serial.getSerialInfo(),
+                serial.getStatus()
+        );
     }
 }
