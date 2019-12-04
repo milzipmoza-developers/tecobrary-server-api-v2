@@ -4,10 +4,7 @@ import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
+import com.woowacourse.tecobrary.librarybook.ui.dto.*;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import com.woowacourse.tecobrary.serial.domain.SerialLibraryBook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +26,25 @@ public class LibraryBookService {
         this.libraryBookRepository = libraryBookRepository;
     }
 
-    public LibraryBookCreateResponseDto save(final LibraryBookRequestDto libraryBookRequestDto) {
-        checkExistLibraryBook(libraryBookRequestDto);
+    public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
+        checkExistLibraryBook(libraryBookDto);
 
-        LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookRequestDto);
+        LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookDto);
         LibraryBook savedLibraryBook = libraryBookRepository.save(libraryBook);
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 
-    private void checkExistLibraryBook(final LibraryBookRequestDto libraryBookRequestDto) {
-        if (libraryBookRepository.existsByLibraryBookInfoIsbn(libraryBookRequestDto.getIsbn())) {
-            throw new DuplicatedLibraryBookException(libraryBookRequestDto.getTitle());
+    public LibraryBookEnrollDto enrollWishBook(final LibraryBookDto libraryBookDto) {
+        checkExistLibraryBook(libraryBookDto);
+
+        LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookDto);
+        LibraryBook enrolledBook = libraryBookRepository.save(libraryBook);
+        return LibraryBookMapper.toEnrolledDto(enrolledBook);
+    }
+
+    private void checkExistLibraryBook(final LibraryBookDto libraryBookDto) {
+        if (libraryBookRepository.existsByLibraryBookInfoIsbn(libraryBookDto.getIsbn())) {
+            throw new DuplicatedLibraryBookException(libraryBookDto.getTitle());
         }
     }
 
