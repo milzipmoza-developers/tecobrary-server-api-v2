@@ -2,8 +2,10 @@ package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.serial.domain.Serial;
 import com.woowacourse.tecobrary.serial.domain.SerialRepository;
+import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +29,14 @@ public class SerialService {
 
     public List<Serial> findSerialsByBookId(final Long bookId) {
         return serialRepository.findAllBySerialLibraryBookBookId(bookId);
+    }
+
+    @Transactional
+    public boolean deleteBySerialNumber(final Long serialNumber) {
+        if (serialRepository.existsBySerialInfoSerialNumber(serialNumber)) {
+            serialRepository.deleteBySerialInfoSerialNumber(serialNumber);
+            return true;
+        }
+        throw new NotFoundSerialNumberException();
     }
 }
