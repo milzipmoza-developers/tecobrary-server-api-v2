@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,26 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 body("[1].author", equalTo(TEST_AUTHOR_01)).
                 body("[1].isbn", equalTo(TEST_ISBN_01)).
                 body("[1].userId", equalTo(12));
+    }
+
+    @DisplayName("[POST] /wishes, WishBook 에 책 정보를 등록한다.")
+    @Test
+    void successfullyCreateWishBook() {
+        given().
+                body(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)).
+                contentType(JSON).
+                accept(JSON).
+        when().
+                post(baseUrl("/wishes")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("image", equalTo(TEST_COVER_URL_01)).
+                body("title", equalTo(TEST_TITLE_01)).
+                body("author", equalTo(TEST_AUTHOR_01)).
+                body("isbn", equalTo(TEST_CREATE_ISBN)).
+                body("userId", equalTo(12));
     }
 }
