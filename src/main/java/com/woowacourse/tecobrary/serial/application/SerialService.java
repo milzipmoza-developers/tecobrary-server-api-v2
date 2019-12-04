@@ -1,7 +1,9 @@
 package com.woowacourse.tecobrary.serial.application;
 
+import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
 import com.woowacourse.tecobrary.serial.domain.Serial;
 import com.woowacourse.tecobrary.serial.domain.SerialRepository;
+import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,10 @@ public class SerialService {
 
     public List<Serial> findSerialsByBookId(final Long bookId) {
         return serialRepository.findAllBySerialLibraryBookBookId(bookId);
+    }
+
+    public Serial findByRentSerial(final RentSerial rentSerial) {
+        return serialRepository.findById(rentSerial.getSerialId())
+                .orElseThrow(NotFoundSerialTargetException::new);
     }
 }

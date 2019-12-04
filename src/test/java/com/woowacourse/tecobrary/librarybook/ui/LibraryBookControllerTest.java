@@ -50,7 +50,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 .title(TEST_TITLE)
                 .author(TEST_AUTHOR)
                 .publisher(TEST_PUBLISHER)
-                .isbn(SAVED_ISBN_AT_ID_01)
+                .isbn(TEST_LIBRARY_BOOK_ISBN)
                 .description(TEST_DESCRIPTION)
                 .build();
 
@@ -91,13 +91,13 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 log().ifError().
                 statusCode(200).
                 contentType(JSON).
-                body("id", is(SAVED_ID_AT_ID_01.intValue())).
-                body("image", is(SAVED_IMAGE_AT_ID_01)).
-                body("title", is(SAVED_TITLE_AT_ID_01)).
-                body("author", is(SAVED_AUTHOR_AT_ID_01)).
-                body("publisher", is(SAVED_PUBLISHER_AT_ID_01)).
-                body("isbn", is(SAVED_ISBN_AT_ID_01)).
-                body("description", is(SAVED_DESCRIPTION_AT_ID_01));
+                body("id", is(TEST_LIBRARY_BOOK_ID.intValue())).
+                body("image", is(TEST_LIBRARY_BOOK_IMAGE)).
+                body("title", is(TEST_LIBRARY_BOOK_TITLE)).
+                body("author", is(TEST_LIBRARY_BOOK_AUTHOR)).
+                body("publisher", is(TEST_LIBRARY_BOOK_PUBLISHER)).
+                body("isbn", is(TEST_LIBRARY_BOOK_ISBN)).
+                body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
     }
 
     @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, Bad Request 응답을 받는다.")
