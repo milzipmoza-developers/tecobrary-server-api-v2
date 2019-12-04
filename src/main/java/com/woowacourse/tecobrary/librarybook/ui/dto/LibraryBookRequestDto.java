@@ -8,7 +8,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class LibraryBookRequestDto {
+public class LibraryBookRequestDto implements LibraryBookDto {
 
     private String image;
     private String title;

@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class LibraryBookResponseDto {
+public class LibraryBookResponseDto implements LibraryBookDto {
 
     private Long id;
     private String image;
@@ -17,7 +17,7 @@ public class LibraryBookResponseDto {
     private String description;
 
     @Builder
-    private LibraryBookResponseDto(final Long id, final String image, final String title, final String author, final String publisher, final String isbn, final String description) {
+    protected LibraryBookResponseDto(final Long id, final String image, final String title, final String author, final String publisher, final String isbn, final String description) {
         this.id = id;
         this.image = image;
         this.title = title;
