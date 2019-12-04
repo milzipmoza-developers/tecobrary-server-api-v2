@@ -2,20 +2,14 @@ package com.woowacourse.tecobrary.wishbook.ui;
 
 import com.woowacourse.tecobrary.wishbook.command.application.WishBookService;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class WishBookController {
-
-    private static final Logger log = LoggerFactory.getLogger(WishBookController.class);
 
     private WishBookService wishBookService;
 
@@ -33,5 +27,12 @@ public class WishBookController {
     public ResponseEntity createWishBook(@RequestBody final WishBookInfoDto wishBookInfoDto) {
         Long savedWishBookId = wishBookService.createWishBook(wishBookInfoDto);
         return ResponseEntity.ok(wishBookService.findById(savedWishBookId));
+    }
+
+    @DeleteMapping("/wishes")
+    public ResponseEntity deleteWishBook(@RequestParam final Long id, Model model) {
+        wishBookService.deleteWishBook(id);
+        model.addAttribute("message", "success");
+        return ResponseEntity.ok(model);
     }
 }

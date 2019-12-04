@@ -21,9 +21,14 @@ public class WishBookInfoDtoMapper {
     }
 
     public static WishBook toEntity(final WishBookInfoDto wishBookInfoDto) {
-        return new WishBook(new BookCoverUrl(wishBookInfoDto.getImage())
-                , new BookInfo(wishBookInfoDto.getTitle(), wishBookInfoDto.getAuthor()
-                , wishBookInfoDto.getPublisher(), wishBookInfoDto.getIsbn(), wishBookInfoDto.getDescription())
-                , new WishBookRequestUser(wishBookInfoDto.getUserId()));
+        return new WishBook(
+                new BookCoverUrl(wishBookInfoDto.getImage()),
+                new BookInfo(
+                        wishBookInfoDto.getTitle(),
+                        wishBookInfoDto.getAuthor(),
+                        wishBookInfoDto.getPublisher(),
+                        wishBookInfoDto.getIsbn(),
+                        wishBookInfoDto.getDescription()),
+                new WishBookRequestUser(wishBookInfoDto.getUserId()));
     }
 }

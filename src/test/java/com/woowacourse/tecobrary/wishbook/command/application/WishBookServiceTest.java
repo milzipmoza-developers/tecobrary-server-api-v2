@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.command.application;
 
-import com.woowacourse.tecobrary.wishbook.command.domain.ExistWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.command.domain.DuplicatedWishBookIsbnException;
 import com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRepository;
@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
@@ -65,8 +66,8 @@ class WishBookServiceTest implements WishBookStatic {
         given(wishBookRepository.existsByWishBookInfoIsbn(TEST_CREATE_ISBN)).willReturn(true);
         given(wishBookRepository.save(TEST_CREATE_WISH_BOOK)).willReturn(TEST_CREATE_WISH_BOOK);
 
-        assertThrows(ExistWishBookIsbnException.class
-                , () -> wishBookService.createWishBook(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)));
+        assertThrows(DuplicatedWishBookIsbnException.class,
+                () -> wishBookService.createWishBook(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)));
     }
 
     @DisplayName("해당하는 id 로 WishBook 을 조회한다.")
@@ -85,7 +86,25 @@ class WishBookServiceTest implements WishBookStatic {
     void failedFindWishBook() {
         given(wishBookRepository.findById(1L)).willReturn(Optional.empty());
 
-        assertThrows(NotFoundWishBookException.class
-                , () -> wishBookService.findById(1L));
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findById(1L));
+    }
+
+    @DisplayName("해당하는 id가 존재하면 삭제한다.")
+    @Test
+    void successfullyDeleteWishBook() {
+        given(wishBookRepository.existsById(1L)).willReturn(true);
+        willDoNothing().given(wishBookRepository).deleteById(1L);
+
+        wishBookService.deleteWishBook(1L);
+
+        verify(wishBookRepository).deleteById(1L);
+    }
+
+    @DisplayName("삭제하려는 wishBook의 id가 존재하지 않을 때 삭제에 실패한다.")
+    @Test
+    void failedDeleteWishBook() {
+        given(wishBookRepository.existsById(1L)).willReturn(false);
+
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.deleteWishBook(1L));
     }
 }
