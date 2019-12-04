@@ -12,7 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-class SerialCreateControllerTest extends RestAssuredTestUtils {
+class SerialCreateReadControllerTest extends RestAssuredTestUtils {
 
     @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가한다.")
     @Test
