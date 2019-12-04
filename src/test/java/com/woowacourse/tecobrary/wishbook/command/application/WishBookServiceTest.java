@@ -113,16 +113,16 @@ class WishBookServiceTest implements WishBookStatic {
     @DisplayName("Soft Delete 되지 않은 WishBook 를 조회한다.")
     @Test
     void successfullyFindBySoftExist() {
-        given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK));
+        given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK_02));
 
-        WishBook existWishBook = wishBookService.findByIdSoftExist(1L);
+        WishBook existWishBook = wishBookService.findByIdSoftExist(2L);
 
-        assertThat(existWishBook.getImage()).isEqualTo(TEST_COVER_URL);
-        assertThat(existWishBook.getTitle()).isEqualTo(TEST_TITLE);
-        assertThat(existWishBook.getAuthor()).isEqualTo(TEST_AUTHOR);
-        assertThat(existWishBook.getIsbn()).isEqualTo(TEST_ISBN);
-        assertThat(existWishBook.getDescription()).isEqualTo(TEST_DESCRIPTION);
-        assertThat(existWishBook.getUserId()).isEqualTo(TEST_USER_ID);
+        assertThat(existWishBook.getImage()).isEqualTo(TEST_COVER_URL_02);
+        assertThat(existWishBook.getTitle()).isEqualTo(TEST_TITLE_02);
+        assertThat(existWishBook.getAuthor()).isEqualTo(TEST_AUTHOR_02);
+        assertThat(existWishBook.getIsbn()).isEqualTo(TEST_ISBN_02);
+        assertThat(existWishBook.getDescription()).isEqualTo(TEST_DESCRIPTION_02);
+        assertThat(existWishBook.getUserId()).isEqualTo(TEST_USER_ID_02);
         assertThat(existWishBook.getDeletedAt()).isNull();
     }
 
