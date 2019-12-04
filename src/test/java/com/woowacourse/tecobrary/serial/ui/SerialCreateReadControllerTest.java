@@ -14,7 +14,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 class SerialCreateReadControllerTest extends RestAssuredTestUtils {
 
-
     @DisplayName("[GET] /serials?bookId, 성공적으로 해당 bookId 에 대한 책의 목록을 응답 받는다.")
     @Test
     void successfullyGetBookIdSerials() {

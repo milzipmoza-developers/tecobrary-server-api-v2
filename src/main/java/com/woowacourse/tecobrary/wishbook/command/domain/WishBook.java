@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.domain;
+package com.woowacourse.tecobrary.wishbook.command.domain;
 
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
@@ -53,5 +53,33 @@ public class WishBook {
         this.wishBookCoverUrl = wishBookCoverUrl;
         this.wishBookInfo = wishBookInfo;
         this.wishBookRequestUser = wishBookRequestUser;
+    }
+
+    public String getImage() {
+        return getWishBookCoverUrl().getImage();
+    }
+
+    public String getTitle() {
+        return getWishBookInfo().getTitle();
+    }
+
+    public String getAuthor() {
+        return getWishBookInfo().getAuthor();
+    }
+
+    public String getPublisher() {
+        return getWishBookInfo().getPublisher();
+    }
+
+    public String getIsbn() {
+        return getWishBookInfo().getIsbn();
+    }
+
+    public String getDescription() {
+        return getWishBookInfo().getDescription();
+    }
+
+    public Long getUserId() {
+        return getWishBookRequestUser().getUserId();
     }
 }
