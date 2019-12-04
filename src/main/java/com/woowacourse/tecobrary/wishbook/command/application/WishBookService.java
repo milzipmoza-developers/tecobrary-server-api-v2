@@ -1,5 +1,7 @@
 package com.woowacourse.tecobrary.wishbook.command.application;
 
+import com.woowacourse.tecobrary.wishbook.command.domain.ExistWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRepository;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
@@ -31,5 +33,18 @@ public class WishBookService {
                 .stream()
                 .map(WishBookInfoDtoMapper::toDto)
                 .collect(toList());
+    }
+
+    public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
+        if (wishBookRepository.existsByWishBookInfoIsbn(wishBookInfoDto.getIsbn())) {
+            throw new ExistWishBookIsbnException();
+        }
+        WishBook wishBook = WishBookInfoDtoMapper.toEntity(wishBookInfoDto);
+        return wishBookRepository.save(wishBook).getId();
+    }
+
+    public WishBookInfoDto findById(final Long id) {
+        WishBook wishBook = wishBookRepository.findById(id).orElseThrow(NotFoundWishBookException::new);
+        return WishBookInfoDtoMapper.toDto(wishBook);
     }
 }

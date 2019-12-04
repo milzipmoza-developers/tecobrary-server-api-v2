@@ -1,6 +1,9 @@
 package com.woowacourse.tecobrary.wishbook.command.util;
 
+import com.woowacourse.tecobrary.common.model.BookCoverUrl;
+import com.woowacourse.tecobrary.common.model.BookInfo;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
+import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRequestUser;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 
 public class WishBookInfoDtoMapper {
@@ -15,5 +18,12 @@ public class WishBookInfoDtoMapper {
                 .description(wishBook.getDescription())
                 .userId(wishBook.getUserId())
                 .build();
+    }
+
+    public static WishBook toEntity(final WishBookInfoDto wishBookInfoDto) {
+        return new WishBook(new BookCoverUrl(wishBookInfoDto.getImage())
+                , new BookInfo(wishBookInfoDto.getTitle(), wishBookInfoDto.getAuthor()
+                , wishBookInfoDto.getPublisher(), wishBookInfoDto.getIsbn(), wishBookInfoDto.getDescription())
+                , new WishBookRequestUser(wishBookInfoDto.getUserId()));
     }
 }

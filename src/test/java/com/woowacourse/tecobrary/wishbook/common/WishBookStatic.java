@@ -23,15 +23,19 @@ public interface WishBookStatic {
     String TEST_DESCRIPTION_01 = "서울, 도쿄, 뉴욕에 사는 프로그래머가 수다를 떨기 위해서 모였다. 보안 전문가 데니스, 도쿄의 아키텍트 정개발, 그리고 뉴욕의 프로그래머 임작가가 새로운 패러다임과 기술을 소개하고, 프로그래머들의 삶과 애환을 이야기한다. 여러 분야의 전문가를 초대해서 웃음과 배움이 넘치는 대화를 나누고, 한국의... ";
     Long TEST_USER_ID_01 = 12L;
 
+    String TEST_CREATE_ISBN = "0123456";
+
     BookCoverUrl TEST_BOOK_COVER_URL = new BookCoverUrl(TEST_COVER_URL);
-    BookInfo TEST_BOOK_INFO = new BookInfo(TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION);
-    WishBookRequestUser TEST_REQUEST_USER = new WishBookRequestUser(TEST_USER_ID);
-
-    WishBook TEST_WISHBOOK = new WishBook(TEST_BOOK_COVER_URL, TEST_BOOK_INFO, TEST_REQUEST_USER);
-
     BookCoverUrl TEST_BOOK_COVER_URL_01 = new BookCoverUrl(TEST_COVER_URL_01);
+
+    BookInfo TEST_BOOK_INFO = new BookInfo(TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION);
     BookInfo TEST_BOOK_INFO_01 = new BookInfo(TEST_TITLE_01, TEST_AUTHOR_01, TEST_PUBLISHER_01, TEST_ISBN_01, TEST_DESCRIPTION_01);
+    BookInfo TEST_CREATE_BOOK_INFO = new BookInfo(TEST_TITLE_01, TEST_AUTHOR_01, TEST_PUBLISHER_01, TEST_CREATE_ISBN, TEST_DESCRIPTION_01);
+
+    WishBookRequestUser TEST_REQUEST_USER = new WishBookRequestUser(TEST_USER_ID);
     WishBookRequestUser TEST_REQUEST_USER_01 = new WishBookRequestUser(TEST_USER_ID_01);
 
-    WishBook TEST_WISHBOOK_01 = new WishBook(TEST_BOOK_COVER_URL_01, TEST_BOOK_INFO_01, TEST_REQUEST_USER_01);
+    WishBook TEST_WISH_BOOK = new WishBook(TEST_BOOK_COVER_URL, TEST_BOOK_INFO, TEST_REQUEST_USER);
+    WishBook TEST_WISH_BOOK_01 = new WishBook(TEST_BOOK_COVER_URL_01, TEST_BOOK_INFO_01, TEST_REQUEST_USER_01);
+    WishBook TEST_CREATE_WISH_BOOK = new WishBook(TEST_BOOK_COVER_URL_01, TEST_CREATE_BOOK_INFO, TEST_REQUEST_USER_01);
 }
