@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 class SerialServiceTest {
@@ -69,7 +70,9 @@ class SerialServiceTest {
     void successfullyDeleteBySerialNumber() {
         given(serialRepository.existsBySerialInfoSerialNumber(any(Long.class))).willReturn(true);
 
-        assertThat(serialService.deleteBySerialNumber(1L)).isTrue();
+        serialService.deleteBySerialNumber(1L);
+
+        verify(serialRepository).deleteBySerialInfoSerialNumber(1L);
     }
 
     @DisplayName("deleteBySerialNumber 메서드가 존재하지 않는 serialNumber 에 대해 Exception 을 발생시킨다.")

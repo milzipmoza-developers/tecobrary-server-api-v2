@@ -32,11 +32,14 @@ public class SerialService {
     }
 
     @Transactional
-    public boolean deleteBySerialNumber(final Long serialNumber) {
-        if (serialRepository.existsBySerialInfoSerialNumber(serialNumber)) {
-            serialRepository.deleteBySerialInfoSerialNumber(serialNumber);
-            return true;
+    public void deleteBySerialNumber(final Long serialNumber) {
+        checkExistSerialNumber(serialNumber);
+        serialRepository.deleteBySerialInfoSerialNumber(serialNumber);
+    }
+
+    private void checkExistSerialNumber(final Long serialNumber) {
+        if (!serialRepository.existsBySerialInfoSerialNumber(serialNumber)) {
+            throw new NotFoundSerialNumberException();
         }
-        throw new NotFoundSerialNumberException();
     }
 }

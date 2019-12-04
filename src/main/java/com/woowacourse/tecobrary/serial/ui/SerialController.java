@@ -24,9 +24,8 @@ public class SerialController {
 
     @DeleteMapping("/serials")
     public ResponseEntity deleteSerial(@RequestParam Long number, Model model) {
-        if (serialService.deleteBySerialNumber(number)) {
-            model.addAttribute("message", DELETE_SUCCESS_MESSAGE);
-        }
+        serialService.deleteBySerialNumber(number);
+        model.addAttribute("message", DELETE_SUCCESS_MESSAGE);
         return ResponseEntity.ok(model);
     }
 }
