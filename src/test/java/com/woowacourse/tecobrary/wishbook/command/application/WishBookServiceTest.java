@@ -15,7 +15,9 @@ import org.mockito.Mock;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -106,5 +108,78 @@ class WishBookServiceTest implements WishBookStatic {
         given(wishBookRepository.existsById(1L)).willReturn(false);
 
         assertThrows(NotFoundWishBookException.class, () -> wishBookService.deleteWishBook(1L));
+    }
+
+    @DisplayName("Soft Delete 되지 않은 WishBook 를 조회한다.")
+    @Test
+    void successfullyFindBySoftExist() {
+        given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK));
+
+        WishBook existWishBook = wishBookService.findByIdSoftExist(1L);
+
+        assertThat(existWishBook.getImage()).isEqualTo(TEST_COVER_URL);
+        assertThat(existWishBook.getTitle()).isEqualTo(TEST_TITLE);
+        assertThat(existWishBook.getAuthor()).isEqualTo(TEST_AUTHOR);
+        assertThat(existWishBook.getIsbn()).isEqualTo(TEST_ISBN);
+        assertThat(existWishBook.getDescription()).isEqualTo(TEST_DESCRIPTION);
+        assertThat(existWishBook.getUserId()).isEqualTo(TEST_USER_ID);
+        assertThat(existWishBook.getDeletedAt()).isNull();
+    }
+
+    @DisplayName("Soft Delete 된 WishBook 에 findByIdAndDeleteAtNull 을 실행하면 조회를 실패한다.")
+    @Test
+    void failedFindBySoftExistAlreadySoftDeletedWishBook() {
+        given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willThrow(NotFoundWishBookException.class);
+
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findByIdSoftExist(1L));
+    }
+
+    @DisplayName("Soft Delete 된 WishBook 을 조회한다.")
+    @Test
+    void successfullyFindBySoftDeleted() {
+        given(wishBookRepository.findByIdAndDeletedAtNotNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK_01));
+
+        WishBook softDeletedWishBook = wishBookService.findByIdSoftDeleted(2L);
+        ReflectionTestUtils.setField(softDeletedWishBook, "deletedAt", LocalDateTime.now());
+
+        assertThat(softDeletedWishBook.getImage()).isEqualTo(TEST_COVER_URL_01);
+        assertThat(softDeletedWishBook.getTitle()).isEqualTo(TEST_TITLE_01);
+        assertThat(softDeletedWishBook.getAuthor()).isEqualTo(TEST_AUTHOR_01);
+        assertThat(softDeletedWishBook.getIsbn()).isEqualTo(TEST_ISBN_01);
+        assertThat(softDeletedWishBook.getDescription()).isEqualTo(TEST_DESCRIPTION_01);
+        assertThat(softDeletedWishBook.getUserId()).isEqualTo(TEST_USER_ID_01);
+        assertThat(softDeletedWishBook.getDeletedAt()).isNotNull();
+    }
+
+    @DisplayName("Soft Delete 된 WishBook 에 findByIdAndDeleteAtNull 을 실행하면 조회를 실패한다.")
+    @Test
+    void failedFindBySoftDeletedNotSoftDeletedWishBook() {
+        given(wishBookRepository.findByIdAndDeletedAtNotNull(any(Long.class))).willThrow(NotFoundWishBookException.class);
+
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findByIdSoftExist(1L));
+    }
+
+    @DisplayName("WishBook 의 id 로 Soft Delete 에 성공한다.")
+    @Test
+    void successfullyFindBySoftDeletedNotSoftDeletedWishBook() {
+        given(wishBookRepository.existsByIdAndDeletedAtNotNull(1L)).willReturn(true);
+        given(wishBookRepository.findById(1L)).willReturn(Optional.of(TEST_WISH_BOOK));
+
+        WishBookInfoDto wishBookInfoDto = wishBookService.softDeleteById(1L);
+
+        assertThat(wishBookInfoDto.getImage()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getImage());
+        assertThat(wishBookInfoDto.getTitle()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getTitle());
+        assertThat(wishBookInfoDto.getAuthor()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getAuthor());
+        assertThat(wishBookInfoDto.getIsbn()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getIsbn());
+        assertThat(wishBookInfoDto.getDescription()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getDescription());
+        assertThat(wishBookInfoDto.getUserId()).isEqualTo(TEST_WISH_BOOK_INFO_DTO.getUserId());
+    }
+
+    @DisplayName("존재하지 않거나 이미 처리(soft delete)된 WishBook 은 AlreadySoftDeletedWishBookException 이 발생한다.")
+    @Test
+    void failedFindBySoftDeletedSoftDeletedWishBook() {
+        given(wishBookRepository.existsByIdAndDeletedAtNotNull(1L)).willReturn(false);
+
+        assertThrows(AlreadySoftDeletedWishBookException.class, () -> wishBookService.softDeleteById(1L));
     }
 }

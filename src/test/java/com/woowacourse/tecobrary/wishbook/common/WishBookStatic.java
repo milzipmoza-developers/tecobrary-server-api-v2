@@ -4,6 +4,8 @@ import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRequestUser;
+import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 
 public interface WishBookStatic {
 
@@ -38,4 +40,6 @@ public interface WishBookStatic {
     WishBook TEST_WISH_BOOK = new WishBook(TEST_BOOK_COVER_URL, TEST_BOOK_INFO, TEST_REQUEST_USER);
     WishBook TEST_WISH_BOOK_01 = new WishBook(TEST_BOOK_COVER_URL_01, TEST_BOOK_INFO_01, TEST_REQUEST_USER_01);
     WishBook TEST_CREATE_WISH_BOOK = new WishBook(TEST_BOOK_COVER_URL_01, TEST_CREATE_BOOK_INFO, TEST_REQUEST_USER_01);
+
+    WishBookInfoDto TEST_WISH_BOOK_INFO_DTO = WishBookInfoDtoMapper.toDto(TEST_WISH_BOOK);
 }
