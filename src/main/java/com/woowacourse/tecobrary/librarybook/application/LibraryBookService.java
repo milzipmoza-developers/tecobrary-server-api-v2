@@ -65,4 +65,8 @@ public class LibraryBookService {
                 .map(LibraryBookMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    public boolean existsById(final long id) {
+        return libraryBookRepository.existsById(id);
+    }
 }

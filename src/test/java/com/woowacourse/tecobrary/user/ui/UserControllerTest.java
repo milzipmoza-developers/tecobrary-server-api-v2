@@ -2,8 +2,11 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.user.common.UserStatic;
+import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
+import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -103,5 +106,52 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_01)).
                 body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
                 body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
+    }
+
+    @DisplayName("[PATCH] /users, 유저 닉네임을 업데이트한다.")
+    @DirtiesContext
+    @Test
+    void successfullyUpdateUserNickName() {
+        UserNameDto userNameDto = new UserNameDto(1L, "조로");
+
+        given().
+                contentType(JSON).
+                accept(JSON).
+                body(userNameDto).
+        when().
+                patch(baseUrl("/users")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("githubId", equalTo(SAVED_GITHUB_ID_AT_ID_01)).
+                body("email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_01)).
+                body("name", equalTo("조로")).
+                body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
+                body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
+    }
+
+    @DisplayName("[POST] /users, 회원의 권한을 업데이트한다.")
+    @DirtiesContext
+    @Test
+    void successfullyUpdateUserAuth() {
+        UserAuthDto userAuthDto = new UserAuthDto(1L, "MANAGER");
+        given().
+                contentType(JSON).
+                accept(JSON).
+                body(userAuthDto).
+        when().
+                post(baseUrl("/users")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("githubId", equalTo(SAVED_GITHUB_ID_AT_ID_01)).
+                body("email", equalTo(SAVED_USER_EMAIL_VALUE_AT_ID_01)).
+                body("name", equalTo(SAVED_USER_NAME_VALUE_AT_ID_01)).
+                body("avatarUrl", equalTo(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)).
+                body("authorization", equalTo("MANAGER"));
     }
 }

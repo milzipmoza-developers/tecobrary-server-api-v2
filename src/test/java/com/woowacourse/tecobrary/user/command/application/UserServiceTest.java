@@ -3,7 +3,9 @@ package com.woowacourse.tecobrary.user.command.application;
 import com.woowacourse.tecobrary.user.command.domain.User;
 import com.woowacourse.tecobrary.user.command.domain.UserRepository;
 import com.woowacourse.tecobrary.user.common.UserStatic;
+import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
+import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 class UserServiceTest implements UserStatic {
@@ -87,5 +91,30 @@ class UserServiceTest implements UserStatic {
         given(userRepository.findById(1L)).willReturn(Optional.empty());
 
         assertThrows(NotFoundUserException.class, () -> userService.findUserById(1L));
+    }
+
+    @DisplayName("회원의 권한을 업데이트한다.")
+    @Test
+    void successfullyUpdateUserAuth() {
+        UserAuthDto userAuthDto = new UserAuthDto(1L, "MANAGER");
+        User mockUser = mock(User.class);
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(mockUser));
+
+        userService.updateUserAuth(userAuthDto);
+
+        verify(mockUser).updateAuthorization(userAuthDto.getAuthorization());
+    }
+
+    @Test
+    void successfullyUpdateUserName() {
+        UserNameDto userNameDto = new UserNameDto(1L, "조로");
+        User mockUser = mock(User.class);
+
+        given(userRepository.findById(1L)).willReturn(Optional.of(mockUser));
+
+        userService.updateUserName(userNameDto);
+
+        verify(mockUser).updateUserName(userNameDto.getNewName());
     }
 }

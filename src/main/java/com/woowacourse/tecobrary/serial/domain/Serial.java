@@ -24,6 +24,9 @@ public class Serial {
     private Long id;
 
     @Embedded
+    private SerialInfo serialInfo;
+
+    @Embedded
     private SerialLibraryBook serialLibraryBook;
 
     @Embedded
@@ -40,8 +43,21 @@ public class Serial {
             nullable = false)
     private LocalDateTime updatedAt;
 
-    public Serial(SerialLibraryBook serialLibraryBook, SerialRentStatus serialRentStatus) {
+    public Serial(SerialInfo serialInfo, SerialLibraryBook serialLibraryBook, SerialRentStatus serialRentStatus) {
+        this.serialInfo = serialInfo;
         this.serialLibraryBook = serialLibraryBook;
         this.serialRentStatus = serialRentStatus;
+    }
+
+    public Long getSerialInfo() {
+        return serialInfo.getSerialNumber();
+    }
+
+    public Long getBookId() {
+        return serialLibraryBook.getBookId();
+    }
+
+    public boolean getStatus() {
+        return serialRentStatus.isStatus();
     }
 }

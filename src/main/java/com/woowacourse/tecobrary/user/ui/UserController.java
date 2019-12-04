@@ -12,6 +12,8 @@
 package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
+import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
+import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -42,5 +44,17 @@ public class UserController {
     @GetMapping("/users/{id}")
     public ResponseEntity findUserById(@PathVariable final int id) {
         return ResponseEntity.ok(userService.findUserById(id));
+    }
+
+    @PatchMapping("/users")
+    public ResponseEntity updateUserName(@RequestBody final UserNameDto userNameDto) {
+        long userId = userService.updateUserName(userNameDto);
+        return ResponseEntity.ok(userService.findUserById(userId));
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity updateUserAuth(@RequestBody final UserAuthDto userAuthDto) {
+        Long userId = userService.updateUserAuth(userAuthDto);
+        return ResponseEntity.ok(userService.findUserById(userId));
     }
 }

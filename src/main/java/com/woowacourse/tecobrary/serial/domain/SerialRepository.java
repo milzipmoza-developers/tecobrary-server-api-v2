@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SerialRepository extends JpaRepository<Serial, Long> {
+
+    boolean existsBySerialInfoSerialNumber(Long serialNumber);
 }

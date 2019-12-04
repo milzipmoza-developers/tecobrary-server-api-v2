@@ -14,12 +14,15 @@ package com.woowacourse.tecobrary.user.command.application;
 import com.woowacourse.tecobrary.user.command.domain.*;
 import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
+import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -73,5 +76,21 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(NotFoundUserException::new);
         return UserInfoDtoMapper.toDto(user);
+    }
+
+    @Transactional
+    public Long updateUserAuth(final UserAuthDto userAuthDto) {
+        User user = userRepository.findById(userAuthDto.getId())
+                .orElseThrow(NotFoundUserException::new);
+        user.updateAuthorization(userAuthDto.getAuthorization());
+        return user.getId();
+    }
+
+    @Transactional
+    public Long updateUserName(final UserNameDto userNameDto) {
+        User user = userRepository.findById(userNameDto.getId())
+                .orElseThrow(NotFoundUserException::new);
+        user.updateUserName(userNameDto.getNewName());
+        return user.getId();
     }
 }
