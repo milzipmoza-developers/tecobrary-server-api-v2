@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
@@ -87,5 +88,32 @@ class WishBookServiceTest implements WishBookStatic {
 
         assertThrows(NotFoundWishBookException.class
                 , () -> wishBookService.findById(1L));
+    }
+
+    @DisplayName("해당하는 id가 존재하면 삭제한다.")
+    @Test
+    void successfullyDeleteWishBook() {
+        given(wishBookRepository.existsById(1L)).willReturn(true);
+        willDoNothing().given(wishBookRepository).deleteById(1L);
+
+        wishBookService.deleteWishBook(1L);
+
+        verify(wishBookRepository).deleteById(1L);
+    }
+
+    @DisplayName("삭제하려는 wishBook의 id가 존재하지 않을 때 삭제에 실패한다.")
+    @Test
+    void failedDeleteWishBook() {
+        given(wishBookRepository.existsById(1L)).willReturn(false);
+
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.deleteWishBook(1L));
+    }
+
+    @DisplayName("id가 존재한다.")
+    @Test
+    void successExistsById() {
+        given(wishBookRepository.existsById(1L)).willReturn(true);
+
+        assertThat(wishBookService.existsById(1L)).isEqualTo(true);
     }
 }

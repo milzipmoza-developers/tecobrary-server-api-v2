@@ -47,4 +47,16 @@ public class WishBookService {
         WishBook wishBook = wishBookRepository.findById(id).orElseThrow(NotFoundWishBookException::new);
         return WishBookInfoDtoMapper.toDto(wishBook);
     }
+
+    public void deleteWishBook(final Long id) {
+        if (!existsById(id)) {
+            throw new NotFoundWishBookException();
+        }
+
+        wishBookRepository.deleteById(id);
+    }
+
+    public boolean existsById(final Long id) {
+        return wishBookRepository.existsById(id);
+    }
 }
