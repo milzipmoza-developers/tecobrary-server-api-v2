@@ -4,10 +4,7 @@ import com.woowacourse.tecobrary.serial.application.SerialCreateReadService;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -18,6 +15,11 @@ public class SerialCreateReadController {
     @Autowired
     public SerialCreateReadController(final SerialCreateReadService serialCreateReadService) {
         this.serialCreateReadService = serialCreateReadService;
+    }
+
+    @GetMapping("/serials")
+    public ResponseEntity getBookSerials(@RequestParam final Long bookId) {
+        return ResponseEntity.ok(serialCreateReadService.findSerialsByBookId(bookId));
     }
 
     @PostMapping("/serials")
