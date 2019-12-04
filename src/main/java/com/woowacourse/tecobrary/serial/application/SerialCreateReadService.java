@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SerialCreateService {
+public class SerialCreateReadService {
 
     private final SerialService serialService;
     private final LibraryBookService libraryBookService;
 
     @Autowired
-    public SerialCreateService(final SerialService serialService, final LibraryBookService libraryBookService) {
+    public SerialCreateReadService(final SerialService serialService, final LibraryBookService libraryBookService) {
         this.serialService = serialService;
         this.libraryBookService = libraryBookService;
     }

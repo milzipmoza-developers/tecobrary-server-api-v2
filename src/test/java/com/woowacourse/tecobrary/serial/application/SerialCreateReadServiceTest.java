@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
-class SerialCreateServiceTest {
+class SerialCreateReadServiceTest {
 
     @Mock
     private SerialService serialService;
@@ -32,7 +32,7 @@ class SerialCreateServiceTest {
     private LibraryBookService libraryBookService;
 
     @InjectMocks
-    private SerialCreateService serialCreateService;
+    private SerialCreateReadService serialCreateReadService;
 
     private Serial serial;
     private SerialCreateRequestDto serialCreateRequestDto;
@@ -50,7 +50,7 @@ class SerialCreateServiceTest {
         given(libraryBookService.existsById(1L)).willReturn(true);
         given(serialService.existsBySerialNumber(1L)).willReturn(false);
 
-        SerialCreateResponseDto serialCreateResponseDto = serialCreateService.save(serialCreateRequestDto);
+        SerialCreateResponseDto serialCreateResponseDto = serialCreateReadService.save(serialCreateRequestDto);
 
         assertThat(serialCreateResponseDto.getMessage()).isEqualTo("등록에 성공하였습니다.");
         assertThat(serialCreateResponseDto.getSerial().getSerialNumber()).isEqualTo(1L);
@@ -65,7 +65,7 @@ class SerialCreateServiceTest {
         given(libraryBookService.existsById(1L)).willReturn(false);
         given(serialService.existsBySerialNumber(1L)).willReturn(false);
 
-        assertThrows(NotFoundSerialTargetException.class, () -> serialCreateService.save(serialCreateRequestDto));
+        assertThrows(NotFoundSerialTargetException.class, () -> serialCreateReadService.save(serialCreateRequestDto));
     }
 
     @DisplayName("일련번호가 동일한 경우 실패한다.")
@@ -75,6 +75,6 @@ class SerialCreateServiceTest {
         given(libraryBookService.existsById(1L)).willReturn(true);
         given(serialService.existsBySerialNumber(1L)).willReturn(true);
 
-        assertThrows(UniqueConstraintException.class, () -> serialCreateService.save(serialCreateRequestDto));
+        assertThrows(UniqueConstraintException.class, () -> serialCreateReadService.save(serialCreateRequestDto));
     }
 }
