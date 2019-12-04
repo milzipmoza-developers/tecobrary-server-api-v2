@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.domain;
+package com.woowacourse.tecobrary.wishbook.command.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;

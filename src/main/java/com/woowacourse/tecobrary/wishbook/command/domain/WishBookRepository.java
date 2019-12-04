@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.domain;
+package com.woowacourse.tecobrary.wishbook.command.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
