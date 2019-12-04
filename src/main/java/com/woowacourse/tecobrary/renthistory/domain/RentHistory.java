@@ -48,4 +48,12 @@ public class RentHistory {
         this.rentSerial = rentSerial;
         this.rentUser = rentUser;
     }
+
+    public Long getSerialNumber() {
+        return rentSerial.getSerialId();
+    }
+
+    public Long getUserId() {
+        return rentUser.getUserId();
+    }
 }
