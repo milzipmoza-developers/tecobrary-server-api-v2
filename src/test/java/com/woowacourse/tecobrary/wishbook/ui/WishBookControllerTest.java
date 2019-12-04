@@ -5,6 +5,7 @@ import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -61,5 +62,21 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 body("author", equalTo(TEST_AUTHOR_01)).
                 body("isbn", equalTo(TEST_CREATE_ISBN)).
                 body("userId", equalTo(12));
+    }
+
+    @DisplayName("[DELETE] /wishes?id=1, 아이디1 에 해당하는 해당하는 wish book 삭제한다.")
+    @DirtiesContext
+    @Test
+    void successfullyDeleteWishBook() {
+        given().
+                param("id", 1L).
+        when().
+                delete(baseUrl("/wishes")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("message", is("success"));
     }
 }
