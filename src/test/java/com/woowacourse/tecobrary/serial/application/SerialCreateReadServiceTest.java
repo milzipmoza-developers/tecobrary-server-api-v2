@@ -17,6 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -81,6 +83,9 @@ class SerialCreateReadServiceTest {
     @DisplayName("BookId 에 해당하는 Serial 리스트를 반환한다.")
     @Test
     void successfullyFindSerialsByBookId() {
+        given(serialService.findSerialsByBookId(any(Long.class))).willReturn(Collections.emptyList());
+        given(libraryBookService.existsById(any(Long.class))).willReturn(true);
 
+        assertThat(serialCreateReadService.findSerialsByBookId(1L)).hasSize(0);
     }
 }
