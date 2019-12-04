@@ -4,6 +4,7 @@ import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException.NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.UniqueConstraintException.UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE;
@@ -48,6 +49,7 @@ class SerialCreateReadControllerTest extends RestAssuredTestUtils {
     }
 
     @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가한다.")
+    @DirtiesContext
     @Test
     void successfullyCreateSerial() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1000L);
