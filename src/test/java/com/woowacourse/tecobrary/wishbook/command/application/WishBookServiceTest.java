@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.command.application;
 
-import com.woowacourse.tecobrary.wishbook.command.domain.ExistWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.command.domain.DuplicatedWishBookIsbnException;
 import com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRepository;
@@ -66,8 +66,8 @@ class WishBookServiceTest implements WishBookStatic {
         given(wishBookRepository.existsByWishBookInfoIsbn(TEST_CREATE_ISBN)).willReturn(true);
         given(wishBookRepository.save(TEST_CREATE_WISH_BOOK)).willReturn(TEST_CREATE_WISH_BOOK);
 
-        assertThrows(ExistWishBookIsbnException.class
-                , () -> wishBookService.createWishBook(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)));
+        assertThrows(DuplicatedWishBookIsbnException.class,
+                () -> wishBookService.createWishBook(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)));
     }
 
     @DisplayName("해당하는 id 로 WishBook 을 조회한다.")
@@ -86,8 +86,7 @@ class WishBookServiceTest implements WishBookStatic {
     void failedFindWishBook() {
         given(wishBookRepository.findById(1L)).willReturn(Optional.empty());
 
-        assertThrows(NotFoundWishBookException.class
-                , () -> wishBookService.findById(1L));
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findById(1L));
     }
 
     @DisplayName("해당하는 id가 존재하면 삭제한다.")
