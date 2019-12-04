@@ -7,6 +7,8 @@ import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SerialService {
 
@@ -23,6 +25,10 @@ public class SerialService {
 
     public boolean existsBySerialNumber(final Long serialNumber) {
         return serialRepository.existsBySerialInfoSerialNumber(serialNumber);
+    }
+
+    public List<Serial> findSerialsByBookId(final Long bookId) {
+        return serialRepository.findAllBySerialLibraryBookBookId(bookId);
     }
 
     public Serial findByRentSerial(final RentSerial rentSerial) {

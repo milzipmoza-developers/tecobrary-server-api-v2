@@ -6,25 +6,28 @@ import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateResponseDto;
+import com.woowacourse.tecobrary.serial.ui.dto.SerialsResponseDto;
 import com.woowacourse.tecobrary.serial.util.SerialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-public class SerialCreateService {
+public class SerialCreateReadService {
 
     private final SerialService serialService;
     private final LibraryBookService libraryBookService;
 
     @Autowired
-    public SerialCreateService(final SerialService serialService, final LibraryBookService libraryBookService) {
+    public SerialCreateReadService(final SerialService serialService, final LibraryBookService libraryBookService) {
         this.serialService = serialService;
         this.libraryBookService = libraryBookService;
     }
 
     public SerialCreateResponseDto save(final SerialCreateRequestDto serialCreateRequestDto) {
         checkExistsLibraryBookId(serialCreateRequestDto.getBookId());
-
         checkNotExistsSerialNumber(serialCreateRequestDto.getSerialNumber());
 
         Serial serial = SerialMapper.toEntity(serialCreateRequestDto);
@@ -42,5 +45,14 @@ public class SerialCreateService {
         if (serialService.existsBySerialNumber(serialNumber)) {
             throw new UniqueConstraintException();
         }
+    }
+
+    public List<SerialsResponseDto> findSerialsByBookId(final Long bookId) {
+        checkExistsLibraryBookId(bookId);
+
+        return serialService.findSerialsByBookId(bookId)
+                .stream()
+                .map(SerialMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
