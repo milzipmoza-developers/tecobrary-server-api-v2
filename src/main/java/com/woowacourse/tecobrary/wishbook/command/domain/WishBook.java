@@ -55,6 +55,15 @@ public class WishBook {
         this.wishBookRequestUser = wishBookRequestUser;
     }
 
+    public LocalDateTime softDelete() {
+        return setDeletedAt(LocalDateTime.now());
+    }
+
+    private LocalDateTime setDeletedAt(final LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+        return this.deletedAt;
+    }
+
     public String getImage() {
         return getWishBookCoverUrl().getImage();
     }
