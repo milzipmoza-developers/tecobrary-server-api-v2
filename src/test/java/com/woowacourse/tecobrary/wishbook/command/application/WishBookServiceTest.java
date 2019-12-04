@@ -108,12 +108,4 @@ class WishBookServiceTest implements WishBookStatic {
 
         assertThrows(NotFoundWishBookException.class, () -> wishBookService.deleteWishBook(1L));
     }
-
-    @DisplayName("id가 존재한다.")
-    @Test
-    void successExistsById() {
-        given(wishBookRepository.existsById(1L)).willReturn(true);
-
-        assertThat(wishBookService.existsById(1L)).isEqualTo(true);
-    }
 }

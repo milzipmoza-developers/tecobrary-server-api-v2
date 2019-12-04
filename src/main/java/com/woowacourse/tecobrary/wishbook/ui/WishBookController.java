@@ -31,12 +31,8 @@ public class WishBookController {
 
     @DeleteMapping("/wishes")
     public ResponseEntity deleteWishBook(@RequestParam final Long id, Model model) {
+        //TODO: controller advice 추가
         wishBookService.deleteWishBook(id);
-
-        if (wishBookService.existsById(id)) {
-            model.addAttribute("message", "fail");
-        }
-
         model.addAttribute("message", "success");
         return ResponseEntity.ok(model);
     }
