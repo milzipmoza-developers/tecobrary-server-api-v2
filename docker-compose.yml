@@ -1,0 +1,18 @@
+version: "3"
+services:
+  tecobrary-api-server:
+    image: tecobrary/tecobrary-api-server
+    depends_on:
+      - "tecobrary-mysql"
+    links:
+      - tecobrary-mysql
+    ports:
+      - "9090:9090"
+  tecobrary-mysql:
+    image: mysql:8.0.17
+    ports:
+      - "6033:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: tecobrary
+      MYSQL_PASSWORD: tecobrary
+      MYSQL_DATABASE: tecobrary
