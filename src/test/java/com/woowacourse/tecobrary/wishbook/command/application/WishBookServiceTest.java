@@ -43,7 +43,7 @@ class WishBookServiceTest implements WishBookStatic {
     void successfullyFindWishBooksOnPage() {
         List<WishBook> mockWishBooks = Arrays.asList(TEST_WISH_BOOK, TEST_WISH_BOOK_01);
 
-        given(wishBookRepository.findAll(any(PageRequest.class)))
+        given(wishBookRepository.findAllByDeletedAtNull(any(PageRequest.class)))
                 .willReturn(new PageImpl<>(mockWishBooks, PageRequest.of(1, 2), 2));
 
         List<WishBookInfoDto> wishBooks = wishBookService.findWishBooksOnPage(1, 2);
@@ -54,7 +54,7 @@ class WishBookServiceTest implements WishBookStatic {
     @DisplayName("wishBook에 책 정보를 등록한다.")
     @Test
     void successfullySaveWishBook() {
-        given(wishBookRepository.existsByWishBookInfoIsbn(TEST_CREATE_ISBN)).willReturn(false);
+        given(wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull(TEST_CREATE_ISBN)).willReturn(false);
         given(wishBookRepository.save(TEST_CREATE_WISH_BOOK)).willReturn(TEST_CREATE_WISH_BOOK);
 
         wishBookService.createWishBook(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK));
@@ -65,7 +65,7 @@ class WishBookServiceTest implements WishBookStatic {
     @DisplayName("해당하는 Isbn이 존재하면 등록에 실패한다.")
     @Test
     void failedSaveWishBook() {
-        given(wishBookRepository.existsByWishBookInfoIsbn(TEST_CREATE_ISBN)).willReturn(true);
+        given(wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull(TEST_CREATE_ISBN)).willReturn(true);
         given(wishBookRepository.save(TEST_CREATE_WISH_BOOK)).willReturn(TEST_CREATE_WISH_BOOK);
 
         assertThrows(DuplicatedWishBookIsbnException.class,

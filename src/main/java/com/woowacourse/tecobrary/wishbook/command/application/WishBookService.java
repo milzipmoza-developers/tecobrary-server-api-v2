@@ -27,7 +27,7 @@ public class WishBookService {
     }
 
     public List<WishBookInfoDto> findWishBooksOnPage(final int page, final int number) {
-        Page<WishBook> pageWishBooks = wishBookRepository.findAll(PageRequest.of(page - 1, number));
+        Page<WishBook> pageWishBooks = wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number));
 
         return pageWishBooks.getContent()
                 .stream()
@@ -35,15 +35,16 @@ public class WishBookService {
                 .collect(toList());
     }
 
+    @Transactional
     public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
-        checkDuplicatedWishBookIsbn(wishBookInfoDto);
+        checkDuplicatedWishNotEnrolledLibraryBookIsbn(wishBookInfoDto);
 
         WishBook wishBook = WishBookInfoDtoMapper.toEntity(wishBookInfoDto);
         return wishBookRepository.save(wishBook).getId();
     }
 
-    private void checkDuplicatedWishBookIsbn(final WishBookInfoDto wishBookInfoDto) {
-        if (wishBookRepository.existsByWishBookInfoIsbn(wishBookInfoDto.getIsbn())) {
+    private void checkDuplicatedWishNotEnrolledLibraryBookIsbn(final WishBookInfoDto wishBookInfoDto) {
+        if (wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull(wishBookInfoDto.getIsbn())) {
             throw new DuplicatedWishBookIsbnException();
         }
     }
@@ -58,18 +59,18 @@ public class WishBookService {
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
-    public WishBook findNotEnrolledById(Long id) {
+    public WishBook findNotEnrolledById(final Long id) {
         return wishBookRepository.findByIdAndDeletedAtNull(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
-    public WishBook findEnrolledById(Long id) {
+    public WishBook findEnrolledById(final Long id) {
         return wishBookRepository.findByIdAndDeletedAtNotNull(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
     @Transactional
-    public WishBookInfoDto softDeleteById(Long id) {
+    public WishBookInfoDto softDeleteById(final Long id) {
         checkNotSoftDeleted(id);
         return WishBookInfoDtoMapper.toDto(softDelete(id));
     }
