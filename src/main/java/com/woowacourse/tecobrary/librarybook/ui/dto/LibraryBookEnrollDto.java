@@ -18,7 +18,7 @@ public class LibraryBookEnrollDto implements LibraryBookDto {
     private LocalDateTime enrolledDate;
 
     @Builder
-    public LibraryBookEnrollDto(final Long id, final String image, final String title, final String author, final String publisher, final String isbn, final String description, final LocalDateTime enrolledDate) {
+    private LibraryBookEnrollDto(final Long id, final String image, final String title, final String author, final String publisher, final String isbn, final String description, final LocalDateTime enrolledDate) {
         this.id = id;
         this.image = image;
         this.title = title;
