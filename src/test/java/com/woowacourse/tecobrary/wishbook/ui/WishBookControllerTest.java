@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static com.woowacourse.tecobrary.wishbook.command.domain.DuplicatedWishBookIsbnException.DUPLICATED_WISH_BOOK_ISBN_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
@@ -54,6 +55,23 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 body("author", equalTo(TEST_AUTHOR_01)).
                 body("isbn", equalTo(TEST_CREATE_ISBN)).
                 body("userId", equalTo(12));
+    }
+
+    @DisplayName("[POST] /wishes, library book에 등록되지 않고, wishBook에 이미 존재하는 isbn을 추가하면 등록에 실패한다.")
+    @Test
+    void failedCreatedWishBook() {
+        given().
+                body(WishBookInfoDtoMapper.toDto(TEST_WISH_BOOK_02)).
+                contentType(JSON).
+                accept(JSON).
+        when().
+                post(baseUrl("/wishes")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(400).
+                contentType(JSON).
+                body("message", is(DUPLICATED_WISH_BOOK_ISBN_EXCEPTION_MESSAGE));
     }
 
     @DisplayName("[DELETE] /wishes?id=1, 아이디1 에 해당하는 해당하는 wish book 삭제한다.")
