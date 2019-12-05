@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookEnrollRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-class WishBookEnrollControllerTest extends RestAssuredTestUtils {
+class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishBookStatic {
 
     @DisplayName("[PATCH] /wishes, wish book 의 id 로 wish book 에서 soft delete 한 후 library book 에 등록을 성공한다.")
     @DirtiesContext
@@ -31,14 +32,12 @@ class WishBookEnrollControllerTest extends RestAssuredTestUtils {
                 log().ifValidationFails().
                 contentType(JSON).
                 statusCode(200).
-                body("libraryBook.image", is("https://bookthumb-phinf.pstatic.net/cover/158/717/15871738.jpg?type=m1&udate=20191126")).
-                body("libraryBook.title", is("스프링 부트와 AWS로 혼자 구현하는 웹 서비스 (인텔리제이, JPA, JUnit 테스트, 그레이들)")).
-                body("libraryBook.author", is("이동욱")).
-                body("libraryBook.publisher", is("프리렉")).
-                body("libraryBook.isbn",is("8965402603 9788965402602")).
-                body("libraryBook.description", is("경험이 실력이 되는 순간!이 책은 제목 그대로 스프링 부트와 AWS로 웹 서비스를 구현합니다. JPA와 " +
-                        "JUNIT 테스트, 그레이들, 머스테치, 스프링 시큐리티를 활용한 소셜 로그인 등으로 애플리케이션을 개발하고, " +
-                        "뒤이어 AWS 인프라의 기본 사용법과 AWS EC2와 RDS를 사용해 서비스가 가능하도록 합니다. 이렇게... ")).
+                body("libraryBook.image", is(TEST_COVER_URL_02)).
+                body("libraryBook.title", is(TEST_TITLE_02)).
+                body("libraryBook.author", is(TEST_AUTHOR_02)).
+                body("libraryBook.publisher", is(TEST_PUBLISHER_02)).
+                body("libraryBook.isbn",is(TEST_ISBN_02)).
+                body("libraryBook.description", is(TEST_DESCRIPTION_02)).
                 body("enrolledDate", notNullValue());
     }
 
