@@ -27,18 +27,18 @@ public class LibraryBookService {
     }
 
     public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
-        checkExistLibraryBook(libraryBookDto);
-
-        LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookDto);
-        LibraryBook savedLibraryBook = libraryBookRepository.save(libraryBook);
+        LibraryBook savedLibraryBook = getCreatedLibraryBook(libraryBookDto);
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 
-    public LibraryBookEnrollDto enrollWishBook(final LibraryBookDto libraryBookDto) {
+    private LibraryBook getCreatedLibraryBook(final LibraryBookDto libraryBookDto) {
         checkExistLibraryBook(libraryBookDto);
-
         LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookDto);
-        LibraryBook enrolledBook = libraryBookRepository.save(libraryBook);
+        return libraryBookRepository.save(libraryBook);
+    }
+
+    public LibraryBookEnrollDto enrollWishBook(final LibraryBookDto libraryBookDto) {
+        LibraryBook enrolledBook = getCreatedLibraryBook(libraryBookDto);
         return LibraryBookMapper.toEnrolledDto(enrolledBook);
     }
 
