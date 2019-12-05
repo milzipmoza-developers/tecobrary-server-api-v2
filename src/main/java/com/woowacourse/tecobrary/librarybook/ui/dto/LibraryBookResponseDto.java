@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class LibraryBookResponseDto {
+public class LibraryBookResponseDto implements LibraryBookDto {
 
     private Long id;
     private String image;

@@ -49,15 +49,46 @@ public class WishBookService {
     }
 
     public WishBookInfoDto findById(final Long id) {
-        WishBook wishBook = wishBookRepository.findById(id)
-                .orElseThrow(NotFoundWishBookException::new);
+        WishBook wishBook = getWishBook(id);
         return WishBookInfoDtoMapper.toDto(wishBook);
+    }
+
+    private WishBook getWishBook(final Long id) {
+        return wishBookRepository.findById(id)
+                .orElseThrow(NotFoundWishBookException::new);
+    }
+
+    public WishBook findNotEnrolledById(Long id) {
+        return wishBookRepository.findByIdAndDeletedAtNull(id)
+                .orElseThrow(NotFoundWishBookException::new);
+    }
+
+    public WishBook findEnrolledById(Long id) {
+        return wishBookRepository.findByIdAndDeletedAtNotNull(id)
+                .orElseThrow(NotFoundWishBookException::new);
+    }
+
+    @Transactional
+    public WishBookInfoDto softDeleteById(Long id) {
+        checkNotSoftDeleted(id);
+        return WishBookInfoDtoMapper.toDto(softDelete(id));
+    }
+
+    private void checkNotSoftDeleted(final Long id) {
+        if (!wishBookRepository.existsByIdAndDeletedAtNotNull(id)) {
+            throw new AlreadySoftDeletedWishBookException();
+        }
+    }
+
+    private WishBook softDelete(final Long id) {
+        WishBook wishBook = getWishBook(id);
+        wishBook.softDelete();
+        return wishBook;
     }
 
     @Transactional
     public void deleteWishBook(final Long id) {
         checkNotExistWishBook(id);
-
         wishBookRepository.deleteById(id);
     }
 
