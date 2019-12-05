@@ -28,22 +28,25 @@ public class WishBookService {
     }
 
     public List<WishBookInfoDto> findWishBooksOnPage(final int page, final int number) {
-        Page<WishBook> pageWishBooks = wishBookRepository.findAll(PageRequest.of(page - 1, number));
-
-        return pageWishBooks.getContent()
+        return findAllNotEnrolledLibraryBook(page, number).getContent()
                 .stream()
                 .map(WishBookInfoDtoMapper::toDto)
                 .collect(toList());
     }
 
+    private Page<WishBook> findAllNotEnrolledLibraryBook(final int page, final int number) {
+        return wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number));
+    }
+
+    @Transactional
     public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
-        checkDuplicatedWishBookIsbn(wishBookInfoDto);
+        checkDuplicated(wishBookInfoDto);
 
         WishBook wishBook = WishBookInfoDtoMapper.toEntity(wishBookInfoDto);
         return wishBookRepository.save(wishBook).getId();
     }
 
-    private void checkDuplicatedWishBookIsbn(final WishBookInfoDto wishBookInfoDto) {
+    private void checkDuplicated(final WishBookInfoDto wishBookInfoDto) {
         if (wishBookRepository.existsByWishBookInfoIsbn(wishBookInfoDto.getIsbn())) {
             throw new DuplicatedWishBookIsbnException();
         }
@@ -59,7 +62,7 @@ public class WishBookService {
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
-    public WishBook findNotEnrolledById(Long id) {
+    public WishBook findNotEnrolledById(final Long id) {
         return findByIdNotSoftDeleted(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
@@ -68,7 +71,7 @@ public class WishBookService {
         return wishBookRepository.findByIdAndDeletedAtNull(id);
     }
 
-    public WishBook findEnrolledById(Long id) {
+    public WishBook findEnrolledById(final Long id) {
         return findByIdSoftDeleted(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
@@ -78,7 +81,7 @@ public class WishBookService {
     }
 
     @Transactional
-    public WishBookInfoDto softDeleteById(Long id) {
+    public WishBookInfoDto softDeleteById(final Long id) {
         checkNotSoftDeleted(id);
         return WishBookInfoDtoMapper.toDto(softDelete(id));
     }
