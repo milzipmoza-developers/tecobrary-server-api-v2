@@ -115,7 +115,7 @@ class WishBookServiceTest implements WishBookStatic {
     void successfullyFindBySoftExist() {
         given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK_02));
 
-        WishBook existWishBook = wishBookService.findByIdSoftExist(2L);
+        WishBook existWishBook = wishBookService.findNotEnrolledById(2L);
 
         assertThat(existWishBook.getImage()).isEqualTo(TEST_COVER_URL_02);
         assertThat(existWishBook.getTitle()).isEqualTo(TEST_TITLE_02);
@@ -131,7 +131,7 @@ class WishBookServiceTest implements WishBookStatic {
     void failedFindBySoftExistAlreadySoftDeletedWishBook() {
         given(wishBookRepository.findByIdAndDeletedAtNull(any(Long.class))).willThrow(NotFoundWishBookException.class);
 
-        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findByIdSoftExist(1L));
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findNotEnrolledById(1L));
     }
 
     @DisplayName("Soft Delete 된 WishBook 을 조회한다.")
@@ -139,7 +139,7 @@ class WishBookServiceTest implements WishBookStatic {
     void successfullyFindBySoftDeleted() {
         given(wishBookRepository.findByIdAndDeletedAtNotNull(any(Long.class))).willReturn(Optional.of(TEST_WISH_BOOK_01));
 
-        WishBook softDeletedWishBook = wishBookService.findByIdSoftDeleted(2L);
+        WishBook softDeletedWishBook = wishBookService.findEnrolledById(2L);
         ReflectionTestUtils.setField(softDeletedWishBook, "deletedAt", LocalDateTime.now());
 
         assertThat(softDeletedWishBook.getImage()).isEqualTo(TEST_COVER_URL_01);
@@ -156,7 +156,7 @@ class WishBookServiceTest implements WishBookStatic {
     void failedFindBySoftDeletedNotSoftDeletedWishBook() {
         given(wishBookRepository.findByIdAndDeletedAtNotNull(any(Long.class))).willThrow(NotFoundWishBookException.class);
 
-        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findByIdSoftExist(1L));
+        assertThrows(NotFoundWishBookException.class, () -> wishBookService.findNotEnrolledById(1L));
     }
 
     @DisplayName("WishBook 의 id 로 Soft Delete 에 성공한다.")

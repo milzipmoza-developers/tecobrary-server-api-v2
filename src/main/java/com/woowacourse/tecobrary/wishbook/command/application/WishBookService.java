@@ -58,12 +58,12 @@ public class WishBookService {
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
-    public WishBook findByIdSoftExist(Long id) {
+    public WishBook findNotEnrolledById(Long id) {
         return wishBookRepository.findByIdAndDeletedAtNull(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
-    public WishBook findByIdSoftDeleted(Long id) {
+    public WishBook findEnrolledById(Long id) {
         return wishBookRepository.findByIdAndDeletedAtNotNull(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
@@ -71,7 +71,6 @@ public class WishBookService {
     @Transactional
     public WishBookInfoDto softDeleteById(Long id) {
         checkNotSoftDeleted(id);
-
         return WishBookInfoDtoMapper.toDto(softDelete(id));
     }
 
@@ -90,7 +89,6 @@ public class WishBookService {
     @Transactional
     public void deleteWishBook(final Long id) {
         checkNotExistWishBook(id);
-
         wishBookRepository.deleteById(id);
     }
 

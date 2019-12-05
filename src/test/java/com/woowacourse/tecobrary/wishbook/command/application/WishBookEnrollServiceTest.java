@@ -33,7 +33,7 @@ class WishBookEnrollServiceTest implements WishBookStatic, LibraryBookStatic {
     @DisplayName("enrollLibraryBookByWishBookId 가 성공적으로 동작한다.")
     @Test
     void successfullyEnrollLibraryBookByWishBookId() {
-        given(wishBookService.findByIdSoftExist(99L)).willReturn(TEST_WISH_BOOK);
+        given(wishBookService.findNotEnrolledById(99L)).willReturn(TEST_WISH_BOOK);
         given(libraryBookService.enrollWishBook(any(LibraryBookEnrollDto.class))).willReturn(TEST_LIBRARY_BOOK_ENROLL_DTO_99);
         ReflectionTestUtils.setField(TEST_LIBRARY_BOOK_ENROLL_DTO_99, "id", 99L);
 
