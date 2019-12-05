@@ -1,0 +1,24 @@
+version: "3"
+services:
+  api-server:
+    image: tecobrary/tecobrary-api-server
+    restart: always
+    depends_on:
+      - "mysql-db"
+    links:
+      - mysql-db
+    ports:
+      - 9090:9090
+  mysql-db:
+    image: mysql:8.0.17
+    ports:
+      - 6033:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tecobrary
+      MYSQL_PASSWORD: tecobrary
+      MYSQL_DATABASE: tecobrary
+    volumes:
+      - ./db/mysql/data:/var/lib/mysql
+      - ./db/mysql/init:/docker-entrypoint-initdb.d
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
