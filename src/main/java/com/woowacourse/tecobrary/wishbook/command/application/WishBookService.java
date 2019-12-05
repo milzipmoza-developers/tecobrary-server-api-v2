@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -59,13 +60,21 @@ public class WishBookService {
     }
 
     public WishBook findNotEnrolledById(Long id) {
-        return wishBookRepository.findByIdAndDeletedAtNull(id)
+        return findByIdNotSoftDeleted(id)
                 .orElseThrow(NotFoundWishBookException::new);
     }
 
+    private Optional<WishBook> findByIdNotSoftDeleted(final Long id) {
+        return wishBookRepository.findByIdAndDeletedAtNull(id);
+    }
+
     public WishBook findEnrolledById(Long id) {
-        return wishBookRepository.findByIdAndDeletedAtNotNull(id)
+        return findByIdSoftDeleted(id)
                 .orElseThrow(NotFoundWishBookException::new);
+    }
+
+    private Optional<WishBook> findByIdSoftDeleted(final Long id) {
+        return wishBookRepository.findByIdAndDeletedAtNotNull(id);
     }
 
     @Transactional
@@ -75,9 +84,13 @@ public class WishBookService {
     }
 
     private void checkNotSoftDeleted(final Long id) {
-        if (!wishBookRepository.existsByIdAndDeletedAtNotNull(id)) {
+        if (!existsByIdAndSoftDeleted(id)) {
             throw new AlreadySoftDeletedWishBookException();
         }
+    }
+
+    private boolean existsByIdAndSoftDeleted(final Long id) {
+        return wishBookRepository.existsByIdAndDeletedAtNotNull(id);
     }
 
     private WishBook softDelete(final Long id) {
