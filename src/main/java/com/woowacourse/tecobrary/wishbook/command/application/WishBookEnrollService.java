@@ -23,7 +23,7 @@ public class WishBookEnrollService {
     public WishBookEnrollResponseDto enrollLibraryBookByWishBookId(Long wishBookId) {
         WishBook wishBook = wishBookService.findByIdSoftExist(wishBookId);
         wishBook.softDelete();
-        LibraryBookEnrollDto libraryBookEnrollDto = LibraryBookMapper.wishBookToDto(wishBook);
+        LibraryBookEnrollDto libraryBookEnrollDto = LibraryBookMapper.toEnrollDto(wishBook);
         LibraryBookEnrollDto enrolledBook = libraryBookService.enrollWishBook(libraryBookEnrollDto);
         return new WishBookEnrollResponseDto(enrolledBook, enrolledBook.getEnrolledDate());
     }

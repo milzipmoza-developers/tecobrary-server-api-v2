@@ -39,7 +39,7 @@ public class LibraryBookService {
 
     public LibraryBookEnrollDto enrollWishBook(final LibraryBookDto libraryBookDto) {
         LibraryBook enrolledBook = getCreatedLibraryBook(libraryBookDto);
-        return LibraryBookMapper.toEnrolledDto(enrolledBook);
+        return LibraryBookMapper.toEnrollDto(enrolledBook);
     }
 
     private void checkExistLibraryBook(final LibraryBookDto libraryBookDto) {
@@ -54,13 +54,13 @@ public class LibraryBookService {
 
     public LibraryBookResponseDto findById(final Long id) {
         LibraryBook libraryBook = libraryBookRepository.findById(id).orElseThrow(NotFoundLibraryBookException::new);
-        return LibraryBookMapper.toDto(libraryBook);
+        return LibraryBookMapper.toResponseDto(libraryBook);
     }
 
     public List<LibraryBookResponseDto> findAll(final int page, final int number) {
         Page<LibraryBook> libraryBooks = libraryBookRepository.findAll(PageRequest.of(page - 1, number));
         return libraryBooks.stream()
-                .map(LibraryBookMapper::toDto)
+                .map(LibraryBookMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -68,7 +68,7 @@ public class LibraryBookService {
         Pageable pageable = PageRequest.of(page - 1, number);
         Page<LibraryBook> libraryBooks = libraryBookRepository.findAllByLibraryBookInfoTitleContaining(title, pageable);
         return libraryBooks.stream()
-                .map(LibraryBookMapper::toDto)
+                .map(LibraryBookMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
 

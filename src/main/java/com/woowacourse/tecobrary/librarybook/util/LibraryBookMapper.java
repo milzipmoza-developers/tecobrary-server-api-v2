@@ -20,7 +20,19 @@ public class LibraryBookMapper {
                         libraryBookDto.getDescription()));
     }
 
-    public static LibraryBookEnrollDto toEnrolledDto(final LibraryBook enrolledBook) {
+    public static LibraryBookResponseDto toResponseDto(final LibraryBook libraryBook) {
+        return LibraryBookResponseDto.builder()
+                .id(libraryBook.getId())
+                .image(libraryBook.getImage())
+                .title(libraryBook.getTitle())
+                .author(libraryBook.getAuthor())
+                .publisher(libraryBook.getPublisher())
+                .isbn(libraryBook.getIsbn())
+                .description(libraryBook.getDescription())
+                .build();
+    }
+
+    public static LibraryBookEnrollDto toEnrollDto(final LibraryBook enrolledBook) {
         return  LibraryBookEnrollDto.builder()
                 .id(enrolledBook.getId())
                 .image(enrolledBook.getImage())
@@ -33,19 +45,7 @@ public class LibraryBookMapper {
                 .build();
     }
 
-    public static LibraryBookResponseDto toDto(final LibraryBook libraryBook) {
-        return LibraryBookResponseDto.builder()
-                .id(libraryBook.getId())
-                .image(libraryBook.getImage())
-                .title(libraryBook.getTitle())
-                .author(libraryBook.getAuthor())
-                .publisher(libraryBook.getPublisher())
-                .isbn(libraryBook.getIsbn())
-                .description(libraryBook.getDescription())
-                .build();
-    }
-
-    public static LibraryBookEnrollDto wishBookToDto(final WishBook wishBook) {
+    public static LibraryBookEnrollDto toEnrollDto(final WishBook wishBook) {
         return LibraryBookEnrollDto.builder()
                 .id(wishBook.getId())
                 .image(wishBook.getImage())
