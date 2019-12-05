@@ -8,7 +8,7 @@
 * Gradle
 * Docker 
   - [Dockerfile](./Dockerfile)
-  - [docker-compose.yml](./docker-compose.yml)
+  - [./docker/docker-compose.yml](./docker/docker-compose.yml)
 
 ## Docker MySql 설치 및 실행
 
@@ -36,7 +36,9 @@ docker run -d -p 6033:3306 --name=tecobrary-mysql --env="MYSQL_ROOT_PASSWORD=tec
 docker exec -it tecobrary-mysql bash;
 ```
 
+## Docker MySQL 테스트용 초기 데이터
 
+* [./docker/db/mysql/init](./docker/db/mysql/init) 에 해당 쿼리문들이 있다.
 
 ## Docker 실행 명령어
 
