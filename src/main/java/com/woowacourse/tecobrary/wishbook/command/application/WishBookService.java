@@ -27,24 +27,26 @@ public class WishBookService {
     }
 
     public List<WishBookInfoDto> findWishBooksOnPage(final int page, final int number) {
-        Page<WishBook> pageWishBooks = wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number));
-
-        return pageWishBooks.getContent()
+        return findAllNotEnrolledLibraryBook(page, number).getContent()
                 .stream()
                 .map(WishBookInfoDtoMapper::toDto)
                 .collect(toList());
     }
 
+    private Page<WishBook> findAllNotEnrolledLibraryBook(final int page, final int number) {
+        return wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number));
+    }
+
     @Transactional
     public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
-        checkDuplicatedWishNotEnrolledLibraryBookIsbn(wishBookInfoDto);
+        checkDuplicated(wishBookInfoDto);
 
         WishBook wishBook = WishBookInfoDtoMapper.toEntity(wishBookInfoDto);
         return wishBookRepository.save(wishBook).getId();
     }
 
-    private void checkDuplicatedWishNotEnrolledLibraryBookIsbn(final WishBookInfoDto wishBookInfoDto) {
-        if (wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull(wishBookInfoDto.getIsbn())) {
+    private void checkDuplicated(final WishBookInfoDto wishBookInfoDto) {
+        if (wishBookRepository.existsByWishBookInfoIsbn(wishBookInfoDto.getIsbn())) {
             throw new DuplicatedWishBookIsbnException();
         }
     }

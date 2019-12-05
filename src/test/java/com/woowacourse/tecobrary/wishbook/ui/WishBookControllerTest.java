@@ -57,7 +57,7 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 body("userId", equalTo(12));
     }
 
-    @DisplayName("[POST] /wishes, library book에 등록되지 않고, wishBook에 이미 존재하는 isbn을 추가하면 등록에 실패한다.")
+    @DisplayName("[POST] /wishes, wishBook에 이미 존재하는 isbn을 추가하면 등록에 실패한다.")
     @Test
     void failedCreatedWishBook() {
         given().

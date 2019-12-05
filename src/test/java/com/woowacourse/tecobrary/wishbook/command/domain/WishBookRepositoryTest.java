@@ -19,16 +19,16 @@ class WishBookRepositoryTest {
     @Autowired
     private WishBookRepository wishBookRepository;
 
-    @DisplayName("wish book에 존재하고 library book에 등록되지 않았을 때 true를 반환한다.")
+    @DisplayName("wish book에 존재할 때 true를 반환한다.")
     @Test
-    void existsByWishBookInfoIsbnAndDeletedAtNullIsTrue() {
-        assertTrue(wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull("8965402603 9788965402602"));
+    void existsByWishBookInfoIsbnIsTrue() {
+        assertTrue(wishBookRepository.existsByWishBookInfoIsbn("8965402603 9788965402602"));
     }
 
-    @DisplayName("wish book에 존재하고 library book에 등록되었을때 false를 반환한다.")
+    @DisplayName("wish book에 존재하지 않을 때 false를 반환한다.")
     @Test
-    void existsByWishBookInfoIsbnAndDeletedAtNullIsFalse() {
-        assertFalse(wishBookRepository.existsByWishBookInfoIsbnAndDeletedAtNull("1162241039 9791162241035"));
+    void existsByWishBookInfoIsbnIsFalse() {
+        assertFalse(wishBookRepository.existsByWishBookInfoIsbn("1162241039 9791162241035111"));
     }
 
     @DisplayName("모든 wish book 리스트 페이지에서 등록되지 않은 책 리스트를 반환한다.")
@@ -39,6 +39,6 @@ class WishBookRepositoryTest {
         assertThat(pageWishBooks.getContent()
                 .stream()
                 .map(WishBookInfoDtoMapper::toDto)
-                .collect(toList()).size()).isEqualTo(1);
+                .collect(toList())).hasSize(1);
     }
 }

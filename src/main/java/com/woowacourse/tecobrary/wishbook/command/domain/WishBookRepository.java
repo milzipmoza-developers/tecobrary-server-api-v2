@@ -16,7 +16,7 @@ public interface WishBookRepository extends JpaRepository<WishBook, Long> {
 
     boolean existsByIdAndDeletedAtNotNull(Long id);
 
-    boolean existsByWishBookInfoIsbnAndDeletedAtNull(String isbn);
+    boolean existsByWishBookInfoIsbn(String isbn);
 
     Page<WishBook> findAllByDeletedAtNull(Pageable pageable);
 }
