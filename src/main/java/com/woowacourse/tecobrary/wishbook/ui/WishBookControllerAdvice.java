@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
+import com.woowacourse.tecobrary.wishbook.command.application.AlreadySoftDeletedWishBookException;
 import com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,10 @@ public class WishBookControllerAdvice {
 
     private static final Logger log = LoggerFactory.getLogger(WishBookControllerAdvice.class);
 
-    @ExceptionHandler({NotFoundWishBookException.class})
+    @ExceptionHandler({
+            NotFoundWishBookException.class,
+            AlreadySoftDeletedWishBookException.class
+    })
     public ResponseEntity wishBookHandlingException(final RuntimeException e, final Model model) {
         log.error(e.getMessage());
         model.addAttribute("message", e.getMessage());
