@@ -21,16 +21,10 @@
   
 ## Docker MySQL TEST ENV
 
+* [쉘 스크립트 사용 방법 및 설명](./scripts)
+
 * 실행 [./scripts/docker-compose-up.sh](./scripts/docker-compose-up.sh)
 * 종료 [./scripts/docker-compose-down.sh](./scripts/docker-compose-down.sh)
-
-### 권한 변경
-
-> chmod 755
-> 소유자만 모든 것(쓰기, 읽기, 실행)이 가능하고 그 외 사용자의 경우는 읽기, 실행은 가능하나 쓰기는 불가능
-
-`` sudo chmod 755 ./scripts/docker-compose-up.sh``
-`` sudo chmod 755 ./scripts/docker-compose-down.sh``
 
 ## Docker MySql 설치 및 실행
 
