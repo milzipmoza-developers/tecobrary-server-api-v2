@@ -9,6 +9,28 @@
 * Docker 
   - [Dockerfile](./Dockerfile)
   - [./docker/docker-compose.yml](./docker/docker-compose.yml)
+  
+## 테스트 환경
+* Spring Framework 5.1.8.RELEASE
+* Tomcat 9.0.22
+* Gradle
+* Docker 
+  - [Dockerfile](./Dockerfile)
+  - [./docker/docker-compose.yml](./docker/docker-compose.yml)
+* MySQL 5.7
+  
+## Docker MySQL TEST ENV
+
+* 실행 [./scripts/docker-compose-up.sh](./scripts/docker-compose-up.sh)
+* 종료 [./scripts/docker-compose-down.sh](./scripts/docker-compose-down.sh)
+
+### 권한 변경
+
+> chmod 755
+> 소유자만 모든 것(쓰기, 읽기, 실행)이 가능하고 그 외 사용자의 경우는 읽기, 실행은 가능하나 쓰기는 불가능
+
+`` sudo chmod 755 ./scripts/docker-compose-up.sh``
+`` sudo chmod 755 ./scripts/docker-compose-down.sh``
 
 ## Docker MySql 설치 및 실행
 
@@ -39,6 +61,7 @@ docker exec -it tecobrary-mysql bash;
 ## Docker MySQL 테스트용 초기 데이터
 
 * [./docker/db/mysql/init](./docker/db/mysql/init) 에 해당 쿼리문들이 있다.
+
 
 ## Docker 실행 명령어
 
