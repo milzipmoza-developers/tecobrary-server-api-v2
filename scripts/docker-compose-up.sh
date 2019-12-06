@@ -26,9 +26,11 @@ echo "$TECORVIS_SAY Today is Good Day. Welcome !"
 echo ""
 echo "$TECORVIS_SAY Check Docker Image [${TARGET_MYSQL}:${TARGET_MYSQL_VERSION}] On Your Computer. "
 echo ""
-if [ ${#EXIST_IMAGE_INFO} == ${EMPTY} ]; then
+if [[ "$EXIST_IMAGE_INFO" =~ "$TARGET_MYSQL_VERSION" ]]; then
+    echo "$TECORVIS_SAY I Found It !"
+else
     echo "$TECORVIS_SAY No. We Need To Install !"
-    echo "$TECORVIS_SAY Let's Install [${TARGET_MYSQL}:${TARGET_MYSQL_VERSION}] Image"
+    echo "$TECORVIS_SAY Let's Pull [${TARGET_MYSQL}:${TARGET_MYSQL_VERSION}] Image"
     echo ""
     echo "$TECORVIS_SAY Just Wait Few Minutes ... Now I'm Working Hard !"
     echo `docker pull ${TARGET_MYSQL}:${TARGET_MYSQL_VERSION}`
@@ -37,8 +39,6 @@ if [ ${#EXIST_IMAGE_INFO} == ${EMPTY} ]; then
     fi
     echo "$TECORVIS_SAY [${TARGET_MYSQL}:${TARGET_MYSQL_VERSION}] Image Install Succeed !"
     echo ""
-else
-    echo "$TECORVIS_SAY I Found It !"
 fi
 
 # Build Tecobrary-Api-Server-V2
@@ -61,9 +61,13 @@ else
 fi
 
 echo "$TECORVIS_SAY Now I Will Build [tecobrary-api-server-v2]. Wait Few Minutes..."
+
+# Execute Gradle Clean and Build
 echo `./gradlew clean Build`
 echo ""
 echo ""
+
+# Docker Image Build
 echo "$TECORVIS_SAY Now I Will Build [tecobrary-api-server-v2] Docker Image. Wait Few Minutes..."
 echo `docker build --build-arg JAR_FILE=build/libs/*.jar -t tecobrary/tecobrary-api-server .`
 echo ""
@@ -72,4 +76,6 @@ echo "$TECORVIS_SAY Congrats ! Image Build Complete !"
 echo ""
 echo "$TECORVIS_SAY Now Run Test Environment Just Wait"
 echo `docker-compose -f ./docker/docker-compose.yml up -d`
+echo ""
+echo ""
 echo "$TECORVIS_SAY Thanks Finished !"
