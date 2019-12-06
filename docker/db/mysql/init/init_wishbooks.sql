@@ -13,7 +13,7 @@ CREATE TABLE `tecobrary`.`WishBooks`
     `author`      varchar(255) NOT NULL,
     `publisher`   varchar(255) DEFAULT NULL,
     `isbn`        varchar(255) NOT NULL,
-    `description` varchar(255) DEFAULT '내용 없음',
+    `description` varchar(500) DEFAULT '내용 없음',
     `createdAt`   datetime     NOT NULL,
     `updatedAt`   datetime     NOT NULL,
     `deletedAt`   datetime     DEFAULT NULL,
@@ -22,7 +22,8 @@ CREATE TABLE `tecobrary`.`WishBooks`
     UNIQUE KEY `isbn` (`isbn`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 24
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- WishBooks Dummy Data --
 -- total 13

@@ -18,7 +18,8 @@ CREATE TABLE `tecobrary`.`Serials`
     UNIQUE KEY `serialNumber` (`serialNumber`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 134
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Serials Dummy Data --

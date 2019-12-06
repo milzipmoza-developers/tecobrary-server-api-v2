@@ -19,7 +19,8 @@ CREATE TABLE `tecobrary`.`Users`
     UNIQUE KEY `github_id` (githubId)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 37
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `tecobrary`.`Users` WRITE;

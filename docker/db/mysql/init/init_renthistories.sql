@@ -15,7 +15,8 @@ CREATE TABLE `tecobrary`.`RentHistories`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 55
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- RentHistories Dummy Data --

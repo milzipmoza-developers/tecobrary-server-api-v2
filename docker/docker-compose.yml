@@ -19,6 +19,5 @@ services:
       MYSQL_PASSWORD: tecobrary
       MYSQL_DATABASE: tecobrary
     volumes:
-      - ./db/mysql/data:/var/lib/mysql
       - ./db/mysql/init:/docker-entrypoint-initdb.d
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
