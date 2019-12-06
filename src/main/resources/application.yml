@@ -13,6 +13,11 @@ spring:
     url: jdbc:mysql://mysql-db:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: root
     password: tecobrary
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 server:
   port: 9090
