@@ -8,21 +8,39 @@
 * Gradle
 * Docker 
   - [Dockerfile](./Dockerfile)
-  - [docker-compose.yml](./docker-compose.yml)
+  - [./docker/docker-compose.yml](./docker/docker-compose.yml)
+  
+## 테스트 환경
+* Spring Framework 5.1.8.RELEASE
+* Tomcat 9.0.22
+* Gradle
+* Docker 
+  - [Dockerfile](./Dockerfile)
+  - [./docker/docker-compose.yml](./docker/docker-compose.yml)
+* MySQL 5.7
+  
+## Docker MySQL TEST ENV
 
-## Docker MySql 설치 및 실행
+* [쉘 스크립트 사용 방법 및 설명](./scripts)
+
+* 실행 [./scripts/docker-compose-up.sh](./scripts/docker-compose-up.sh)
+* 종료 [./scripts/docker-compose-down.sh](./scripts/docker-compose-down.sh)
+
+## Docker MySql 설치 및 실행 (Deprecated)
+
+> 아래의 과정들은 위의 [Docker MySQL TEST ENV](#docker-mysql-test-env) 에 쉘 스크립트로 작성해 두었다.
 
 1. Docker MySql 이미지 설치
 
-8.0.17 버전의 mysql 이미지를 설치한다.
+5.7 버전의 mysql 이미지를 설치한다.
 
 ```
-docker pull mysql:8.0.17
+docker pull mysql:5.7
 ```
 
 2. MySql 이미지 실행
 
-* tecobrary-mysql 라는 이름으로 도커 mysql:8.0.17 이미지를 실행한다.
+* tecobrary-mysql 라는 이름으로 도커 mysql:5.7 이미지를 실행한다.
 * 포트는 컨테이너의 3306 포트와 로컬호스트의 6033 포트를 연결한다.
 * MYSQL_ROOT_PASSWORD=tecobrary => tecobrary-mysql 의 root 의 비밀번호를 tecobrary 로 설정한다.
 
@@ -36,6 +54,9 @@ docker run -d -p 6033:3306 --name=tecobrary-mysql --env="MYSQL_ROOT_PASSWORD=tec
 docker exec -it tecobrary-mysql bash;
 ```
 
+## Docker MySQL 테스트용 초기 데이터
+
+* [./docker/db/mysql/init](./docker/db/mysql/init) 에 해당 쿼리문들이 있다.
 
 
 ## Docker 실행 명령어

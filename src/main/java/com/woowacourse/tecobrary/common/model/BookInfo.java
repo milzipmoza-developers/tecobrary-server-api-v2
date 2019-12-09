@@ -30,7 +30,8 @@ public class BookInfo {
     private String isbn;
 
     @Column(name = "description",
-            columnDefinition = "varchar(255) default '내용 없음'")
+            length = 500,
+            columnDefinition = "varchar(500) default '내용 없음'")
     private String description;
 
     @Builder
