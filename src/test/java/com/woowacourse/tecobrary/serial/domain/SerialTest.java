@@ -13,7 +13,7 @@ class SerialTest implements SerialStatic {
     @DisplayName("성공적으로 rent status 를 true 로 변경한다.")
     @Test
     void successfullyUpdateRentStatusToRent() {
-        assertThat(TEST_SERIAL_NOT_RENT.updateStatusToRent()).isTrue();
+        assertThat(TEST_SERIAL_02.updateStatusToRent()).isTrue();
     }
 
     @DisplayName("이미 대여 중인 책은 AlreadyRentStatusException 이 발생한다..")
