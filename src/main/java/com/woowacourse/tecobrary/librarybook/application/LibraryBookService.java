@@ -6,7 +6,6 @@ import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookExce
 import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.ui.dto.*;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
-import com.woowacourse.tecobrary.serial.domain.SerialLibraryBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,8 +52,14 @@ public class LibraryBookService {
     }
 
     public LibraryBookResponseDto findById(final Long id) {
-        LibraryBook libraryBook = libraryBookRepository.findById(id).orElseThrow(NotFoundLibraryBookException::new);
+        LibraryBook libraryBook = libraryBookRepository.findById(id)
+                .orElseThrow(NotFoundLibraryBookException::new);
         return LibraryBookMapper.toResponseDto(libraryBook);
+    }
+
+    public LibraryBook findByBookId(final Long bookId) {
+        return libraryBookRepository.findById(bookId)
+                .orElseThrow(NotFoundLibraryBookException::new);
     }
 
     public List<LibraryBookResponseDto> findAll(final int page, final int number) {
@@ -74,10 +79,5 @@ public class LibraryBookService {
 
     public boolean existsById(final long id) {
         return libraryBookRepository.existsById(id);
-    }
-
-    public LibraryBook findBySerialLibraryBook(final SerialLibraryBook serialLibraryBook) {
-        return libraryBookRepository.findById(serialLibraryBook.getBookId())
-                .orElseThrow(NotFoundLibraryBookException::new);
     }
 }

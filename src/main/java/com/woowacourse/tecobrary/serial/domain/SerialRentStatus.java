@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.serial.domain;
 
+import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,17 @@ public class SerialRentStatus {
 
     public SerialRentStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean toRent() {
+        checkRent();
+        this.status = true;
+        return this.status;
+    }
+
+    private void checkRent() {
+        if (this.status) {
+            throw new AlreadyRentStatusException();
+        }
     }
 }
