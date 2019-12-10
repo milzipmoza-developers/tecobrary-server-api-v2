@@ -38,7 +38,7 @@ public class RentHistoryReadService {
         List<RentHistoryDto> rentHistoryDtos = new ArrayList<>();
         for (RentHistory rentHistory : rentHistories) {
             Serial serial = serialService.findByRentSerial(rentHistory.getRentSerial());
-            LibraryBook libraryBook = libraryBookService.findBySerialLibraryBook(serial.getSerialLibraryBook());
+            LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
             rentHistoryDtos.add(RentHistoryMapper.toDto(rentHistory, libraryBook));
         }
         return rentHistoryDtos;
