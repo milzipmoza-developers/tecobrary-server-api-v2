@@ -9,6 +9,7 @@ import com.woowacourse.tecobrary.renthistory.ui.dto.RentInfoDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
 import com.woowacourse.tecobrary.serial.domain.Serial;
+import lombok.Builder;
 
 public class RentHistoryMapper {
 
@@ -22,6 +23,7 @@ public class RentHistoryMapper {
                 .build();
     }
 
+    @Builder
     public static RentResponseDto toDto(final Serial serial, final RentHistory rentHistory, final LibraryBook libraryBook, final String message) {
         return new RentResponseDto(new RentInfoDto(libraryBook.getTitle(), rentHistory.getSerialNumber(), serial.getStatus()), message);
     }

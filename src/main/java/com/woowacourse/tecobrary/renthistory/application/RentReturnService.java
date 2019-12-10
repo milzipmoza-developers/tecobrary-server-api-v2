@@ -41,7 +41,12 @@ public class RentReturnService {
         Serial serial = doRent(rentRequestDto);
         RentHistory rentHistory = rentHistoryService.createRentHistory(rentRequestDto);
         LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
-        return RentHistoryMapper.toDto(serial, rentHistory, libraryBook, RENT_SUCCESS_MESSAGE);
+        return RentHistoryMapper.builder()
+                .serial(serial)
+                .rentHistory(rentHistory)
+                .libraryBook(libraryBook)
+                .message(RENT_SUCCESS_MESSAGE)
+                .build();
     }
 
     private void checkRentConditions(final RentRequestDto rentRequestDto) {
