@@ -64,4 +64,8 @@ public class Serial {
     public boolean updateStatusToRent() {
         return serialRentStatus.toRent();
     }
+
+    public boolean updateStatusToReturn() {
+        return serialRentStatus.toReturn();
+    }
 }
