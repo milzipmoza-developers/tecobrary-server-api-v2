@@ -37,23 +37,23 @@ class RentHistoryReadServiceTest implements LibraryBookStatic, SerialStatic, Ren
     @DisplayName("회원의 도서대여 목록을 조회한다.")
     @Test
     void findAllByUserId() {
-        given(rentHistoryService.findAllByRentUser(TEST_RENT_HISTORY_USER_ID))
+        given(rentHistoryService.findAllByRentUser(TEST_RENT_HISTORY_USER_ID_16))
                 .willReturn(Arrays.asList(TEST_RENT_HISTORY, TEST_RENT_HISTORY_02));
-        given(serialService.findByRentSerial(TEST_RENT_SERIAL)).willReturn(TEST_SERIAL);
+        given(serialService.findByRentSerial(TEST_RENT_SERIAL)).willReturn(TEST_SERIAL_NOT_RENT);
         given(serialService.findByRentSerial(TEST_RENT_SERIAL_02)).willReturn(TEST_SERIAL_02);
         given(libraryBookService.findByBookId(TEST_BOOK_ID)).willReturn(TEST_LIBRARY_BOOK_19);
         given(libraryBookService.findByBookId(TEST_BOOK_ID_02)).willReturn(TEST_LIBRARY_BOOK_07);
 
-        List<RentHistoryDto> rentHistoryDtos = rentHistoryReadService.findAllByUserId(TEST_RENT_HISTORY_USER_ID);
+        List<RentHistoryDto> rentHistoryDtos = rentHistoryReadService.findAllByUserId(TEST_RENT_HISTORY_USER_ID_16);
 
         RentHistoryDto rentHistoryDto1 = rentHistoryDtos.get(0);
         assertThat(rentHistoryDto1.getSerial()).isEqualTo(TEST_SERIAL_NUMBER);
         assertThat(rentHistoryDto1.getTitle()).isEqualTo(TEST_LIBRARY_BOOK_TITLE_19);
-        assertThat(rentHistoryDto1.getUserId()).isEqualTo(TEST_RENT_HISTORY_USER_ID);
+        assertThat(rentHistoryDto1.getUserId()).isEqualTo(TEST_RENT_HISTORY_USER_ID_16);
 
         RentHistoryDto rentHistoryDto2 = rentHistoryDtos.get(1);
         assertThat(rentHistoryDto2.getSerial()).isEqualTo(TEST_SERIAL_NUMBER_02);
         assertThat(rentHistoryDto2.getTitle()).isEqualTo(TEST_LIBRARY_BOOK_TITLE_07);
-        assertThat(rentHistoryDto2.getUserId()).isEqualTo(TEST_RENT_HISTORY_USER_ID);
+        assertThat(rentHistoryDto2.getUserId()).isEqualTo(TEST_RENT_HISTORY_USER_ID_16);
     }
 }
