@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.serial.domain;
 
-import com.woowacourse.tecobrary.renthistory.application.AlreadyRentStatusException;
 import com.woowacourse.tecobrary.serial.common.SerialStatic;
+import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
