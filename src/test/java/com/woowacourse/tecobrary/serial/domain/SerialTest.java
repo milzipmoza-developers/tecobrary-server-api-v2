@@ -16,7 +16,7 @@ class SerialTest implements SerialStatic {
         assertThat(TEST_SERIAL_02.updateStatusToRent()).isTrue();
     }
 
-    @DisplayName("이미 대여 중인 책은 AlreadyRentStatusException 이 발생한다..")
+    @DisplayName("이미 대여 중인 책은 AlreadyRentStatusException 이 발생한다.")
     @Test
     void failedUpdateRentStatusToRent() {
         assertThrows(AlreadyRentStatusException.class, TEST_SERIAL_ALREADY_RENT::updateStatusToRent);
