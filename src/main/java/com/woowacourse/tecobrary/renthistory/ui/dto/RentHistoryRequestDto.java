@@ -7,7 +7,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-class RentHistoryRequestDto {
+class RentHistoryRequestDto implements RentHistoryRequest {
 
     private Long serial;
     private Long userId;

@@ -3,7 +3,7 @@ package com.woowacourse.tecobrary.renthistory.application;
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
 import com.woowacourse.tecobrary.renthistory.util.RentHistoryMapper;
 import com.woowacourse.tecobrary.serial.application.SerialService;
@@ -36,7 +36,7 @@ public class RentReturnService {
         this.rentHistoryService = rentHistoryService;
     }
 
-    public RentResponseDto rent(final RentRequestDto rentRequestDto) {
+    public RentResponseDto rent(final RentHistoryRequest rentRequestDto) {
         checkRentConditions(rentRequestDto);
         Serial serial = doRent(rentRequestDto);
         RentHistory rentHistory = rentHistoryService.createRentHistory(rentRequestDto);
@@ -49,32 +49,32 @@ public class RentReturnService {
                 .build();
     }
 
-    private void checkRentConditions(final RentRequestDto rentRequestDto) {
+    private void checkRentConditions(final RentHistoryRequest rentRequestDto) {
         checkExistUser(rentRequestDto);
         checkExistSerialNumber(rentRequestDto);
         checkRentStatus(rentRequestDto);
     }
 
-    private void checkExistUser(final RentRequestDto rentRequestDto) {
+    private void checkExistUser(final RentHistoryRequest rentRequestDto) {
         if (!userService.existsByUserId(rentRequestDto.getUserId())) {
             throw new NotFoundUserException();
         }
     }
 
-    private void checkExistSerialNumber(final RentRequestDto rentRequestDto) {
+    private void checkExistSerialNumber(final RentHistoryRequest rentRequestDto) {
         if (!serialService.existsBySerialNumber(rentRequestDto.getSerial())) {
             throw new NotFoundSerialNumberException();
         }
     }
 
-    private void checkRentStatus(final RentRequestDto rentRequestDto) {
+    private void checkRentStatus(final RentHistoryRequest rentRequestDto) {
         if (serialService.checkBySerialNumberIsRent(rentRequestDto.getSerial())) {
             throw new AlreadyRentBookException(rentRequestDto);
         }
     }
 
     @Transactional
-    protected Serial doRent(final RentRequestDto rentRequestDto) {
+    protected Serial doRent(final RentHistoryRequest rentRequestDto) {
         Serial serial = serialService.findBySerialNumber(rentRequestDto.getSerial());
         serial.updateStatusToRent();
         return serial;

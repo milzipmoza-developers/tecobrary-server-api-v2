@@ -5,8 +5,8 @@ import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
 import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
 import com.woowacourse.tecobrary.renthistory.domain.RentUser;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentInfoDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
 import com.woowacourse.tecobrary.serial.domain.Serial;
 import lombok.Builder;
@@ -28,7 +28,7 @@ public class RentHistoryMapper {
         return new RentResponseDto(new RentInfoDto(libraryBook.getTitle(), rentHistory.getSerialNumber(), serial.getStatus()), message);
     }
 
-    public static RentHistory toEntity(final RentRequestDto rentRequestDto) {
+    public static RentHistory toEntity(final RentHistoryRequest rentRequestDto) {
         return new RentHistory(
                 new RentSerial(rentRequestDto.getSerial()),
                 new RentUser(rentRequestDto.getUserId())
