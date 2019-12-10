@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.serial.domain;
 
-import com.woowacourse.tecobrary.renthistory.application.AlreadyRentStatusException;
+import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
