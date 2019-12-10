@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-public class RentHistoryController {
+public class RentHistoryReadController {
 
     private final RentHistoryReadService rentHistoryReadService;
 
     @Autowired
-    public RentHistoryController(final RentHistoryReadService rentHistoryReadService) {
+    public RentHistoryReadController(final RentHistoryReadService rentHistoryReadService) {
         this.rentHistoryReadService = rentHistoryReadService;
     }
 

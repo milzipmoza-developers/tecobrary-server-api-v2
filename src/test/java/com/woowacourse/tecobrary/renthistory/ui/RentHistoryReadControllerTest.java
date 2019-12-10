@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-class RentHistoryControllerTest extends RestAssuredTestUtils implements RentHistoryStatic, LibraryBookStatic, SerialStatic {
+class RentHistoryReadControllerTest extends RestAssuredTestUtils implements RentHistoryStatic, LibraryBookStatic, SerialStatic {
 
     @DisplayName("[GET] /rents/:userId, 해당 유저의 전체 도서 대여 목록을 반환한다.")
     @Test
