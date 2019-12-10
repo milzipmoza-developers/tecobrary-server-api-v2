@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.function.Predicate;
+
 @Service
 public class RentReturnService {
 
@@ -37,7 +39,7 @@ public class RentReturnService {
     }
 
     public RentResponseDto rent(final RentHistoryRequest rentRequestDto) {
-        checkRentConditions(rentRequestDto);
+        checkRentConditions(rentRequestDto, rentStatusChecker());
         Serial serial = doRent(rentRequestDto);
         RentHistory rentHistory = rentHistoryService.createRentHistory(rentRequestDto);
         LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
@@ -49,10 +51,14 @@ public class RentReturnService {
                 .build();
     }
 
-    private void checkRentConditions(final RentHistoryRequest rentRequestDto) {
+    private void checkRentConditions(final RentHistoryRequest rentRequestDto, final Predicate<Long> statusChecker) {
         checkExistUser(rentRequestDto);
         checkExistSerialNumber(rentRequestDto);
-        checkRentStatus(rentRequestDto);
+        checkRentStatus(rentRequestDto, statusChecker);
+    }
+
+    private Predicate<Long> rentStatusChecker() {
+        return serialService::checkBySerialNumberIsRent;
     }
 
     private void checkExistUser(final RentHistoryRequest rentRequestDto) {
@@ -67,8 +73,8 @@ public class RentReturnService {
         }
     }
 
-    private void checkRentStatus(final RentHistoryRequest rentRequestDto) {
-        if (serialService.checkBySerialNumberIsRent(rentRequestDto.getSerial())) {
+    private void checkRentStatus(final RentHistoryRequest rentRequestDto, final Predicate<Long> rentStatusChecker) {
+        if (rentStatusChecker.test(rentRequestDto.getSerial())) {
             throw new AlreadyRentBookException(rentRequestDto);
         }
     }
