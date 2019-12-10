@@ -13,6 +13,7 @@ import com.woowacourse.tecobrary.user.command.application.NotFoundUserException;
 import com.woowacourse.tecobrary.user.command.application.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RentReturnService {
@@ -67,7 +68,8 @@ public class RentReturnService {
         }
     }
 
-    private Serial doRent(final RentRequestDto rentRequestDto) {
+    @Transactional
+    protected Serial doRent(final RentRequestDto rentRequestDto) {
         Serial serial = serialService.findBySerialNumber(rentRequestDto.getSerial());
         serial.updateStatusToRent();
         return serial;
