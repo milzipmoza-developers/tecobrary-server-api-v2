@@ -3,13 +3,9 @@ package com.woowacourse.tecobrary.renthistory.ui.dto;
 import lombok.Getter;
 
 @Getter
-public class RentResponseDto {
-
-    private RentInfoDto rentInfo;
-    private String message;
+public class RentResponseDto extends RentHistoryResponseDto {
 
     public RentResponseDto(final RentInfoDto rentInfo, final String message) {
-        this.rentInfo = rentInfo;
-        this.message = message;
+        super(rentInfo, message);
     }
 }
