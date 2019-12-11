@@ -20,8 +20,8 @@ class RentHistoryRepositoryTest implements RentHistoryStatic {
     @DisplayName("회원의 대여목록을 반환한다.")
     @Test
     void findAllByRentUserUserIdAndDeletedAtIsNull() {
-        ReflectionTestUtils.setField(TEST_RENT_HISTORY, "rentNo", TEST_RENT_HISTORY_ID);
-        ReflectionTestUtils.setField(TEST_RENT_HISTORY_02, "rentNo", TEST_RENT_HISTORY_ID_02);
+        ReflectionTestUtils.setField(TEST_RENT_HISTORY, "id", TEST_RENT_HISTORY_ID);
+        ReflectionTestUtils.setField(TEST_RENT_HISTORY_02, "id", TEST_RENT_HISTORY_ID_02);
         List<RentHistory> rentHistories = rentHistoryRepository.findAllByRentUserUserIdAndDeletedAtIsNull(16L);
         assertThat(rentHistories.get(0)).isEqualTo(TEST_RENT_HISTORY);
         assertThat(rentHistories.get(1)).isEqualTo(TEST_RENT_HISTORY_02);
