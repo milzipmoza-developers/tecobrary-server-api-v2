@@ -44,7 +44,7 @@ class SerialServiceTest {
         ReflectionTestUtils.setField(serial, "id", 1L);
 
         assertThat(savedSerial.getId()).isEqualTo(1L);
-        assertThat(savedSerial.getSerialInfo()).isEqualTo(1L);
+        assertThat(savedSerial.getSerialNumber()).isEqualTo(1L);
         assertThat(savedSerial.getStatus()).isEqualTo(false);
         assertThat(savedSerial.getBookId()).isEqualTo(1L);
     }
