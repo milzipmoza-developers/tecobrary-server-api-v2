@@ -51,4 +51,14 @@ public interface SerialStatic extends LibraryBookStatic {
     SerialLibraryBook TEST_SERIAL_LIBRARY_BOOK_05 = new SerialLibraryBook(TEST_BOOK_ID_05);
     SerialRentStatus TEST_SERIAL_RENT_STATUS_05 = new SerialRentStatus(TEST_RENT_STATUS_05);
     Serial TEST_SERIAL_NOT_RENT_05 = new Serial(TEST_SERIAL_INFO_05, TEST_SERIAL_LIBRARY_BOOK_05, TEST_SERIAL_RENT_STATUS_05);
+
+    Long TEST_SERIAL_NUMBER_06  = 6L;
+    Long TEST_BOOK_ID_06 = TEST_LIBRARY_BOOK_ID_19;
+    boolean TEST_RENT_STATUS_06 = true;
+
+    SerialInfo TEST_SERIAL_INFO_06 = new SerialInfo(TEST_SERIAL_NUMBER_06);
+    SerialLibraryBook TEST_SERIAL_LIBRARY_BOOK_06 = new SerialLibraryBook(TEST_BOOK_ID_06);
+    SerialRentStatus TEST_SERIAL_RENT_STATUS_06 = new SerialRentStatus(TEST_RENT_STATUS_06);
+    Serial TEST_SERIAL_ALREADY_RENT_06 = new Serial(TEST_SERIAL_INFO_06, TEST_SERIAL_LIBRARY_BOOK_06, TEST_SERIAL_RENT_STATUS_06);
+
 }
