@@ -61,19 +61,11 @@ public class RentHistory {
         return setDeletedAt(LocalDateTime.now());
     }
 
+    public boolean isDifferentUser(final Long userId) {
+        return !rentUser.isSameUser(userId);
+    }
+
     private LocalDateTime setDeletedAt(final LocalDateTime deletedAt) {
         return this.deletedAt = deletedAt;
-    }
-
-    public boolean checkSameUser(final Long userId) {
-        boolean isSameUser = rentUser.isSameUser(userId);
-        checkSameUser(isSameUser);
-        return isSameUser;
-    }
-
-    private void checkSameUser(final boolean isSameUser) {
-        if (!isSameUser) {
-            throw new NotPermittedUserException();
-        }
     }
 }
