@@ -2,6 +2,7 @@ package com.woowacourse.tecobrary.renthistory.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.renthistory.domain.NotPermittedUserException;
 import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentInfoDto;
@@ -16,8 +17,6 @@ import com.woowacourse.tecobrary.user.command.application.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.function.Predicate;
 
 @Service
 public class RentReturnService {
@@ -40,7 +39,7 @@ public class RentReturnService {
 
     @Transactional
     public RentInfoDto rent(final RentHistoryRequest rentRequestDto) {
-        checkConditions(rentRequestDto);
+        checkExistence(rentRequestDto);
         checkRentStatus(rentRequestDto);
         Serial serial = doRent(rentRequestDto);
         RentHistory rentHistory = rentHistoryService.createRentHistory(rentRequestDto);
@@ -48,34 +47,26 @@ public class RentReturnService {
         return RentHistoryMapper.toRentInfoDto(libraryBook, rentHistory, serial);
     }
 
-    private void checkConditions(final RentHistoryRequest rentRequestDto) {
-        checkExistUser(rentRequestDto);
-        checkExistSerialNumber(rentRequestDto);
+    private void checkExistence(final RentHistoryRequest rentRequestDto) {
+        checkExistentUser(rentRequestDto);
+        checkExistentSerialNumber(rentRequestDto);
     }
 
-    private void checkRentStatus(final RentHistoryRequest rentRequestDto) {
-        checkRent(rentRequestDto, rentStatusChecker());
-    }
-
-    private void checkRent(final RentHistoryRequest rentRequestDto, final Predicate<Long> rentStatusChecker) {
-        if (rentStatusChecker.test(rentRequestDto.getSerial())) {
-            throw new AlreadyRentBookException(rentRequestDto);
-        }
-    }
-
-    private Predicate<Long> rentStatusChecker() {
-        return serialService::checkBySerialNumberIsRent;
-    }
-
-    private void checkExistUser(final RentHistoryRequest rentRequestDto) {
+    private void checkExistentUser(final RentHistoryRequest rentRequestDto) {
         if (!userService.existsByUserId(rentRequestDto.getUserId())) {
             throw new NotFoundUserException();
         }
     }
 
-    private void checkExistSerialNumber(final RentHistoryRequest rentRequestDto) {
+    private void checkExistentSerialNumber(final RentHistoryRequest rentRequestDto) {
         if (!serialService.existsBySerialNumber(rentRequestDto.getSerial())) {
             throw new NotFoundSerialNumberException();
+        }
+    }
+
+    private void checkRentStatus(final RentHistoryRequest rentRequestDto) {
+        if (serialService.checkBySerialNumberIsRent(rentRequestDto.getSerial())) {
+            throw new AlreadyRentBookException(rentRequestDto);
         }
     }
 
@@ -87,26 +78,18 @@ public class RentReturnService {
 
     @Transactional
     public ReturnInfoDto returnBook(final ReturnRequestDto returnRequestDto) {
-        checkConditions(returnRequestDto);
-        checkReturnStatus(returnRequestDto, returnStatusChecker());
+        checkExistence(returnRequestDto);
+        checkReturnedStatus(returnRequestDto);
         Serial serial = doReturn(returnRequestDto);
         RentHistory rentHistory = doSoftDelete(returnRequestDto);
         LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
         return RentHistoryMapper.toReturnInfoDto(libraryBook, serial, rentHistory);
     }
 
-    private void checkReturned(final RentHistoryRequest rentRequestDto, final Predicate<Long> rentStatusChecker) {
-        if (rentStatusChecker.test(rentRequestDto.getSerial())) {
+    private void checkReturnedStatus(final RentHistoryRequest rentRequestDto) {
+        if (!serialService.checkBySerialNumberIsRent(rentRequestDto.getSerial())) {
             throw new AlreadyReturnBookException(rentRequestDto);
         }
-    }
-
-    private Predicate<Long> returnStatusChecker() {
-        return id -> !serialService.checkBySerialNumberIsRent(id);
-    }
-
-    private void checkReturnStatus(final ReturnRequestDto returnRequestDto, final Predicate<Long> returnStatusChecker) {
-        checkReturned(returnRequestDto, returnStatusChecker);
     }
 
     private Serial doReturn(final ReturnRequestDto returnRequestDto) {
@@ -117,9 +100,14 @@ public class RentReturnService {
 
     private RentHistory doSoftDelete(final ReturnRequestDto returnRequestDto) {
         RentHistory rentHistory = rentHistoryService.findRentHistoryBySerial(returnRequestDto.getSerial());
-        if (rentHistory.checkSameUser(returnRequestDto.getUserId())) {
-            rentHistory.softDelete();
-        }
+        checkSameUser(returnRequestDto, rentHistory);
+        rentHistory.softDelete();
         return rentHistory;
+    }
+
+    private void checkSameUser(final ReturnRequestDto returnRequestDto, final RentHistory rentHistory) {
+        if (rentHistory.isDifferentUser(returnRequestDto.getUserId())) {
+            throw new NotPermittedUserException();
+        }
     }
 }
