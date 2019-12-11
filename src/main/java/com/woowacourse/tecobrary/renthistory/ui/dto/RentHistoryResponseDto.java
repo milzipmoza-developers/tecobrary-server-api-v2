@@ -1,3 +1,14 @@
+/*
+ * @(#) RentHistoryResponseDto.java
+ *
+ * v 1.0.0
+ *
+ * 2019.12.10
+ *
+ * Copyright (c) 2019 woowacourse, thedevluffy
+ * All rights reserved
+ */
+
 package com.woowacourse.tecobrary.renthistory.ui.dto;
 
 import lombok.Getter;
@@ -5,11 +16,9 @@ import lombok.Getter;
 @Getter
 class RentHistoryResponseDto {
 
-    private RentInfoDto rentInfo;
     private String message;
 
-    RentHistoryResponseDto(final RentInfoDto rentInfo, final String message) {
-        this.rentInfo = rentInfo;
+    RentHistoryResponseDto(final String message) {
         this.message = message;
     }
 }
