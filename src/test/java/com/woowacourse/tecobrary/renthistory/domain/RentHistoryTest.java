@@ -16,7 +16,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RentHistoryTest implements RentHistoryStatic {
 
@@ -27,15 +26,9 @@ class RentHistoryTest implements RentHistoryStatic {
 
     }
 
-    @DisplayName("동일한 유저인지 확인한다.")
+    @DisplayName("동일하지 않은 유저인지 확인한다.")
     @Test
     void checkSameUserIsTrue() {
-        assertThat(TEST_RENT_HISTORY_RENT_BOOK.checkSameUser(1L)).isEqualTo(true);
-    }
-
-    @DisplayName("동일한 유저가 아니면 NotPermittedUserException 이 발생한다.")
-    @Test
-    void checkSameUserIsFalse() {
-        assertThrows(NotPermittedUserException.class, () -> TEST_RENT_HISTORY_RENT_BOOK.checkSameUser(2L));
+        assertThat(TEST_RENT_HISTORY_RENT_BOOK.isDifferentUser(1L)).isEqualTo(false);
     }
 }
