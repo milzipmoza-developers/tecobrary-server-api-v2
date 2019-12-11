@@ -26,4 +26,9 @@ public class RentHistoryService {
     public RentHistory createRentHistory(final RentHistoryRequest rentRequestDto) {
         return rentHistoryRepository.save(RentHistoryMapper.toEntity(rentRequestDto));
     }
+
+    public RentHistory findRentHistoryBySerial(final Long serial) {
+        return rentHistoryRepository.findByRentSerialSerialIdAndDeletedAtIsNull(serial)
+                .orElseThrow(NotFoundRentHistoryException::new);
+    }
 }
