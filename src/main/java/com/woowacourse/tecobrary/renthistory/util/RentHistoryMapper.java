@@ -14,7 +14,7 @@ public class RentHistoryMapper {
 
     public static RentHistoryDto toDto(final RentHistory rentHistory, final LibraryBook libraryBook) {
         return RentHistoryDto.builder()
-                .id(rentHistory.getRentNo())
+                .id(rentHistory.getId())
                 .serial(rentHistory.getSerialNumber())
                 .title(libraryBook.getTitle())
                 .userId(rentHistory.getUserId())
