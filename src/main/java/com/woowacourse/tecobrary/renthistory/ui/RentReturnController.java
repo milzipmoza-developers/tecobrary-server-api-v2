@@ -13,7 +13,6 @@ package com.woowacourse.tecobrary.renthistory.ui;
 
 import com.woowacourse.tecobrary.renthistory.application.RentReturnService;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnRequestDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class RentReturnController {
 
-    private static final String RENT_SUCCESS_MESSAGE = "대여에 성공하였습니다.";
     private static final String RETURN_SUCCESS_MESSAGE = "반납에 성공하였습니다.";
 
     private final RentReturnService rentReturnService;
@@ -35,11 +33,8 @@ public class RentReturnController {
     }
 
     @PostMapping("/rents")
-    public ResponseEntity rent(@RequestBody final RentRequestDto rentRequestDto) {
-        return ResponseEntity.ok(new RentResponseDto(
-                rentReturnService.rent(rentRequestDto),
-                RENT_SUCCESS_MESSAGE)
-        );
+    public ResponseEntity rentBook(@RequestBody final RentRequestDto rentRequestDto) {
+        return ResponseEntity.ok(rentReturnService.rentBook(rentRequestDto));
     }
 
     @PatchMapping("/rents")

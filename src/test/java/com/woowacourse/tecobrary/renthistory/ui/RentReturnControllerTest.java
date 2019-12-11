@@ -21,6 +21,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyRentBookException.ALREADY_RENT_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyReturnBookException.ALREADY_RETURNED_BOOK_EXCEPTION_MESSAGE;
+import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RENT_SUCCESS_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.user.command.application.NotFoundUserException.NOT_FOUND_USER_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -49,7 +50,7 @@ public class RentReturnControllerTest extends RestAssuredTestUtils implements Li
                 body("rentInfo.title", is(TEST_LIBRARY_BOOK_TITLE)).
                 body("rentInfo.serialNumber", is(1)).
                 body("rentInfo.status", is(true)).
-                body("message", is("대여에 성공하였습니다."));
+                body("message", is(RENT_SUCCESS_MESSAGE));
     }
 
     @DisplayName("[POST] /rents, 존재하지 않는 user 에 대해서는 Bad Request 에러가 발생한다.")

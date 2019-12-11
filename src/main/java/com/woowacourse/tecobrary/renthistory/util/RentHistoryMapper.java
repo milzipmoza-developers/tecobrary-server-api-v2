@@ -4,12 +4,13 @@ import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
 import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
 import com.woowacourse.tecobrary.renthistory.domain.RentUser;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
-import com.woowacourse.tecobrary.renthistory.ui.dto.RentInfoDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnInfoDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.*;
 import com.woowacourse.tecobrary.serial.domain.Serial;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RentHistoryMapper {
 
     public static RentHistoryDto toDto(final RentHistory rentHistory, final LibraryBook libraryBook) {
@@ -22,12 +23,16 @@ public class RentHistoryMapper {
                 .build();
     }
 
-    public static RentInfoDto toRentInfoDto(final LibraryBook libraryBook,
-                                            final RentHistory rentHistory,
-                                            final Serial serial) {
-        return new RentInfoDto(libraryBook.getTitle(),
-                rentHistory.getSerialNumber(),
-                serial.getStatus());
+    @Builder(builderMethodName = "rentDtoBuilder")
+    public static RentResponseDto toRentInfoDto(final LibraryBook libraryBook,
+                                                 final RentHistory rentHistory,
+                                                 final Serial serial,
+                                                 final String message) {
+        return new RentResponseDto(
+                new RentInfoDto(libraryBook.getTitle(),
+                        rentHistory.getSerialNumber(),
+                        serial.getStatus()),
+                message);
     }
 
     public static RentHistory toEntity(final RentHistoryRequest rentRequestDto) {
@@ -38,8 +43,8 @@ public class RentHistoryMapper {
     }
 
     public static ReturnInfoDto toReturnInfoDto(final LibraryBook libraryBook,
-                                              final Serial serial,
-                                              final RentHistory rentHistory) {
+                                                final Serial serial,
+                                                final RentHistory rentHistory) {
         return
                 new ReturnInfoDto(libraryBook.getTitle(),
                         serial.getSerialNumber(),
