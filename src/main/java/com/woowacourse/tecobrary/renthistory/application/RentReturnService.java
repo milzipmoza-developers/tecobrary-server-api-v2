@@ -6,8 +6,8 @@ import com.woowacourse.tecobrary.renthistory.domain.NotPermittedUserException;
 import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnInfoDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnRequestDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnResponseDto;
 import com.woowacourse.tecobrary.renthistory.util.RentHistoryMapper;
 import com.woowacourse.tecobrary.serial.application.SerialService;
 import com.woowacourse.tecobrary.serial.domain.Serial;
@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RentReturnService {
 
     public static final String RENT_SUCCESS_MESSAGE = "대여에 성공하였습니다.";
+    public static final String RETURN_SUCCESS_MESSAGE = "반납에 성공하였습니다.";
 
     private final UserService userService;
     private final LibraryBookService libraryBookService;
@@ -83,13 +84,17 @@ public class RentReturnService {
     }
 
     @Transactional
-    public ReturnInfoDto returnBook(final ReturnRequestDto returnRequestDto) {
+    public ReturnResponseDto returnBook(final ReturnRequestDto returnRequestDto) {
         checkExistence(returnRequestDto);
         checkReturnedStatus(returnRequestDto);
         Serial serial = doReturn(returnRequestDto);
         RentHistory rentHistory = doSoftDelete(returnRequestDto);
         LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
-        return RentHistoryMapper.toReturnInfoDto(libraryBook, serial, rentHistory);
+        return RentHistoryMapper.returnDtoBuilder()
+                .libraryBook(libraryBook)
+                .serial(serial)
+                .rentHistory(rentHistory)
+                .message(RETURN_SUCCESS_MESSAGE).build();
     }
 
     private void checkReturnedStatus(final RentHistoryRequest rentRequestDto) {

@@ -25,9 +25,9 @@ public class RentHistoryMapper {
 
     @Builder(builderMethodName = "rentDtoBuilder")
     public static RentResponseDto toRentInfoDto(final LibraryBook libraryBook,
-                                                 final RentHistory rentHistory,
-                                                 final Serial serial,
-                                                 final String message) {
+                                                final RentHistory rentHistory,
+                                                final Serial serial,
+                                                final String message) {
         return new RentResponseDto(
                 new RentInfoDto(libraryBook.getTitle(),
                         rentHistory.getSerialNumber(),
@@ -42,12 +42,15 @@ public class RentHistoryMapper {
         );
     }
 
-    public static ReturnInfoDto toReturnInfoDto(final LibraryBook libraryBook,
-                                                final Serial serial,
-                                                final RentHistory rentHistory) {
-        return
+    @Builder(builderMethodName = "returnDtoBuilder")
+    public static ReturnResponseDto toReturnInfoDto(final LibraryBook libraryBook,
+                                                    final Serial serial,
+                                                    final RentHistory rentHistory,
+                                                    final String message) {
+        return new ReturnResponseDto(
                 new ReturnInfoDto(libraryBook.getTitle(),
                         serial.getSerialNumber(),
-                        rentHistory.getDeletedAt());
+                        rentHistory.getDeletedAt()),
+                message);
     }
 }

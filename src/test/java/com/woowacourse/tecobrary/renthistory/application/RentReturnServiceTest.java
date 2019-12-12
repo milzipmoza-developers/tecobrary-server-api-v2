@@ -5,8 +5,8 @@ import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.renthistory.common.RentHistoryStatic;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentResponseDto;
-import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnInfoDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnRequestDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnResponseDto;
 import com.woowacourse.tecobrary.serial.application.SerialService;
 import com.woowacourse.tecobrary.serial.common.SerialStatic;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
@@ -24,6 +24,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.time.LocalDateTime;
 
 import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RENT_SUCCESS_MESSAGE;
+import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RETURN_SUCCESS_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -132,10 +133,11 @@ public class RentReturnServiceTest implements LibraryBookStatic, SerialStatic, R
 
         given(libraryBookService.findByBookId(any(Long.class))).willReturn(TEST_LIBRARY_BOOK_19);
 
-        ReturnInfoDto returnInfoDto = rentReturnService.returnBook(new ReturnRequestDto(1L, 1L));
+        ReturnResponseDto returnInfoDto = rentReturnService.returnBook(new ReturnRequestDto(1L, 1L));
 
-        assertThat(returnInfoDto.getTitle()).isEqualTo(TEST_LIBRARY_BOOK_TITLE_19);
-        assertThat(returnInfoDto.getSerialNumber()).isEqualTo(TEST_SERIAL_NUMBER_03);
-        assertThat(returnInfoDto.getReturnedAt()).isNotNull();
+        assertThat(returnInfoDto.getReturnInfo().getTitle()).isEqualTo(TEST_LIBRARY_BOOK_TITLE_19);
+        assertThat(returnInfoDto.getReturnInfo().getSerialNumber()).isEqualTo(TEST_SERIAL_NUMBER_03);
+        assertThat(returnInfoDto.getReturnInfo().getReturnedAt()).isNotNull();
+        assertThat(returnInfoDto.getMessage()).isEqualTo(RETURN_SUCCESS_MESSAGE);
     }
 }

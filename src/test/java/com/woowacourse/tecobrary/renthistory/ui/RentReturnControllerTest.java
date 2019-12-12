@@ -22,6 +22,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyRentBookException.ALREADY_RENT_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyReturnBookException.ALREADY_RETURNED_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RENT_SUCCESS_MESSAGE;
+import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RETURN_SUCCESS_MESSAGE;
+import static com.woowacourse.tecobrary.renthistory.domain.NotPermittedUserException.NOT_PERMITTED_USER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.user.command.application.NotFoundUserException.NOT_FOUND_USER_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -123,7 +125,7 @@ public class RentReturnControllerTest extends RestAssuredTestUtils implements Li
                 body("returnInfo.title", is("전문가를 위한 스프링 5 (스프링을 깊이 있게, 철저하게!)")).
                 body("returnInfo.serialNumber", is(131)).
                 body("returnInfo.returnedAt", is(notNullValue())).
-                body("message", is("반납에 성공하였습니다."));
+                body("message", is(RETURN_SUCCESS_MESSAGE));
     }
 
     @DisplayName("[PATCH] /rents, 존재하지 않는 user 에 대해서는 Bad Request 에러가 발생한다.")
@@ -156,7 +158,7 @@ public class RentReturnControllerTest extends RestAssuredTestUtils implements Li
                 log().ifValidationFails().
                 statusCode(403).
                 body("statusCode", is(403)).
-                body("message", is("반납을 처리할 수 없는 유저입니다."));
+                body("message", is(NOT_PERMITTED_USER_EXCEPTION_MESSAGE));
     }
 
     @DisplayName("[PATCH] /rents, 존재하지 않는 serial 에 대해서는 Bad Request 에러가 발생한다.")
