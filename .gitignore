@@ -33,8 +33,8 @@ out/
 .vscode/
 
 ### properties ###
-/src/main/resources/github.yml
-/src/main/resources/jwtauth.yml
+/src/main/resources/application-github.yml
+/src/main/resources/application-jwtauth.yml
 
 ### docker ###
 /docker/db/mysql/data
