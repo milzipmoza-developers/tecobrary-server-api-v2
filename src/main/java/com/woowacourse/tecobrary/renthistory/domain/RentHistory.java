@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
-@EqualsAndHashCode(of = "rentNo")
+@EqualsAndHashCode(of = "id")
 @Table(name = "RentHistories")
 @Access(AccessType.FIELD)
 public class RentHistory {
@@ -21,7 +21,7 @@ public class RentHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Long rentNo;
+    private Long id;
 
     @Embedded
     private RentSerial rentSerial;
@@ -55,5 +55,17 @@ public class RentHistory {
 
     public Long getUserId() {
         return rentUser.getUserId();
+    }
+
+    public LocalDateTime softDelete() {
+        return setDeletedAt(LocalDateTime.now());
+    }
+
+    public boolean isDifferentUser(final Long userId) {
+        return !rentUser.isSameUser(userId);
+    }
+
+    private LocalDateTime setDeletedAt(final LocalDateTime deletedAt) {
+        return this.deletedAt = deletedAt;
     }
 }

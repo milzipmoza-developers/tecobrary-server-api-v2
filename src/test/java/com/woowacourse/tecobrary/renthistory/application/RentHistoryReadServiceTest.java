@@ -40,7 +40,7 @@ class RentHistoryReadServiceTest implements LibraryBookStatic, SerialStatic, Ren
         given(rentHistoryService.findAllByRentUser(TEST_RENT_HISTORY_USER_ID_16))
                 .willReturn(Arrays.asList(TEST_RENT_HISTORY, TEST_RENT_HISTORY_02));
         given(serialService.findByRentSerial(TEST_RENT_SERIAL)).willReturn(TEST_SERIAL_NOT_RENT);
-        given(serialService.findByRentSerial(TEST_RENT_SERIAL_02)).willReturn(TEST_SERIAL_02);
+        given(serialService.findByRentSerial(TEST_RENT_SERIAL_02)).willReturn(TEST_SERIAL_NOT_RENT_02);
         given(libraryBookService.findByBookId(TEST_BOOK_ID)).willReturn(TEST_LIBRARY_BOOK_19);
         given(libraryBookService.findByBookId(TEST_BOOK_ID_02)).willReturn(TEST_LIBRARY_BOOK_07);
 

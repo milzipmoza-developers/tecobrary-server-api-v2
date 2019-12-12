@@ -7,13 +7,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class RentRequestDto {
-
-    private Long serial;
-    private Long userId;
+public class RentRequestDto extends RentHistoryRequestDto {
 
     public RentRequestDto(final Long serial, final Long userId) {
-        this.serial = serial;
-        this.userId = userId;
+        super(serial, userId);
     }
 }

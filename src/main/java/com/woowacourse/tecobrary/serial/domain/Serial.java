@@ -49,7 +49,7 @@ public class Serial {
         this.serialRentStatus = serialRentStatus;
     }
 
-    public Long getSerialInfo() {
+    public Long getSerialNumber() {
         return serialInfo.getSerialNumber();
     }
 
@@ -63,5 +63,9 @@ public class Serial {
 
     public boolean updateStatusToRent() {
         return serialRentStatus.toRent();
+    }
+
+    public boolean updateStatusToReturn() {
+        return serialRentStatus.toReturn();
     }
 }
