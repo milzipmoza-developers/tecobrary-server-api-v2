@@ -27,3 +27,8 @@ include::librarybook/librarybook.adoc[]
 === Serial Api
 
 include::serial/serial.adoc[]
+
+
+=== WishBook Api
+
+include::wishbook/wishbook.adoc[]
