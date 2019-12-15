@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/request-body.adoc[]
+
+===== description
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/request-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/response-body.adoc[]
+
+===== description
+
+include::../{snippets}/serial-controller-test/successfully-remove-serial/response-fields.adoc[]

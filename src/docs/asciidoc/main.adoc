@@ -22,3 +22,8 @@ include::user/user.adoc[]
 === LibraryBook Api
 
 include::librarybook/librarybook.adoc[]
+
+
+=== Serial Api
+
+include::serial/serial.adoc[]
