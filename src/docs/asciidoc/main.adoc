@@ -17,3 +17,8 @@
 === User Api
 
 include::user/user.adoc[]
+
+
+=== LibraryBook Api
+
+include::librarybook/librarybook.adoc[]

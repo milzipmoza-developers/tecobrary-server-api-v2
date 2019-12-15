@@ -1,0 +1,19 @@
+==== 도서를 등록한다.
+
+include::successfully_create_library_book.adoc[]
+
+==== 도서 수를 조회한다.
+
+include::successfully_read_library_book_total_count.adoc[]
+
+==== 도서를 조회한다.
+
+include::successfully_read_library_book.adoc[]
+
+==== 제목으로 도서를 조회한다.
+
+include::successfully_read_library_books_by_title.adoc[]
+
+==== 도서 목록을 조회한다.
+
+include::successfully_read_library_books.adoc[]
