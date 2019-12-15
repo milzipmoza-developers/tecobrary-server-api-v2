@@ -1,4 +1,5 @@
 plugins {
+	id "org.asciidoctor.convert" version "1.5.9.2"
 	id 'org.springframework.boot' version '2.1.6.RELEASE'
 	id 'java'
 }
@@ -8,6 +9,26 @@ apply plugin: 'io.spring.dependency-management'
 group = 'com.woowacourse'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+bootJar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
+}
 
 repositories {
 	mavenCentral()
@@ -32,8 +53,10 @@ dependencies {
 	testImplementation 'io.rest-assured:xml-path:4.1.1'
 	testImplementation 'io.rest-assured:json-schema-validator:4.1.1'
 	testImplementation 'io.rest-assured:spring-mock-mvc:4.1.1'
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.powermock:powermock-module-junit4:2.0.4'
 	testImplementation 'org.powermock:powermock-api-mockito2:2.0.4'
+	testCompile('org.springframework.restdocs:spring-restdocs-restassured') 
 
 	runtimeOnly 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 	
