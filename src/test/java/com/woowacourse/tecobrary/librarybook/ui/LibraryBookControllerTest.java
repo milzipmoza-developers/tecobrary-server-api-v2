@@ -3,17 +3,38 @@ package com.woowacourse.tecobrary.librarybook.ui;
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException.NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
+
+    private RequestSpecification spec;
+
+    @BeforeEach
+    void setUp(RestDocumentationContextProvider restDocumentation) {
+        this.spec = new RequestSpecBuilder()
+                .addFilter(documentationConfiguration(restDocumentation))
+                .build();
+    }
 
     @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
     @DirtiesContext
@@ -28,9 +49,21 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 .description(TEST_DESCRIPTION)
                 .build();
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(libraryBookRequestDto).
+                filter(document("{class-name}/{method-name}",
+                        requestFields(
+                                fieldWithPath("image").description("enroll_book_image"),
+                                fieldWithPath("title").description("enroll_book_title"),
+                                fieldWithPath("author").description("enroll_book_author"),
+                                fieldWithPath("publisher").description("enroll_book_publisher"),
+                                fieldWithPath("isbn").description("enroll_book_isbn"),
+                                fieldWithPath("description").description("enroll_book_desc")),
+                        responseFields(
+                                fieldWithPath("id").description("enrolled_book_id"),
+                                fieldWithPath("message").description("${enrolled_book_title} register succeed")
+                        ))).
         when().
                 post(baseUrl("/books")).
         then().
@@ -69,8 +102,11 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
 
     @DisplayName("[GET] /books/all, 총 도서 수를 조회한다.")
     @Test
-    void readLibraryBookTotalCount() {
-        given().
+    void successfullyReadLibraryBookTotalCount() {
+        given(this.spec).
+                filter(document("{class-name}/{method-name}",
+                        responseFields(
+                                fieldWithPath("total").description("total_books")))).
         when().
                 get(baseUrl("/books/all")).
         then().
@@ -82,9 +118,20 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
 
     @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
     @Test
-    void readLibraryBook() {
-        given().
+    void successfullyReadLibraryBook() {
+        given(this.spec).
                 pathParam("id", 1L).
+                filter(document("{class-name}/{method-name}",
+                        pathParameters(
+                                parameterWithName("id").description("book_id")),
+                        responseFields(
+                                fieldWithPath("id").description("target_book_id"),
+                                fieldWithPath("image").description("target_book_image"),
+                                fieldWithPath("title").description("target_book_title"),
+                                fieldWithPath("author").description("target_book_author"),
+                                fieldWithPath("publisher").description("target_book_publisher"),
+                                fieldWithPath("isbn").description("target_book_isbn"),
+                                fieldWithPath("description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books/{id}")).
         then().
@@ -116,10 +163,22 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
 
     @DisplayName("[GET] /books?page=1&number=10, 해당 page 에 해당하는 number 개의 도서 list 로 반환한다.")
     @Test
-    void readLibraryBooks() {
-        given().
+    void successfullyReadLibraryBooks() {
+        given(this.spec).
                 queryParam("page", "1").
                 queryParam("number", "10").
+                filter(document("{class-name}/{method-name}",
+                        requestParameters(
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].id").description("target_book_id"),
+                                fieldWithPath("[0].image").description("target_book_image"),
+                                fieldWithPath("[0].title").description("target_book_title"),
+                                fieldWithPath("[0].author").description("target_book_author"),
+                                fieldWithPath("[0].publisher").description("target_book_publisher"),
+                                fieldWithPath("[0].isbn").description("target_book_isbn"),
+                                fieldWithPath("[0].description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books")).
         then().
@@ -144,11 +203,24 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
 
     @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 제목에 맞는 도서 정보를 조회한다. 테스트 DB 에서 객체를 검색하면 9개가 나온다.")
     @Test
-    void readLibraryBooksByTitle() {
-        given().
+    void successfullyReadLibraryBooksByTitle() {
+        given(this.spec).
                 queryParam("page", "1").
                 queryParam("number", "10").
                 queryParam("title", "객체").
+                filter(document("{class-name}/{method-name}",
+                        requestParameters(
+                                parameterWithName("title").description("book_title"),
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].id").description("target_book_id"),
+                                fieldWithPath("[0].image").description("target_book_image"),
+                                fieldWithPath("[0].title").description("target_book_title"),
+                                fieldWithPath("[0].author").description("target_book_author"),
+                                fieldWithPath("[0].publisher").description("target_book_publisher"),
+                                fieldWithPath("[0].isbn").description("target_book_isbn"),
+                                fieldWithPath("[0].description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books/search")).
         then().
