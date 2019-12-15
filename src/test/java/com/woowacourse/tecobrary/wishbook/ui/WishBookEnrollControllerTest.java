@@ -3,17 +3,37 @@ package com.woowacourse.tecobrary.wishbook.ui;
 import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookEnrollRequestDto;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException.NOT_FOUND_WISH_BOOK_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishBookStatic {
+
+    private RequestSpecification spec;
+
+    @BeforeEach
+    void setUp(RestDocumentationContextProvider restDocumentation) {
+        this.spec = new RequestSpecBuilder()
+                .addFilter(documentationConfiguration(restDocumentation))
+                .build();
+    }
 
     @DisplayName("[PATCH] /wishes, wish book 의 id 로 wish book 에서 soft delete 한 후 library book 에 등록을 성공한다.")
     @DirtiesContext
@@ -21,10 +41,24 @@ class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishB
     public void successfullyEnroll() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(23L);
         
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document("{class-name}/{method-name}",
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("libraryBook.id").description("enroll_book_id"),
+                                fieldWithPath("libraryBook.image").description("enroll_book_image"),
+                                fieldWithPath("libraryBook.title").description("enroll_book_title"),
+                                fieldWithPath("libraryBook.author").description("enroll_book_author"),
+                                fieldWithPath("libraryBook.publisher").description("enroll_book_publisher"),
+                                fieldWithPath("libraryBook.isbn").description("enroll_book_isbn"),
+                                fieldWithPath("libraryBook.description").description("enroll_book_desc"),
+                                fieldWithPath("libraryBook.enrolledDate").description("library_book_create_time"),
+                                fieldWithPath("enrolledDate").description("library_book_create_time")
+                        ))).
         when().
                 patch(baseUrl("/wishes")).
         then().
