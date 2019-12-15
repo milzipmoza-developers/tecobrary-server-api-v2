@@ -4,22 +4,46 @@ import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 public class UserControllerTest extends RestAssuredTestUtils implements UserStatic {
+
+    private RequestSpecification spec;
+
+    @BeforeEach
+    void setUp(RestDocumentationContextProvider restDocumentation) {
+        this.spec = new RequestSpecBuilder()
+                .addFilter(documentationConfiguration(restDocumentation))
+                .build();
+    }
 
     @DisplayName("[GET] /users/all, 회원 수를 조회한다.")
     @Test
     void successfullyCountOfUser() {
-        given().
+        given(this.spec).
                 accept(JSON).
+                filter(document("{class-name}/{method-name}", responseFields(
+                        fieldWithPath("total").description("all_user_count")
+                ))).
         when().
                 get(baseUrl("/users/all")).
         then().
@@ -33,10 +57,20 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     @DisplayName("[GET] /users?page=1&number=10, 10개씩 1페이지 회원 목록을 조회한다.")
     @Test
     void successfullyFindUsers() {
-        given().
+        given(this.spec).
                 param("page",1).
                 param("number", 10).
                 accept(JSON).
+                filter(document("{class-name}/{method-name}", requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].githubId").description("id_target_githubId"),
+                                fieldWithPath("[0].email").description("id_target_email"),
+                                fieldWithPath("[0].name").description("id_target_name"),
+                                fieldWithPath("[0].avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("[0].authorization").description("id_target_authorization")
+                        ))).
         when().
                 get(baseUrl("/users")).
         then().
@@ -92,8 +126,17 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     @DisplayName("[GET] /users/:id, id로 특정 유저 조회를 한다.")
     @Test
     void successfullyFindUserById() {
-        given().
+        given(this.spec).
                 accept(JSON).
+                filter(document("{class-name}/{method-name}", pathParameters(
+                        parameterWithName("id").description("userId")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
         when().
                 get(baseUrl("/users/{id}"),1).
         then().
@@ -114,10 +157,21 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     void successfullyUpdateUserNickName() {
         UserNameDto userNameDto = new UserNameDto(1L, "조로");
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 accept(JSON).
                 body(userNameDto).
+                filter(document("{class-name}/{method-name}",
+                        requestFields(
+                                fieldWithPath("id").description("target_user_id"),
+                                fieldWithPath("newName").description("new_name")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
         when().
                 patch(baseUrl("/users")).
         then().
@@ -137,9 +191,20 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     @Test
     void successfullyUpdateUserAuth() {
         UserAuthDto userAuthDto = new UserAuthDto(1L, "MANAGER");
-        given().
+        given(this.spec).
                 contentType(JSON).
                 accept(JSON).
+                filter(document("{class-name}/{method-name}",
+                        requestFields(
+                                fieldWithPath("id").description("target_user_id"),
+                                fieldWithPath("authorization").description("new_authorization")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
                 body(userAuthDto).
         when().
                 post(baseUrl("/users")).
