@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/request-body.adoc[]
+
+===== description
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/request-fields.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/response-body.adoc[]
+
+===== description
+
+include::../{snippets}/rent-return-controller-test/successfully-return-a-book/response-fields.adoc[]

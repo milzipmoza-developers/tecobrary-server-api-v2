@@ -1,0 +1,19 @@
+==== 회원 수를 조회한다.
+
+include::successfully-count-of-user.adoc[]
+
+==== 회원 목록을 조회한다.
+
+include::successfully-find-users.adoc[]
+
+==== 회원을 조회한다.
+
+include::successfully-find-user-by-id.adoc[]
+
+==== 회원 닉네임을 업데이트한다.
+
+include::successfully-update-user-nick-name.adoc[]
+
+==== 회원 권한을 업데이트한다.
+
+include::successfully-update-user-auth.adoc[]

@@ -1,0 +1,11 @@
+==== 회원의 대여목록을 조회한다.
+
+include::successfully-find-all-rent-history-by-user.adoc[]
+
+==== 도서를 대여를 한다.
+
+include::successfully-rent-a-book.adoc[]
+
+==== 도서를 반납한다.
+
+include::successfully-return-a-book.adoc[]

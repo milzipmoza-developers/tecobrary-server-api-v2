@@ -1,0 +1,11 @@
+==== 특정 도서의 전체 serial 목록을 조회한다.
+
+include::successfully-get-book-id-serials.adoc[]
+
+==== 특정 도서의 serial을 추가한다.
+
+include::successfully-create-serial.adoc[]
+
+==== serial을 삭제한다.
+
+include::successfully-remove-serial.adoc[]

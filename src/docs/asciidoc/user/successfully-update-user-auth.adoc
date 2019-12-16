@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/request-body.adoc[]
+
+===== description
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/request-fields.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/response-body.adoc[]
+
+===== description
+
+include::../{snippets}/user-controller-test/successfully-update-user-auth/response-fields.adoc[]

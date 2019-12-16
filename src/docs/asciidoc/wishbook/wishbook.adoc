@@ -1,0 +1,15 @@
+==== wishbook 목록을 조회한다.
+
+include::successfully-find-wish-books.adoc[]
+
+==== wishbook을 등록한다.
+
+include::successfully-create-wish-book.adoc[]
+
+==== wishbook을 삭제한다.
+
+include::successfully-delete-wish-book.adoc[]
+
+==== wishbook을 삭제하고 librarybook에 등록한다.
+
+include::successfully-enroll.adoc[]
