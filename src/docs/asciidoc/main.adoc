@@ -37,3 +37,8 @@ include::wishbook/wishbook.adoc[]
 === RentHistory Api
 
 include::renthistory/renthistory.adoc[]
+
+
+=== OAuth Api
+
+include::oauth/oauth.adoc[]

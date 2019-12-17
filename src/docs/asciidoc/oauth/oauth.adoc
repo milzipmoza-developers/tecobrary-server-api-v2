@@ -1,0 +1,3 @@
+==== Github OAuth 요청을 보낸다.
+
+include::github-confirm-authentication.adoc[]

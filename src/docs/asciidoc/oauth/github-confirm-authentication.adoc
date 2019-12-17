@@ -1,0 +1,16 @@
+===== HTTP Request
+
+include::../{snippets}/github-o-auth-controller-test/github-confirm-authentication/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/github-o-auth-controller-test/github-confirm-authentication/request-body.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/github-o-auth-controller-test/github-confirm-authentication/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/github-o-auth-controller-test/github-confirm-authentication/response-body.adoc[]
