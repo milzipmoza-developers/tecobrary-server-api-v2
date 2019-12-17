@@ -11,20 +11,13 @@
 
 package com.woowacourse.tecobrary.renthistory.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnRequestDto;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyRentBookException.ALREADY_RENT_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyReturnBookException.ALREADY_RETURNED_BOOK_EXCEPTION_MESSAGE;
@@ -39,19 +32,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-public class RentReturnControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+public class RentReturnControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
     @DisplayName("[POST] /rents, serial 과 userId 를 이용해 대여를 성공적으로 처리한다.")
     @DirtiesContext
@@ -63,7 +45,7 @@ public class RentReturnControllerTest extends RestAssuredTestUtils implements Li
                 body(rentRequestDto).
                 accept(JSON).
                 contentType(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("serial").description("target_serial"),
                                 fieldWithPath("userId").description("rent_request_user_id")),
@@ -145,7 +127,7 @@ public class RentReturnControllerTest extends RestAssuredTestUtils implements Li
                 body(rentRequestDto).
                 accept(JSON).
                 contentType(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("serial").description("target_serial"),
                                 fieldWithPath("userId").description("return_request_user_id")),

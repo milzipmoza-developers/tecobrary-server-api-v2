@@ -1,18 +1,11 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException.NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -22,19 +15,8 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
     @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
     @DirtiesContext
@@ -52,7 +34,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
         given(this.spec).
                 contentType(JSON).
                 body(libraryBookRequestDto).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("image").description("enroll_book_image"),
                                 fieldWithPath("title").description("enroll_book_title"),
@@ -104,7 +86,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
     @Test
     void successfullyReadLibraryBookTotalCount() {
         given(this.spec).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         responseFields(
                                 fieldWithPath("total").description("total_books")))).
         when().
@@ -121,7 +103,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
     void successfullyReadLibraryBook() {
         given(this.spec).
                 pathParam("id", 1L).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         pathParameters(
                                 parameterWithName("id").description("book_id")),
                         responseFields(
@@ -167,7 +149,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
         given(this.spec).
                 queryParam("page", "1").
                 queryParam("number", "10").
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestParameters(
                                 parameterWithName("page").description("page"),
                                 parameterWithName("number").description("number")),
@@ -208,7 +190,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 queryParam("page", "1").
                 queryParam("number", "10").
                 queryParam("title", "객체").
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestParameters(
                                 parameterWithName("title").description("book_title"),
                                 parameterWithName("page").description("page"),

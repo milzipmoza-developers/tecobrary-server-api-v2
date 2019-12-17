@@ -1,18 +1,11 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.wishbook.command.domain.DuplicatedWishBookIsbnException.DUPLICATED_WISH_BOOK_ISBN_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -23,19 +16,8 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-class WishBookControllerTest extends RestAssuredTestUtils implements WishBookStatic {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStatic {
 
     @DisplayName("[GET] /wishes?page=1&number=10, 해당 page에 해당하는 number 개의 wishbook 리스트를 조회한다.")
     @Test
@@ -44,7 +26,7 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 param("page", 1).
                 param("number", 10).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestParameters(
                                 parameterWithName("page").description("page"),
                                 parameterWithName("number").description("number")),
@@ -78,7 +60,7 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
                 body(WishBookInfoDtoMapper.toDto(TEST_CREATE_WISH_BOOK)).
                 contentType(JSON).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("userId").description("who_request_wishbook"),
                                 fieldWithPath("image").description("wish_book_image"),
@@ -133,7 +115,7 @@ class WishBookControllerTest extends RestAssuredTestUtils implements WishBookSta
     void successfullyDeleteWishBook() {
         given(this.spec).
                 param("id", 1L).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestParameters(
                                 parameterWithName("id").description("wish_book_id")),
                         responseFields(
