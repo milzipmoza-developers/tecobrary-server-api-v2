@@ -92,13 +92,24 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("userId", equalTo(12));
     }
 
-    @DisplayName("[POST] /wishes, wishBook에 이미 존재하는 isbn을 추가하면 등록에 실패한다.")
+    @DisplayName("[POST] /wishes, 요청한 희망도서가 이미 요청되었으면, 희망도서 등록에 실패한다.")
     @Test
     void failedCreatedWishBook() {
-        given().
+        given(this.spec).
                 body(WishBookInfoDtoMapper.toDto(TEST_WISH_BOOK_02)).
                 contentType(JSON).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("userId").description("who_request_wishbook"),
+                                fieldWithPath("image").description("wish_book_image"),
+                                fieldWithPath("title").description("wish_book_title"),
+                                fieldWithPath("author").description("wish_book_author"),
+                                fieldWithPath("publisher").description("wish_book_publisher"),
+                                fieldWithPath("isbn").description("wish_book_isbn"),
+                                fieldWithPath("description").description("wish_book_desc")),
+                        responseFields(
+                                fieldWithPath("message").description("duplicate_wish_book_isbn_exception_message")))).
         when().
                 post(baseUrl("/wishes")).
         then().
