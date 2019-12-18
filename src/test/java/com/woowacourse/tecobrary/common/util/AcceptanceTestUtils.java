@@ -17,7 +17,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 public class AcceptanceTestUtils {
 
-    protected static String DOCUMENTATION_OUTPUT_DIRECTORY = "{class-name}/{method-name}";
+    protected static final String DOCUMENTATION_OUTPUT_DIRECTORY = "{class-name}/{method-name}";
 
     protected RequestSpecification spec;
 
