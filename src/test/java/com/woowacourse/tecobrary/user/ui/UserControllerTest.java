@@ -1,19 +1,12 @@
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -22,26 +15,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-public class UserControllerTest extends RestAssuredTestUtils implements UserStatic {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+public class UserControllerTest extends AcceptanceTestUtils implements UserStatic {
 
     @DisplayName("[GET] /users/all, 회원 수를 조회한다.")
     @Test
     void successfullyCountOfUser() {
         given(this.spec).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}", responseFields(
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, responseFields(
                         fieldWithPath("total").description("all_user_count")
                 ))).
         when().
@@ -61,7 +43,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 param("page",1).
                 param("number", 10).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}", requestParameters(
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
                         parameterWithName("page").description("page"),
                         parameterWithName("number").description("number")),
                         responseFields(
@@ -128,7 +110,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
     void successfullyFindUserById() {
         given(this.spec).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}", pathParameters(
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, pathParameters(
                         parameterWithName("id").description("userId")),
                         responseFields(
                                 fieldWithPath("githubId").description("id_target_githubId"),
@@ -161,7 +143,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 contentType(JSON).
                 accept(JSON).
                 body(userNameDto).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("id").description("target_user_id"),
                                 fieldWithPath("newName").description("new_name")),
@@ -194,7 +176,7 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
         given(this.spec).
                 contentType(JSON).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestFields(
                                 fieldWithPath("id").description("target_user_id"),
                                 fieldWithPath("authorization").description("new_authorization")),

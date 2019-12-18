@@ -1,18 +1,11 @@
 package com.woowacourse.tecobrary.renthistory.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.renthistory.common.RentHistoryStatic;
 import com.woowacourse.tecobrary.serial.common.SerialStatic;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -22,19 +15,8 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-class RentHistoryReadControllerTest extends RestAssuredTestUtils implements RentHistoryStatic, LibraryBookStatic, SerialStatic {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+class RentHistoryReadControllerTest extends AcceptanceTestUtils implements RentHistoryStatic, LibraryBookStatic, SerialStatic {
 
     @DisplayName("[GET] /rents/:userId, 해당 유저의 전체 도서 대여 목록을 반환한다.")
     @Test
@@ -42,7 +24,7 @@ class RentHistoryReadControllerTest extends RestAssuredTestUtils implements Rent
 
         given(this.spec).
                 accept(JSON).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         pathParameters(
                                 parameterWithName("id").description("user_id")),
                         responseFields(

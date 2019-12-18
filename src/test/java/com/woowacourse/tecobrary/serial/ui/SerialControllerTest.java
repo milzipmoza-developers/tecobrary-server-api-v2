@@ -1,16 +1,9 @@
 package com.woowacourse.tecobrary.serial.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.ui.SerialController.DELETE_SUCCESS_MESSAGE;
@@ -22,19 +15,8 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-class SerialControllerTest extends RestAssuredTestUtils {
-
-    private RequestSpecification spec;
-
-    @BeforeEach
-    void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.spec = new RequestSpecBuilder()
-                .addFilter(documentationConfiguration(restDocumentation))
-                .build();
-    }
+class SerialControllerTest extends AcceptanceTestUtils {
 
     @DisplayName("[DELETE] /serials?number=1, 성공적으로 serial 1 을 삭제한다.")
     @DirtiesContext
@@ -42,7 +24,7 @@ class SerialControllerTest extends RestAssuredTestUtils {
     public void successfullyRemoveSerial() {
         given(this.spec).
                 param("number", 1).
-                filter(document("{class-name}/{method-name}",
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                         requestParameters(
                                 parameterWithName("number").description("serial_number")),
                         responseFields(
