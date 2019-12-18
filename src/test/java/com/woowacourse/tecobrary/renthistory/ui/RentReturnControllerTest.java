@@ -66,13 +66,19 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(RENT_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 존재하지 않는 user 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[POST] /rents, 대여를 요청한 회원이 존재하지 않으면 대여를 실패한다.")
     @Test
     void failedRentWithNotExistUser() {
-        given().
+        given(this.spec).
                 accept(JSON).
                 contentType(JSON).
                 body(new RentRequestDto(1L, 1_000_000L)).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("rent_request_user_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_user_exception_message")))).
         when().
                 post(baseUrl("/rents")).
         then().
@@ -82,13 +88,19 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 존재하지 않는 serial 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[POST] /rents, 대여 할 도서의 serial이 존재하지 않으면 대여를 실패한다.")
     @Test
     void failedRentWithNotExistSerial() {
-        given().
+        given(this.spec).
                 accept(JSON).
                 contentType(JSON).
                 body(new RentRequestDto(1_000_000L, 1L)).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("rent_request_user_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_number_exception_message")))).
         when().
                 post(baseUrl("/rents")).
         then().
@@ -98,15 +110,23 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 이미 대여 중인 serial 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[POST] /rents, 대여할 책이 이미 대여 중이면, 대여를 실패한다.")
     @Test
     void failedRentWithAlreadyRentSerial() {
         RentRequestDto rentRequestDto = new RentRequestDto(5L, 1L);
 
-        given().
+        given(this.spec).
                 body(rentRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("rent_request_user_id")),
+                        responseFields(
+                                fieldWithPath("rentInfo.serial").description("target_serial"),
+                                fieldWithPath("rentInfo.userId").description("rent_request_user_id"),
+                                fieldWithPath("message").description("already_rent_book_exception_message")))).
         when().
                 post(baseUrl("/rents")).
         then().
@@ -148,13 +168,19 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(RETURN_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 존재하지 않는 user 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[PATCH] /rents, 반납을 요청한 회원이 존재하지 않으면 반납이 실패한다.")
     @Test
     void failedReturnWithNotExistUser() {
-        given().
+        given(this.spec).
                 accept(JSON).
                 contentType(JSON).
                 body(new ReturnRequestDto(2L, 1_000_000L)).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("return_request_user_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_user_exception_message")))).
         when().
                 patch(baseUrl("/rents")).
         then().
@@ -164,13 +190,20 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 대여한 user 와 일치하지 않는 user 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[PATCH] /rents, 반납을 요청한 회원과 대여한 회원이 일치하지 않으면 반납이 실패한다.")
     @Test
     void failedReturnWithNotRentUser() {
-        given().
+        given(this.spec).
                 accept(JSON).
                 contentType(JSON).
                 body(new ReturnRequestDto(131L, 4L)).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("return_request_user_id")),
+                        responseFields(
+                                fieldWithPath("statusCode").description("status_code"),
+                                fieldWithPath("message").description("not_permitted_user_exception_message")))).
         when().
                 patch(baseUrl("/rents")).
         then().
@@ -181,13 +214,19 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_PERMITTED_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 존재하지 않는 serial 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[PATCH] /rents, 반납 할 도서의 serial이 존재하지 않으면 반납을 실패한다.")
     @Test
     void failedReturnWithNotExistSerial() {
-        given().
+        given(this.spec).
                 accept(JSON).
                 contentType(JSON).
                 body(new ReturnRequestDto(1_000_000L, 1L)).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("return_request_user_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_number_exception_message")))).
         when().
                 patch(baseUrl("/rents")).
         then().
@@ -197,15 +236,24 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 이미 반납된 serial 에 대해서는 Bad Request 에러가 발생한다.")
+    @DisplayName("[PATCH] /rents, 반납할 책이 이미 반납되었으면, 반납을 실패한다.")
     @Test
     void failedReturnWithAlreadyRentSerial() {
         ReturnRequestDto returnRequestDto = new ReturnRequestDto(1L, 1L);
 
-        given().
+        given(this.spec).
                 body(returnRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("serial").description("target_serial"),
+                                fieldWithPath("userId").description("return_request_user_id")),
+                        responseFields(
+                                fieldWithPath("returnInfo.serial").description("target_serial"),
+                                fieldWithPath("returnInfo.userId").description("return_request_user_id"),
+                                fieldWithPath("statusCode").description("status_code"),
+                                fieldWithPath("message").description("already_returned_book_exception_message")))).
         when().
                 patch(baseUrl("/rents")).
         then().
