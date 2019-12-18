@@ -10,6 +10,14 @@ include::successfully-find-users.adoc[]
 
 include::successfully-find-user-by-id.adoc[]
 
+==== 존재하지 않는 페이지의 회원을 조회하면 조회에 실패한다.
+
+include::fail-find-users.adoc[]
+
+==== 페이지와 페이지 당 회원 수에 문자를 입력하면 조회에 실패한다.
+
+include::fail-find-users-invalid-params.adoc[]
+
 ==== 회원 닉네임을 업데이트한다.
 
 include::successfully-update-user-nick-name.adoc[]
