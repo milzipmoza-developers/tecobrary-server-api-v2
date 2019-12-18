@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class SerialCreateReadControllerTest extends AcceptanceTestUtils {
 
-    @DisplayName("[GET] /serials?bookId, 성공적으로 해당 bookId 에 대한 책의 목록을 응답 받는다.")
+    @DisplayName("[GET] /serials?bookId, 도서의 Serial 목록을 조회한다.")
     @Test
     void successfullyGetBookIdSerials() {
         given(this.spec).
@@ -43,11 +43,16 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("[2].status", is(false));
     }
 
-    @DisplayName("[GET] /serials?bookId=10000000, 존재하지 않는 책에 대하여 Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /serials?bookId=10000000, 도서가 존재하지 않으면 조회를 실패한다.")
     @Test
     void failedGetBookIdSerialsBadRequest() {
-        given().
+        given(this.spec).
                 queryParam("bookId", 10_000_000).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("bookId").description("book_id")),
+                        responseFields(
+                                fieldWithPath("message").description("fail_to_get_serial_message")))).
         when().
                 get(baseUrl("/serials")).
         then().
@@ -57,7 +62,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /serials, id 에 해당하는 도서에 serial 을 추가한다.")
+    @DisplayName("[POST] /serials, 도서에 serial 을 추가한다.")
     @DirtiesContext
     @Test
     void successfullyCreateSerial() {
@@ -70,7 +75,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                                 fieldWithPath("bookId").description("target_book_id"),
                                 fieldWithPath("serialNumber").description("new_serial_number")),
                         responseFields(
-                                fieldWithPath("message").description("등록에 성공하였습니다."),
+                                fieldWithPath("message").description("success_to_register_serial_message"),
                                 fieldWithPath("serial.status").description("book_rent_status"),
                                 fieldWithPath("serial.id").description("serial_id"),
                                 fieldWithPath("serial.serialNumber").description("serial_number"),
@@ -92,13 +97,19 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("serial.createdAt", notNullValue());
     }
 
-    @DisplayName("[POST] /serials, id에 해당하는 도서가 없을 경우 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, 도서가 존재하지 않으면 serial 등록에 실패한다.")
     @Test
-    void failedCreateSerial_NotFoundSerialTarget() {
+    void failedCreateSerialNotFoundSerialTarget() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1_000_000L, 1000L);
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(serialCreateRequestDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("bookId").description("target_book_id"),
+                                fieldWithPath("serialNumber").description("new_serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_target_exception_message")))).
         when().
                 post(baseUrl("/serials")).
         then().
@@ -109,13 +120,19 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /serials, 일련번호가 존재하는 경우 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, 일련번호가 이미 존재하면 serial 등록에 실패한다.")
     @Test
-    void failedCreateSerial_UniqueConstraint() {
+    void failedCreateSerialUniqueConstraint() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1L);
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(serialCreateRequestDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("bookId").description("target_book_id"),
+                                fieldWithPath("serialNumber").description("new_serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("unique_constraint_exception_message")))).
         when().
                 post(baseUrl("/serials")).
         then().
