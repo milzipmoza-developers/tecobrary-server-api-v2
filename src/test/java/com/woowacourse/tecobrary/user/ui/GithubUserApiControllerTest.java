@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.common.UserStatic;
@@ -15,7 +15,7 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.when;
 
-class GithubUserApiControllerTest extends RestAssuredTestUtils implements UserStatic {
+class GithubUserApiControllerTest extends AcceptanceTestUtils implements UserStatic {
 
     private static final String CODE_FOR_TEST = "test_code";
     private static final String ACCESS_TOKEN_FOR_TEST = "test_access_token";

@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/request-body.adoc[]
+
+===== description
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/request-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/response-body.adoc[]
+
+===== description
+
+include::../{snippets}/library-book-controller-test/successfully-read-library-books-by-title/response-fields.adoc[]

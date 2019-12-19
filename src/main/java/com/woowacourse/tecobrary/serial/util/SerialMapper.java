@@ -20,7 +20,7 @@ public class SerialMapper {
     public static SerialCreateResponseDto toDto(Serial serial, String message) {
         return new SerialCreateResponseDto(message, SerialResponseDto.builder()
                 .id(serial.getId())
-                .serialNumber(serial.getSerialInfo())
+                .serialNumber(serial.getSerialNumber())
                 .bookId(serial.getBookId())
                 .status(serial.getStatus())
                 .createdAt(serial.getCreatedAt())
@@ -30,7 +30,7 @@ public class SerialMapper {
 
     public static SerialsResponseDto toDto(Serial serial) {
         return new SerialsResponseDto(
-                serial.getSerialInfo(),
+                serial.getSerialNumber(),
                 serial.getStatus()
         );
     }

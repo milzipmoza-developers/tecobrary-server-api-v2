@@ -3,16 +3,21 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://tecobrary-mysql:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://mysql-db:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: root
     password: tecobrary
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 server:
   port: 9090

@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import java.util.List;
-
 @Service
 public class SerialService {
 
@@ -50,5 +48,14 @@ public class SerialService {
     public Serial findByRentSerial(final RentSerial rentSerial) {
         return serialRepository.findById(rentSerial.getSerialId())
                 .orElseThrow(NotFoundSerialTargetException::new);
+    }
+
+    public Serial findBySerialNumber(final Long serial) {
+        return serialRepository.findBySerialInfoSerialNumber(serial)
+                .orElseThrow(NotFoundSerialNumberException::new);
+    }
+
+    public boolean checkBySerialNumberIsRent(Long id) {
+        return serialRepository.existsBySerialInfoSerialNumberAndSerialRentStatusIsTrue(id);
     }
 }

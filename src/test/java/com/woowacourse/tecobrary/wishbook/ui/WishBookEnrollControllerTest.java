@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookEnrollRequestDto;
 import org.junit.jupiter.api.DisplayName;
@@ -12,19 +12,35 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishBookStatic {
+class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBookStatic {
 
-    @DisplayName("[PATCH] /wishes, wish book 의 id 로 wish book 에서 soft delete 한 후 library book 에 등록을 성공한다.")
+    @DisplayName("[PATCH] /wishes, 구입된 희망도서를 도서목록에 등록한다.")
     @DirtiesContext
     @Test
     public void successfullyEnroll() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(23L);
         
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("libraryBook.id").description("enroll_book_id"),
+                                fieldWithPath("libraryBook.image").description("enroll_book_image"),
+                                fieldWithPath("libraryBook.title").description("enroll_book_title"),
+                                fieldWithPath("libraryBook.author").description("enroll_book_author"),
+                                fieldWithPath("libraryBook.publisher").description("enroll_book_publisher"),
+                                fieldWithPath("libraryBook.isbn").description("enroll_book_isbn"),
+                                fieldWithPath("libraryBook.description").description("enroll_book_desc"),
+                                fieldWithPath("libraryBook.enrolledDate").description("library_book_create_time"),
+                                fieldWithPath("enrolledDate").description("library_book_create_time")
+                        ))).
         when().
                 patch(baseUrl("/wishes")).
         then().
@@ -41,15 +57,20 @@ class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishB
                 body("enrolledDate", notNullValue());
     }
 
-    @DisplayName("[PATCH] /wishes, 이미 soft delete 된 wish book 의 id 로 요청시 NotFoundWishBookException, Bad Request 를 응답 받는다.")
+    @DisplayName("[PATCH] /wishes, 희망도서에 등록되어 이미 구입이 완료된 도서를 도서목록에 등록하면, 도서목록 등록을 실패한다.")
     @Test
     public void failedEnrollAlreadySoftDeleted() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(12L);
 
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_wish_book_exception_message")))).
         when().
                 patch(baseUrl("/wishes")).
         then().
@@ -60,15 +81,20 @@ class WishBookEnrollControllerTest extends RestAssuredTestUtils implements WishB
                 body("message", is(NOT_FOUND_WISH_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /wishes, 존재하지 않는 id 로 요청시 NotFoundWishBookException, Bad Request 를 응답 받는다.")
+    @DisplayName("[PATCH] /wishes, 희망도서를 도서목록에 등록할 때 희망도서가 희망 도서목록에 존재하지 않으면, 도서목록 등록을 실패한다.")
     @Test
     public void failedEnrollNotFoundWishBookId() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(1_000_000L);
 
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_wish_book_exception_message")))).
         when().
                 patch(baseUrl("/wishes")).
         then().

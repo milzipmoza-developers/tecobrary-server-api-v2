@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/http-request.adoc[]
+
+===== request body
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/request-body.adoc[]
+
+===== description
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/path-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/http-response.adoc[]
+
+===== response body
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/response-body.adoc[]
+
+===== description
+
+include::../{snippets}/rent-history-read-controller-test/successfully-find-all-rent-history-by-user/response-fields.adoc[]

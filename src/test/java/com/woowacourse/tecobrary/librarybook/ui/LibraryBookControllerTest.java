@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
 import org.junit.jupiter.api.DisplayName;
@@ -12,10 +12,13 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryBookStatic {
+class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
-    @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
+    @DisplayName("[POST] /books, 도서를 등록한다.")
     @DirtiesContext
     @Test
     void successfullyCreateLibraryBook() {
@@ -28,9 +31,21 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 .description(TEST_DESCRIPTION)
                 .build();
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(libraryBookRequestDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("image").description("enroll_book_image"),
+                                fieldWithPath("title").description("enroll_book_title"),
+                                fieldWithPath("author").description("enroll_book_author"),
+                                fieldWithPath("publisher").description("enroll_book_publisher"),
+                                fieldWithPath("isbn").description("enroll_book_isbn"),
+                                fieldWithPath("description").description("enroll_book_desc")),
+                        responseFields(
+                                fieldWithPath("id").description("enrolled_book_id"),
+                                fieldWithPath("message").description("book_title register succeed")
+                        ))).
         when().
                 post(baseUrl("/books")).
         then().
@@ -42,7 +57,7 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("message", is(TEST_TITLE + " register succeed"));
     }
 
-    @DisplayName("[POST] /books, isbn이 같은 도서가 이미 존재할 때, 등록을 실패한다.")
+    @DisplayName("[POST] /books, 등록할 도서와 isbn이 같은 도서가 존재하면, 도서등록을 실패한다.")
     @Test
     void failedCreateLibraryBook() {
         LibraryBookRequestDto libraryBookRequestDto = LibraryBookRequestDto.builder()
@@ -54,9 +69,20 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 .description(TEST_DESCRIPTION)
                 .build();
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(libraryBookRequestDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("image").description("enroll_book_image"),
+                                fieldWithPath("title").description("enroll_book_title"),
+                                fieldWithPath("author").description("enroll_book_author"),
+                                fieldWithPath("publisher").description("enroll_book_publisher"),
+                                fieldWithPath("isbn").description("enroll_book_isbn"),
+                                fieldWithPath("description").description("enroll_book_desc")),
+                        responseFields(
+                                fieldWithPath("message").description("book_title register failed")
+                        ))).
         when().
                 post(baseUrl("/books")).
         then().
@@ -69,8 +95,11 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
 
     @DisplayName("[GET] /books/all, 총 도서 수를 조회한다.")
     @Test
-    void readLibraryBookTotalCount() {
-        given().
+    void successfullyReadLibraryBookTotalCount() {
+        given(this.spec).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        responseFields(
+                                fieldWithPath("total").description("total_books")))).
         when().
                 get(baseUrl("/books/all")).
         then().
@@ -80,11 +109,22 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("total", is(95));
     }
 
-    @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
+    @DisplayName("[GET] /books/{id}, 도서를 조회한다.")
     @Test
-    void readLibraryBook() {
-        given().
+    void successfullyReadLibraryBook() {
+        given(this.spec).
                 pathParam("id", 1L).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        pathParameters(
+                                parameterWithName("id").description("book_id")),
+                        responseFields(
+                                fieldWithPath("id").description("target_book_id"),
+                                fieldWithPath("image").description("target_book_image"),
+                                fieldWithPath("title").description("target_book_title"),
+                                fieldWithPath("author").description("target_book_author"),
+                                fieldWithPath("publisher").description("target_book_publisher"),
+                                fieldWithPath("isbn").description("target_book_isbn"),
+                                fieldWithPath("description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books/{id}")).
         then().
@@ -100,11 +140,16 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
     }
 
-    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /books/{id}, 도서가 존재하지 않으면, 도서조회를 실패한다.")
     @Test
     void failedReadLibraryBook() {
-        given().
+        given(this.spec).
                 pathParam("id", 1_000_000).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        pathParameters(
+                                parameterWithName("id").description("book_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_library_book_exception_message")))).
         when().
                 get(baseUrl("/books/{id}")).
         then().
@@ -114,12 +159,24 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("message", is(NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[GET] /books?page=1&number=10, 해당 page 에 해당하는 number 개의 도서 list 로 반환한다.")
+    @DisplayName("[GET] /books?page=1&number=10, 도서목록을 조회한다.")
     @Test
-    void readLibraryBooks() {
-        given().
+    void successfullyReadLibraryBooks() {
+        given(this.spec).
                 queryParam("page", "1").
                 queryParam("number", "10").
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].id").description("target_book_id"),
+                                fieldWithPath("[0].image").description("target_book_image"),
+                                fieldWithPath("[0].title").description("target_book_title"),
+                                fieldWithPath("[0].author").description("target_book_author"),
+                                fieldWithPath("[0].publisher").description("target_book_publisher"),
+                                fieldWithPath("[0].isbn").description("target_book_isbn"),
+                                fieldWithPath("[0].description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books")).
         then().
@@ -129,12 +186,16 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 body("size()", is(10));
     }
 
-    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /books?page=a&number=b, 페이지와 페이지에 대한 도서 수에 문자를 입력하면, 도서목록 조회를 실패한다.")
     @Test
     void failedReadLibraryBooks() {
-        given().
+        given(this.spec).
                 queryParam("page", "a").
                 queryParam("number", "b").
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/books")).
         then().
@@ -142,13 +203,26 @@ class LibraryBookControllerTest extends RestAssuredTestUtils implements LibraryB
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 제목에 맞는 도서 정보를 조회한다. 테스트 DB 에서 객체를 검색하면 9개가 나온다.")
+    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 도서 제목으로 도서를 조회한다.")
     @Test
-    void readLibraryBooksByTitle() {
-        given().
+    void successfullyReadLibraryBooksByTitle() {
+        given(this.spec).
                 queryParam("page", "1").
                 queryParam("number", "10").
                 queryParam("title", "객체").
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("title").description("book_title"),
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].id").description("target_book_id"),
+                                fieldWithPath("[0].image").description("target_book_image"),
+                                fieldWithPath("[0].title").description("target_book_title"),
+                                fieldWithPath("[0].author").description("target_book_author"),
+                                fieldWithPath("[0].publisher").description("target_book_publisher"),
+                                fieldWithPath("[0].isbn").description("target_book_isbn"),
+                                fieldWithPath("[0].description").description("target_book_desc")))).
         when().
                 get(baseUrl("/books/search")).
         then().

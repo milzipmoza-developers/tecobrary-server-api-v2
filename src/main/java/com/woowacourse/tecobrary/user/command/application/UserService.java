@@ -93,4 +93,8 @@ public class UserService {
         user.updateUserName(userNameDto.getNewName());
         return user.getId();
     }
+
+    public boolean existsByUserId(final Long userId) {
+        return userRepository.existsById(userId);
+    }
 }

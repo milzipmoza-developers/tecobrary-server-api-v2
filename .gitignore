@@ -35,3 +35,6 @@ out/
 ### properties ###
 /src/main/resources/github.yml
 /src/main/resources/jwtauth.yml
+
+### docker ###
+/docker/db/mysql/data

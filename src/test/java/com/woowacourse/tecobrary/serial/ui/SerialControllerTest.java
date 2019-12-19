@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.serial.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
@@ -10,15 +10,25 @@ import static com.woowacourse.tecobrary.serial.ui.SerialController.DELETE_SUCCES
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-class SerialControllerTest extends RestAssuredTestUtils {
+class SerialControllerTest extends AcceptanceTestUtils {
 
-    @DisplayName("[DELETE] /serials?number=1, 성공적으로 serial 1 을 삭제한다.")
+    @DisplayName("[DELETE] /serials?number=1, 도서의 일련번호를 삭제한다.")
     @DirtiesContext
     @Test
     public void successfullyRemoveSerial() {
-        given().
+        given(this.spec).
                 param("number", 1).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("number").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("success_to_delete_serial_message")))).
         when().
                 delete(baseUrl("/serials")).
         then().
@@ -29,11 +39,16 @@ class SerialControllerTest extends RestAssuredTestUtils {
                 body("message", is(DELETE_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[DELETE] /serials?number=10000000, 존재하지 않는 일련번호에 대해 Bad Request 를 응답 받는다.")
+    @DisplayName("[DELETE] /serials?number=10000000, 도서의 일련번호가 존재하지 않으면, 일련번호 삭제를 실패한다.")
     @Test
     public void failedRemoveSerialNotExistId() {
-        given().
+        given(this.spec).
                 param("number", 10_000_000).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("number").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_number_exception_message")))).
         when().
                 delete(baseUrl("/serials")).
         then().

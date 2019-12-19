@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.common.util.RestAssuredTestUtils;
+import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
@@ -12,14 +12,20 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-public class UserControllerTest extends RestAssuredTestUtils implements UserStatic {
+public class UserControllerTest extends AcceptanceTestUtils implements UserStatic {
 
-    @DisplayName("[GET] /users/all, 회원 수를 조회한다.")
+    @DisplayName("[GET] /users/all, 총 회원 수를 조회한다.")
     @Test
     void successfullyCountOfUser() {
-        given().
+        given(this.spec).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, responseFields(
+                        fieldWithPath("total").description("all_user_count")
+                ))).
         when().
                 get(baseUrl("/users/all")).
         then().
@@ -30,13 +36,23 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("total", is(32));
     }
 
-    @DisplayName("[GET] /users?page=1&number=10, 10개씩 1페이지 회원 목록을 조회한다.")
+    @DisplayName("[GET] /users?page=1&number=10, 회원 목록을 조회한다.")
     @Test
     void successfullyFindUsers() {
-        given().
+        given(this.spec).
                 param("page",1).
                 param("number", 10).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")),
+                        responseFields(
+                                fieldWithPath("[0].githubId").description("id_target_githubId"),
+                                fieldWithPath("[0].email").description("id_target_email"),
+                                fieldWithPath("[0].name").description("id_target_name"),
+                                fieldWithPath("[0].avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("[0].authorization").description("id_target_authorization")
+                        ))).
         when().
                 get(baseUrl("/users")).
         then().
@@ -58,13 +74,16 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("[1].authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_02));
     }
 
-    @DisplayName("[GET] /users?page=6&number=10, 10개씩 6페이지 회원 목록을 조회하면 아무것도 없다.")
+    @DisplayName("[GET] /users?page=6&number=10, 존재하지 않는 페이지의 회원을 조회하면, 회원목록 조회를 실패한다.")
     @Test
     void failFindUsers() {
-        given().
+        given(this.spec).
                 param("page",6).
                 param("number", 10).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/users")).
         then().
@@ -75,12 +94,15 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("users.size()", is(0));
     }
 
-    @DisplayName("[GET] /users?page=string&number=string, 적절하지 않은 쿼리 파라미터 값을 보내면 Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /users?page=string&number=string, 페이지와 페이지에 대한 회원 수에 문자를 입력하면, 회원목록 조회를 실패한다.")
     @Test
     void failFindUsersInvalidParams() {
-        given().
+        given(this.spec).
                 params("page","string","number", "string").
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/users")).
         then().
@@ -89,11 +111,20 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /users/:id, id로 특정 유저 조회를 한다.")
+    @DisplayName("[GET] /users/:id, 회원을 조회한다.")
     @Test
     void successfullyFindUserById() {
-        given().
+        given(this.spec).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, pathParameters(
+                        parameterWithName("id").description("userId")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
         when().
                 get(baseUrl("/users/{id}"),1).
         then().
@@ -108,16 +139,27 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 
-    @DisplayName("[PATCH] /users, 유저 닉네임을 업데이트한다.")
+    @DisplayName("[PATCH] /users, 회원의 닉네임을 수정한다.")
     @DirtiesContext
     @Test
     void successfullyUpdateUserNickName() {
         UserNameDto userNameDto = new UserNameDto(1L, "조로");
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 accept(JSON).
                 body(userNameDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_user_id"),
+                                fieldWithPath("newName").description("new_name")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
         when().
                 patch(baseUrl("/users")).
         then().
@@ -132,14 +174,25 @@ public class UserControllerTest extends RestAssuredTestUtils implements UserStat
                 body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 
-    @DisplayName("[POST] /users, 회원의 권한을 업데이트한다.")
+    @DisplayName("[POST] /users, 회원의 권한을 수정한다.")
     @DirtiesContext
     @Test
     void successfullyUpdateUserAuth() {
         UserAuthDto userAuthDto = new UserAuthDto(1L, "MANAGER");
-        given().
+        given(this.spec).
                 contentType(JSON).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_user_id"),
+                                fieldWithPath("authorization").description("new_authorization")),
+                        responseFields(
+                                fieldWithPath("githubId").description("id_target_githubId"),
+                                fieldWithPath("email").description("id_target_email"),
+                                fieldWithPath("name").description("id_target_name"),
+                                fieldWithPath("avatarUrl").description("id_target_avatar_url"),
+                                fieldWithPath("authorization").description("id_target_authorization")
+                        ))).
                 body(userAuthDto).
         when().
                 post(baseUrl("/users")).

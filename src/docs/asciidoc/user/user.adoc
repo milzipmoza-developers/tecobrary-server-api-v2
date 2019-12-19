@@ -1,0 +1,27 @@
+==== 총 회원 수를 조회한다.
+
+include::successfully-count-of-user.adoc[]
+
+==== 회원을 조회한다.
+
+include::successfully-find-user-by-id.adoc[]
+
+==== 회원 목록을 조회한다.
+
+include::successfully-find-users.adoc[]
+
+==== 존재하지 않는 페이지의 회원을 조회하면, 회원목록 조회를 실패한다.
+
+include::fail-find-users.adoc[]
+
+==== 페이지와 페이지에 대한 회원 수에 문자를 입력하면, 회원목록 조회를 실패한다.
+
+include::fail-find-users-invalid-params.adoc[]
+
+==== 회원의 닉네임을 수정한다.
+
+include::successfully-update-user-nick-name.adoc[]
+
+==== 회원의 권한을 수정한다.
+
+include::successfully-update-user-auth.adoc[]
