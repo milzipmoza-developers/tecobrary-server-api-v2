@@ -15,6 +15,7 @@ ext {
 }
 
 test {
+	useJUnitPlatform()
 	outputs.dir snippetsDir
 }
 
@@ -53,11 +54,14 @@ dependencies {
 	testImplementation 'io.rest-assured:xml-path:4.1.1'
 	testImplementation 'io.rest-assured:json-schema-validator:4.1.1'
 	testImplementation 'io.rest-assured:spring-mock-mvc:4.1.1'
-    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.powermock:powermock-module-junit4:2.0.4'
 	testImplementation 'org.powermock:powermock-api-mockito2:2.0.4'
-	testCompile('org.springframework.restdocs:spring-restdocs-restassured') 
+	testImplementation 'org.springframework.restdocs:spring-restdocs-restassured'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	
 	runtimeOnly 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 	
 	compileOnly 'org.projectlombok:lombok:1.18.8'
