@@ -17,7 +17,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBookStatic {
 
-    @DisplayName("[PATCH] /wishes, 구입된 희망도서가 도서목록에 등록한다.")
+    @DisplayName("[PATCH] /wishes, 구입된 희망도서를 도서목록에 등록한다.")
     @DirtiesContext
     @Test
     public void successfullyEnroll() {

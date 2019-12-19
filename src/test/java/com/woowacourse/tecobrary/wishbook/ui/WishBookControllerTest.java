@@ -53,7 +53,7 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("[0].isbn", equalTo(TEST_ISBN_02));
     }
 
-    @DisplayName("[POST] /wishes, 희망 도서목록에 도서를 등록한다.")
+    @DisplayName("[POST] /wishes, 희망도서 목록에 도서를 등록한다.")
     @Test
     void successfullyCreateWishBook() {
         given(this.spec).
@@ -92,7 +92,7 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("userId", equalTo(12));
     }
 
-    @DisplayName("[POST] /wishes, 요청한 희망도서가 요청목록에 존재하면, 희망도서 등록을 실패한다.")
+    @DisplayName("[POST] /wishes, 요청한 희망도서가 희망도서 목록에 존재하면, 희망도서 등록을 실패한다.")
     @Test
     void failedCreatedWishBook() {
         given(this.spec).

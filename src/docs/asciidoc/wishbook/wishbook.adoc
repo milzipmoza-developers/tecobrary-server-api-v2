@@ -2,11 +2,11 @@
 
 include::successfully-find-wish-books.adoc[]
 
-==== 희망 도서목록에 도서를 등록한다.
+==== 희망도서 목록에 도서를 등록한다.
 
 include::successfully-create-wish-book.adoc[]
 
-==== 요청한 희망도서가 요청목록에 존재하면, 희망도서 등록을 실패한다.
+==== 요청한 희망도서가 희망도서 목록에 존재하면, 희망도서 등록을 실패한다.
 
 include::failed-created-wish-book.adoc[]
 
@@ -14,7 +14,7 @@ include::failed-created-wish-book.adoc[]
 
 include::successfully-delete-wish-book.adoc[]
 
-==== 구입된 희망도서가 도서목록에 등록한다.
+==== 구입된 희망도서를 도서목록에 등록한다.
 
 include::successfully-enroll.adoc[]
 
