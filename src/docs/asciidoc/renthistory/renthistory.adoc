@@ -1,4 +1,4 @@
-==== 회원의 대여목록을 조회한다.
+==== 회원의 도서대여 목록을 조회한다.
 
 include::successfully-find-all-rent-history-by-user.adoc[]
 
@@ -6,34 +6,34 @@ include::successfully-find-all-rent-history-by-user.adoc[]
 
 include::successfully-rent-a-book.adoc[]
 
-==== 대여를 요청한 회원이 존재하지 않으면 대여를 실패한다.
+==== 도서를 대여하는 회원이 존재하지 않으면, 대여를 실패한다.
 
 include::failed-rent-with-not-exist-user.adoc[]
 
-==== 대여 할 도서의 serial이 존재하지 않으면 대여를 실패한다.
+==== 대여 할 도서의 일련번호가 존재하지 않으면, 도서대여를 실패한다.
 
 include::failed-rent-with-not-exist-serial.adoc[]
 
-==== 대여할 책이 이미 대여 중이면, 대여를 실패한다.
+==== 대여할 책이 이미 대여 중이면, 도서대여를 실패한다.
 
 include::failed-rent-with-already-rent-serial.adoc[]
 
-==== 도서를 반납한다.
+==== 대여한 도서를 반납한다.
 
 include::successfully-return-a-book.adoc[]
 
-==== 반납을 요청한 회원이 존재하지 않으면 반납이 실패한다.
+==== 도서를 반납하는 회원이 존재하지 않으면, 도서반납을 실패한다.
 
 include::failed-return-with-not-exist-user.adoc[]
 
-==== 반납을 요청한 회원과 대여한 회원이 일치하지 않으면 반납이 실패한다.
+==== 도서를 반납하는 회원과 대여한 회원이 일치하지 않으면, 도서반납을 실패한다.
 
 include::failed-return-with-not-rent-user.adoc[]
 
-==== 반납 할 도서의 serial이 존재하지 않으면 반납을 실패한다.
+==== 반납하는 도서의 일련번호가 존재하지 않으면, 도서반납을 실패한다.
 
 include::failed-return-with-not-exist-serial.adoc[]
 
-==== 반납할 책이 이미 반납되었으면, 반납을 실패한다.
+==== 반납하는 도서가 이미 반납되었으면, 도서반납을 실패한다.
 
 include::failed-return-with-already-rent-serial.adoc[]

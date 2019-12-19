@@ -35,7 +35,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 public class RentReturnControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
-    @DisplayName("[POST] /rents, serial 과 userId 를 이용해 대여를 성공적으로 처리한다.")
+    @DisplayName("[POST] /rents, 도서를 대여한다.")
     @DirtiesContext
     @Test
     void successfullyRentABook() {
@@ -66,7 +66,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(RENT_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 대여를 요청한 회원이 존재하지 않으면 대여를 실패한다.")
+    @DisplayName("[POST] /rents, 도서를 대여하는 회원이 존재하지 않으면, 대여를 실패한다.")
     @Test
     void failedRentWithNotExistUser() {
         given(this.spec).
@@ -88,7 +88,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 대여 할 도서의 serial이 존재하지 않으면 대여를 실패한다.")
+    @DisplayName("[POST] /rents, 대여 할 도서의 일련번호가 존재하지 않으면, 도서대여를 실패한다.")
     @Test
     void failedRentWithNotExistSerial() {
         given(this.spec).
@@ -110,7 +110,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /rents, 대여할 책이 이미 대여 중이면, 대여를 실패한다.")
+    @DisplayName("[POST] /rents, 대여할 책이 이미 대여 중이면, 도서대여를 실패한다.")
     @Test
     void failedRentWithAlreadyRentSerial() {
         RentRequestDto rentRequestDto = new RentRequestDto(5L, 1L);
@@ -137,7 +137,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(ALREADY_RENT_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, serial 를 이용해 반납을 성공적으로 처리한다.")
+    @DisplayName("[PATCH] /rents, 대여한 도서를 반납한다.")
     @DirtiesContext
     @Test
     void successfullyReturnABook() {
@@ -168,7 +168,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(RETURN_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 반납을 요청한 회원이 존재하지 않으면 반납이 실패한다.")
+    @DisplayName("[PATCH] /rents, 도서를 반납하는 회원이 존재하지 않으면, 도서반납을 실패한다.")
     @Test
     void failedReturnWithNotExistUser() {
         given(this.spec).
@@ -190,7 +190,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 반납을 요청한 회원과 대여한 회원이 일치하지 않으면 반납이 실패한다.")
+    @DisplayName("[PATCH] /rents, 도서를 반납하는 회원과 대여한 회원이 일치하지 않으면, 도서반납을 실패한다.")
     @Test
     void failedReturnWithNotRentUser() {
         given(this.spec).
@@ -214,7 +214,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_PERMITTED_USER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 반납 할 도서의 serial이 존재하지 않으면 반납을 실패한다.")
+    @DisplayName("[PATCH] /rents, 반납하는 도서의 일련번호가 존재하지 않으면, 도서반납을 실패한다.")
     @Test
     void failedReturnWithNotExistSerial() {
         given(this.spec).
@@ -236,7 +236,7 @@ public class RentReturnControllerTest extends AcceptanceTestUtils implements Lib
                 body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /rents, 반납할 책이 이미 반납되었으면, 반납을 실패한다.")
+    @DisplayName("[PATCH] /rents, 반납하는 도서가 이미 반납되었으면, 도서반납을 실패한다.")
     @Test
     void failedReturnWithAlreadyRentSerial() {
         ReturnRequestDto returnRequestDto = new ReturnRequestDto(1L, 1L);
