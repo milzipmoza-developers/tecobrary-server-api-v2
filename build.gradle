@@ -16,7 +16,6 @@ ext {
 
 test {
 	outputs.dir snippetsDir
-	useJUnitPlatform()
 }
 
 asciidoctor {
