@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class SerialCreateReadControllerTest extends AcceptanceTestUtils {
 
-    @DisplayName("[GET] /serials?bookId, 도서의 Serial 목록을 조회한다.")
+    @DisplayName("[GET] /serials?bookId, 도서의 일련번호 목록을 조회한다.")
     @Test
     void successfullyGetBookIdSerials() {
         given(this.spec).
@@ -43,7 +43,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("[2].status", is(false));
     }
 
-    @DisplayName("[GET] /serials?bookId=10000000, 도서가 존재하지 않으면 조회를 실패한다.")
+    @DisplayName("[GET] /serials?bookId=10000000, 도서가 존재하지 않으면, 도서의 일련번호 조회를 실패한다.")
     @Test
     void failedGetBookIdSerialsBadRequest() {
         given(this.spec).
@@ -62,7 +62,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /serials, 도서에 serial 을 추가한다.")
+    @DisplayName("[POST] /serials, 도서의 일련번호를 등록한다.")
     @DirtiesContext
     @Test
     void successfullyCreateSerial() {
@@ -97,7 +97,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("serial.createdAt", notNullValue());
     }
 
-    @DisplayName("[POST] /serials, 도서가 존재하지 않으면 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, 도서가 존재하지 않으면, 도서의 일련번호 등록을 실패한다.")
     @Test
     void failedCreateSerialNotFoundSerialTarget() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1_000_000L, 1000L);
@@ -120,7 +120,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 body("message", is(NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[POST] /serials, 일련번호가 이미 존재하면 serial 등록에 실패한다.")
+    @DisplayName("[POST] /serials, 일련번호가 이미 존재하면, 도서의 일련번호 등록을 실패한다.")
     @Test
     void failedCreateSerialUniqueConstraint() {
         SerialCreateRequestDto serialCreateRequestDto = new SerialCreateRequestDto(1L, 1L);

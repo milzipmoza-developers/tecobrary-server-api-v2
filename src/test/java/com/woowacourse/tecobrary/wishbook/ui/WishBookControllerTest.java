@@ -19,7 +19,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStatic {
 
-    @DisplayName("[GET] /wishes?page=1&number=10, 해당 page에 해당하는 number 개의 wishbook 리스트를 조회한다.")
+    @DisplayName("[GET] /wishes?page=1&number=10, 희망도서 목록에서 도서를 조회한다.")
     @Test
     void successfullyFindWishBooks() {
         given(this.spec).
@@ -53,7 +53,7 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("[0].isbn", equalTo(TEST_ISBN_02));
     }
 
-    @DisplayName("[POST] /wishes, WishBook 에 책 정보를 등록한다.")
+    @DisplayName("[POST] /wishes, 희망도서 목록에 도서를 등록한다.")
     @Test
     void successfullyCreateWishBook() {
         given(this.spec).
@@ -92,7 +92,7 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("userId", equalTo(12));
     }
 
-    @DisplayName("[POST] /wishes, 요청한 희망도서가 이미 요청되었으면, 희망도서 등록에 실패한다.")
+    @DisplayName("[POST] /wishes, 요청한 희망도서가 희망도서 목록에 존재하면, 희망도서 등록을 실패한다.")
     @Test
     void failedCreatedWishBook() {
         given(this.spec).
@@ -120,7 +120,7 @@ class WishBookControllerTest extends AcceptanceTestUtils implements WishBookStat
                 body("message", is(DUPLICATED_WISH_BOOK_ISBN_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[DELETE] /wishes?id=1, 아이디1 에 해당하는 해당하는 wish book 삭제한다.")
+    @DisplayName("[DELETE] /wishes?id=1, 희망도서 목록에서 희망도서를 삭제한다.")
     @DirtiesContext
     @Test
     void successfullyDeleteWishBook() {

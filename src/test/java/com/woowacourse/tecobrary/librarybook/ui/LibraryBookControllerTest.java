@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
-    @DisplayName("[POST] /books, 도서를 성공적으로 등록한다.")
+    @DisplayName("[POST] /books, 도서를 등록한다.")
     @DirtiesContext
     @Test
     void successfullyCreateLibraryBook() {
@@ -57,7 +57,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("message", is(TEST_TITLE + " register succeed"));
     }
 
-    @DisplayName("[POST] /books, isbn이 같은 도서가 이미 존재할 때, 등록을 실패한다.")
+    @DisplayName("[POST] /books, 등록할 도서와 isbn이 같은 도서가 존재하면, 도서등록을 실패한다.")
     @Test
     void failedCreateLibraryBook() {
         LibraryBookRequestDto libraryBookRequestDto = LibraryBookRequestDto.builder()
@@ -109,7 +109,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("total", is(95));
     }
 
-    @DisplayName("[GET] /books/{id}, id 에 해당하는 도서를 조회한다.")
+    @DisplayName("[GET] /books/{id}, 도서를 조회한다.")
     @Test
     void successfullyReadLibraryBook() {
         given(this.spec).
@@ -140,7 +140,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
     }
 
-    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, 조회를 실패한다.")
+    @DisplayName("[GET] /books/{id}, 도서가 존재하지 않으면, 도서조회를 실패한다.")
     @Test
     void failedReadLibraryBook() {
         given(this.spec).
@@ -159,7 +159,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("message", is(NOT_FOUND_LIBRARY_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[GET] /books?page=1&number=10, 해당 page 에 해당하는 number 개의 도서 list 로 반환한다.")
+    @DisplayName("[GET] /books?page=1&number=10, 도서목록을 조회한다.")
     @Test
     void successfullyReadLibraryBooks() {
         given(this.spec).
@@ -186,7 +186,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("size()", is(10));
     }
 
-    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, 조회를 실패한다.")
+    @DisplayName("[GET] /books?page=a&number=b, 페이지와 페이지에 대한 도서 수에 문자를 입력하면, 도서목록 조회를 실패한다.")
     @Test
     void failedReadLibraryBooks() {
         given(this.spec).
@@ -203,7 +203,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 제목에 맞는 도서 정보를 조회한다. 테스트 DB 에서 객체를 검색하면 9개가 나온다.")
+    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 도서 제목으로 도서를 조회한다.")
     @Test
     void successfullyReadLibraryBooksByTitle() {
         given(this.spec).

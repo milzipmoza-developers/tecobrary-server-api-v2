@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 public class UserControllerTest extends AcceptanceTestUtils implements UserStatic {
 
-    @DisplayName("[GET] /users/all, 회원 수를 조회한다.")
+    @DisplayName("[GET] /users/all, 총 회원 수를 조회한다.")
     @Test
     void successfullyCountOfUser() {
         given(this.spec).
@@ -36,7 +36,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("total", is(32));
     }
 
-    @DisplayName("[GET] /users?page=1&number=10, 10개씩 1페이지 회원 목록을 조회한다.")
+    @DisplayName("[GET] /users?page=1&number=10, 회원 목록을 조회한다.")
     @Test
     void successfullyFindUsers() {
         given(this.spec).
@@ -74,7 +74,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("[1].authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_02));
     }
 
-    @DisplayName("[GET] /users?page=6&number=10, 존재하지 않는 페이지의 회원을 조회하면 조회에 실패한다.")
+    @DisplayName("[GET] /users?page=6&number=10, 존재하지 않는 페이지의 회원을 조회하면, 회원목록 조회를 실패한다.")
     @Test
     void failFindUsers() {
         given(this.spec).
@@ -94,7 +94,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("users.size()", is(0));
     }
 
-    @DisplayName("[GET] /users?page=string&number=string, 페이지와 페이지 당 회원 수에 문자를 입력하면 조회에 실패한다.")
+    @DisplayName("[GET] /users?page=string&number=string, 페이지와 페이지에 대한 회원 수에 문자를 입력하면, 회원목록 조회를 실패한다.")
     @Test
     void failFindUsersInvalidParams() {
         given(this.spec).
@@ -111,7 +111,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /users/:id, id로 특정 유저 조회를 한다.")
+    @DisplayName("[GET] /users/:id, 회원을 조회한다.")
     @Test
     void successfullyFindUserById() {
         given(this.spec).
@@ -139,7 +139,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 
-    @DisplayName("[PATCH] /users, 유저 닉네임을 업데이트한다.")
+    @DisplayName("[PATCH] /users, 회원의 닉네임을 수정한다.")
     @DirtiesContext
     @Test
     void successfullyUpdateUserNickName() {
@@ -174,7 +174,7 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_01));
     }
 
-    @DisplayName("[POST] /users, 회원의 권한을 업데이트한다.")
+    @DisplayName("[POST] /users, 회원의 권한을 수정한다.")
     @DirtiesContext
     @Test
     void successfullyUpdateUserAuth() {

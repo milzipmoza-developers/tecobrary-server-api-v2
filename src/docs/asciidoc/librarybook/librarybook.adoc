@@ -2,11 +2,11 @@
 
 include::successfully-create-library-book.adoc[]
 
-==== isbn이 같은 도서가 이미 존재할 때, 등록을 실패한다.
+==== 등록할 도서와 isbn이 같은 도서가 존재하면, 도서등록을 실패한다.
 
 include::failed-create-library-books.adoc[]
 
-==== 도서 수를 조회한다.
+==== 총 도서 수를 조회한다.
 
 include::successfully-read-library-book-total-count.adoc[]
 
@@ -14,18 +14,18 @@ include::successfully-read-library-book-total-count.adoc[]
 
 include::successfully-read-library-book.adoc[]
 
-==== 도서가 존재하지 않을 때, 조회를 실패한다.
+==== 도서가 존재하지 않으면, 도서조회를 실패한다.
 
 include::failed-read-library-book.adoc[]
 
-==== 제목으로 도서를 조회한다.
+==== 도서 제목으로 도서를 조회한다.
 
 include::successfully-read-library-books-by-title.adoc[]
 
-==== 도서 목록을 조회한다.
+==== 도서목록을 조회한다.
 
 include::successfully-read-library-books.adoc[]
 
-==== page에 문자를 입력하는 경우, 조회를 실패한다.
+==== 페이지와 페이지에 대한 도서 수에 문자를 입력하면, 도서목록 조회를 실패한다.
 
 include::failed-read-library-books.adoc[]

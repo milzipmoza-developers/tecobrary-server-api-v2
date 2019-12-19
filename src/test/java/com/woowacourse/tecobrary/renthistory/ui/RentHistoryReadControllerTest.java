@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class RentHistoryReadControllerTest extends AcceptanceTestUtils implements RentHistoryStatic, LibraryBookStatic, SerialStatic {
 
-    @DisplayName("[GET] /rents/:userId, 해당 유저의 전체 도서 대여 목록을 반환한다.")
+    @DisplayName("[GET] /rents/:userId, 회원의 도서대여 목록을 조회한다.")
     @Test
     void successfullyFindAllRentHistoryByUser() {
 
