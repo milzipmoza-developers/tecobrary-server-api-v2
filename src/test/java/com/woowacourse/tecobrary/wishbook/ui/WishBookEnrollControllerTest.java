@@ -17,7 +17,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBookStatic {
 
-    @DisplayName("[PATCH] /wishes, wish book 의 id 로 wish book 에서 soft delete 한 후 library book 에 등록을 성공한다.")
+    @DisplayName("[PATCH] /wishes, 구입된 희망도서가 도서목록에 등록한다.")
     @DirtiesContext
     @Test
     public void successfullyEnroll() {
@@ -57,7 +57,7 @@ class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBo
                 body("enrolledDate", notNullValue());
     }
 
-    @DisplayName("[PATCH] /wishes, 희망도서에 등록되어 구입이 완료된 도서를 희망도서로 등록 요청하면, 희망도서 등록을 실패한다.")
+    @DisplayName("[PATCH] /wishes, 희망도서에 등록되어 이미 구입이 완료된 도서를 도서목록에 등록하면, 도서목록 등록을 실패한다.")
     @Test
     public void failedEnrollAlreadySoftDeleted() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(12L);
@@ -81,7 +81,7 @@ class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBo
                 body("message", is(NOT_FOUND_WISH_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /wishes, 희망도서로 요청한 도서가 존재하지 않으면, 희망도서 등록을 실패한다.")
+    @DisplayName("[PATCH] /wishes, 희망도서를 도서목록에 등록할 때 희망도서가 희망 도서목록에 존재하지 않으면, 도서목록 등록을 실패한다.")
     @Test
     public void failedEnrollNotFoundWishBookId() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(1_000_000L);
