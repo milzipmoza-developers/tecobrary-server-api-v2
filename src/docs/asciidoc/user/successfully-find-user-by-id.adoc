@@ -1,6 +1,6 @@
 ===== HTTP Request
 
-include::../{snippets}/user-controller-test/successfully-find-user-by-id/http-request.adoc[]
+include::{snippets}/user-controller-test/successfully-find-user-by-id/http-request.adoc[]
 
 ===== request body
 
