@@ -1,11 +1,27 @@
-==== 특정 도서의 전체 serial 목록을 조회한다.
+==== 도서의 전체 serial 목록을 조회한다.
 
 include::successfully-get-book-id-serials.adoc[]
 
-==== 특정 도서의 serial을 추가한다.
+==== 도서가 존재하지 않으면 조회를 실패한다.
+
+include::failed-get-book-id-serials-bad-request.adoc[]
+
+==== 도서에 serial을 추가한다.
 
 include::successfully-create-serial.adoc[]
+
+==== 도서가 존재하지 않으면 serial 등록에 실패한다.
+
+include::failed-create-serial-not-found-serial-target.adoc[]
+
+==== 일련번호가 이미 존재하면 serial 등록에 실패한다.
+
+include::failed-create-serial-unique-constraint.adoc[]
 
 ==== serial을 삭제한다.
 
 include::successfully-remove-serial.adoc[]
+
+==== 일련번호가 존재하지 않으면 serial 삭제가 실패한다.
+
+include::failed-remove-serial-not-exist-id.adoc[]

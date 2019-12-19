@@ -44,7 +44,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                                 fieldWithPath("description").description("enroll_book_desc")),
                         responseFields(
                                 fieldWithPath("id").description("enrolled_book_id"),
-                                fieldWithPath("message").description("${enrolled_book_title} register succeed")
+                                fieldWithPath("message").description("book_title register succeed")
                         ))).
         when().
                 post(baseUrl("/books")).
@@ -69,9 +69,20 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 .description(TEST_DESCRIPTION)
                 .build();
 
-        given().
+        given(this.spec).
                 contentType(JSON).
                 body(libraryBookRequestDto).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("image").description("enroll_book_image"),
+                                fieldWithPath("title").description("enroll_book_title"),
+                                fieldWithPath("author").description("enroll_book_author"),
+                                fieldWithPath("publisher").description("enroll_book_publisher"),
+                                fieldWithPath("isbn").description("enroll_book_isbn"),
+                                fieldWithPath("description").description("enroll_book_desc")),
+                        responseFields(
+                                fieldWithPath("message").description("book_title register failed")
+                        ))).
         when().
                 post(baseUrl("/books")).
         then().
@@ -129,11 +140,16 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
     }
 
-    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /books/{id}, 해당하는 id의 도서가 존재하지 않을 때, 조회를 실패한다.")
     @Test
     void failedReadLibraryBook() {
-        given().
+        given(this.spec).
                 pathParam("id", 1_000_000).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        pathParameters(
+                                parameterWithName("id").description("book_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_library_book_exception_message")))).
         when().
                 get(baseUrl("/books/{id}")).
         then().
@@ -170,12 +186,16 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 body("size()", is(10));
     }
 
-    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /books?page=a&number=b, page 에 문자를 입력하는 경우, 조회를 실패한다.")
     @Test
     void failedReadLibraryBooks() {
-        given().
+        given(this.spec).
                 queryParam("page", "a").
                 queryParam("number", "b").
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("page").description("page"),
+                                parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/books")).
         then().

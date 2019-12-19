@@ -18,7 +18,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 
 class SerialControllerTest extends AcceptanceTestUtils {
 
-    @DisplayName("[DELETE] /serials?number=1, 성공적으로 serial 1 을 삭제한다.")
+    @DisplayName("[DELETE] /serials?number=1, serial을 삭제한다.")
     @DirtiesContext
     @Test
     public void successfullyRemoveSerial() {
@@ -28,7 +28,7 @@ class SerialControllerTest extends AcceptanceTestUtils {
                         requestParameters(
                                 parameterWithName("number").description("serial_number")),
                         responseFields(
-                                fieldWithPath("message").description("해당 일련번호를 삭제하였습니다.")))).
+                                fieldWithPath("message").description("success_to_delete_serial_message")))).
         when().
                 delete(baseUrl("/serials")).
         then().
@@ -39,11 +39,16 @@ class SerialControllerTest extends AcceptanceTestUtils {
                 body("message", is(DELETE_SUCCESS_MESSAGE));
     }
 
-    @DisplayName("[DELETE] /serials?number=10000000, 존재하지 않는 일련번호에 대해 Bad Request 를 응답 받는다.")
+    @DisplayName("[DELETE] /serials?number=10000000, 일련번호가 존재하지 않으면 serial 삭제가 실패한다.")
     @Test
     public void failedRemoveSerialNotExistId() {
-        given().
+        given(this.spec).
                 param("number", 10_000_000).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("number").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_number_exception_message")))).
         when().
                 delete(baseUrl("/serials")).
         then().

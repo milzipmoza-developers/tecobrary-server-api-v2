@@ -6,6 +6,10 @@ include::successfully-find-wish-books.adoc[]
 
 include::successfully-create-wish-book.adoc[]
 
+==== 요청한 희망도서가 이미 요청되었으면, 희망도서 등록에 실패한다.
+
+include::failed-created-wish-book.adoc[]
+
 ==== wishbook을 삭제한다.
 
 include::successfully-delete-wish-book.adoc[]
@@ -13,3 +17,11 @@ include::successfully-delete-wish-book.adoc[]
 ==== wishbook을 삭제하고 librarybook에 등록한다.
 
 include::successfully-enroll.adoc[]
+
+==== 희망도서에 등록되어 구입이 완료된 도서를 희망도서로 등록을 요청하면, 희망도서 등록을 실패한다.
+
+include::failed-enroll-already-soft-deleted.adoc[]
+
+==== 희망도서로 요청한 도서가 존재하지 않으면, 희망도서 등록을 실패한다.
+
+include::failed-enroll-not-found-wish-book-id.adoc[]

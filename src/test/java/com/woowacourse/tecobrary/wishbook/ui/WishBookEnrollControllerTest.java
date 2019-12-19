@@ -57,15 +57,20 @@ class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBo
                 body("enrolledDate", notNullValue());
     }
 
-    @DisplayName("[PATCH] /wishes, 이미 soft delete 된 wish book 의 id 로 요청시 NotFoundWishBookException, Bad Request 를 응답 받는다.")
+    @DisplayName("[PATCH] /wishes, 희망도서에 등록되어 구입이 완료된 도서를 희망도서로 등록 요청하면, 희망도서 등록을 실패한다.")
     @Test
     public void failedEnrollAlreadySoftDeleted() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(12L);
 
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_wish_book_exception_message")))).
         when().
                 patch(baseUrl("/wishes")).
         then().
@@ -76,15 +81,20 @@ class WishBookEnrollControllerTest extends AcceptanceTestUtils implements WishBo
                 body("message", is(NOT_FOUND_WISH_BOOK_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[PATCH] /wishes, 존재하지 않는 id 로 요청시 NotFoundWishBookException, Bad Request 를 응답 받는다.")
+    @DisplayName("[PATCH] /wishes, 희망도서로 요청한 도서가 존재하지 않으면, 희망도서 등록을 실패한다.")
     @Test
     public void failedEnrollNotFoundWishBookId() {
         WishBookEnrollRequestDto wishBookEnrollRequestDto = new WishBookEnrollRequestDto(1_000_000L);
 
-        given().
+        given(this.spec).
                 body(wishBookEnrollRequestDto).
                 accept(JSON).
                 contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestFields(
+                                fieldWithPath("id").description("target_wishbook_id")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_wish_book_exception_message")))).
         when().
                 patch(baseUrl("/wishes")).
         then().

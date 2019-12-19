@@ -74,13 +74,16 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("[1].authorization", equalTo(SAVED_USER_AUTH_VALUE_AT_ID_02));
     }
 
-    @DisplayName("[GET] /users?page=6&number=10, 10개씩 6페이지 회원 목록을 조회하면 아무것도 없다.")
+    @DisplayName("[GET] /users?page=6&number=10, 존재하지 않는 페이지의 회원을 조회하면 조회에 실패한다.")
     @Test
     void failFindUsers() {
-        given().
+        given(this.spec).
                 param("page",6).
                 param("number", 10).
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/users")).
         then().
@@ -91,12 +94,15 @@ public class UserControllerTest extends AcceptanceTestUtils implements UserStati
                 body("users.size()", is(0));
     }
 
-    @DisplayName("[GET] /users?page=string&number=string, 적절하지 않은 쿼리 파라미터 값을 보내면 Bad Request 응답을 받는다.")
+    @DisplayName("[GET] /users?page=string&number=string, 페이지와 페이지 당 회원 수에 문자를 입력하면 조회에 실패한다.")
     @Test
     void failFindUsersInvalidParams() {
-        given().
+        given(this.spec).
                 params("page","string","number", "string").
                 accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, requestParameters(
+                        parameterWithName("page").description("page"),
+                        parameterWithName("number").description("number")))).
         when().
                 get(baseUrl("/users")).
         then().
