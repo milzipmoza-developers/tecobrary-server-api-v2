@@ -14,6 +14,7 @@ package com.woowacourse.tecobrary.user.command.domain;
 import com.woowacourse.tecobrary.common.model.Email;
 import com.woowacourse.tecobrary.common.model.HttpsUrl;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -45,14 +46,15 @@ public class UserGithubInfo {
             column = @Column(name = "avatarUrl", nullable = false))
     private HttpsUrl httpsUrl;
 
-    public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl httpsUrl) {
+    @Builder
+    public UserGithubInfo(final String githubId, final UserName name, final Email email, final HttpsUrl httpsUrl) {
         this.githubId = githubId;
         this.name = name;
         this.email = email;
         this.httpsUrl = httpsUrl;
     }
 
-    String updateName(String newName) {
+    String updateName(final String newName) {
         this.name = new UserName(newName);
         return name.getName();
     }
