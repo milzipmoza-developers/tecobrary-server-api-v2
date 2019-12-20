@@ -35,7 +35,7 @@ public class BookInfo {
     private String description;
 
     @Builder
-    public BookInfo(String title, String author, String publisher, String isbn, String description) {
+    public BookInfo(final String title, final String author, final String publisher, final String isbn, final String description) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;

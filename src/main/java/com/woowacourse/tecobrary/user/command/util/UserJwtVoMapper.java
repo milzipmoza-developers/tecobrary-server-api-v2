@@ -5,7 +5,7 @@ import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 
 public class UserJwtVoMapper {
 
-    public static UserJwtInfoVo map(User user) {
+    public static UserJwtInfoVo map(final User user) {
         return new UserJwtInfoVo(
                 user.getId(),
                 user.getUserEmail(),

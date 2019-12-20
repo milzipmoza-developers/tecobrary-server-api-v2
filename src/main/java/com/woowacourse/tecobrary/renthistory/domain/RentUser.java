@@ -16,7 +16,7 @@ public class RentUser {
             nullable = false)
     private Long userId;
 
-    public RentUser(Long userId) {
+    public RentUser(final Long userId) {
         this.userId = userId;
     }
 

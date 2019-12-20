@@ -34,28 +34,28 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User save(User user) {
+    public User save(final User user) {
         return userRepository.save(user);
     }
 
-    public User save(UserGithubInfo userGithubInfo) {
+    public User save(final UserGithubInfo userGithubInfo) {
         return userRepository.save(new User(userGithubInfo, new UserAuthorization(Authorization.NONE)));
     }
 
-    public User findByGithubId(String githubId) {
+    public User findByGithubId(final String githubId) {
         return userRepository.getUserByUserGithubInfoGithubId(githubId)
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 
-    public UserJwtInfoVo findUserJwtInfoByUserNo(String userNo) {
+    public UserJwtInfoVo findUserJwtInfoByUserNo(final String userNo) {
         return UserJwtVoMapper.map(findById(userNo));
     }
 
-    private User findById(String userNo) {
+    private User findById(final String userNo) {
         return userRepository.findById(Long.valueOf(userNo))
                 .orElseThrow(NotFoundGithubUserException::new);
     }

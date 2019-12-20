@@ -44,7 +44,7 @@ public class RentHistory {
             columnDefinition = "DATETIME default NULL")
     private LocalDateTime deletedAt;
 
-    public RentHistory(RentSerial rentSerial, RentUser rentUser) {
+    public RentHistory(final RentSerial rentSerial, final RentUser rentUser) {
         this.rentSerial = rentSerial;
         this.rentUser = rentUser;
     }

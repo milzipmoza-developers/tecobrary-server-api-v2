@@ -20,7 +20,7 @@ public class SerialRentStatus {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean status;
 
-    public SerialRentStatus(boolean status) {
+    public SerialRentStatus(final boolean status) {
         this.status = status;
     }
 
