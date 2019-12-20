@@ -1,22 +1,23 @@
 package com.woowacourse.tecobrary.serial.ui;
 
 import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
+import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException.NOT_FOUND_SERIAL_TARGET_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.UniqueConstraintException.UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-class SerialCreateReadControllerTest extends AcceptanceTestUtils {
+class SerialCreateReadControllerTest extends AcceptanceTestUtils implements LibraryBookStatic {
 
     @DisplayName("[GET] /serials?bookId, 도서의 일련번호 목록을 조회한다.")
     @Test
@@ -141,5 +142,56 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils {
                 statusCode(400).
                 contentType(JSON).
                 body("message", is(UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE));
+    }
+
+    @DisplayName("[GET] /serials/:serialNumber, 일련번호로 도서를 조회한다.")
+    @Test
+    void successfullyGetBookBySerialNumber() {
+        given(this.spec).
+                contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, pathParameters(
+                        parameterWithName("serialNumber").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("id").description("target_book_id"),
+                                fieldWithPath("image").description("target_book_image"),
+                                fieldWithPath("title").description("target_book_title"),
+                                fieldWithPath("author").description("target_book_author"),
+                                fieldWithPath("publisher").description("target_book_publisher"),
+                                fieldWithPath("isbn").description("target_book_isbn"),
+                                fieldWithPath("description").description("target_book_desc")
+                        ))).
+        when().
+                get(baseUrl("/serials/{serialNumber}"), 1).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("id", is(TEST_LIBRARY_BOOK_ID.intValue())).
+                body("image", is(TEST_LIBRARY_BOOK_IMAGE)).
+                body("title", is(TEST_LIBRARY_BOOK_TITLE)).
+                body("author", is(TEST_LIBRARY_BOOK_AUTHOR)).
+                body("publisher", is(TEST_LIBRARY_BOOK_PUBLISHER)).
+                body("isbn", is(TEST_LIBRARY_BOOK_ISBN)).
+                body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
+    }
+
+    @DisplayName("[GET] /serials/:serialNumber, 도서의 일련번호가 존재하지 않으면, 도서조회를 실패한다.")
+    @Test
+    void failedGetBookBySerialNumberNotExist() {
+        given(this.spec).
+                contentType(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY, pathParameters(
+                        parameterWithName("serialNumber").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("not_found_serial_number_exception_message")))).
+        when().
+                get(baseUrl("/serials/{serialNumber}"), 10000000).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(400).
+                contentType(JSON).
+                body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
     }
 }
