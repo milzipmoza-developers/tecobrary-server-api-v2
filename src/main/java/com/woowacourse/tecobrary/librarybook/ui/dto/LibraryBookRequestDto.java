@@ -18,7 +18,7 @@ public class LibraryBookRequestDto implements LibraryBookDto {
     private String description;
 
     @Builder
-    private LibraryBookRequestDto(String image, String title, String author, String publisher, String isbn, String description) {
+    private LibraryBookRequestDto(final String image, final String title, final String author, final String publisher, final String isbn, final String description) {
         this.image = image;
         this.title = title;
         this.author = author;

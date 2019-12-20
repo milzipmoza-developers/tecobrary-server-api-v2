@@ -14,7 +14,7 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
     private static final String YML_FILE_EXTENSION = ".yml";
 
     @Override
-    public PropertySource<?> createPropertySource(String name, EncodedResource resource) throws IOException {
+    public PropertySource<?> createPropertySource(final String name, final EncodedResource resource) throws IOException {
         String filename = resource.getResource().getFilename();
         if (filename != null && filename.endsWith(YML_FILE_EXTENSION)) {
             return name != null ? new YamlResourcePropertySource(name, resource) : new YamlResourcePropertySource(getNameForResource(resource.getResource()), resource);
@@ -22,7 +22,7 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
         return (name != null ? new ResourcePropertySource(name, resource) : new ResourcePropertySource(resource));
     }
 
-    private String getNameForResource(Resource resource) {
+    private String getNameForResource(final Resource resource) {
         String name = resource.getDescription();
         if (!StringUtils.hasText(name)) {
             name = resource.getClass().getSimpleName() + "@" + System.identityHashCode(resource);

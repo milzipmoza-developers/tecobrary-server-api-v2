@@ -15,7 +15,7 @@ public class SerialLibraryBook {
     @Column(name = "bookId")
     private Long bookId;
 
-    public SerialLibraryBook(Long bookId) {
+    public SerialLibraryBook(final Long bookId) {
         this.bookId = bookId;
     }
 }

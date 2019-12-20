@@ -20,7 +20,7 @@ public class WishBookEnrollService {
         this.libraryBookService = libraryBookService;
     }
 
-    public WishBookEnrollResponseDto enrollLibraryBookByWishBookId(Long wishBookId) {
+    public WishBookEnrollResponseDto enrollLibraryBookByWishBookId(final Long wishBookId) {
         WishBook wishBook = wishBookService.findNotEnrolledById(wishBookId);
         wishBook.softDelete();
         LibraryBookEnrollDto libraryBookEnrollDto = LibraryBookMapper.toEnrollDto(wishBook);

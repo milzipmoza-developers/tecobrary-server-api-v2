@@ -43,7 +43,7 @@ public class Serial {
             nullable = false)
     private LocalDateTime updatedAt;
 
-    public Serial(SerialInfo serialInfo, SerialLibraryBook serialLibraryBook, SerialRentStatus serialRentStatus) {
+    public Serial(final SerialInfo serialInfo, final SerialLibraryBook serialLibraryBook, final SerialRentStatus serialRentStatus) {
         this.serialInfo = serialInfo;
         this.serialLibraryBook = serialLibraryBook;
         this.serialRentStatus = serialRentStatus;

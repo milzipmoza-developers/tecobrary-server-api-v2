@@ -20,14 +20,14 @@ public class GithubUserApiController {
     private final UserGithubService userGithubService;
 
     @Autowired
-    public GithubUserApiController(GithubApiService githubApiService,
-                                   UserGithubService userGithubService) {
+    public GithubUserApiController(final GithubApiService githubApiService,
+                                   final UserGithubService userGithubService) {
         this.githubApiService = githubApiService;
         this.userGithubService = userGithubService;
     }
 
     @GetMapping("/auth/user")
-    public ResponseEntity tecobraryUserAuthentication(@RequestParam String code) {
+    public ResponseEntity tecobraryUserAuthentication(@RequestParam final String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
         UserJwtInfoVo userJwtInfoVo = userGithubService.getUserByGithubInfo(githubApiAccessToken);
         return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, JwtUtils.generateToken(userJwtInfoVo)));

@@ -30,7 +30,7 @@ public class WishBookController {
     }
 
     @DeleteMapping("/wishes")
-    public ResponseEntity deleteWishBook(@RequestParam final Long id, Model model) {
+    public ResponseEntity deleteWishBook(@RequestParam final Long id, final Model model) {
         wishBookService.deleteWishBook(id);
         model.addAttribute("message", "success");
         return ResponseEntity.ok(model);

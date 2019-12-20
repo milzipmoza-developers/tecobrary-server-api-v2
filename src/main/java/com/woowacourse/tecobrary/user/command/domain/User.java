@@ -51,16 +51,16 @@ public class User {
             nullable = false)
     private LocalDateTime updatedAt;
 
-    public User(UserGithubInfo userGithubInfo, UserAuthorization userAuthorization) {
+    public User(final UserGithubInfo userGithubInfo, final UserAuthorization userAuthorization) {
         this.userGithubInfo = userGithubInfo;
         this.userAuthorization = userAuthorization;
     }
 
-    public String updateUserName(String newName) {
+    public String updateUserName(final String newName) {
         return userGithubInfo.updateName(newName);
     }
 
-    public String updateAuthorization(String newAuthorization) {
+    public String updateAuthorization(final String newAuthorization) {
         return userAuthorization.updateAuthorization(newAuthorization);
     }
 

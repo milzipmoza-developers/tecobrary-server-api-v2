@@ -38,13 +38,13 @@ public class SerialCreateReadService {
         return SerialMapper.toDto(savedSerial, "등록에 성공하였습니다.");
     }
 
-    private void checkExistsLibraryBookId(Long bookId) {
+    private void checkExistsLibraryBookId(final Long bookId) {
         if (!libraryBookService.existsById(bookId)) {
             throw new NotFoundSerialTargetException();
         }
     }
 
-    private void checkNotExistsSerialNumber(Long serialNumber) {
+    private void checkNotExistsSerialNumber(final Long serialNumber) {
         if (serialService.existsBySerialNumber(serialNumber)) {
             throw new UniqueConstraintException();
         }

@@ -28,12 +28,12 @@ public class UserName {
             length = 100)
     private String name;
 
-    public UserName(String name) {
+    public UserName(final String name) {
         checkNameLength(name);
         this.name = name;
     }
 
-    private void checkNameLength(String name) {
+    private void checkNameLength(final String name) {
         if (name.length() > 255) {
             throw new UserNameLengthException();
         }

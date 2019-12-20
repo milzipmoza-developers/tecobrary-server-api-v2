@@ -21,7 +21,7 @@ public class WishBookEnrollController {
     }
 
     @PatchMapping("/wishes")
-    public ResponseEntity enrollLibraryBook(@RequestBody WishBookEnrollRequestDto wishBookEnrollRequestDto) {
+    public ResponseEntity enrollLibraryBook(@RequestBody final WishBookEnrollRequestDto wishBookEnrollRequestDto) {
         return ResponseEntity.ok(wishBookEnrollService.enrollLibraryBookByWishBookId(wishBookEnrollRequestDto.getId()));
     }
 }

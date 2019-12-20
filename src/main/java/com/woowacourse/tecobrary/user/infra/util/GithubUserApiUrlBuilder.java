@@ -34,10 +34,10 @@ public class GithubUserApiUrlBuilder {
     private final String redirectUri;
     private final String scope;
 
-    public GithubUserApiUrlBuilder(@Value("${github.user.client_id}") String clientId,
-                                   @Value("${github.user.client_secret}") String clientSecret,
-                                   @Value("${github.user.redirect_uri}") String redirectUri,
-                                   @Value("${github.api.scope}") String scope) {
+    public GithubUserApiUrlBuilder(@Value("${github.user.client_id}") final String clientId,
+                                   @Value("${github.user.client_secret}") final String clientSecret,
+                                   @Value("${github.user.redirect_uri}") final String redirectUri,
+                                   @Value("${github.api.scope}") final String scope) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.redirectUri = redirectUri;
@@ -56,7 +56,7 @@ public class GithubUserApiUrlBuilder {
         }
     }
 
-    public String api(String code) {
+    public String api(final String code) {
         try {
             return new URIBuilder(GITHUB_OAUTH_ACCESS_TOKEN_BASE_URL)
                     .addParameter(CLIENT_ID, clientId)
