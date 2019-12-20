@@ -144,7 +144,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils implements Libr
                 body("message", is(UNIQUE_CONSTRAINT_EXCEPTION_MESSAGE));
     }
 
-    @DisplayName("[GET] /serials/:serialNumber, 일련번호에 해당하는 도서 정보를 조회한다.")
+    @DisplayName("[GET] /serials/:serialNumber, 일련번호로 도서를 조회한다.")
     @Test
     void successfullyGetBookBySerialNumber() {
         given(this.spec).
@@ -176,7 +176,7 @@ class SerialCreateReadControllerTest extends AcceptanceTestUtils implements Libr
                 body("description", is(TEST_LIBRARY_BOOK_DESCRIPTION));
     }
 
-    @DisplayName("[GET] /serials/:serialNumber, 존재하지 않는 일련번호에 대하여 도서 조회시 실패한다.")
+    @DisplayName("[GET] /serials/:serialNumber, 도서의 일련번호가 존재하지 않으면, 도서조회를 실패한다.")
     @Test
     void failedGetBookBySerialNumberNotExist() {
         given(this.spec).

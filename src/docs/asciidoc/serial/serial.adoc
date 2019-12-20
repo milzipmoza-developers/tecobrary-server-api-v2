@@ -26,10 +26,10 @@ include::successfully-remove-serial.adoc[]
 
 include::failed-remove-serial-not-exist-id.adoc[]
 
-==== 일련번호에 해당하는 도서 정보를 조회한다.
+==== 일련번호로 도서를 조회한다.
 
 include::successfully-get-book-by-serial-number.adoc[]
 
-==== 존재하지 않는 일련번호에 대하여 도서 조회시 실패한다.
+==== 도서의 일련번호가 존재하지 않으면, 도서조회를 실패한다.
 
 include::failed-get-book-by-serial-number-not-exist.adoc[]
