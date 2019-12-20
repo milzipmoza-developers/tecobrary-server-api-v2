@@ -69,19 +69,19 @@ public interface UserStatic {
 
     User SAVED_USER = new User(SAVED_USER_GITHUB_INFO, SAVED_USER_AUTHORIZATION);
 
-    UserJwtInfoVo SAVED_USER_JWT_INFO_VO = new UserJwtInfoVo(
-            SAVED_USER_NO,
-            SAVED_USER_EMAIL_VALUE_AT_ID_01,
-            SAVED_USER_NAME_VALUE_AT_ID_01,
-            SAVED_USER_AVATAR_URL_VALUE_AT_ID_01,
-            SAVED_USER_AUTH_VALUE_AT_ID_01
-    );
+    UserJwtInfoVo SAVED_USER_JWT_INFO_VO = UserJwtInfoVo.builder()
+            .userNo(SAVED_USER_NO)
+            .email(SAVED_USER_EMAIL_VALUE_AT_ID_01)
+            .name(SAVED_USER_NAME_VALUE_AT_ID_01)
+            .avatarUrl(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)
+            .authorization(SAVED_USER_AUTH_VALUE_AT_ID_01)
+            .build();
 
-    UserJwtInfoVo TEST_USER_JWT_INFO_VO = new UserJwtInfoVo(
-            TEST_USER_NO,
-            TEST_USER_EMAIL_VALUE,
-            TEST_USER_NAME_VALUE,
-            TEST_USER_AVATAR_URL_VALUE,
-            TEST_USER_AUTH_VALUE
-    );
+    UserJwtInfoVo TEST_USER_JWT_INFO_VO = UserJwtInfoVo.builder()
+            .userNo(TEST_USER_NO)
+            .email(TEST_USER_EMAIL_VALUE)
+            .name(TEST_USER_NAME_VALUE)
+            .avatarUrl(TEST_USER_AVATAR_URL_VALUE)
+            .authorization(TEST_USER_AUTH_VALUE)
+            .build();
 }
