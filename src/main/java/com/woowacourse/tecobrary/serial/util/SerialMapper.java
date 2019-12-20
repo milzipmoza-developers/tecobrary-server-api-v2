@@ -11,13 +11,13 @@ import com.woowacourse.tecobrary.serial.ui.dto.SerialsResponseDto;
 
 public class SerialMapper {
 
-    public static Serial toEntity(SerialCreateRequestDto serialCreateRequestDto) {
+    public static Serial toEntity(final SerialCreateRequestDto serialCreateRequestDto) {
         return new Serial(new SerialInfo(serialCreateRequestDto.getSerialNumber()),
                 new SerialLibraryBook(serialCreateRequestDto.getBookId()),
                 new SerialRentStatus(false));
     }
 
-    public static SerialCreateResponseDto toDto(Serial serial, String message) {
+    public static SerialCreateResponseDto toDto(final Serial serial, final String message) {
         return new SerialCreateResponseDto(message, SerialResponseDto.builder()
                 .id(serial.getId())
                 .serialNumber(serial.getSerialNumber())
@@ -28,7 +28,7 @@ public class SerialMapper {
                 .build());
     }
 
-    public static SerialsResponseDto toDto(Serial serial) {
+    public static SerialsResponseDto toDto(final Serial serial) {
         return new SerialsResponseDto(
                 serial.getSerialNumber(),
                 serial.getStatus()

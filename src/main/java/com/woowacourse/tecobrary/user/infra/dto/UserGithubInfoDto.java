@@ -18,7 +18,7 @@ public class UserGithubInfoDto {
     private Email email;
     private HttpsUrl avatarUrl;
 
-    public UserGithubInfoDto(String id, String name, String email, String avatarUrl) {
+    public UserGithubInfoDto(final String id, final String name, final String email, final String avatarUrl) {
         this.githubId = id;
         this.name = new UserName(name);
         this.email = new Email(email);

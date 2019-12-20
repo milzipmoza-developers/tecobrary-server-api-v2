@@ -14,11 +14,11 @@ public class GsonUtils {
          GSON = new Gson();
     }
 
-    public static GithubUserInfoVo parseUserInfo(String jsonString) {
+    public static GithubUserInfoVo parseUserInfo(final String jsonString) {
         return GSON.fromJson(jsonString, GithubUserInfoVo.class);
     }
 
-    public static List<GithubEmailVo> parseUserEmail(String jsonString) {
+    public static List<GithubEmailVo> parseUserEmail(final String jsonString) {
         GithubEmailVo[] array = GSON.fromJson(jsonString, GithubEmailVo[].class);
         return Arrays.asList(array);
     }

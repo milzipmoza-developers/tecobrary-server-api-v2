@@ -23,12 +23,12 @@ public class HttpsUrl {
             length = 255)
     private String url;
 
-    public HttpsUrl(String url) {
+    public HttpsUrl(final String url) {
         checkUrlForm(url);
         this.url = url;
     }
 
-    private void checkUrlForm(String url) {
+    private void checkUrlForm(final String url) {
         Matcher matcher = URL_PATTERN.matcher(url);
         if (!matcher.matches()) {
             throw new MalformedHttpsUrlException();

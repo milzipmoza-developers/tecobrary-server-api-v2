@@ -33,17 +33,17 @@ public class LibraryBookController {
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity readLibraryBook(@PathVariable Long id) {
+    public ResponseEntity readLibraryBook(@PathVariable final Long id) {
         return ResponseEntity.ok(libraryBookService.findById(id));
     }
 
     @GetMapping("/books")
-    public ResponseEntity readLibraryBooks(@RequestParam int page, @RequestParam int number) {
+    public ResponseEntity readLibraryBooks(@RequestParam final int page, @RequestParam final int number) {
         return ResponseEntity.ok(libraryBookService.findAll(page, number));
     }
 
     @GetMapping("/books/search")
-    public ResponseEntity readLibraryBooksByTitle(@RequestParam int page, @RequestParam int number, @RequestParam String title) {
+    public ResponseEntity readLibraryBooksByTitle(@RequestParam final int page, @RequestParam final int number, @RequestParam final String title) {
         return ResponseEntity.ok(libraryBookService.findAllByTitleContaining(title, page, number));
     }
 }

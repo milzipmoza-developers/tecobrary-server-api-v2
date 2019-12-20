@@ -23,12 +23,12 @@ public class Email {
             length = 100)
     private String email;
 
-    public Email(String email) {
+    public Email(final String email) {
         checkEmailForm(email);
         this.email = email;
     }
 
-    private void checkEmailForm(String email) {
+    private void checkEmailForm(final String email) {
         Matcher matcher = EMAIL_PATTERN.matcher(email);
         if (!matcher.matches()) {
             throw new MalformedEmailException();

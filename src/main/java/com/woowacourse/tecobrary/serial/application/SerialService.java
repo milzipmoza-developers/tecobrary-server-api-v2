@@ -55,7 +55,7 @@ public class SerialService {
                 .orElseThrow(NotFoundSerialNumberException::new);
     }
 
-    public boolean checkBySerialNumberIsRent(Long id) {
+    public boolean checkBySerialNumberIsRent(final Long id) {
         return serialRepository.existsBySerialInfoSerialNumberAndSerialRentStatusIsTrue(id);
     }
 }

@@ -6,7 +6,7 @@ import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 
 public class UserGithubInfoMapper {
 
-    public static UserGithubInfo map(GithubUserInfoVo githubUserInfoVo, String primaryEmail) {
+    public static UserGithubInfo map(final GithubUserInfoVo githubUserInfoVo, final String primaryEmail) {
         UserGithubInfoDto githubUserInfo = new UserGithubInfoDto(
                 githubUserInfoVo.getId(),
                 githubUserInfoVo.getName(),

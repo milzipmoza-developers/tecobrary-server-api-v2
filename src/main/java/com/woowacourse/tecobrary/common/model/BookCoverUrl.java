@@ -15,7 +15,7 @@ public class BookCoverUrl {
     @Column(name = "image")
     private String image;
 
-    public BookCoverUrl(String image) {
+    public BookCoverUrl(final String image) {
         this.image = image;
     }
 }

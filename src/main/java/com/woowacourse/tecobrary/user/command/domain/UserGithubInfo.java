@@ -45,14 +45,14 @@ public class UserGithubInfo {
             column = @Column(name = "avatarUrl", nullable = false))
     private HttpsUrl httpsUrl;
 
-    public UserGithubInfo(String githubId, UserName name, Email email, HttpsUrl httpsUrl) {
+    public UserGithubInfo(final String githubId, final UserName name, final Email email, final HttpsUrl httpsUrl) {
         this.githubId = githubId;
         this.name = name;
         this.email = email;
         this.httpsUrl = httpsUrl;
     }
 
-    String updateName(String newName) {
+    String updateName(final String newName) {
         this.name = new UserName(newName);
         return name.getName();
     }
