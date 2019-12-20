@@ -11,11 +11,9 @@
 
 package com.woowacourse.tecobrary.user.ui.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
 public class UserJwtInfoVo {
@@ -26,7 +24,8 @@ public class UserJwtInfoVo {
     private String avatarUrl;
     private String authorization;
 
-    public UserJwtInfoVo(Long userNo, String email, String name, String avatarUrl, String authorization) {
+    @Builder
+    private UserJwtInfoVo(final Long userNo, final String email, final String name, final String avatarUrl, final String authorization) {
         this.userNo = String.valueOf(userNo);
         this.email = email;
         this.name = name;

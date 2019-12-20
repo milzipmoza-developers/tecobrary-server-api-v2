@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public UserJwtInfoVo findUserJwtInfoByUserNo(final String userNo) {
-        return UserJwtVoMapper.map(findById(userNo));
+        return UserJwtVoMapper.toVo(findById(userNo));
     }
 
     private User findById(final String userNo) {
