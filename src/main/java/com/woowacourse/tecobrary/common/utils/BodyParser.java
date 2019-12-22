@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.common.util;
+package com.woowacourse.tecobrary.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;
