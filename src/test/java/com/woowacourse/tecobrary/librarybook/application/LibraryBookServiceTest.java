@@ -6,10 +6,7 @@ import com.woowacourse.tecobrary.librarybook.common.LibraryBookStatic;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,10 +66,9 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         given(libraryBookRepository.save(any(LibraryBook.class))).willReturn(libraryBook);
         given(libraryBookRepository.existsByLibraryBookInfoIsbn(any(String.class))).willReturn(false);
 
-        LibraryBookCreateResponseDto libraryBookCreateResponseDto = libraryBookService.save(libraryBookRequestDto);
+        LibraryBook savedLibraryBook = libraryBookService.save(libraryBookRequestDto);
 
-        assertThat(libraryBookCreateResponseDto.getId()).isEqualTo(libraryBook.getId());
-        assertThat(libraryBookCreateResponseDto.getMessage()).isEqualTo(libraryBook.getTitle() + " register succeed");
+        assertThat(savedLibraryBook.getId()).isEqualTo(libraryBook.getId());
     }
 
     @DisplayName("중복된 isbn 에 대한 save 가 실패한다.")
@@ -89,9 +85,9 @@ class LibraryBookServiceTest implements LibraryBookStatic {
     void readTotalCount() {
         given(libraryBookRepository.count()).willReturn(TOTAL_COUNT);
 
-        LibraryBookTotalCountResponseDto libraryBookTotalCountResponseDto = libraryBookService.count();
+        Long totalCount = libraryBookService.count();
 
-        assertThat(libraryBookTotalCountResponseDto.getTotal()).isEqualTo(TOTAL_COUNT);
+        assertThat(totalCount).isEqualTo(TOTAL_COUNT);
     }
 
     @DisplayName("id에 해당하는 도서를 조회한다.")
@@ -99,7 +95,7 @@ class LibraryBookServiceTest implements LibraryBookStatic {
     void readLibraryBook() {
         given(libraryBookRepository.findById(1L)).willReturn(Optional.of(libraryBook));
 
-        LibraryBookResponseDto libraryBookResponseDto = libraryBookService.findById(1L);
+        LibraryBook libraryBookResponseDto = libraryBookService.findById(1L);
 
         assertThat(libraryBookResponseDto.getId()).isEqualTo(1L);
         assertThat(libraryBookResponseDto.getTitle()).isEqualTo(TEST_TITLE);
@@ -116,7 +112,7 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         List<LibraryBook> mockLibraryBooks = Arrays.asList(TEST_LIBRARY_BOOK, TEST_LIBRARY_BOOK);
         given(libraryBookRepository.findAll(any(PageRequest.class)))
                 .willReturn(new PageImpl<>(mockLibraryBooks, PageRequest.of(1, 2), 2));
-        List<LibraryBookResponseDto> libraryBooks = libraryBookService.findAll(1, 2);
+        List<LibraryBook> libraryBooks = libraryBookService.findAll(1, 2);
         assertThat(libraryBooks).hasSize(2);
     }
 
@@ -126,7 +122,7 @@ class LibraryBookServiceTest implements LibraryBookStatic {
         List<LibraryBook> mockLibraryBooks = Arrays.asList(TEST_LIBRARY_BOOK, TEST_LIBRARY_BOOK);
         given(libraryBookRepository.findAllByLibraryBookInfoTitleContaining(any(String.class), any(PageRequest.class)))
                 .willReturn(new PageImpl<>(mockLibraryBooks, PageRequest.of(1, 2), 2));
-        List<LibraryBookResponseDto> libraryBooks = libraryBookService.findAllByTitleContaining(TEST_TITLE, 1, 2);
+        List<LibraryBook> libraryBooks = libraryBookService.findAllByTitleContaining(TEST_TITLE, 1, 2);
         assertThat(libraryBooks).hasSize(2);
     }
 }

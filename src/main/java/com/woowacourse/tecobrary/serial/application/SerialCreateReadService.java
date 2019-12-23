@@ -61,7 +61,7 @@ public class SerialCreateReadService {
 
     public LibraryBookResponseDto findBookBySerialNumber(final Long serialNumber) {
         Long bookId = serialService.findBySerialNumber(serialNumber).getBookId();
-        LibraryBook book = libraryBookService.findByBookId(bookId);
+        LibraryBook book = libraryBookService.findById(bookId);
         return LibraryBookMapper.toResponseDto(book);
     }
 }

@@ -4,10 +4,9 @@ import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
-import com.woowacourse.tecobrary.librarybook.ui.dto.*;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,20 +24,10 @@ public class LibraryBookService {
         this.libraryBookRepository = libraryBookRepository;
     }
 
-    public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
-        LibraryBook savedLibraryBook = getCreatedLibraryBook(libraryBookDto);
-        return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
-    }
-
-    private LibraryBook getCreatedLibraryBook(final LibraryBookDto libraryBookDto) {
+    public LibraryBook save(final LibraryBookDto libraryBookDto) {
         checkExistLibraryBook(libraryBookDto);
         LibraryBook libraryBook = LibraryBookMapper.toEntity(libraryBookDto);
         return libraryBookRepository.save(libraryBook);
-    }
-
-    public LibraryBookEnrollDto enrollWishBook(final LibraryBookDto libraryBookDto) {
-        LibraryBook enrolledBook = getCreatedLibraryBook(libraryBookDto);
-        return LibraryBookMapper.toEnrollDto(enrolledBook);
     }
 
     private void checkExistLibraryBook(final LibraryBookDto libraryBookDto) {
@@ -47,33 +36,25 @@ public class LibraryBookService {
         }
     }
 
-    public LibraryBookTotalCountResponseDto count() {
-        return new LibraryBookTotalCountResponseDto(libraryBookRepository.count());
+    public Long count() {
+        return libraryBookRepository.count();
     }
 
-    public LibraryBookResponseDto findById(final Long id) {
-        LibraryBook libraryBook = libraryBookRepository.findById(id)
-                .orElseThrow(NotFoundLibraryBookException::new);
-        return LibraryBookMapper.toResponseDto(libraryBook);
-    }
-
-    public LibraryBook findByBookId(final Long bookId) {
+    public LibraryBook findById(final Long bookId) {
         return libraryBookRepository.findById(bookId)
                 .orElseThrow(NotFoundLibraryBookException::new);
     }
 
-    public List<LibraryBookResponseDto> findAll(final int page, final int number) {
-        Page<LibraryBook> libraryBooks = libraryBookRepository.findAll(PageRequest.of(page - 1, number));
-        return libraryBooks.stream()
-                .map(LibraryBookMapper::toResponseDto)
+    public List<LibraryBook> findAll(final int page, final int number) {
+        return libraryBookRepository.findAll(PageRequest.of(page - 1, number))
+                .stream()
                 .collect(Collectors.toList());
     }
 
-    public List<LibraryBookResponseDto> findAllByTitleContaining(final String title, final int page, final int number) {
+    public List<LibraryBook> findAllByTitleContaining(final String title, final int page, final int number) {
         Pageable pageable = PageRequest.of(page - 1, number);
-        Page<LibraryBook> libraryBooks = libraryBookRepository.findAllByLibraryBookInfoTitleContaining(title, pageable);
-        return libraryBooks.stream()
-                .map(LibraryBookMapper::toResponseDto)
+        return libraryBookRepository.findAllByLibraryBookInfoTitleContaining(title, pageable)
+                .stream()
                 .collect(Collectors.toList());
     }
 

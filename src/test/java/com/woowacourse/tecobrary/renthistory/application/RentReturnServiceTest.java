@@ -84,7 +84,7 @@ public class RentReturnServiceTest implements LibraryBookStatic, SerialStatic, R
         given(serialService.checkBySerialNumberIsRent(any(Long.class))).willReturn(false);
         given(serialService.findBySerialNumber(any(Long.class))).willReturn(TEST_SERIAL_NOT_RENT);
         given(rentHistoryService.createRentHistory(any(RentRequestDto.class))).willReturn(TEST_RENT_HISTORY_RENT_BOOK);
-        given(libraryBookService.findByBookId(any(Long.class))).willReturn(TEST_LIBRARY_BOOK_01);
+        given(libraryBookService.findById(any(Long.class))).willReturn(TEST_LIBRARY_BOOK_01);
 
         RentResponseDto rent = rentReturnService.rentBook(TEST_RENT_REQUEST_DTO);
 
@@ -131,7 +131,7 @@ public class RentReturnServiceTest implements LibraryBookStatic, SerialStatic, R
         given(rentHistoryService.findRentHistoryBySerial(any(Long.class))).willReturn(TEST_RENT_HISTORY_RENT_BOOK);
         ReflectionTestUtils.setField(TEST_RENT_HISTORY_RENT_BOOK, "deletedAt", LocalDateTime.now());
 
-        given(libraryBookService.findByBookId(any(Long.class))).willReturn(TEST_LIBRARY_BOOK_19);
+        given(libraryBookService.findById(any(Long.class))).willReturn(TEST_LIBRARY_BOOK_19);
 
         ReturnResponseDto returnInfoDto = rentReturnService.returnBook(new ReturnRequestDto(1L, 1L));
 
