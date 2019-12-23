@@ -1,5 +1,5 @@
 /*
- * @(#) GithubApiResponseVo.java
+ * @(#) GithubApiResponseDto.java
  *
  * v 1.0.0
  *
@@ -9,8 +9,9 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.ui.vo;
+package com.woowacourse.tecobrary.user.ui.dto;
 
+import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -18,12 +19,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class GithubApiResponseVo {
+public class GithubApiResponseDto {
 
     private UserJwtInfoVo user;
     private String token;
 
-    public GithubApiResponseVo(UserJwtInfoVo user, String token) {
+    public GithubApiResponseDto(UserJwtInfoVo user, String token) {
         this.user = user;
         this.token = token;
     }

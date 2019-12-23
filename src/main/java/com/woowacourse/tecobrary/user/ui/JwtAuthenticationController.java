@@ -2,7 +2,7 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.user.command.application.UserService;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
-import com.woowacourse.tecobrary.user.ui.vo.GithubApiResponseVo;
+import com.woowacourse.tecobrary.user.ui.dto.GithubApiResponseDto;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,6 @@ public class JwtAuthenticationController {
         String token = authorization.substring(authorization.indexOf(" "));
         String userNo = JwtUtils.getUserIdFromToken(token);
         UserJwtInfoVo userJwtInfoVo = userService.findUserJwtInfoByUserNo(userNo);
-        return ResponseEntity.ok(new GithubApiResponseVo(userJwtInfoVo, token));
+        return ResponseEntity.ok(new GithubApiResponseDto(userJwtInfoVo, token));
     }
 }
