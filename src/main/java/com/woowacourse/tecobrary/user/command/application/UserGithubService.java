@@ -36,14 +36,14 @@ public class UserGithubService {
     public UserJwtInfoVo getUserByGithubInfo(final String githubApiAccessToken) {
         GithubUserInfoVo githubUserInfoVo = githubApiService.getGithubUserInfo(githubApiAccessToken);
         try {
-            return UserJwtVoMapper.map(userService.findByGithubId(githubUserInfoVo.getId()));
+            return UserJwtVoMapper.toVo(userService.findByGithubId(githubUserInfoVo.getId()));
         } catch (NotFoundGithubUserException e) {
-            return UserJwtVoMapper.map(getNewUserAfterSave(githubApiAccessToken, githubUserInfoVo));
+            return UserJwtVoMapper.toVo(getNewUserAfterSave(githubApiAccessToken, githubUserInfoVo));
         }
     }
 
     private User getNewUserAfterSave(final String githubApiAccessToken, final GithubUserInfoVo githubUserInfoVo) {
-        UserGithubInfo userGithubInfo = UserGithubInfoMapper.map(githubUserInfoVo,
+        UserGithubInfo userGithubInfo = UserGithubInfoMapper.toDomain(githubUserInfoVo,
                 githubApiService.getGithubUserEmail(githubApiAccessToken));
         return userService.save(userGithubInfo);
     }

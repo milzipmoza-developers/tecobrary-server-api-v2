@@ -5,13 +5,12 @@ import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 
 public class UserJwtVoMapper {
 
-    public static UserJwtInfoVo map(final User user) {
-        return new UserJwtInfoVo(
-                user.getId(),
-                user.getUserEmail(),
-                user.getUserName(),
-                user.getUserAvatarUrl(),
-                user.getAuthorization()
-        );
+    public static UserJwtInfoVo toVo(final User user) {
+        return UserJwtInfoVo.builder()
+                .userNo(user.getId())
+                .email(user.getUserEmail())
+                .name(user.getUserName())
+                .avatarUrl(user.getUserAvatarUrl())
+                .build();
     }
 }

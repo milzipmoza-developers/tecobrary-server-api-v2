@@ -6,19 +6,19 @@ import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
 
 public class UserGithubInfoMapper {
 
-    public static UserGithubInfo map(final GithubUserInfoVo githubUserInfoVo, final String primaryEmail) {
-        UserGithubInfoDto githubUserInfo = new UserGithubInfoDto(
-                githubUserInfoVo.getId(),
-                githubUserInfoVo.getName(),
-                primaryEmail,
-                githubUserInfoVo.getAvatar_url()
-        );
+    public static UserGithubInfo toDomain(final GithubUserInfoVo githubUserInfoVo, final String primaryEmail) {
+        UserGithubInfoDto githubUserInfo = UserGithubInfoDto.builder()
+                .id(githubUserInfoVo.getId())
+                .name(githubUserInfoVo.getName())
+                .email(primaryEmail)
+                .avatarUrl(githubUserInfoVo.getAvatar_url())
+                .build();
 
-        return new UserGithubInfo(
-                githubUserInfo.getGithubId(),
-                githubUserInfo.getName(),
-                githubUserInfo.getEmail(),
-                githubUserInfo.getAvatarUrl()
-        );
+        return UserGithubInfo.builder()
+                .githubId(githubUserInfo.getGithubId())
+                .name(githubUserInfo.getName())
+                .email(githubUserInfo.getEmail())
+                .httpsUrl(githubUserInfo.getAvatarUrl())
+                .build();
     }
 }
