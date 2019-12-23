@@ -7,15 +7,13 @@ import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRepository;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 @Service
 public class WishBookService {
@@ -27,23 +25,18 @@ public class WishBookService {
         this.wishBookRepository = wishBookRepository;
     }
 
-    public List<WishBookInfoDto> findWishBooksOnPage(final int page, final int number) {
-        return findAllNotEnrolledLibraryBook(page, number).getContent()
+    public List<WishBook> findWishBooksOnPage(final int page, final int number) {
+        return wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number))
                 .stream()
-                .map(WishBookInfoDtoMapper::toDto)
-                .collect(toList());
-    }
-
-    private Page<WishBook> findAllNotEnrolledLibraryBook(final int page, final int number) {
-        return wishBookRepository.findAllByDeletedAtNull(PageRequest.of(page - 1, number));
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
+    public WishBook createWishBook(final WishBookInfoDto wishBookInfoDto) {
         checkDuplicated(wishBookInfoDto);
 
         WishBook wishBook = WishBookInfoDtoMapper.toEntity(wishBookInfoDto);
-        return wishBookRepository.save(wishBook).getId();
+        return wishBookRepository.save(wishBook);
     }
 
     private void checkDuplicated(final WishBookInfoDto wishBookInfoDto) {
@@ -52,9 +45,8 @@ public class WishBookService {
         }
     }
 
-    public WishBookInfoDto findById(final Long id) {
-        WishBook wishBook = getWishBook(id);
-        return WishBookInfoDtoMapper.toDto(wishBook);
+    public WishBook findById(final Long id) {
+        return getWishBook(id);
     }
 
     private WishBook getWishBook(final Long id) {
@@ -81,9 +73,9 @@ public class WishBookService {
     }
 
     @Transactional
-    public WishBookInfoDto softDeleteById(final Long id) {
+    public WishBook softDeleteById(final Long id) {
         checkNotSoftDeleted(id);
-        return WishBookInfoDtoMapper.toDto(softDelete(id));
+        return softDelete(id);
     }
 
     private void checkNotSoftDeleted(final Long id) {
