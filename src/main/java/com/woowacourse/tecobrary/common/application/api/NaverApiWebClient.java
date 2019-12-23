@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.common.application.api;
 
+import com.woowacourse.tecobrary.common.ui.dto.NaverApiDto;
 import com.woowacourse.tecobrary.common.ui.dto.NaverApiItemDto;
-import com.woowacourse.tecobrary.common.ui.dto.NaverApiResponseDto;
 import com.woowacourse.tecobrary.common.ui.dto.NaverSearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,7 +47,7 @@ public class NaverApiWebClient {
                 .header(X_NAVER_CLIENT_SECRET, clientSecret)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(NaverApiResponseDto.class)
-                .map(NaverApiResponseDto::getItems);
+                .bodyToMono(NaverApiDto.class)
+                .map(NaverApiDto::getItems);
     }
 }
