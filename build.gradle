@@ -2,6 +2,8 @@ plugins {
     id "org.asciidoctor.convert" version "1.5.9.2"
     id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'java'
+    id "org.sonarqube" version "2.8"
+    id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -61,9 +63,27 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-	
+
     runtimeOnly 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "milzipmoza-developers_tecobrary-server-api-v2"
+        property "sonar.organization", "milzipmoza-developers"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", "16e82033e51dcfd461bb736ec1da59bb6e16ecc9"
+
+        property "sonar.sources", "src"
+        property "sonar.language", "java"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.exclusions", "**/*Test*.*, **/*Static.java"
+        property "sonaar.test.inclusions", "**/*Test.java"
+        property "sonar.coverage.exclusions", "**/*Test*.*, **/*Static.java, **/*Dto.java, **/*Mapper.java, **/api/*.java"
+        property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+        property "sonar.java.junit.reportPaths", "build/test-results"
+    }
 }
