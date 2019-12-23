@@ -27,7 +27,7 @@ public class LibraryBookCRUDService {
 
     public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
         LibraryBook savedLibraryBook = libraryBookService.save(libraryBookDto);
-        slackBotService.enrolledNotification(libraryBookDto);
+        slackBotService.enrolledNotification(LibraryBookMapper.toResponseDto(savedLibraryBook));
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 
