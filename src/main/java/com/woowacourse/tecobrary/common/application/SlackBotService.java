@@ -20,12 +20,12 @@ public class SlackBotService {
     }
 
     public void wishBookNotification(final LibraryBookDto libraryBookDto) {
-        String response = slackBotWebClient.wishBookNotification(libraryBookDto);
-        log.info("SlackBot Wish Book Notification Response : {}", response);
+        slackBotWebClient.wishBookNotification(libraryBookDto).subscribe();
+        log.info("Send SlackBot Request - Wish Book Notification");
     }
 
     public void enrolledNotification(final LibraryBookDto libraryBookDto) {
-        String response = slackBotWebClient.enrolledNotification(libraryBookDto);
-        log.info("SlackBot Enrolled Notification Response : {}", response);
+        slackBotWebClient.enrolledNotification(libraryBookDto).subscribe();
+        log.info("Send SlackBot Request - Enrolled Notification Response");
     }
 }

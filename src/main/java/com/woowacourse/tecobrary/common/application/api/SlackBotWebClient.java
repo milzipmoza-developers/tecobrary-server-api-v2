@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Component
 public class SlackBotWebClient {
@@ -23,7 +24,7 @@ public class SlackBotWebClient {
         this.host = host;
     }
 
-    public String wishBookNotification(final LibraryBookDto libraryBookDto) {
+    public Mono<String> wishBookNotification(final LibraryBookDto libraryBookDto) {
         return WebClient
                 .create()
                 .post()
@@ -36,11 +37,10 @@ public class SlackBotWebClient {
                 .body(BodyInserters.fromObject(libraryBookDto))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(String.class)
-                .block();
+                .bodyToMono(String.class);
     }
 
-    public String enrolledNotification(final LibraryBookDto libraryBookDto) {
+    public Mono<String> enrolledNotification(final LibraryBookDto libraryBookDto) {
         return WebClient
                 .create()
                 .post()
@@ -53,7 +53,6 @@ public class SlackBotWebClient {
                 .body(BodyInserters.fromObject(libraryBookDto))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(String.class)
-                .block();
+                .bodyToMono(String.class);
     }
 }
