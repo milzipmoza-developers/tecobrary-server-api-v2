@@ -39,3 +39,6 @@ out/
 
 ### docker ###
 /docker/db/mysql/data
+
+### log files ###
+/logs
