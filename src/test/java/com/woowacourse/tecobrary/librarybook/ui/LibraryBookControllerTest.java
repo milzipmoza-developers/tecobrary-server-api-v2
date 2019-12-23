@@ -41,7 +41,8 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                                 fieldWithPath("author").description("enroll_book_author"),
                                 fieldWithPath("publisher").description("enroll_book_publisher"),
                                 fieldWithPath("isbn").description("enroll_book_isbn"),
-                                fieldWithPath("description").description("enroll_book_desc")),
+                                fieldWithPath("description").description("enroll_book_desc"),
+                                fieldWithPath("slackBotMode.mode").description("slack_bot_notification_on")),
                         responseFields(
                                 fieldWithPath("id").description("enrolled_book_id"),
                                 fieldWithPath("message").description("book_title register succeed")
@@ -79,7 +80,9 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                                 fieldWithPath("author").description("enroll_book_author"),
                                 fieldWithPath("publisher").description("enroll_book_publisher"),
                                 fieldWithPath("isbn").description("enroll_book_isbn"),
-                                fieldWithPath("description").description("enroll_book_desc")),
+                                fieldWithPath("description").description("enroll_book_desc"),
+                                fieldWithPath("slackBotMode.mode").description("slack_bot_notification")
+                        ),
                         responseFields(
                                 fieldWithPath("message").description("book_title register failed")
                         ))).
