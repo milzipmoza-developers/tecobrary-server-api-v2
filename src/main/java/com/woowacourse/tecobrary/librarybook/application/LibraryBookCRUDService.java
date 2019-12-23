@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.application;
 
+import com.woowacourse.tecobrary.common.application.SlackBotService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
@@ -16,14 +17,17 @@ import java.util.stream.Collectors;
 public class LibraryBookCRUDService {
 
     private LibraryBookService libraryBookService;
+    private SlackBotService slackBotService;
 
     @Autowired
-    public LibraryBookCRUDService(final LibraryBookService libraryBookService) {
+    public LibraryBookCRUDService(final LibraryBookService libraryBookService, final SlackBotService slackBotService) {
         this.libraryBookService = libraryBookService;
+        this.slackBotService = slackBotService;
     }
 
     public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
         LibraryBook savedLibraryBook = libraryBookService.save(libraryBookDto);
+        slackBotService.enrolledNotification(libraryBookDto);
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 
