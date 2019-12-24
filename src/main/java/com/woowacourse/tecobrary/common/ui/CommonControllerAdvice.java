@@ -17,6 +17,6 @@ public class CommonControllerAdvice {
         log.debug(e.getMessage());
         model.addAttribute("statusCode", 400);
         model.addAttribute("message", "잘못된 요청입니다.");
-        return ResponseEntity.ok().body(model);
+        return ResponseEntity.badRequest().body(model);
     }
 }
