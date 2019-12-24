@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.wishbook.command.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
+import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookEnrollDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
@@ -24,7 +25,7 @@ public class WishBookEnrollService {
         WishBook wishBook = wishBookService.findNotEnrolledById(wishBookId);
         wishBook.softDelete();
         LibraryBookEnrollDto libraryBookEnrollDto = LibraryBookMapper.toEnrollDto(wishBook);
-        LibraryBookEnrollDto enrolledBook = libraryBookService.enrollWishBook(libraryBookEnrollDto);
-        return new WishBookEnrollResponseDto(enrolledBook, enrolledBook.getEnrolledDate());
+        LibraryBook enrolledBook = libraryBookService.save(libraryBookEnrollDto);
+        return new WishBookEnrollResponseDto(LibraryBookMapper.toEnrollDto(enrolledBook), enrolledBook.getCreatedAt());
     }
 }

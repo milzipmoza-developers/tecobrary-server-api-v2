@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -34,8 +36,9 @@ class WishBookEnrollServiceTest implements WishBookStatic, LibraryBookStatic {
     @Test
     void successfullyEnrollLibraryBookByWishBookId() {
         given(wishBookService.findNotEnrolledById(99L)).willReturn(TEST_WISH_BOOK);
-        given(libraryBookService.enrollWishBook(any(LibraryBookEnrollDto.class))).willReturn(TEST_LIBRARY_BOOK_ENROLL_DTO_99);
-        ReflectionTestUtils.setField(TEST_LIBRARY_BOOK_ENROLL_DTO_99, "id", 99L);
+        given(libraryBookService.save(any(LibraryBookEnrollDto.class))).willReturn(TEST_LIBRARY_BOOK_99);
+        ReflectionTestUtils.setField(TEST_LIBRARY_BOOK_99, "id", 99L);
+        ReflectionTestUtils.setField(TEST_LIBRARY_BOOK_99, "createdAt", LocalDateTime.now());
 
         WishBookEnrollResponseDto enrolledWishBook = wishBookEnrollService.enrollLibraryBookByWishBookId(99L);
 
