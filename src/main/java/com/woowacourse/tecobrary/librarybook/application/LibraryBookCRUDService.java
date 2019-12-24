@@ -39,14 +39,12 @@ public class LibraryBookCRUDService {
         return LibraryBookMapper.toResponseDto(libraryBookService.findById(id));
     }
 
-
     public List<LibraryBookResponseDto> findAll(final int page, final int number) {
         return libraryBookService.findAll(page, number)
                 .stream()
                 .map(LibraryBookMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
-
 
     public List<LibraryBookResponseDto> findAllByTitleContaining(final String title, final int page, final int number) {
         return libraryBookService.findAllByTitleContaining(title, page, number)
