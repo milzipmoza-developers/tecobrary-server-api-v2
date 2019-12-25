@@ -31,4 +31,8 @@ public class RentHistoryService {
         return rentHistoryRepository.findByRentSerialSerialIdAndDeletedAtIsNull(serial)
                 .orElseThrow(NotFoundRentHistoryException::new);
     }
+
+    public List<RentHistory> findAllReturnedByRentUser(final Long userId) {
+        return rentHistoryRepository.findAllByRentUserUserIdAndDeletedAtIsNotNull(userId);
+    }
 }
