@@ -11,6 +11,7 @@ public class UserJwtVoMapper {
                 .email(user.getUserEmail())
                 .name(user.getUserName())
                 .avatarUrl(user.getUserAvatarUrl())
+                .authorization(user.getAuthorization())
                 .build();
     }
 }
