@@ -28,7 +28,7 @@ class JwtUtilsTest {
     @BeforeEach
     void setUp() {
         userJwtInfoVo = UserJwtInfoVo.builder()
-                .userNo(1L)
+                .id(1L)
                 .email("luffy@milzipdevs.com")
                 .name("luffy")
                 .avatarUrl("https://avatar.url/123")

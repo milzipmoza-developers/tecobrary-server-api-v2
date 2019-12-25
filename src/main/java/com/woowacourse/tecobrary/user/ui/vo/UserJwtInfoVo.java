@@ -18,15 +18,15 @@ import lombok.*;
 @ToString
 public class UserJwtInfoVo {
 
-    private String userNo;
+    private String id;
     private String email;
     private String name;
     private String avatarUrl;
     private String authorization;
 
     @Builder
-    private UserJwtInfoVo(final Long userNo, final String email, final String name, final String avatarUrl, final String authorization) {
-        this.userNo = String.valueOf(userNo);
+    private UserJwtInfoVo(final Long id, final String email, final String name, final String avatarUrl, final String authorization) {
+        this.id = String.valueOf(id);
         this.email = email;
         this.name = name;
         this.avatarUrl = avatarUrl;
