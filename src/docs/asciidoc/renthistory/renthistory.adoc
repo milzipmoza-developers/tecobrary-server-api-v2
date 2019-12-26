@@ -2,6 +2,10 @@
 
 include::successfully-find-all-rent-history-by-user.adoc[]
 
+==== 회원의 도서반납 목록을 조회한다.
+
+include::successfully-find-all-return-history-by-user.adoc[]
+
 ==== 도서를 대여를 한다.
 
 include::successfully-rent-a-book.adoc[]

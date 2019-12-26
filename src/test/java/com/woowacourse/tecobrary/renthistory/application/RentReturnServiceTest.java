@@ -127,7 +127,7 @@ public class RentReturnServiceTest implements LibraryBookStatic, SerialStatic, R
         given(userService.existsByUserId(any(Long.class))).willReturn(true);
         given(serialService.existsBySerialNumber(any(Long.class))).willReturn(true);
         given(serialService.checkBySerialNumberIsRent(any(Long.class))).willReturn(true);
-        given(serialService.findBySerialNumber(any(Long.class))).willReturn(TEST_SERIAL_ALREADY_RENT);
+        given(serialService.findBySerialNumber(any(Long.class))).willReturn(TEST_SERIAL_ALREADY_RENT_07);
         given(rentHistoryService.findRentHistoryBySerial(any(Long.class))).willReturn(TEST_RENT_HISTORY_RENT_BOOK);
         ReflectionTestUtils.setField(TEST_RENT_HISTORY_RENT_BOOK, "deletedAt", LocalDateTime.now());
 
@@ -136,7 +136,7 @@ public class RentReturnServiceTest implements LibraryBookStatic, SerialStatic, R
         ReturnResponseDto returnInfoDto = rentReturnService.returnBook(new ReturnRequestDto(1L, 1L));
 
         assertThat(returnInfoDto.getReturnInfo().getTitle()).isEqualTo(TEST_LIBRARY_BOOK_TITLE_19);
-        assertThat(returnInfoDto.getReturnInfo().getSerialNumber()).isEqualTo(TEST_SERIAL_NUMBER_03);
+        assertThat(returnInfoDto.getReturnInfo().getSerialNumber()).isEqualTo(TEST_SERIAL_NUMBER_07);
         assertThat(returnInfoDto.getReturnInfo().getReturnedAt()).isNotNull();
         assertThat(returnInfoDto.getMessage()).isEqualTo(RETURN_SUCCESS_MESSAGE);
     }

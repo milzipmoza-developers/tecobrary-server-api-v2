@@ -23,4 +23,9 @@ public class RentHistoryReadController {
     public ResponseEntity findAllRentHistory(@PathVariable final Long userId) {
         return ResponseEntity.ok(rentHistoryReadService.findAllByUserId(userId));
     }
+
+    @GetMapping("/histories/{userId}")
+    public ResponseEntity findAllReturnHistory(@PathVariable final Long userId) {
+        return ResponseEntity.ok(rentHistoryReadService.findAllReturnedByUserId(userId));
+    }
 }

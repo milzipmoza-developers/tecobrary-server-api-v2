@@ -23,6 +23,17 @@ public class RentHistoryMapper {
                 .build();
     }
 
+    public static ReturnHistoryDto toHistoryDto(final RentHistory rentHistory, final LibraryBook libraryBook) {
+        return ReturnHistoryDto.builder()
+                .id(rentHistory.getId())
+                .serial(rentHistory.getSerialNumber())
+                .title(libraryBook.getTitle())
+                .userId(rentHistory.getUserId())
+                .rentDate(rentHistory.getCreatedAt())
+                .returnDate(rentHistory.getDeletedAt())
+                .build();
+    }
+
     @Builder(builderMethodName = "rentDtoBuilder")
     public static RentResponseDto toRentInfoDto(final LibraryBook libraryBook,
                                                 final RentHistory rentHistory,
