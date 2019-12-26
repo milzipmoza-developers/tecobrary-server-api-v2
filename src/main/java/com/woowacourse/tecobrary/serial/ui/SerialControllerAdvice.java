@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.serial.ui;
 
+import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
@@ -18,7 +19,8 @@ public class SerialControllerAdvice {
     @ExceptionHandler({
             NotFoundSerialTargetException.class,
             UniqueConstraintException.class,
-            NotFoundSerialNumberException.class
+            NotFoundSerialNumberException.class,
+            AlreadyRentStatusException.class
     })
     public ResponseEntity invalidCreateSerial(final RuntimeException e, final Model model) {
         log.error(e.getMessage());
