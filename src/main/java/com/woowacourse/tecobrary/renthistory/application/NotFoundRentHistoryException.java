@@ -12,7 +12,7 @@ public class NotFoundRentHistoryException extends RuntimeException {
         super(NOT_FOUND_RENT_HISTORY_EXCEPTION_MESSAGE);
     }
 
-    public NotFoundRentHistoryException(RentHistoryRequest returnRequestDto) {
+    public NotFoundRentHistoryException(final RentHistoryRequest returnRequestDto) {
         this();
         this.returnRequestDto = returnRequestDto;
     }

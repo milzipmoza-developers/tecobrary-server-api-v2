@@ -3,12 +3,10 @@ package com.woowacourse.tecobrary.user.infra.dto;
 import com.woowacourse.tecobrary.common.model.Email;
 import com.woowacourse.tecobrary.common.model.HttpsUrl;
 import com.woowacourse.tecobrary.user.command.domain.UserName;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
 public class UserGithubInfoDto {
@@ -18,7 +16,8 @@ public class UserGithubInfoDto {
     private Email email;
     private HttpsUrl avatarUrl;
 
-    public UserGithubInfoDto(String id, String name, String email, String avatarUrl) {
+    @Builder
+    private UserGithubInfoDto(final String id, final String name, final String email, final String avatarUrl) {
         this.githubId = id;
         this.name = new UserName(name);
         this.email = new Email(email);

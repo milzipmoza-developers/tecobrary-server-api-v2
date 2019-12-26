@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/users/all")
-    public ResponseEntity countOfUser(Model model) {
+    public ResponseEntity countOfUser(final Model model) {
         model.addAttribute("total", userService.countOfUser());
         return ResponseEntity.ok(model);
     }

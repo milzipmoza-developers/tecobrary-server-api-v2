@@ -3,9 +3,6 @@ package com.woowacourse.tecobrary.librarybook.common;
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookEnrollDto;
-
-import java.time.LocalDateTime;
 
 public interface LibraryBookStatic {
 
@@ -55,32 +52,32 @@ public interface LibraryBookStatic {
     String TEST_LIBRARY_BOOK_ISBN_99 = "8968482519 9788968482519";
     String TEST_LIBRARY_BOOK_DESCRIPTION_99 = "『SQL 레벨업』은 《SQL 첫걸음》으로 성공적인 입문을 마치고, 다음 고지를 바라보는 이들을 위한 책이다. 고성능 SQL 작성 방법을 초보자 눈높이에 맞춰 다양한 예제를 통해 설명한다. 특히 오라클과 호환성을 목표로 하는 오픈소스인 POSTGRESQL을 사용하여 모든 예제를 작성했고, 둘의 수행 결과가 상이한... ";
 
-    LibraryBook TEST_LIBRARY_BOOK = new LibraryBook(new BookCoverUrl(TEST_IMAGE),
+    LibraryBook TEST_LIBRARY_BOOK = new LibraryBook(
+            new BookCoverUrl(TEST_IMAGE),
             new BookInfo(TEST_TITLE, TEST_AUTHOR, TEST_PUBLISHER, TEST_ISBN, TEST_DESCRIPTION));
 
-    LibraryBook TEST_LIBRARY_BOOK_01 = new LibraryBook(new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE),
+    LibraryBook TEST_LIBRARY_BOOK_01 = new LibraryBook(
+            new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE),
             new BookInfo(TEST_LIBRARY_BOOK_TITLE, TEST_LIBRARY_BOOK_AUTHOR, TEST_LIBRARY_BOOK_PUBLISHER,
                     TEST_LIBRARY_BOOK_ISBN, TEST_LIBRARY_BOOK_DESCRIPTION));
 
-    LibraryBook TEST_LIBRARY_BOOK_02 = new LibraryBook(new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_02),
+    LibraryBook TEST_LIBRARY_BOOK_02 = new LibraryBook(
+            new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_02),
             new BookInfo(TEST_LIBRARY_BOOK_TITLE_02, TEST_LIBRARY_BOOK_AUTHOR_02, TEST_LIBRARY_BOOK_PUBLISHER_02,
                     TEST_LIBRARY_BOOK_ISBN_02, TEST_LIBRARY_BOOK_DESCRIPTION_02));
 
-    LibraryBook TEST_LIBRARY_BOOK_19 = new LibraryBook(new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_19),
+    LibraryBook TEST_LIBRARY_BOOK_19 = new LibraryBook(
+            new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_19),
             new BookInfo(TEST_LIBRARY_BOOK_TITLE_19, TEST_LIBRARY_BOOK_AUTHOR_19, TEST_LIBRARY_BOOK_PUBLISHER_19,
                     TEST_LIBRARY_BOOK_ISBN_19, TEST_LIBRARY_BOOK_DESCRIPTION_19));
 
-    LibraryBook TEST_LIBRARY_BOOK_07 = new LibraryBook(new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_07),
+    LibraryBook TEST_LIBRARY_BOOK_07 = new LibraryBook(
+            new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_07),
             new BookInfo(TEST_LIBRARY_BOOK_TITLE_07, TEST_LIBRARY_BOOK_AUTHOR_07, TEST_LIBRARY_BOOK_PUBLISHER_07,
                     TEST_LIBRARY_BOOK_ISBN_07, TEST_LIBRARY_BOOK_DESCRIPTION_07));
 
-    LibraryBookEnrollDto TEST_LIBRARY_BOOK_ENROLL_DTO_99 = LibraryBookEnrollDto.builder()
-            .image(TEST_LIBRARY_BOOK_IMAGE_99)
-            .title(TEST_LIBRARY_BOOK_TITLE_99)
-            .author(TEST_LIBRARY_BOOK_AUTHOR_99)
-            .publisher(TEST_LIBRARY_BOOK_PUBLISHER_99)
-            .isbn(TEST_LIBRARY_BOOK_ISBN_99)
-            .description(TEST_LIBRARY_BOOK_DESCRIPTION_99)
-            .enrolledDate(LocalDateTime.now())
-            .build();
+    LibraryBook TEST_LIBRARY_BOOK_99 = new LibraryBook(
+            new BookCoverUrl(TEST_LIBRARY_BOOK_IMAGE_99),
+            new BookInfo(TEST_LIBRARY_BOOK_TITLE_99, TEST_LIBRARY_BOOK_AUTHOR_99,
+                    TEST_LIBRARY_BOOK_PUBLISHER_99, TEST_LIBRARY_BOOK_ISBN_99, TEST_LIBRARY_BOOK_DESCRIPTION_99));
 }

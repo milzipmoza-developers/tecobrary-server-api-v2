@@ -52,4 +52,35 @@ class RentHistoryReadControllerTest extends AcceptanceTestUtils implements RentH
                 body("[1].userId", equalTo(TEST_RENT_HISTORY_USER_ID_16.intValue())).
                 body("[1].rentDate", equalTo("2019-11-11T03:48:41"));
     }
+
+    @DisplayName("[GET] /histories/:userId, 회원의 도서반납 목록을 조회한다.")
+    @Test
+    void successfullyFindAllReturnHistoryByUser() {
+
+        given(this.spec).
+                accept(JSON).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        pathParameters(
+                                parameterWithName("user_id").description("반납 도서 목록을 조회할 유저의 id")),
+                        responseFields(
+                                fieldWithPath("[0].id").description("RentHistory 테이블의 id"),
+                                fieldWithPath("[0].serial").description("반납 도서의 Serial Number"),
+                                fieldWithPath("[0].title").description("반납 도서의 제목"),
+                                fieldWithPath("[0].userId").description("반납 도서를 대여한 유저 id"),
+                                fieldWithPath("[0].rentDate").description("반납 도서를 대여한 날짜 및 시간"),
+                                fieldWithPath("[0].returnDate").description("반납 도서를 반납한 날짜 및 시간")))).
+        when().
+                get(baseUrl("/histories/{user_id}"), TEST_RENT_HISTORY_USER_ID_33).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                statusCode(200).
+                contentType(JSON).
+                body("[0].id", equalTo(TEST_RENT_HISTORY_ID_USER_ID_33)).
+                body("[0].serial", equalTo(TEST_RENT_HISTORY_SERIAL_USER_ID_33)).
+                body("[0].title", equalTo(TEST_RENT_HISTORY_TITLE_USER_ID_33)).
+                body("[0].userId", equalTo(TEST_RENT_HISTORY_USER_ID_33)).
+                body("[0].rentDate", equalTo("2019-11-15T03:08:39")).
+                body("[0].returnDate", equalTo("2019-11-15T04:05:49"));
+    }
 }

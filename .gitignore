@@ -35,6 +35,10 @@ out/
 ### properties ###
 /src/main/resources/github.yml
 /src/main/resources/jwtauth.yml
+/src/main/resources/naverapi.yml
 
 ### docker ###
 /docker/db/mysql/data
+
+### log files ###
+/logs

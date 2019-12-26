@@ -1,0 +1,24 @@
+====== HTTP Request
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/http-request.adoc[]
+
+====== request body
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/request-body.adoc[]
+
+====== description
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/request-parameters.adoc[]
+
+
+====== HTTP Response
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/http-response.adoc[]
+
+====== response body
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/response-body.adoc[]
+
+====== description
+
+include::../../{snippets}/naver-api-controller-test/successfully-search-from-naver-api/response-fields.adoc[]

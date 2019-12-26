@@ -1,11 +1,11 @@
-package com.woowacourse.tecobrary.common.util;
+package com.woowacourse.tecobrary.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BodyParser {
 
-    public static Map<String, String> parse(String body) {
+    public static Map<String, String> parse(final String body) {
         String[] responses = body.split("&");
         Map<String, String> response = new HashMap<>();
         for (String res : responses) {

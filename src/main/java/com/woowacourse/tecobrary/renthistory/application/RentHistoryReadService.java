@@ -4,6 +4,7 @@ import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryDto;
+import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnHistoryDto;
 import com.woowacourse.tecobrary.renthistory.util.RentHistoryMapper;
 import com.woowacourse.tecobrary.serial.application.SerialService;
 import com.woowacourse.tecobrary.serial.domain.Serial;
@@ -31,16 +32,31 @@ public class RentHistoryReadService {
 
     public List<RentHistoryDto> findAllByUserId(final Long userId) {
         List<RentHistory> rentHistories = rentHistoryService.findAllByRentUser(userId);
-        return convertDtos(rentHistories);
+        return convertRentDtos(rentHistories);
     }
 
-    private List<RentHistoryDto> convertDtos(final List<RentHistory> rentHistories) {
+    private List<RentHistoryDto> convertRentDtos(final List<RentHistory> rentHistories) {
         List<RentHistoryDto> rentHistoryDtos = new ArrayList<>();
         for (RentHistory rentHistory : rentHistories) {
             Serial serial = serialService.findByRentSerial(rentHistory.getRentSerial());
-            LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
+            LibraryBook libraryBook = libraryBookService.findById(serial.getBookId());
             rentHistoryDtos.add(RentHistoryMapper.toDto(rentHistory, libraryBook));
         }
         return rentHistoryDtos;
+    }
+
+    public List<ReturnHistoryDto> findAllReturnedByUserId(final Long userId) {
+        List<RentHistory> rentHistories = rentHistoryService.findAllReturnedByRentUser(userId);
+        return convertReturnDtos(rentHistories);
+    }
+
+    private List<ReturnHistoryDto> convertReturnDtos(final List<RentHistory> rentHistories) {
+        List<ReturnHistoryDto> returnHistoryDtos = new ArrayList<>();
+        for (RentHistory rentHistory : rentHistories) {
+            Serial serial = serialService.findByRentSerial(rentHistory.getRentSerial());
+            LibraryBook libraryBook = libraryBookService.findById(serial.getBookId());
+            returnHistoryDtos.add(RentHistoryMapper.toHistoryDto(rentHistory, libraryBook));
+        }
+        return returnHistoryDtos;
     }
 }

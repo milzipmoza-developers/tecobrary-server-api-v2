@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
-import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
+import com.woowacourse.tecobrary.librarybook.application.LibraryBookCRUDService;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookRequestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,36 +14,36 @@ public class LibraryBookController {
 
     private static final Logger log = LoggerFactory.getLogger(LibraryBookController.class);
 
-    private final LibraryBookService libraryBookService;
+    private final LibraryBookCRUDService libraryBookCRUDService;
 
     @Autowired
-    public LibraryBookController(final LibraryBookService libraryBookService) {
-        this.libraryBookService = libraryBookService;
+    public LibraryBookController(final LibraryBookCRUDService libraryBookCRUDService) {
+        this.libraryBookCRUDService = libraryBookCRUDService;
     }
 
     @PostMapping("/books")
     public ResponseEntity createLibraryBook(@RequestBody final LibraryBookRequestDto libraryBookRequestDto) {
         log.debug("library book dto : {}", libraryBookRequestDto);
-        return ResponseEntity.ok(libraryBookService.save(libraryBookRequestDto));
+        return ResponseEntity.ok(libraryBookCRUDService.save(libraryBookRequestDto));
     }
 
     @GetMapping("/books/all")
     public ResponseEntity readLibraryBookTotalCount() {
-        return ResponseEntity.ok(libraryBookService.count());
+        return ResponseEntity.ok(libraryBookCRUDService.count());
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity readLibraryBook(@PathVariable Long id) {
-        return ResponseEntity.ok(libraryBookService.findById(id));
+    public ResponseEntity readLibraryBook(@PathVariable final Long id) {
+        return ResponseEntity.ok(libraryBookCRUDService.findById(id));
     }
 
     @GetMapping("/books")
-    public ResponseEntity readLibraryBooks(@RequestParam int page, @RequestParam int number) {
-        return ResponseEntity.ok(libraryBookService.findAll(page, number));
+    public ResponseEntity readLibraryBooks(@RequestParam final int page, @RequestParam final int number) {
+        return ResponseEntity.ok(libraryBookCRUDService.findAll(page, number));
     }
 
     @GetMapping("/books/search")
-    public ResponseEntity readLibraryBooksByTitle(@RequestParam int page, @RequestParam int number, @RequestParam String title) {
-        return ResponseEntity.ok(libraryBookService.findAllByTitleContaining(title, page, number));
+    public ResponseEntity readLibraryBooksByTitle(@RequestParam final int page, @RequestParam final int number, @RequestParam final String title) {
+        return ResponseEntity.ok(libraryBookCRUDService.findAllByTitleContaining(title, page, number));
     }
 }

@@ -24,13 +24,13 @@ public class JwtUtils implements Serializable {
     private static String SECRET;
 
     @Value("${jwt.secret}")
-    private void injectSecret(String secret) {
+    private void injectSecret(final String secret) {
         SECRET = secret;
     }
 
-    public static String generateToken(UserJwtInfoVo userJwtInfoVo) {
+    public static String generateToken(final UserJwtInfoVo userJwtInfoVo) {
         Map<String, Object> claims = new LinkedHashMap<>();
-        claims.put("id", userJwtInfoVo.getUserNo());
+        claims.put("id", userJwtInfoVo.getId());
         claims.put("email", userJwtInfoVo.getEmail());
         claims.put("name", userJwtInfoVo.getName());
         claims.put("authorization", userJwtInfoVo.getAuthorization());
@@ -42,12 +42,12 @@ public class JwtUtils implements Serializable {
         return doGenerateToken(claims, headers);
     }
 
-    public static Boolean validateToken(String token, UserJwtInfoVo userJwtInfoVo) {
+    public static Boolean validateToken(final String token, final UserJwtInfoVo userJwtInfoVo) {
         final String userNo = getUserIdFromToken(token);
-        return (userNo.equals(userJwtInfoVo.getUserNo()) && !isTokenExpired(token));
+        return (userNo.equals(userJwtInfoVo.getId()) && !isTokenExpired(token));
     }
 
-    public static Boolean isTokenExpired(String token) {
+    public static Boolean isTokenExpired(final String token) {
         try {
             final Date expiration = getExpirationDateFromToken(token);
             return expiration.before(new Date());
@@ -56,11 +56,11 @@ public class JwtUtils implements Serializable {
         }
     }
 
-    public static String getUserIdFromToken(String token) {
+    public static String getUserIdFromToken(final String token) {
         return (String) getClaimFromToken(token, claims -> claims.get("id"));
     }
 
-    private static String doGenerateToken(Map<String, Object> claims, Map<String, Object> headers) {
+    private static String doGenerateToken(final Map<String, Object> claims, final Map<String, Object> headers) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .setHeader(headers)
@@ -70,16 +70,16 @@ public class JwtUtils implements Serializable {
                 .compact();
     }
 
-    private static Date getExpirationDateFromToken(String token) {
+    private static Date getExpirationDateFromToken(final String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private static <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    private static <T> T getClaimFromToken(final String token, final Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
-    private static Claims getAllClaimsFromToken(String token) {
+    private static Claims getAllClaimsFromToken(final String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)

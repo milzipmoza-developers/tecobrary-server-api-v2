@@ -13,7 +13,7 @@ import static com.woowacourse.tecobrary.common.infra.filter.CorsHeader.*;
 public class CorsFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain)
             throws ServletException, IOException {
         response.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, ALLOW_ORIGIN);
         response.setHeader(ACCESS_CONTROL_ALLOW_METHODS, ALLOW_METHODS);

@@ -22,6 +22,11 @@ public class SerialCreateReadController {
         return ResponseEntity.ok(serialCreateReadService.findSerialsByBookId(bookId));
     }
 
+    @GetMapping("/serials/{serialNumber}")
+    public ResponseEntity getBookBySerialNumber(@PathVariable final Long serialNumber) {
+        return ResponseEntity.ok(serialCreateReadService.findBookBySerialNumber(serialNumber));
+    }
+
     @PostMapping("/serials")
     public ResponseEntity createSerial(@RequestBody final SerialCreateRequestDto serialCreateRequestDto) {
         return ResponseEntity.ok(serialCreateReadService.save(serialCreateRequestDto));

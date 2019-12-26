@@ -16,7 +16,7 @@ public class RentSerial {
             nullable = false)
     private Long serialId;
 
-    public RentSerial(Long serialId) {
+    public RentSerial(final Long serialId) {
         this.serialId = serialId;
     }
 }

@@ -30,11 +30,11 @@ public class UserAuthorization {
             nullable = false)
     private Authorization authorization;
 
-    public UserAuthorization(Authorization authorization) {
+    public UserAuthorization(final Authorization authorization) {
         this.authorization = authorization;
     }
 
-    String updateAuthorization(String newAuthorization) {
+    String updateAuthorization(final String newAuthorization) {
         this.authorization = Authorization.of(newAuthorization);
         return this.authorization.getAuthorization();
     }

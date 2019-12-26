@@ -46,7 +46,7 @@ public class RentReturnService {
         checkRentStatus(rentRequestDto);
         Serial serial = doRent(rentRequestDto);
         RentHistory rentHistory = rentHistoryService.createRentHistory(rentRequestDto);
-        LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
+        LibraryBook libraryBook = libraryBookService.findById(serial.getBookId());
         return RentHistoryMapper.rentDtoBuilder()
                 .libraryBook(libraryBook)
                 .rentHistory(rentHistory)
@@ -89,7 +89,7 @@ public class RentReturnService {
         checkReturnedStatus(returnRequestDto);
         Serial serial = doReturn(returnRequestDto);
         RentHistory rentHistory = doSoftDelete(returnRequestDto);
-        LibraryBook libraryBook = libraryBookService.findByBookId(serial.getBookId());
+        LibraryBook libraryBook = libraryBookService.findById(serial.getBookId());
         return RentHistoryMapper.returnDtoBuilder()
                 .libraryBook(libraryBook)
                 .serial(serial)

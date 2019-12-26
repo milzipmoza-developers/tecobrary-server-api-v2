@@ -42,7 +42,7 @@ public class LibraryBook {
             nullable = false)
     private LocalDateTime updatedAt;
 
-    public LibraryBook(BookCoverUrl libraryBookCoverUrl, BookInfo libraryBookInfo) {
+    public LibraryBook(final BookCoverUrl libraryBookCoverUrl, final BookInfo libraryBookInfo) {
         this.libraryBookCoverUrl = libraryBookCoverUrl;
         this.libraryBookInfo = libraryBookInfo;
     }

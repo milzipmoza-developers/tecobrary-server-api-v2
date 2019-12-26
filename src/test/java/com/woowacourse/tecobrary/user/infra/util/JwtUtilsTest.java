@@ -27,13 +27,14 @@ class JwtUtilsTest {
 
     @BeforeEach
     void setUp() {
-        userJwtInfoVo = new UserJwtInfoVo(
-                1L,
-                "luffy@milzipdevs.com",
-                "luffy",
-                "https://avatar.url/123",
-                "KING"
-        );
+        userJwtInfoVo = UserJwtInfoVo.builder()
+                .id(1L)
+                .email("luffy@milzipdevs.com")
+                .name("luffy")
+                .avatarUrl("https://avatar.url/123")
+                .authorization("KING")
+                .build();
+
         jwtToken = JwtUtils.generateToken(userJwtInfoVo);
         log.debug("token : {}", jwtToken);
     }

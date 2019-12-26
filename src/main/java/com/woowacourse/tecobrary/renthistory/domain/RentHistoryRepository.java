@@ -12,4 +12,6 @@ public interface RentHistoryRepository extends JpaRepository<RentHistory, Long> 
     List<RentHistory> findAllByRentUserUserIdAndDeletedAtIsNull(Long userId);
 
     Optional<RentHistory> findByRentSerialSerialIdAndDeletedAtIsNull(Long serial);
+
+    List<RentHistory> findAllByRentUserUserIdAndDeletedAtIsNotNull(Long userId);
 }

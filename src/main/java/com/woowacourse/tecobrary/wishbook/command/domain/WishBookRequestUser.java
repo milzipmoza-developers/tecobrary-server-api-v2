@@ -16,7 +16,7 @@ public class WishBookRequestUser {
             nullable = false)
     private Long userId;
 
-    public WishBookRequestUser(Long userId) {
+    public WishBookRequestUser(final Long userId) {
         this.userId = userId;
     }
 }

@@ -1,6 +1,9 @@
 package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
+import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
+import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
 import com.woowacourse.tecobrary.serial.domain.Serial;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
@@ -35,13 +38,13 @@ public class SerialCreateReadService {
         return SerialMapper.toDto(savedSerial, "등록에 성공하였습니다.");
     }
 
-    private void checkExistsLibraryBookId(Long bookId) {
+    private void checkExistsLibraryBookId(final Long bookId) {
         if (!libraryBookService.existsById(bookId)) {
             throw new NotFoundSerialTargetException();
         }
     }
 
-    private void checkNotExistsSerialNumber(Long serialNumber) {
+    private void checkNotExistsSerialNumber(final Long serialNumber) {
         if (serialService.existsBySerialNumber(serialNumber)) {
             throw new UniqueConstraintException();
         }
@@ -54,5 +57,11 @@ public class SerialCreateReadService {
                 .stream()
                 .map(SerialMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public LibraryBookResponseDto findBookBySerialNumber(final Long serialNumber) {
+        Long bookId = serialService.findBySerialNumber(serialNumber).getBookId();
+        LibraryBook book = libraryBookService.findById(bookId);
+        return LibraryBookMapper.toResponseDto(book);
     }
 }

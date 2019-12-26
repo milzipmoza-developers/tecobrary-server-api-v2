@@ -28,11 +28,11 @@ public enum Authorization {
 
     private String authorization;
 
-    Authorization(String authorization) {
+    Authorization(final String authorization) {
         this.authorization = authorization;
     }
 
-    public static Authorization of(String name) {
+    public static Authorization of(final String name) {
         return Arrays.stream(values())
                 .filter(value -> value.getAuthorization().equals(name))
                 .findFirst()

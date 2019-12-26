@@ -49,7 +49,7 @@ public class WishBook {
             columnDefinition = "DATETIME default NULL")
     private LocalDateTime deletedAt;
 
-    public WishBook(BookCoverUrl wishBookCoverUrl, BookInfo wishBookInfo, WishBookRequestUser wishBookRequestUser) {
+    public WishBook(final BookCoverUrl wishBookCoverUrl, final BookInfo wishBookInfo, final WishBookRequestUser wishBookRequestUser) {
         this.wishBookCoverUrl = wishBookCoverUrl;
         this.wishBookInfo = wishBookInfo;
         this.wishBookRequestUser = wishBookRequestUser;

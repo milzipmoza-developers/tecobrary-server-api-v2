@@ -29,7 +29,7 @@ public class GithubOAuthController {
     private final GithubUserApiUrlBuilder githubUserApiUrlBuilder;
 
     @Autowired
-    public GithubOAuthController(GithubUserApiUrlBuilder githubUserApiUrlBuilder) {
+    public GithubOAuthController(final GithubUserApiUrlBuilder githubUserApiUrlBuilder) {
         this.githubUserApiUrlBuilder = githubUserApiUrlBuilder;
     }
 
