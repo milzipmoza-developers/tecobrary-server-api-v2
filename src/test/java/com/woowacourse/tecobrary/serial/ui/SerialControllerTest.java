@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException.ALREADY_RENT_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.ui.SerialController.DELETE_SUCCESS_MESSAGE;
 import static io.restassured.RestAssured.given;
@@ -57,5 +58,25 @@ class SerialControllerTest extends AcceptanceTestUtils {
                 contentType(JSON).
                 statusCode(400).
                 body("message", is(NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE));
+    }
+
+    @DisplayName("[DELETE] /serials?number=2, 일련번호에 해당하는 도서가 대여 중이면, 일련번호 삭제를 실패한다.")
+    @Test
+    public void failedRemoveSerialAlreadyRentBook() {
+        given(this.spec).
+                param("number", 2).
+                filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
+                        requestParameters(
+                                parameterWithName("number").description("serial_number")),
+                        responseFields(
+                                fieldWithPath("message").description("already_rent_book_exception_message")))).
+        when().
+                delete(baseUrl("/serials")).
+        then().
+                log().ifError().
+                log().ifValidationFails().
+                contentType(JSON).
+                statusCode(400).
+                body("message", is(ALREADY_RENT_BOOK_EXCEPTION_MESSAGE));
     }
 }
