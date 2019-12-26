@@ -7,10 +7,11 @@ public class UserJwtVoMapper {
 
     public static UserJwtInfoVo toVo(final User user) {
         return UserJwtInfoVo.builder()
-                .userNo(user.getId())
+                .id(user.getId())
                 .email(user.getUserEmail())
                 .name(user.getUserName())
                 .avatarUrl(user.getUserAvatarUrl())
+                .authorization(user.getAuthorization())
                 .build();
     }
 }

@@ -70,7 +70,7 @@ public interface UserStatic {
     User SAVED_USER = new User(SAVED_USER_GITHUB_INFO, SAVED_USER_AUTHORIZATION);
 
     UserJwtInfoVo SAVED_USER_JWT_INFO_VO = UserJwtInfoVo.builder()
-            .userNo(SAVED_USER_NO)
+            .id(SAVED_USER_NO)
             .email(SAVED_USER_EMAIL_VALUE_AT_ID_01)
             .name(SAVED_USER_NAME_VALUE_AT_ID_01)
             .avatarUrl(SAVED_USER_AVATAR_URL_VALUE_AT_ID_01)
@@ -78,7 +78,7 @@ public interface UserStatic {
             .build();
 
     UserJwtInfoVo TEST_USER_JWT_INFO_VO = UserJwtInfoVo.builder()
-            .userNo(TEST_USER_NO)
+            .id(TEST_USER_NO)
             .email(TEST_USER_EMAIL_VALUE)
             .name(TEST_USER_NAME_VALUE)
             .avatarUrl(TEST_USER_AVATAR_URL_VALUE)

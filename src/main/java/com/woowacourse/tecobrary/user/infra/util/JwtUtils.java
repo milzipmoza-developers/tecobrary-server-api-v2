@@ -30,7 +30,7 @@ public class JwtUtils implements Serializable {
 
     public static String generateToken(final UserJwtInfoVo userJwtInfoVo) {
         Map<String, Object> claims = new LinkedHashMap<>();
-        claims.put("id", userJwtInfoVo.getUserNo());
+        claims.put("id", userJwtInfoVo.getId());
         claims.put("email", userJwtInfoVo.getEmail());
         claims.put("name", userJwtInfoVo.getName());
         claims.put("authorization", userJwtInfoVo.getAuthorization());
@@ -44,7 +44,7 @@ public class JwtUtils implements Serializable {
 
     public static Boolean validateToken(final String token, final UserJwtInfoVo userJwtInfoVo) {
         final String userNo = getUserIdFromToken(token);
-        return (userNo.equals(userJwtInfoVo.getUserNo()) && !isTokenExpired(token));
+        return (userNo.equals(userJwtInfoVo.getId()) && !isTokenExpired(token));
     }
 
     public static Boolean isTokenExpired(final String token) {
