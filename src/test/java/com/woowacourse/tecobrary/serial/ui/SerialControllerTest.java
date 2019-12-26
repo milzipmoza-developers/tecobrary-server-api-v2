@@ -30,9 +30,9 @@ class SerialControllerTest extends AcceptanceTestUtils {
                                 parameterWithName("number").description("serial_number")),
                         responseFields(
                                 fieldWithPath("message").description("success_to_delete_serial_message")))).
-                when().
+        when().
                 delete(baseUrl("/serials")).
-                then().
+        then().
                 log().ifError().
                 log().ifValidationFails().
                 contentType(JSON).
@@ -50,9 +50,9 @@ class SerialControllerTest extends AcceptanceTestUtils {
                                 parameterWithName("number").description("serial_number")),
                         responseFields(
                                 fieldWithPath("message").description("not_found_serial_number_exception_message")))).
-                when().
+        when().
                 delete(baseUrl("/serials")).
-                then().
+        then().
                 log().ifError().
                 log().ifValidationFails().
                 contentType(JSON).
@@ -70,9 +70,9 @@ class SerialControllerTest extends AcceptanceTestUtils {
                                 parameterWithName("number").description("serial_number")),
                         responseFields(
                                 fieldWithPath("message").description("already_rent_book_exception_message")))).
-                when().
+        when().
                 delete(baseUrl("/serials")).
-                then().
+        then().
                 log().ifError().
                 log().ifValidationFails().
                 contentType(JSON).
