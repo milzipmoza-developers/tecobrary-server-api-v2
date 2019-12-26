@@ -10,8 +10,8 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://mysql-db:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://15.164.94.91:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: tecobrary
     password: tecobrary
   http:
     encoding:
