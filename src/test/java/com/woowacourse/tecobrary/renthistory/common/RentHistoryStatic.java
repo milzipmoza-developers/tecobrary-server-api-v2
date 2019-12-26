@@ -35,4 +35,9 @@ public interface RentHistoryStatic {
     RentSerial TEST_RENT_SERIAL_05 = new RentSerial(TEST_RENT_HISTORY_SERIAL_ID);
     RentUser TEST_RENT_USER_01 = new RentUser(TEST_RENT_HISTORY_USER_ID_01);
     RentHistory TEST_RENT_HISTORY_RENT_BOOK = new RentHistory(TEST_RENT_SERIAL_05, TEST_RENT_USER_01);
+
+    int TEST_RENT_HISTORY_USER_ID_33 = 33;
+    String TEST_RENT_HISTORY_TITLE_USER_ID_33 = "객체 지향과 디자인 패턴 (개발자가 반드시 정복해야 할)";
+    int TEST_RENT_HISTORY_SERIAL_USER_ID_33 = 10;
+    int TEST_RENT_HISTORY_ID_USER_ID_33 = 45;
 }
