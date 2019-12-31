@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.search.application.api;
+package com.woowacourse.tecobrary.librarybook.application.api;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
