@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
                 "classpath:jwtauth.yml",
                 "classpath:naverapi.yml",
                 "classpath:slackbot.yml",
+                "classpath:elasticsearch.yml"
         },
         ignoreResourceNotFound = true,
         factory = YamlPropertySourceFactory.class
