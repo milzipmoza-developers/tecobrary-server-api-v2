@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.librarybook.ui;
 
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
+import com.woowacourse.tecobrary.librarybook.exception.ESIOException;
 import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ public class LibraryBookControllerAdvice {
 
     private static final Logger log = LoggerFactory.getLogger(LibraryBookControllerAdvice.class);
 
-    @ExceptionHandler({DuplicatedLibraryBookException.class, NotFoundLibraryBookException.class})
+    @ExceptionHandler({DuplicatedLibraryBookException.class, NotFoundLibraryBookException.class, ESIOException.class})
     public ResponseEntity duplicatedLibraryBook(final RuntimeException e, final Model model) {
         log.error(e.getMessage());
         model.addAttribute("message", e.getMessage());
