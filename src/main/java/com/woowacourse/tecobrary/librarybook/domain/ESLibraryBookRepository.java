@@ -55,31 +55,15 @@ public class ESLibraryBookRepository {
                 .build();
     };
 
-    private ESRestClient esRestClient;
+    private final ESRestClient esRestClient;
 
     @Autowired
     public ESLibraryBookRepository(final ESRestClient esRestClient) {
         this.esRestClient = esRestClient;
     }
 
-    public Page<LibraryBookResponseDto> searchByKeyword(String keyword, Pageable pageable) {
-        SearchRequest searchRequest = createSearchRequest(keyword);
-
-        try {
-            SearchResponse searchResponse = esRestClient.search(searchRequest, RequestOptions.DEFAULT);
-
-            SearchHits searchHits = searchResponse.getHits();
-
-            List<LibraryBookResponseDto> libraryBooks = Arrays.stream(searchHits.getHits())
-                    .filter(ESLibraryBookRepository::containsLongId)
-                    .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
-                    .collect(Collectors.toList());
-
-            return new PageImpl<>(libraryBooks, pageable, searchHits.getTotalHits().value);
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            throw new ESIOException(e);
-        }
+    private static boolean containsLongId(final SearchHit searchHit) {
+        return ONLY_INTEGER_PATTERN.matcher(searchHit.getId()).matches();
     }
 
     private SearchRequest createSearchRequest(final String keyword) {
@@ -98,7 +82,23 @@ public class ESLibraryBookRepository {
         return searchRequest;
     }
 
-    private static boolean containsLongId(SearchHit searchHit) {
-        return ONLY_INTEGER_PATTERN.matcher(searchHit.getId()).matches();
+    public Page<LibraryBookResponseDto> searchByKeyword(final String keyword, final Pageable pageable) {
+        SearchRequest searchRequest = createSearchRequest(keyword);
+
+        try {
+            SearchResponse searchResponse = esRestClient.search(searchRequest, RequestOptions.DEFAULT);
+
+            SearchHits searchHits = searchResponse.getHits();
+
+            List<LibraryBookResponseDto> libraryBooks = Arrays.stream(searchHits.getHits())
+                    .filter(ESLibraryBookRepository::containsLongId)
+                    .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(libraryBooks, pageable, searchHits.getTotalHits().value);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            throw new ESIOException(e);
+        }
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class ESLibraryBookService {
 
-    private ESLibraryBookRepository esLibraryBookRepository;
+    private final ESLibraryBookRepository esLibraryBookRepository;
 
     @Autowired
     public ESLibraryBookService(final ESLibraryBookRepository esLibraryBookRepository) {
