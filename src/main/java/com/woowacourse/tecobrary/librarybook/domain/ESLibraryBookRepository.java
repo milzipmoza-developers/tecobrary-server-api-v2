@@ -8,6 +8,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
@@ -22,12 +23,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Repository
 public class ESLibraryBookRepository {
 
     private static final Logger log = LoggerFactory.getLogger(ESLibraryBookRepository.class);
+
+    private static final Pattern ONLY_INTEGER_PATTERN = Pattern.compile("^[0-9]+$");
 
     private static final String LIBRARY_BOOKS_INDEX_NAME = "librarybooks";
     private static final String TITLE = "title";
@@ -67,6 +71,7 @@ public class ESLibraryBookRepository {
             SearchHits searchHits = searchResponse.getHits();
 
             List<LibraryBookResponseDto> libraryBooks = Arrays.stream(searchHits.getHits())
+                    .filter(ESLibraryBookRepository::containsLongId)
                     .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
                     .collect(Collectors.toList());
 
@@ -91,5 +96,9 @@ public class ESLibraryBookRepository {
         searchSourceBuilder.query(queryBuilder);
         searchRequest.source(searchSourceBuilder);
         return searchRequest;
+    }
+
+    private static boolean containsLongId(SearchHit searchHit) {
+        return ONLY_INTEGER_PATTERN.matcher(searchHit.getId()).matches();
     }
 }
