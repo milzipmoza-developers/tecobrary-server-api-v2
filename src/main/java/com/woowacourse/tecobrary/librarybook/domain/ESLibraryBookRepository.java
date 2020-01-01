@@ -92,6 +92,7 @@ public class ESLibraryBookRepository {
 
             List<LibraryBookResponseDto> libraryBooks = Arrays.stream(searchHits.getHits())
                     .filter(ESLibraryBookRepository::containsLongId)
+                    .sorted((searchHit1, searchHit2) -> Float.compare(searchHit2.getScore(), searchHit1.getScore()))
                     .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
                     .collect(Collectors.toList());
 
