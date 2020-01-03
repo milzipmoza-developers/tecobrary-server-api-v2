@@ -21,7 +21,8 @@ public class LibraryBookSearchController {
 
     @GetMapping("/book/search")
     public ResponseEntity searchLibraryBooks(@RequestParam final String keyword,
-                                             @RequestParam final int page, @RequestParam final int size) {
+                                             @RequestParam final int page,
+                                             @RequestParam final int size) {
         return ResponseEntity.ok(esLibraryBookService.searchLibraryBook(keyword, page, size));
     }
 }
