@@ -22,7 +22,6 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -41,19 +40,8 @@ public class ESLibraryBookRepository {
     private static final String DESCRIPTION = "description";
     private static final String IMAGE = "image";
 
-    private static final SearchHitsMapper<LibraryBookResponseDto> LIBRARY_BOOKS_RESPONSE_DTO_MAPPER = searchHit -> {
-        Map<String, Object> sources = searchHit.getSourceAsMap();
-
-        return LibraryBookResponseDto.builder()
-                .id(Long.valueOf(searchHit.getId()))
-                .title(String.valueOf(sources.get(TITLE)))
-                .author(String.valueOf(sources.get(AUTHOR)))
-                .publisher(String.valueOf(sources.get(PUBLISHER)))
-                .isbn(String.valueOf(sources.get(ISBN)))
-                .description(String.valueOf(sources.get(DESCRIPTION)))
-                .image(String.valueOf(sources.get(IMAGE)))
-                .build();
-    };
+    private static final SearchHitsMapper<LibraryBookResponseDto> LIBRARY_BOOKS_RESPONSE_DTO_MAPPER =
+            new LibraryBookDtoSearchHitsMapper();
 
     private final ESRestClient esRestClient;
 
