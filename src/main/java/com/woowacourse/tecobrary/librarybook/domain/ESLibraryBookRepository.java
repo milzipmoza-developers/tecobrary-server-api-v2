@@ -62,26 +62,6 @@ public class ESLibraryBookRepository {
         this.esRestClient = esRestClient;
     }
 
-    private static boolean containsLongId(final SearchHit searchHit) {
-        return ONLY_INTEGER_PATTERN.matcher(searchHit.getId()).matches();
-    }
-
-    private SearchRequest createSearchRequest(final String keyword) {
-        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
-                .minimumShouldMatch(1)
-                .should(QueryBuilders.matchQuery(TITLE, keyword))
-                .should(QueryBuilders.matchQuery(AUTHOR, keyword))
-                .should(QueryBuilders.matchQuery(PUBLISHER, keyword))
-                .should(QueryBuilders.matchQuery(ISBN, keyword))
-                .should(QueryBuilders.matchQuery(DESCRIPTION, keyword));
-
-        SearchRequest searchRequest = new SearchRequest(LIBRARY_BOOKS_INDEX_NAME);
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(queryBuilder);
-        searchRequest.source(searchSourceBuilder);
-        return searchRequest;
-    }
-
     public Page<LibraryBookResponseDto> searchByKeyword(final String keyword, final Pageable pageable) {
         SearchRequest searchRequest = createSearchRequest(keyword);
 
@@ -101,5 +81,25 @@ public class ESLibraryBookRepository {
             log.error(e.getMessage());
             throw new ESIOException(e);
         }
+    }
+
+    private SearchRequest createSearchRequest(final String keyword) {
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                .minimumShouldMatch(1)
+                .should(QueryBuilders.matchQuery(TITLE, keyword))
+                .should(QueryBuilders.matchQuery(AUTHOR, keyword))
+                .should(QueryBuilders.matchQuery(PUBLISHER, keyword))
+                .should(QueryBuilders.matchQuery(ISBN, keyword))
+                .should(QueryBuilders.matchQuery(DESCRIPTION, keyword));
+
+        SearchRequest searchRequest = new SearchRequest(LIBRARY_BOOKS_INDEX_NAME);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(queryBuilder);
+        searchRequest.source(searchSourceBuilder);
+        return searchRequest;
+    }
+
+    private static boolean containsLongId(final SearchHit searchHit) {
+        return ONLY_INTEGER_PATTERN.matcher(searchHit.getId()).matches();
     }
 }
