@@ -22,7 +22,7 @@ class ESLibraryBookServiceTest implements LibraryBookStatic {
     private ESLibraryBookRepository esLibraryBookRepository;
     private ESLibraryBookService esLibraryBookService;
 
-    @DisplayName("키워드에 해당하는 도서를 조회한다.")
+    @DisplayName("키워드를 포함하는 도서를 조회한다.")
     @Test
     void searchLibraryBooks() {
         String keyword = "웹";
