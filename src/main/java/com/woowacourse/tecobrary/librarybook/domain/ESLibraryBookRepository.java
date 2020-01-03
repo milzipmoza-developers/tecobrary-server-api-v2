@@ -6,6 +6,7 @@ import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -58,11 +59,7 @@ public class ESLibraryBookRepository {
 
             SearchHits searchHits = searchResponse.getHits();
 
-            List<LibraryBookResponseDto> libraryBooks = Arrays.stream(searchHits.getHits())
-                    .filter(ESLibraryBookRepository::containsLongId)
-                    .sorted((searchHit1, searchHit2) -> Float.compare(searchHit2.getScore(), searchHit1.getScore()))
-                    .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
-                    .collect(Collectors.toList());
+            List<LibraryBookResponseDto> libraryBooks = getLibraryBookResponseDtosContainingLongId(searchHits);
 
             return new PageImpl<>(libraryBooks, pageable, searchHits.getTotalHits().value);
         } catch (IOException e) {
@@ -72,19 +69,35 @@ public class ESLibraryBookRepository {
     }
 
     private SearchRequest createSearchRequest(final String keyword) {
-        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+        QueryBuilder queryBuilder = createQueryBuilder(keyword);
+
+        SearchRequest searchRequest = new SearchRequest(LIBRARY_BOOKS_INDEX_NAME);
+        SearchSourceBuilder searchSourceBuilder = createSearchSourceBuilder(queryBuilder);
+        searchRequest.source(searchSourceBuilder);
+        return searchRequest;
+    }
+
+    private BoolQueryBuilder createQueryBuilder(final String keyword) {
+        return QueryBuilders.boolQuery()
                 .minimumShouldMatch(1)
                 .should(QueryBuilders.matchQuery(TITLE, keyword))
                 .should(QueryBuilders.matchQuery(AUTHOR, keyword))
                 .should(QueryBuilders.matchQuery(PUBLISHER, keyword))
                 .should(QueryBuilders.matchQuery(ISBN, keyword))
                 .should(QueryBuilders.matchQuery(DESCRIPTION, keyword));
+    }
 
-        SearchRequest searchRequest = new SearchRequest(LIBRARY_BOOKS_INDEX_NAME);
+    private SearchSourceBuilder createSearchSourceBuilder(final QueryBuilder queryBuilder) {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(queryBuilder);
-        searchRequest.source(searchSourceBuilder);
-        return searchRequest;
+        return searchSourceBuilder;
+    }
+
+    private List<LibraryBookResponseDto> getLibraryBookResponseDtosContainingLongId(final SearchHits searchHits) {
+        return Arrays.stream(searchHits.getHits())
+                .filter(ESLibraryBookRepository::containsLongId)
+                .map(LIBRARY_BOOKS_RESPONSE_DTO_MAPPER::map)
+                .collect(Collectors.toList());
     }
 
     private static boolean containsLongId(final SearchHit searchHit) {
