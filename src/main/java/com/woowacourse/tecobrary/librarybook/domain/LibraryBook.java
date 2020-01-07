@@ -20,6 +20,13 @@ import java.time.LocalDateTime;
 @Access(AccessType.FIELD)
 public class LibraryBook {
 
+    public static final String IMAGE = "image";
+    public static final String TITLE = "title";
+    public static final String AUTHOR = "author";
+    public static final String PUBLISHER = "publisher";
+    public static final String ISBN = "isbn";
+    public static final String DESCRIPTION = "description";
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")

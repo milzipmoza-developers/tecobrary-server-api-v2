@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.woowacourse.tecobrary.librarybook.domain.LibraryBook.*;
+
 @Repository
 public class ESLibraryBookRepository {
 
@@ -34,12 +36,6 @@ public class ESLibraryBookRepository {
     private static final Pattern ONLY_INTEGER_PATTERN = Pattern.compile("^[0-9]+$");
 
     private static final String LIBRARY_BOOKS_INDEX_NAME = "librarybooks";
-    private static final String TITLE = "title";
-    private static final String AUTHOR = "author";
-    private static final String PUBLISHER = "publisher";
-    private static final String ISBN = "isbn";
-    private static final String DESCRIPTION = "description";
-    private static final String IMAGE = "image";
 
     private static final SearchHitsMapper<LibraryBookResponseDto> LIBRARY_BOOKS_RESPONSE_DTO_MAPPER =
             new LibraryBookDtoSearchHitsMapper();
