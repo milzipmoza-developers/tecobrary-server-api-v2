@@ -206,7 +206,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                 statusCode(400);
     }
 
-    @DisplayName("[GET] /books/search?title=객체&page=1&number=10, 도서 제목으로 도서를 조회한다.")
+    @DisplayName("[GET] /books/title/search?title=객체&page=1&number=10, 도서 제목으로 도서를 조회한다.")
     @Test
     void successfullyReadLibraryBooksByTitle() {
         given(this.spec).
@@ -227,7 +227,7 @@ class LibraryBookControllerTest extends AcceptanceTestUtils implements LibraryBo
                                 fieldWithPath("[0].isbn").description("target_book_isbn"),
                                 fieldWithPath("[0].description").description("target_book_desc")))).
         when().
-                get(baseUrl("/books/search")).
+                get(baseUrl("/books/title/search")).
         then().
                 log().ifError().
                 statusCode(200).

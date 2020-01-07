@@ -19,7 +19,7 @@ public class LibraryBookSearchController {
         this.esLibraryBookService = esLibraryBookService;
     }
 
-    @GetMapping("/book/search")
+    @GetMapping("/books/search")
     public ResponseEntity searchLibraryBooks(@RequestParam final String keyword,
                                              @RequestParam final int page,
                                              @RequestParam final int size) {
