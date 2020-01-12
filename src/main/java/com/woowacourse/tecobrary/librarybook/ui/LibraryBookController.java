@@ -42,7 +42,7 @@ public class LibraryBookController {
         return ResponseEntity.ok(libraryBookCRUDService.findAll(page, number));
     }
 
-    @GetMapping("/books/search")
+    @GetMapping("/books/title/search")
     public ResponseEntity readLibraryBooksByTitle(@RequestParam final int page, @RequestParam final int number, @RequestParam final String title) {
         return ResponseEntity.ok(libraryBookCRUDService.findAllByTitleContaining(title, page, number));
     }
