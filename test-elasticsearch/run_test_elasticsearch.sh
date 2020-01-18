@@ -25,12 +25,15 @@ docker run -d -it -p 9292:9200 -p 9393:9300 -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" 
 
 for i in {30..0}; do
   echo "[test-elasticsearch] Checking Elasticsearch is Started..."
-  echo ""
-  curl -s -o /dev/null localhost:9292
-  if  [ "$?" != "7" ] && [ $(curl -fsSL "http://localhost:9292/_cat/health?h=status" | grep -E '^green') ]; then
+  CURL_REPLY_EXIT_CODE=$(curl -s -w %{http_code} -o /dev/null localhost:9292)
+  if  [ "$CURL_REPLY_EXIT_CODE" != "000" ] && [ $(curl -fsSL "http://localhost:9292/_cat/health?h=status" | grep -E '^green') ]; then
     echo "------------------------------------------------------------"
+    echo ""
     echo "[test-elasticsearch] Elasticsearch is Started!"
     break
+  else
+    echo "[test-elasticsearch] Elasticsearch is Not Started Yet..."
+    echo ""
   fi
   sleep 2
 done
