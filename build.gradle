@@ -14,9 +14,22 @@ ext {
     snippetsDir = file('build/generated-snippets')
 }
 
+task testElasticsearchRunner(type: Exec) {
+    workingDir '.'
+    commandLine './test-elasticsearch/run_test_elasticsearch.sh'
+}
+
 test {
     useJUnitPlatform()
     outputs.dir snippetsDir
+    dependsOn 'testElasticsearchRunner'
+    finalizedBy 'testElasticsearchKiller'
+}
+
+task testElasticsearchKiller(type: Exec) {
+    workingDir '.'
+    commandLine './test-elasticsearch/kill_test_elasticsearch.sh'
+    dependsOn 'test'
 }
 
 asciidoctor {

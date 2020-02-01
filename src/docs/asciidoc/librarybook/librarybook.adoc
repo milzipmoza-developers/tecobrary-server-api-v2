@@ -29,3 +29,7 @@ include::successfully-read-library-books.adoc[]
 ==== 페이지와 페이지에 대한 도서 수에 문자를 입력하면, 도서목록 조회를 실패한다.
 
 include::failed-read-library-books.adoc[]
+
+==== 키워드로 도서를 조회한다.
+
+include::successfully-search-keyword.adoc[]

@@ -45,12 +45,20 @@ public interface LibraryBookStatic {
     String TEST_LIBRARY_BOOK_ISBN_07 = "8994774483 9788994774480";
     String TEST_LIBRARY_BOOK_DESCRIPTION_07 = "『코딩을 지탱하는 기술』는 프로그램이 언어가 가지고 있는 다양한 개념이 왜 존재하고 있는지를 설명해주고 있다. 저자는 언어 설계자의 관점에서 여러 언어를 비교하고 언어가 어떻게 변화되어 왔는지 설명한다. 더불어 다양한 개념이 왜 탄생하게 되었는지 이해할 수 있으며 각 언어를 왜, 언제, 어떻게... ";
 
+    Long TEST_LIBRARY_BOOK_ID_16 = 16L;
+    String TEST_LIBRARY_BOOK_IMAGE_16 = "https://bookthumb-phinf.pstatic.net/cover/139/875/13987505.jpg?type=m1&udate=20180928";
+    String TEST_LIBRARY_BOOK_TITLE_16 = "카카오 AI 리포트";
+    String TEST_LIBRARY_BOOK_AUTHOR_16 = "카카오 AI 리포트 편집진";
+    String TEST_LIBRARY_BOOK_PUBLISHER_16 = "북바이북";
+    String TEST_LIBRARY_BOOK_ISBN_16 = "1185400826 9791185400822";
+
     String TEST_LIBRARY_BOOK_IMAGE_99 = "https://bookthumb-phinf.pstatic.net/cover/101/607/10160776.jpg?type=m1&udate=20190216";
     String TEST_LIBRARY_BOOK_TITLE_99 = "SQL 레벨업 (DB 성능 최적화를 위한 SQL 실전 가이드)";
     String TEST_LIBRARY_BOOK_AUTHOR_99 = "미크";
     String TEST_LIBRARY_BOOK_PUBLISHER_99 = "한빛미디어";
     String TEST_LIBRARY_BOOK_ISBN_99 = "8968482519 9788968482519";
     String TEST_LIBRARY_BOOK_DESCRIPTION_99 = "『SQL 레벨업』은 《SQL 첫걸음》으로 성공적인 입문을 마치고, 다음 고지를 바라보는 이들을 위한 책이다. 고성능 SQL 작성 방법을 초보자 눈높이에 맞춰 다양한 예제를 통해 설명한다. 특히 오라클과 호환성을 목표로 하는 오픈소스인 POSTGRESQL을 사용하여 모든 예제를 작성했고, 둘의 수행 결과가 상이한... ";
+
 
     LibraryBook TEST_LIBRARY_BOOK = new LibraryBook(
             new BookCoverUrl(TEST_IMAGE),

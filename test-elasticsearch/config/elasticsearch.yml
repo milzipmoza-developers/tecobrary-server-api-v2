@@ -1,0 +1,17 @@
+## Default Elasticsearch configuration from Elasticsearch base image.
+## https://github.com/elastic/elasticsearch/blob/master/distribution/docker/src/docker/config/elasticsearch.yml
+
+# --------------------------------- Cluster ----------------------------------
+cluster.name: "tecobrary-es-cluster"
+
+# --------------------------------- Node -------------------------------------
+node.name: "es-node"
+
+# --------------------------------- Network ----------------------------------
+network.host: 0.0.0.0
+
+# --------------------------------- Discovery --------------------------------
+discovery.type: single-node
+
+# --------------------------------- Bootstrap ----------------------------------
+bootstrap.memory_lock: true
