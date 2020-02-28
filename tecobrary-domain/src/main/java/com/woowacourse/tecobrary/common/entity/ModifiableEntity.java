@@ -19,7 +19,7 @@ public class ModifiableEntity {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "modifiedAt",
+    @Column(name = "updatedAt",
             nullable = false)
-    private LocalDateTime modifiedAt;
+    private LocalDateTime updatedAt;
 }

@@ -34,7 +34,7 @@ public class RentHistory extends DeletableEntity {
     }
 
     @Override
-    protected LocalDateTime softDelete() {
+    public LocalDateTime softDelete() {
         return super.softDelete();
     }
 

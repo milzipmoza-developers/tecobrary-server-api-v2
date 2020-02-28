@@ -43,6 +43,11 @@ public class WishBook extends DeletableEntity {
         this.wishBookRequestUser = wishBookRequestUser;
     }
 
+    @Override
+    public LocalDateTime softDelete() {
+        return super.softDelete();
+    }
+
     public String getImage() {
         return wishBookCoverUrl.getImage();
     }
