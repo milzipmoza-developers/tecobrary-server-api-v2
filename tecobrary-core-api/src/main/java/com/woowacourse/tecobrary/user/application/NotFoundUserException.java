@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.command.application;
+package com.woowacourse.tecobrary.user.application;
 
 public class NotFoundUserException extends RuntimeException {
 

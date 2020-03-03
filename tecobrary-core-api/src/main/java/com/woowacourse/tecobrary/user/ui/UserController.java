@@ -11,7 +11,7 @@
 
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.user.command.application.UserService;
+import com.woowacourse.tecobrary.user.application.UserService;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
 import org.springframework.beans.factory.annotation.Autowired;

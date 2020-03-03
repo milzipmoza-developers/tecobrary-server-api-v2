@@ -1,8 +1,8 @@
-package com.woowacourse.tecobrary.wishbook.command.application;
+package com.woowacourse.tecobrary.wishbook.application;
 
 import com.woowacourse.tecobrary.librarybook.util.BookConverter;
 import com.woowacourse.tecobrary.tecorvis.api.SlackBotService;
-import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;

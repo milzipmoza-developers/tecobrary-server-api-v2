@@ -9,7 +9,7 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.command.application;
+package com.woowacourse.tecobrary.user.application;
 
 public class NotFoundGithubUserException extends RuntimeException {
 

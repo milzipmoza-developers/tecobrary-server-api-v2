@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.command.application;
+package com.woowacourse.tecobrary.wishbook.application;
 
 public class NotFoundWishBookException extends RuntimeException {
 

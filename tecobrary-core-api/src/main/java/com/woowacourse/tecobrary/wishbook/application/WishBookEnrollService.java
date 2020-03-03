@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.command.application;
+package com.woowacourse.tecobrary.wishbook.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;

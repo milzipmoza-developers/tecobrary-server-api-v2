@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
-import com.woowacourse.tecobrary.wishbook.command.application.WishBookCRUDService;
+import com.woowacourse.tecobrary.wishbook.application.WishBookCRUDService;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

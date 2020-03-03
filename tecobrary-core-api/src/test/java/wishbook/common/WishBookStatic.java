@@ -2,7 +2,7 @@ package wishbook.common;
 
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
-import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.domain.WishBookRequestUser;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;

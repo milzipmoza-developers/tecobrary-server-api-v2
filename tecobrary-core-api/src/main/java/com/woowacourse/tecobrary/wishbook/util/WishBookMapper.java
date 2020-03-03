@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.command.util;
+package com.woowacourse.tecobrary.wishbook.util;
 
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookDto;

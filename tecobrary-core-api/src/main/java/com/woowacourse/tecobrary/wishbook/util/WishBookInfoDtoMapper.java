@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.wishbook.command.util;
+package com.woowacourse.tecobrary.wishbook.util;
 
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;

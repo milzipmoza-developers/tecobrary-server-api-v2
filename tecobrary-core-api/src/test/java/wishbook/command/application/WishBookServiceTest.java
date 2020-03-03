@@ -1,10 +1,10 @@
 package wishbook.command.application;
 
-import com.woowacourse.tecobrary.wishbook.command.application.AlreadySoftDeletedWishBookException;
-import com.woowacourse.tecobrary.wishbook.command.application.DuplicatedWishBookIsbnException;
-import com.woowacourse.tecobrary.wishbook.command.application.NotFoundWishBookException;
-import com.woowacourse.tecobrary.wishbook.command.application.WishBookService;
-import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.application.AlreadySoftDeletedWishBookException;
+import com.woowacourse.tecobrary.wishbook.application.DuplicatedWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.application.NotFoundWishBookException;
+import com.woowacourse.tecobrary.wishbook.application.WishBookService;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.domain.WishBookRepository;
 import org.junit.jupiter.api.DisplayName;

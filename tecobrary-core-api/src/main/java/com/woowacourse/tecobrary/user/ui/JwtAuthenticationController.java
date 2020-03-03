@@ -2,7 +2,7 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.github.dto.GithubApiResponseDto;
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
-import com.woowacourse.tecobrary.user.command.application.UserService;
+import com.woowacourse.tecobrary.user.application.UserService;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

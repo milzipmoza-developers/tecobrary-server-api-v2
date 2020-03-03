@@ -1,8 +1,8 @@
 package com.woowacourse.tecobrary.wishbook.ui;
 
-import com.woowacourse.tecobrary.wishbook.command.application.AlreadySoftDeletedWishBookException;
-import com.woowacourse.tecobrary.wishbook.command.application.DuplicatedWishBookIsbnException;
-import com.woowacourse.tecobrary.wishbook.command.application.NotFoundWishBookException;
+import com.woowacourse.tecobrary.wishbook.application.AlreadySoftDeletedWishBookException;
+import com.woowacourse.tecobrary.wishbook.application.DuplicatedWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.application.NotFoundWishBookException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,7 @@ package com.woowacourse.tecobrary.user.ui;
 
 import com.woowacourse.tecobrary.github.api.GithubApiService;
 import com.woowacourse.tecobrary.github.dto.GithubApiResponseDto;
-import com.woowacourse.tecobrary.user.command.application.UserGithubService;
+import com.woowacourse.tecobrary.user.application.UserGithubService;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package wishbook.ui;
 
-import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import common.util.AcceptanceTestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

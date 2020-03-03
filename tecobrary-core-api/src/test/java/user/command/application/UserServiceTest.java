@@ -1,8 +1,8 @@
 package user.command.application;
 
-import com.woowacourse.tecobrary.user.command.application.NotFoundGithubUserException;
-import com.woowacourse.tecobrary.user.command.application.NotFoundUserException;
-import com.woowacourse.tecobrary.user.command.application.UserService;
+import com.woowacourse.tecobrary.user.application.NotFoundGithubUserException;
+import com.woowacourse.tecobrary.user.application.NotFoundUserException;
+import com.woowacourse.tecobrary.user.application.UserService;
 import com.woowacourse.tecobrary.user.domain.User;
 import com.woowacourse.tecobrary.user.domain.UserRepository;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;

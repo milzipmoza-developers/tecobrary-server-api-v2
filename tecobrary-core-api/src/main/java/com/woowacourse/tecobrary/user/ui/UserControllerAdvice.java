@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.user.command.application.NotFoundUserException;
+import com.woowacourse.tecobrary.user.application.NotFoundUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

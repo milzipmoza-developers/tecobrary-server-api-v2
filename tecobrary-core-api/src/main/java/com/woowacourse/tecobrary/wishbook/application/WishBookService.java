@@ -1,6 +1,6 @@
-package com.woowacourse.tecobrary.wishbook.command.application;
+package com.woowacourse.tecobrary.wishbook.application;
 
-import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
 import com.woowacourse.tecobrary.wishbook.domain.WishBookRepository;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;

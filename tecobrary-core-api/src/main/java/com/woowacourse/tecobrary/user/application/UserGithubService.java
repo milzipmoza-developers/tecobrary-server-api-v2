@@ -9,12 +9,12 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.command.application;
+package com.woowacourse.tecobrary.user.application;
 
 import com.woowacourse.tecobrary.github.api.GithubApiService;
 import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
-import com.woowacourse.tecobrary.user.command.util.UserGithubInfoMapper;
-import com.woowacourse.tecobrary.user.command.util.UserJwtDtoConverter;
+import com.woowacourse.tecobrary.user.util.UserGithubInfoMapper;
+import com.woowacourse.tecobrary.user.util.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.user.domain.User;
 import com.woowacourse.tecobrary.user.domain.UserGithubInfo;
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
