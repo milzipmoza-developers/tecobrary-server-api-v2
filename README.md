@@ -7,7 +7,7 @@
 * Tomcat 9.0.22
 * Gradle
 * Docker 
-  - [Dockerfile](./Dockerfile)
+  - [Dockerfile](tecobrary-core-api/Dockerfile)
   - [./docker/docker-compose.yml](./docker/docker-compose.yml)
   
 ## 테스트 환경
@@ -15,7 +15,7 @@
 * Tomcat 9.0.22
 * Gradle
 * Docker 
-  - [Dockerfile](./Dockerfile)
+  - [Dockerfile](tecobrary-core-api/Dockerfile)
   - [./docker/docker-compose.yml](./docker/docker-compose.yml)
 * MySQL 5.7
   
