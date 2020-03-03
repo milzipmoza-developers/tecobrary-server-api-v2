@@ -1,5 +1,6 @@
 package common.infra.filter;
 
+import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.common.infra.filter.JwtFilter;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,10 @@ import static org.mockito.Mockito.mock;
 
 @PrepareForTest({ JwtUtils.class })
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = TecobraryApplication.class
+)
 class JwtFilterTest {
 
     private static final String EXPIRED_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
@@ -45,7 +49,7 @@ class JwtFilterTest {
     @DisplayName("비어있는 Request Header 의 Authorization 에 대하여 Forbidden 을 응답한다.")
     @Test
     void requestAuthorizationHeaderIsNull() throws ServletException, IOException {
-        jwtFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilter(request, response, filterChain);
         assertEquals(response.getStatus(), HttpServletResponse.SC_FORBIDDEN);
     }
 
@@ -53,7 +57,7 @@ class JwtFilterTest {
     @Test
     void requestAuthorizationHeaderHasNoBearerPrefix() throws ServletException, IOException {
         request.addHeader("Authorization", "this is not valid header");
-        jwtFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilter(request, response, filterChain);
         assertEquals(response.getStatus(), HttpServletResponse.SC_FORBIDDEN);
     }
 
@@ -61,7 +65,7 @@ class JwtFilterTest {
     @Test
     void requestAuthorizationHeaderHasNoDelimiter() throws ServletException, IOException {
         request.addHeader("Authorization", "Bearer" + EXPIRED_TOKEN);
-        jwtFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilter(request, response, filterChain);
         assertEquals(response.getStatus(), HttpServletResponse.SC_FORBIDDEN);
     }
 }

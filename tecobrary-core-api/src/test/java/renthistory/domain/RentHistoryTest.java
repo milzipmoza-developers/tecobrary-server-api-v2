@@ -11,9 +11,11 @@
 
 package renthistory.domain;
 
-import com.woowacourse.tecobrary.renthistory.common.RentHistoryStatic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import renthistory.common.RentHistoryStatic;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RentHistoryTest implements RentHistoryStatic {
 

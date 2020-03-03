@@ -34,7 +34,7 @@ class CorsFilterTest {
         request.setMethod(OPTIONS);
 
         CorsFilter corsFilter = new CorsFilter();
-        corsFilter.doFilterInternal(request, response, filterChain);
+        corsFilter.doFilter(request, response, filterChain);
 
         assertEquals(response.getStatus(), HttpServletResponse.SC_OK);
         assertEquals(response.getHeader(ACCESS_CONTROL_ALLOW_ORIGIN), ALLOW_ORIGIN);

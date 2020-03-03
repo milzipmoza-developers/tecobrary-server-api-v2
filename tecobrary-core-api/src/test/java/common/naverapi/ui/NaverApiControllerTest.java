@@ -1,6 +1,7 @@
 package common.naverapi.ui;
 
 import common.util.AcceptanceTestUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 class NaverApiControllerTest extends AcceptanceTestUtils {
 
     @DisplayName("[GET] /naverapi, 검색 키워드와 갯수, 페이지를 요청시 성공적으로 응답을 받는다.")
+    @Disabled
     @Test
     void successfullySearchFromNaverApi() {
             given(this.spec).

@@ -1,5 +1,6 @@
 package user.infra.util;
 
+import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
 import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = TecobraryApplication.class)
 class JwtUtilsTest {
 
     private static final Logger log = LoggerFactory.getLogger(JwtUtilsTest.class);

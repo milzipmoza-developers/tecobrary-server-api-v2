@@ -1,15 +1,15 @@
 package user.ui;
 
-import com.woowacourse.tecobrary.common.util.AcceptanceTestUtils;
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
-import com.woowacourse.tecobrary.user.common.UserStatic;
 import com.woowacourse.tecobrary.user.ui.GithubUserApiController;
+import common.util.AcceptanceTestUtils;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import user.common.UserStatic;
 
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;

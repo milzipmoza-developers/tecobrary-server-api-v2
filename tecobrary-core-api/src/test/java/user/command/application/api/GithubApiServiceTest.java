@@ -1,5 +1,6 @@
 package user.command.application.api;
 
+import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApi;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiClient;
 import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = TecobraryApplication.class)
 class GithubApiServiceTest implements GithubApiStatic {
 
     private static final String VIRTUAL_ACCESS_TOKEN = "access token is this";

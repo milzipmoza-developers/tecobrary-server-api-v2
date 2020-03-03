@@ -1,13 +1,12 @@
 package wishbook.command.application;
 
 import com.woowacourse.tecobrary.wishbook.command.application.AlreadySoftDeletedWishBookException;
+import com.woowacourse.tecobrary.wishbook.command.application.DuplicatedWishBookIsbnException;
+import com.woowacourse.tecobrary.wishbook.command.application.NotFoundWishBookException;
 import com.woowacourse.tecobrary.wishbook.command.application.WishBookService;
-import com.woowacourse.tecobrary.wishbook.command.domain.DuplicatedWishBookIsbnException;
-import com.woowacourse.tecobrary.wishbook.command.domain.NotFoundWishBookException;
-import com.woowacourse.tecobrary.wishbook.command.domain.WishBook;
-import com.woowacourse.tecobrary.wishbook.command.domain.WishBookRepository;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
-import com.woowacourse.tecobrary.wishbook.common.WishBookStatic;
+import com.woowacourse.tecobrary.wishbook.domain.WishBook;
+import com.woowacourse.tecobrary.wishbook.domain.WishBookRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
+import wishbook.common.WishBookStatic;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

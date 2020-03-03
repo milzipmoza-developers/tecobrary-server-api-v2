@@ -1,11 +1,12 @@
 package serial.domain;
 
-import com.woowacourse.tecobrary.serial.common.SerialStatic;
 import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import com.woowacourse.tecobrary.serial.exception.AlreadyReturnStatusException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import serial.common.SerialStatic;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SerialTest implements SerialStatic {

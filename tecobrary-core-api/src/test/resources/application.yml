@@ -14,3 +14,21 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+naver:
+  client_id: a
+  client_secret: a
+
+slackbot:
+  host: http://localhost:5000
+
+github:
+  user:
+    client_id: clientId
+    client_secret: clientSecret
+    redirect_uri: redirectUrl
+  api:
+    scope: scope
+
+jwt:
+  secret: test

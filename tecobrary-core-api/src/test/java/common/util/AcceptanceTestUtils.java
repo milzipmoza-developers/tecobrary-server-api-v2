@@ -1,5 +1,6 @@
 package common.util;
 
+import com.woowacourse.tecobrary.TecobraryApplication;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = TecobraryApplication.class
+)
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 public class AcceptanceTestUtils {
 
