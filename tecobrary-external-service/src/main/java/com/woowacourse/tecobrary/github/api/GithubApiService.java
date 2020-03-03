@@ -9,10 +9,10 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.command.application.api;
+package com.woowacourse.tecobrary.github.api;
 
-import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
-import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
+import com.woowacourse.tecobrary.github.utils.GsonUtils;
+import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class GithubApiService {
         return githubApi.githubUserApiAccessToken(code);
     }
 
-    public GithubUserInfoVo getGithubUserInfo(String githubApiAccessToken) {
+    public GithubUserInfoDto getGithubUserInfo(String githubApiAccessToken) {
         return GsonUtils.parseUserInfo(
                 githubApiClient.userInfo(githubApiAccessToken));
     }

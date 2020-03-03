@@ -9,9 +9,8 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.ui.dto;
+package com.woowacourse.tecobrary.github.dto;
 
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,10 +20,10 @@ import lombok.ToString;
 @ToString
 public class GithubApiResponseDto {
 
-    private UserJwtInfoVo user;
+    private UserJwtInfoDto user;
     private String token;
 
-    public GithubApiResponseDto(UserJwtInfoVo user, String token) {
+    public GithubApiResponseDto(UserJwtInfoDto user, String token) {
         this.user = user;
         this.token = token;
     }

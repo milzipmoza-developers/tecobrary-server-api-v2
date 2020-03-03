@@ -11,13 +11,13 @@
 
 package com.woowacourse.tecobrary.user.command.application;
 
-import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
+import com.woowacourse.tecobrary.github.api.GithubApiService;
+import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.user.command.util.UserGithubInfoMapper;
-import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.command.util.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.user.domain.User;
 import com.woowacourse.tecobrary.user.domain.UserGithubInfo;
-import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
+import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,16 +33,16 @@ public class UserGithubService {
         this.githubApiService = githubApiService;
     }
 
-    public UserJwtInfoVo getUserByGithubInfo(final String githubApiAccessToken) {
-        GithubUserInfoVo githubUserInfoVo = githubApiService.getGithubUserInfo(githubApiAccessToken);
+    public UserJwtInfoDto getUserByGithubInfo(final String githubApiAccessToken) {
+        GithubUserInfoDto githubUserInfoVo = githubApiService.getGithubUserInfo(githubApiAccessToken);
         try {
-            return UserJwtVoMapper.toVo(userService.findByGithubId(githubUserInfoVo.getId()));
+            return UserJwtDtoConverter.convert(userService.findByGithubId(githubUserInfoVo.getId()));
         } catch (NotFoundGithubUserException e) {
-            return UserJwtVoMapper.toVo(getNewUserAfterSave(githubApiAccessToken, githubUserInfoVo));
+            return UserJwtDtoConverter.convert(getNewUserAfterSave(githubApiAccessToken, githubUserInfoVo));
         }
     }
 
-    private User getNewUserAfterSave(final String githubApiAccessToken, final GithubUserInfoVo githubUserInfoVo) {
+    private User getNewUserAfterSave(final String githubApiAccessToken, final GithubUserInfoDto githubUserInfoVo) {
         UserGithubInfo userGithubInfo = UserGithubInfoMapper.toDomain(githubUserInfoVo,
                 githubApiService.getGithubUserEmail(githubApiAccessToken));
         return userService.save(userGithubInfo);

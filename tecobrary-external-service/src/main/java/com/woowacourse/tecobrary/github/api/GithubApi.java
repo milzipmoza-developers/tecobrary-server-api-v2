@@ -9,12 +9,12 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.command.application.api;
+package com.woowacourse.tecobrary.github.api;
 
-import com.woowacourse.tecobrary.common.utils.BodyParser;
-import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUrlBuilder;
-import com.woowacourse.tecobrary.user.infra.util.GsonUtils;
-import com.woowacourse.tecobrary.user.ui.vo.GithubEmailVo;
+import com.woowacourse.tecobrary.github.utils.GithubUserApiUrlBuilder;
+import com.woowacourse.tecobrary.github.utils.GsonUtils;
+import com.woowacourse.tecobrary.github.dto.GithubEmailDto;
+import com.woowacourse.tecobrary.utils.BodyParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,10 +44,10 @@ public class GithubApi {
     }
 
     public String getPrimaryEmail(String githubApiUserEmailClientResponse) {
-        List<GithubEmailVo> githubEmailVo = GsonUtils.parseUserEmail(githubApiUserEmailClientResponse);
-        return githubEmailVo.stream()
-                .filter(GithubEmailVo::isPrimary)
-                .map(GithubEmailVo::getEmail)
+        List<GithubEmailDto> githubEmailDto = GsonUtils.parseUserEmail(githubApiUserEmailClientResponse);
+        return githubEmailDto.stream()
+                .filter(GithubEmailDto::isPrimary)
+                .map(GithubEmailDto::getEmail)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 접근"));
     }

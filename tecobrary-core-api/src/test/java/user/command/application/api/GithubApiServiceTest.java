@@ -1,10 +1,10 @@
 package user.command.application.api;
 
 import com.woowacourse.tecobrary.TecobraryApplication;
-import com.woowacourse.tecobrary.user.command.application.api.GithubApi;
-import com.woowacourse.tecobrary.user.command.application.api.GithubApiClient;
-import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
-import com.woowacourse.tecobrary.user.ui.vo.GithubUserInfoVo;
+import com.woowacourse.tecobrary.github.api.GithubApi;
+import com.woowacourse.tecobrary.github.api.GithubApiClient;
+import com.woowacourse.tecobrary.github.api.GithubApiService;
+import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -86,7 +86,7 @@ class GithubApiServiceTest implements GithubApiStatic {
     void githubUserInfo() {
         given(githubApiClient.userInfo(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_USERS_RETURN);
 
-        GithubUserInfoVo expected = new GithubUserInfoVo("1", "https://github.com/images/error/octocat_happy.gif", "octocat");
+        GithubUserInfoDto expected = new GithubUserInfoDto("1", "https://github.com/images/error/octocat_happy.gif", "octocat");
 
         assertEquals(githubApiService.getGithubUserInfo(VIRTUAL_ACCESS_TOKEN), expected);
     }

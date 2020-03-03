@@ -1,5 +1,5 @@
 /*
- * @(#) GithubUserInfoVo.java
+ * @(#) GithubUserInfoDto.java
  *
  * v 1.0.0
  *
@@ -9,7 +9,7 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.ui.vo;
+package com.woowacourse.tecobrary.github.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,13 +20,13 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class GithubUserInfoVo {
+public class GithubUserInfoDto {
 
     private String id;
     private String avatar_url;
     private String name;
 
-    public GithubUserInfoVo(String id, String avatar_url, String name) {
+    public GithubUserInfoDto(String id, String avatar_url, String name) {
         this.id = id;
         this.avatar_url = avatar_url;
         this.name = name;

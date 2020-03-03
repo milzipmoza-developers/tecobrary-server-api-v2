@@ -7,7 +7,7 @@ import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
 import com.woowacourse.tecobrary.librarybook.util.BookConverter;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
-import com.woowacourse.tecobrary.tecorvis.SlackBotService;
+import com.woowacourse.tecobrary.tecorvis.api.SlackBotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

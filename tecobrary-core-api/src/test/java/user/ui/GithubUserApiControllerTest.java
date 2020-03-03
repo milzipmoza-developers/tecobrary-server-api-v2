@@ -1,7 +1,7 @@
 package user.ui;
 
+import com.woowacourse.tecobrary.github.api.GithubApiService;
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
-import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.ui.GithubUserApiController;
 import common.util.AcceptanceTestUtils;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;

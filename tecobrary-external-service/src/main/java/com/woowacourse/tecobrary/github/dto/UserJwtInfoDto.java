@@ -9,14 +9,14 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.ui.vo;
+package com.woowacourse.tecobrary.github.dto;
 
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
-public class UserJwtInfoVo {
+public class UserJwtInfoDto {
 
     private String id;
     private String email;
@@ -25,7 +25,7 @@ public class UserJwtInfoVo {
     private String authorization;
 
     @Builder
-    private UserJwtInfoVo(final Long id, final String email, final String name, final String avatarUrl, final String authorization) {
+    private UserJwtInfoDto(final Long id, final String email, final String name, final String avatarUrl, final String authorization) {
         this.id = String.valueOf(id);
         this.email = email;
         this.name = name;

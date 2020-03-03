@@ -11,7 +11,7 @@
 
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.user.infra.util.GithubUserApiUrlBuilder;
+import com.woowacourse.tecobrary.github.utils.GithubUserApiUrlBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @Slf4j
 @CrossOrigin(origins = "*")
-@RequestMapping("/github")
+@RequestMapping("/com/woowacourse/tecobrary/github")
 public class GithubOAuthController {
 
     private final GithubUserApiUrlBuilder githubUserApiUrlBuilder;

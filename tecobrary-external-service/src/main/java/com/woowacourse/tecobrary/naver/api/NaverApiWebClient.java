@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.naver;
+package com.woowacourse.tecobrary.naver.api;
 
 import com.woowacourse.tecobrary.naver.dto.NaverApiDto;
 import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;

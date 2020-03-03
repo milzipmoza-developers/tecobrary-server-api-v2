@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.infra.util;
 
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
+import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -28,13 +28,13 @@ public class JwtUtils implements Serializable {
         SECRET = secret;
     }
 
-    public static String generateToken(final UserJwtInfoVo userJwtInfoVo) {
+    public static String generateToken(final UserJwtInfoDto userJwtInfoDto) {
         Map<String, Object> claims = new LinkedHashMap<>();
-        claims.put("id", userJwtInfoVo.getId());
-        claims.put("email", userJwtInfoVo.getEmail());
-        claims.put("name", userJwtInfoVo.getName());
-        claims.put("authorization", userJwtInfoVo.getAuthorization());
-        claims.put("avatarUrl", userJwtInfoVo.getAvatarUrl());
+        claims.put("id", userJwtInfoDto.getId());
+        claims.put("email", userJwtInfoDto.getEmail());
+        claims.put("name", userJwtInfoDto.getName());
+        claims.put("authorization", userJwtInfoDto.getAuthorization());
+        claims.put("avatarUrl", userJwtInfoDto.getAvatarUrl());
 
         Map<String, Object> headers = new LinkedHashMap<>();
         headers.put("alg", "HS256");
@@ -42,9 +42,9 @@ public class JwtUtils implements Serializable {
         return doGenerateToken(claims, headers);
     }
 
-    public static Boolean validateToken(final String token, final UserJwtInfoVo userJwtInfoVo) {
+    public static Boolean validateToken(final String token, final UserJwtInfoDto userJwtInfoDto) {
         final String userNo = getUserIdFromToken(token);
-        return (userNo.equals(userJwtInfoVo.getId()) && !isTokenExpired(token));
+        return (userNo.equals(userJwtInfoDto.getId()) && !isTokenExpired(token));
     }
 
     public static Boolean isTokenExpired(final String token) {

@@ -2,7 +2,7 @@ package user.infra.util;
 
 import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
+import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,11 +25,11 @@ class JwtUtilsTest {
             "w4kRk3C-3Visj-hFlm5fGGqTMr80IZdo7W8ML2IKN8Q";
 
     private String jwtToken;
-    private UserJwtInfoVo userJwtInfoVo;
+    private UserJwtInfoDto userJwtInfoDto;
 
     @BeforeEach
     void setUp() {
-        userJwtInfoVo = UserJwtInfoVo.builder()
+        userJwtInfoDto = UserJwtInfoDto.builder()
                 .id(1L)
                 .email("luffy@milzipdevs.com")
                 .name("luffy")
@@ -37,14 +37,14 @@ class JwtUtilsTest {
                 .authorization("KING")
                 .build();
 
-        jwtToken = JwtUtils.generateToken(userJwtInfoVo);
+        jwtToken = JwtUtils.generateToken(userJwtInfoDto);
         log.debug("token : {}", jwtToken);
     }
 
     @DisplayName("jwt token 가 userJwtInfoVo 로 생성된 유효한 토큰인지 확인한다.")
     @Test
     void validateToken() {
-        assertTrue(JwtUtils.validateToken(jwtToken, userJwtInfoVo));
+        assertTrue(JwtUtils.validateToken(jwtToken, userJwtInfoDto));
     }
 
     @DisplayName("JWT 로부터 UserId 를 성공적으로 받아온다.")

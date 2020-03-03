@@ -9,7 +9,7 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.ui.vo;
+package com.woowacourse.tecobrary.github.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +18,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class GithubEmailVo {
+public class GithubEmailDto {
 
     private String email;
     private boolean primary;
     private boolean verified;
     private String visibility;
 
-    public GithubEmailVo(String email, boolean primary, boolean verified, String visibility) {
+    public GithubEmailDto(String email, boolean primary, boolean verified, String visibility) {
         this.email = email;
         this.primary = primary;
         this.verified = verified;

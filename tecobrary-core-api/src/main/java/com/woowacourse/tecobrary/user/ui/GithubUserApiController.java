@@ -1,10 +1,10 @@
 package com.woowacourse.tecobrary.user.ui;
 
+import com.woowacourse.tecobrary.github.api.GithubApiService;
+import com.woowacourse.tecobrary.github.dto.GithubApiResponseDto;
 import com.woowacourse.tecobrary.user.command.application.UserGithubService;
-import com.woowacourse.tecobrary.user.command.application.api.GithubApiService;
 import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
-import com.woowacourse.tecobrary.user.ui.dto.GithubApiResponseDto;
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
+import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class GithubUserApiController {
     @GetMapping("/auth/user")
     public ResponseEntity tecobraryUserAuthentication(@RequestParam final String code) {
         String githubApiAccessToken = githubApiService.getGithubAccessToken(code);
-        UserJwtInfoVo userJwtInfoVo = userGithubService.getUserByGithubInfo(githubApiAccessToken);
-        return ResponseEntity.ok(new GithubApiResponseDto(userJwtInfoVo, JwtUtils.generateToken(userJwtInfoVo)));
+        UserJwtInfoDto userJwtInfoDto = userGithubService.getUserByGithubInfo(githubApiAccessToken);
+        return ResponseEntity.ok(new GithubApiResponseDto(userJwtInfoDto, JwtUtils.generateToken(userJwtInfoDto)));
     }
 }

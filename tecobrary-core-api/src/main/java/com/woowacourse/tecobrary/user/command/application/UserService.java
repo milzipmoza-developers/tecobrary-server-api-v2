@@ -12,12 +12,12 @@
 package com.woowacourse.tecobrary.user.command.application;
 
 import com.woowacourse.tecobrary.user.command.util.UserInfoDtoMapper;
-import com.woowacourse.tecobrary.user.command.util.UserJwtVoMapper;
+import com.woowacourse.tecobrary.user.command.util.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.user.domain.*;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
-import com.woowacourse.tecobrary.user.ui.vo.UserJwtInfoVo;
+import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,8 +51,8 @@ public class UserService {
                 .orElseThrow(NotFoundGithubUserException::new);
     }
 
-    public UserJwtInfoVo findUserJwtInfoByUserNo(final String userNo) {
-        return UserJwtVoMapper.toVo(findById(userNo));
+    public UserJwtInfoDto findUserJwtInfoByUserNo(final String userNo) {
+        return UserJwtDtoConverter.convert(findById(userNo));
     }
 
     private User findById(final String userNo) {

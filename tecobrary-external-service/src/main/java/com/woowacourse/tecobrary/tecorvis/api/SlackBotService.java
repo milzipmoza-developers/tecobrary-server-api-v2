@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.tecorvis;
+package com.woowacourse.tecobrary.tecorvis.api;
 
 import com.woowacourse.tecobrary.tecorvis.dto.SlackBotBookInfoDto;
 import org.slf4j.Logger;
