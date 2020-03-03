@@ -13,11 +13,9 @@ public class UserGithubInfoMapper {
                 .avatarUrl(githubUserInfoDto.getAvatar_url())
                 .build();
 
-        return UserGithubInfo.builder()
-                .githubId(githubUserInfo.getGithubId())
-                .name(githubUserInfo.getName())
-                .email(githubUserInfo.getEmail())
-                .httpsUrl(githubUserInfo.getAvatarUrl())
-                .build();
+        return new UserGithubInfo(githubUserInfo.getGithubId(),
+                githubUserInfo.getName(),
+                githubUserInfo.getEmail(),
+                githubUserInfo.getAvatarUrl());
     }
 }
