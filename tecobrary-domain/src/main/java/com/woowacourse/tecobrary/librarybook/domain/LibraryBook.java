@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.domain;
 
+import com.woowacourse.tecobrary.common.entity.DefaultBook;
 import com.woowacourse.tecobrary.common.entity.ModifiableEntity;
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = "id", callSuper = false)
 @Table(name = "LibraryBooks")
 @Access(AccessType.FIELD)
-public class LibraryBook extends ModifiableEntity {
+public class LibraryBook extends ModifiableEntity implements DefaultBook {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

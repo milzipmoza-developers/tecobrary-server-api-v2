@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.domain;
 
+import com.woowacourse.tecobrary.common.entity.DefaultBook;
 import com.woowacourse.tecobrary.common.entity.DeletableEntity;
 import com.woowacourse.tecobrary.common.model.BookCoverUrl;
 import com.woowacourse.tecobrary.common.model.BookInfo;
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id", callSuper = false)
 @Table(name = "WishBooks")
 @Access(AccessType.FIELD)
-public class WishBook extends DeletableEntity {
+public class WishBook extends DeletableEntity implements DefaultBook {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
