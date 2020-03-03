@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/http-request.adoc[]
+
+===== request body
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/request-body.adoc[]
+
+===== description
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/path-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/http-response.adoc[]
+
+===== response body
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/response-body.adoc[]
+
+===== description
+
+include::{snippets}/serial-create-read-controller-test/successfully-get-book-by-serial-number/response-fields.adoc[]

@@ -1,0 +1,35 @@
+==== 도서의 일련번호 목록을 조회한다.
+
+include::successfully-get-book-id-serials.adoc[]
+
+==== 도서가 존재하지 않으면, 도서의 일련번호 조회를 실패한다.
+
+include::failed-get-book-id-serials-bad-request.adoc[]
+
+==== 도서의 일련번호를 등록한다.
+
+include::successfully-create-serial.adoc[]
+
+==== 도서가 존재하지 않으면, 도서의 일련번호 등록을 실패한다.
+
+include::failed-create-serial-not-found-serial-target.adoc[]
+
+==== 일련번호가 이미 존재하면, 도서의 일련번호 등록을 실패한다.
+
+include::failed-create-serial-unique-constraint.adoc[]
+
+==== 도서의 일련번호를 삭제한다.
+
+include::successfully-remove-serial.adoc[]
+
+==== 도서의 일련번호가 존재하지 않으면, 일련번호 삭제를 실패한다.
+
+include::failed-remove-serial-not-exist-id.adoc[]
+
+==== 일련번호로 도서를 조회한다.
+
+include::successfully-get-book-by-serial-number.adoc[]
+
+==== 도서의 일련번호가 존재하지 않으면, 도서조회를 실패한다.
+
+include::failed-get-book-by-serial-number-not-exist.adoc[]
