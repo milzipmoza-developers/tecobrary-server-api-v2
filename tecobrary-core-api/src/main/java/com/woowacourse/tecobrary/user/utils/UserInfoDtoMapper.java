@@ -9,7 +9,7 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.user.util;
+package com.woowacourse.tecobrary.user.utils;
 
 import com.woowacourse.tecobrary.user.domain.User;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;

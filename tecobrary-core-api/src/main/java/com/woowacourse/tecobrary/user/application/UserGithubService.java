@@ -13,8 +13,8 @@ package com.woowacourse.tecobrary.user.application;
 
 import com.woowacourse.tecobrary.github.api.GithubApiService;
 import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
-import com.woowacourse.tecobrary.user.util.UserGithubInfoMapper;
-import com.woowacourse.tecobrary.user.util.UserJwtDtoConverter;
+import com.woowacourse.tecobrary.user.utils.UserGithubInfoMapper;
+import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.user.domain.User;
 import com.woowacourse.tecobrary.user.domain.UserGithubInfo;
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
@@ -42,8 +42,8 @@ public class UserGithubService {
         }
     }
 
-    private User getNewUserAfterSave(final String githubApiAccessToken, final GithubUserInfoDto githubUserInfoVo) {
-        UserGithubInfo userGithubInfo = UserGithubInfoMapper.toDomain(githubUserInfoVo,
+    private User getNewUserAfterSave(final String githubApiAccessToken, final GithubUserInfoDto githubUserInfoDto) {
+        UserGithubInfo userGithubInfo = UserGithubInfoMapper.toDomain(githubUserInfoDto,
                 githubApiService.getGithubUserEmail(githubApiAccessToken));
         return userService.save(userGithubInfo);
     }

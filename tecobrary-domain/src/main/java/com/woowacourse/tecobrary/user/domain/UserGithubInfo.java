@@ -54,6 +54,11 @@ public class UserGithubInfo {
         this.httpsUrl = httpsUrl;
     }
 
+    @Builder
+    public UserGithubInfo(final String githubId, final String name, final String email, final String httpsUrl) {
+        this(githubId, new UserName(name), new Email(email), new HttpsUrl(httpsUrl));
+    }
+
     String updateName(final String newName) {
         this.name = new UserName(newName);
         return name.getName();

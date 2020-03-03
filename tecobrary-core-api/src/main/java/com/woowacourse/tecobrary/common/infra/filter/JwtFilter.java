@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.common.infra.filter;
 
-import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
+import com.woowacourse.tecobrary.user.utils.JwtUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;

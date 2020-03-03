@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user.infra.util;
+package com.woowacourse.tecobrary.user.utils;
 
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 import io.jsonwebtoken.Claims;

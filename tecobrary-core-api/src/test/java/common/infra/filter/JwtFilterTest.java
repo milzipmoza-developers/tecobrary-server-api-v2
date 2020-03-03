@@ -2,7 +2,7 @@ package common.infra.filter;
 
 import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.common.infra.filter.JwtFilter;
-import com.woowacourse.tecobrary.user.infra.util.JwtUtils;
+import com.woowacourse.tecobrary.user.utils.JwtUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
