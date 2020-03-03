@@ -1,8 +1,8 @@
-package com.woowacourse.tecobrary.common.application.api;
+package com.woowacourse.tecobrary.naver;
 
-import com.woowacourse.tecobrary.common.ui.dto.NaverApiDto;
-import com.woowacourse.tecobrary.common.ui.dto.NaverApiItemDto;
-import com.woowacourse.tecobrary.common.ui.dto.NaverSearchRequestDto;
+import com.woowacourse.tecobrary.naver.dto.NaverApiDto;
+import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;
+import com.woowacourse.tecobrary.naver.dto.NaverSearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import java.util.List;
 public class NaverApiWebClient {
 
     private static final String REQUEST_SCHEME = "https";
-    private static final String REQUEST_HOST = "openapi.naver.com";
+    private static final String REQUEST_HOST = "openapi.com.woowacourse.tecobrary.naver.com";
     private static final String REQUEST_PATH = "v1/search/book.json";
     private static final String PARAM_QUERY = "query";
     private static final String PARAM_DISPLAY = "display";
@@ -28,8 +28,8 @@ public class NaverApiWebClient {
     private String clientSecret;
 
     @Autowired
-    public NaverApiWebClient(@Value("${naver.client_id}") final String clientId,
-                             @Value("${naver.client_secret}") final String clientSecret) {
+    public NaverApiWebClient(@Value("${com.woowacourse.tecobrary.naver.client_id}") final String clientId,
+                             @Value("${com.woowacourse.tecobrary.naver.client_secret}") final String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }

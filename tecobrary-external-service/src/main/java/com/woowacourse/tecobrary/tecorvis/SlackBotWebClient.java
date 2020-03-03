@@ -1,7 +1,6 @@
-package com.woowacourse.tecobrary.common.application.api;
+package com.woowacourse.tecobrary.tecorvis;
 
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
-import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookDto;
+import com.woowacourse.tecobrary.tecorvis.dto.SlackBotBookInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -25,7 +24,7 @@ public class SlackBotWebClient {
         this.host = host;
     }
 
-    public Mono<String> wishBookNotification(final WishBookDto wishBookDto) {
+    public Mono<String> wishBookNotification(final SlackBotBookInfoDto wishBookDto) {
         return WebClient
                 .create()
                 .post()
@@ -41,7 +40,7 @@ public class SlackBotWebClient {
                 .bodyToMono(String.class);
     }
 
-    public Mono<String> enrolledNotification(final LibraryBookDto libraryBookDto) {
+    public Mono<String> enrolledNotification(final SlackBotBookInfoDto libraryBookDto) {
         return WebClient
                 .create()
                 .post()

@@ -1,8 +1,6 @@
-package com.woowacourse.tecobrary.common.application;
+package com.woowacourse.tecobrary.tecorvis;
 
-import com.woowacourse.tecobrary.common.application.api.SlackBotWebClient;
-import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
-import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookDto;
+import com.woowacourse.tecobrary.tecorvis.dto.SlackBotBookInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +18,13 @@ public class SlackBotService {
         this.slackBotWebClient = slackBotWebClient;
     }
 
-    public void wishBookNotification(final WishBookDto wishBookDto) {
-        slackBotWebClient.wishBookNotification(wishBookDto).subscribe();
+    public void wishBookNotification(final SlackBotBookInfoDto bookInfoDto) {
+        slackBotWebClient.wishBookNotification(bookInfoDto).subscribe();
         log.info("Send SlackBot Request - Wish Book Notification");
     }
 
-    public void enrolledNotification(final LibraryBookDto libraryBookDto) {
-        slackBotWebClient.enrolledNotification(libraryBookDto).subscribe();
+    public void enrolledNotification(final SlackBotBookInfoDto bookInfoDto) {
+        slackBotWebClient.enrolledNotification(bookInfoDto).subscribe();
         log.info("Send SlackBot Request - Enrolled Notification Response");
     }
 }

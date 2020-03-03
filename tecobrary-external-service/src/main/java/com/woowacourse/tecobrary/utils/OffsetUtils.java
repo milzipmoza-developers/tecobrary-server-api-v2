@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.common.utils;
+package com.woowacourse.tecobrary.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

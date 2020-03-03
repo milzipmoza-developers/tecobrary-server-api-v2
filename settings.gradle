@@ -6,4 +6,5 @@ pluginManagement {
 rootProject.name = 'tecobrary'
 include 'tecobrary-domain'
 include 'tecobrary-core-api'
+include 'tecobrary-external-service'
 

@@ -1,12 +1,11 @@
-package com.woowacourse.tecobrary.common.application;
+package com.woowacourse.tecobrary.naver;
 
-import com.woowacourse.tecobrary.common.application.api.NaverApiWebClient;
-import com.woowacourse.tecobrary.common.ui.dto.NaverApiItemDto;
-import com.woowacourse.tecobrary.common.ui.dto.NaverSearchRequestDto;
-import com.woowacourse.tecobrary.common.utils.OffsetUtils;
+import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;
+import com.woowacourse.tecobrary.naver.dto.NaverSearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import com.woowacourse.tecobrary.utils.OffsetUtils;
 
 import java.util.List;
 

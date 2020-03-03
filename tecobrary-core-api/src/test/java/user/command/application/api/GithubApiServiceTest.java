@@ -45,7 +45,7 @@ class GithubApiServiceTest implements GithubApiStatic {
             "  \"company\": \"GitHub\",\n" +
             "  \"blog\": \"https://github.com/blog\",\n" +
             "  \"location\": \"San Francisco\",\n" +
-            "  \"email\": \"octocat@github.com\",\n" +
+            "  \"email\": \"octocat@com.woowacourse.tecobrary.github.com\",\n" +
             "  \"hireable\": false,\n" +
             "  \"bio\": \"There once was...\",\n" +
             "  \"public_repos\": 2,\n" +
@@ -57,7 +57,7 @@ class GithubApiServiceTest implements GithubApiStatic {
             "}";
     private static final String GITHUB_API_EMAIL_RETURN = "[\n" +
             "  {\n" +
-            "    \"email\": \"octocat@github.com\",\n" +
+            "    \"email\": \"octocat@com.woowacourse.tecobrary.github.com\",\n" +
             "    \"verified\": true,\n" +
             "    \"primary\": true,\n" +
             "    \"visibility\": \"public\"\n" +
@@ -95,9 +95,9 @@ class GithubApiServiceTest implements GithubApiStatic {
     @Test
     void githubUserEmail() {
         given(githubApiClient.userEmail(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_EMAIL_RETURN);
-        given(githubApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@github.com");
+        given(githubApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@com.woowacourse.tecobrary.github.com");
 
-        String expected = "octocat@github.com";
+        String expected = "octocat@com.woowacourse.tecobrary.github.com";
 
         assertEquals(githubApiService.getGithubUserEmail(VIRTUAL_ACCESS_TOKEN), expected);
     }
