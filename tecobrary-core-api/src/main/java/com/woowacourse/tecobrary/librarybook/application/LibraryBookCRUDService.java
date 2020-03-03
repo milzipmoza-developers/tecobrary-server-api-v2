@@ -1,12 +1,13 @@
 package com.woowacourse.tecobrary.librarybook.application;
 
-import com.woowacourse.tecobrary.common.application.SlackBotService;
 import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookTotalCountResponseDto;
+import com.woowacourse.tecobrary.librarybook.util.BookConverter;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
+import com.woowacourse.tecobrary.tecorvis.SlackBotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class LibraryBookCRUDService {
 
     public LibraryBookCreateResponseDto save(final LibraryBookDto libraryBookDto) {
         LibraryBook savedLibraryBook = libraryBookService.save(libraryBookDto);
-        slackBotService.enrolledNotification(LibraryBookMapper.toResponseDto(savedLibraryBook));
+        slackBotService.enrolledNotification(BookConverter.convert(savedLibraryBook));
         return new LibraryBookCreateResponseDto(savedLibraryBook.getId(), savedLibraryBook.getTitle() + " register succeed");
     }
 

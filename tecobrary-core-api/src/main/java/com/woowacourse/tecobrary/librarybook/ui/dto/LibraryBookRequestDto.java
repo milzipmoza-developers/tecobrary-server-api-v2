@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.ui.dto;
 
-import com.woowacourse.tecobrary.common.ui.dto.SlackBotModeDto;
+import com.woowacourse.tecobrary.tecorvis.dto.SlackBotModeDto;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

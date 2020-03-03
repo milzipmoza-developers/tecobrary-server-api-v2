@@ -1,6 +1,7 @@
 package com.woowacourse.tecobrary.wishbook.command.application;
 
-import com.woowacourse.tecobrary.common.application.SlackBotService;
+import com.woowacourse.tecobrary.librarybook.util.BookConverter;
+import com.woowacourse.tecobrary.tecorvis.SlackBotService;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.command.util.WishBookMapper;
 import com.woowacourse.tecobrary.wishbook.domain.WishBook;
@@ -37,7 +38,7 @@ public class WishBookCRUDService {
 
     public Long createWishBook(final WishBookInfoDto wishBookInfoDto) {
         WishBook wishBook = wishBookService.createWishBook(wishBookInfoDto);
-        slackBotService.wishBookNotification(WishBookMapper.toDto(wishBook));
+        slackBotService.wishBookNotification(BookConverter.convert(wishBook));
         return wishBook.getId();
     }
 

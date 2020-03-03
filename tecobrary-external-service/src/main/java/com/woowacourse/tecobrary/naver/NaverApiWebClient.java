@@ -28,8 +28,8 @@ public class NaverApiWebClient {
     private String clientSecret;
 
     @Autowired
-    public NaverApiWebClient(@Value("${com.woowacourse.tecobrary.naver.client_id}") final String clientId,
-                             @Value("${com.woowacourse.tecobrary.naver.client_secret}") final String clientSecret) {
+    public NaverApiWebClient(@Value("${naver.client_id}") final String clientId,
+                             @Value("${naver.client_secret}") final String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
