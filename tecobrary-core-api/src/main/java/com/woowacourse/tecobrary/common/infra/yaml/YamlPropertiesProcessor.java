@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.utility;
+package com.woowacourse.tecobrary.common.infra.yaml;
 
 import org.springframework.beans.factory.config.YamlProcessor;
 import org.springframework.core.CollectionFactory;

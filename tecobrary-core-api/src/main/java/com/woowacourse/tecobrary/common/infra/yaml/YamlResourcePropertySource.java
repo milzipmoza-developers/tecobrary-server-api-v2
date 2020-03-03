@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.utility;
+package com.woowacourse.tecobrary.common.infra.yaml;
 
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.io.support.EncodedResource;
