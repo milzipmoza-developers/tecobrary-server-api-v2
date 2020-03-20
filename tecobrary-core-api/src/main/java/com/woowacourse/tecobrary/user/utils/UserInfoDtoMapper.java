@@ -11,7 +11,7 @@
 
 package com.woowacourse.tecobrary.user.utils;
 
-import com.woowacourse.tecobrary.user.domain.User;
+import com.woowacourse.tecobrary.user.entity.User;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 
 public class UserInfoDtoMapper {

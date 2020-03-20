@@ -1,10 +1,10 @@
 package wishbook.common;
 
-import com.woowacourse.tecobrary.common.model.BookCoverUrl;
-import com.woowacourse.tecobrary.common.model.BookInfo;
+import com.woowacourse.tecobrary.common.domain.BookCoverUrl;
+import com.woowacourse.tecobrary.common.domain.BookInfo;
 import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
-import com.woowacourse.tecobrary.wishbook.domain.WishBook;
-import com.woowacourse.tecobrary.wishbook.domain.WishBookRequestUser;
+import com.woowacourse.tecobrary.wishbook.entity.WishBook;
+import com.woowacourse.tecobrary.wishbook.entity.WishBookRequestUser;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
 
 public interface WishBookStatic {

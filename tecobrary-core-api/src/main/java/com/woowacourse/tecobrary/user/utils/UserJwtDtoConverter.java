@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.utils;
 
-import com.woowacourse.tecobrary.user.domain.User;
+import com.woowacourse.tecobrary.user.entity.User;
 import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
 
 public class UserJwtDtoConverter {

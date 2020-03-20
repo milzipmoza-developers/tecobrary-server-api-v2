@@ -1,12 +1,12 @@
 package com.woowacourse.tecobrary.librarybook.util;
 
-import com.woowacourse.tecobrary.common.model.BookCoverUrl;
-import com.woowacourse.tecobrary.common.model.BookInfo;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.common.domain.BookCoverUrl;
+import com.woowacourse.tecobrary.common.domain.BookInfo;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookEnrollDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
-import com.woowacourse.tecobrary.wishbook.domain.WishBook;
+import com.woowacourse.tecobrary.wishbook.entity.WishBook;
 
 public class LibraryBookMapper {
 

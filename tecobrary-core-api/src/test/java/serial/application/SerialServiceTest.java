@@ -1,7 +1,7 @@
 package serial.application;
 
 import com.woowacourse.tecobrary.serial.application.SerialService;
-import com.woowacourse.tecobrary.serial.domain.*;
+import com.woowacourse.tecobrary.serial.entity.*;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

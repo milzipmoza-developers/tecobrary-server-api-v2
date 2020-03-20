@@ -23,7 +23,7 @@ import static com.woowacourse.tecobrary.renthistory.application.AlreadyRentBookE
 import static com.woowacourse.tecobrary.renthistory.application.AlreadyReturnBookException.ALREADY_RETURNED_BOOK_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RENT_SUCCESS_MESSAGE;
 import static com.woowacourse.tecobrary.renthistory.application.RentReturnService.RETURN_SUCCESS_MESSAGE;
-import static com.woowacourse.tecobrary.renthistory.domain.NotPermittedUserException.NOT_PERMITTED_USER_EXCEPTION_MESSAGE;
+import static com.woowacourse.tecobrary.renthistory.entity.NotPermittedUserException.NOT_PERMITTED_USER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException.NOT_FOUND_SERIAL_NUMBER_EXCEPTION_MESSAGE;
 import static com.woowacourse.tecobrary.user.application.NotFoundUserException.NOT_FOUND_USER_EXCEPTION_MESSAGE;
 import static io.restassured.RestAssured.given;

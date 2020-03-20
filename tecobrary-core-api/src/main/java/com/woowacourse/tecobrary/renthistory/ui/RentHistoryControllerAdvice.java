@@ -14,7 +14,7 @@ package com.woowacourse.tecobrary.renthistory.ui;
 import com.woowacourse.tecobrary.renthistory.application.AlreadyRentBookException;
 import com.woowacourse.tecobrary.renthistory.application.AlreadyReturnBookException;
 import com.woowacourse.tecobrary.renthistory.application.NotFoundRentHistoryException;
-import com.woowacourse.tecobrary.renthistory.domain.NotPermittedUserException;
+import com.woowacourse.tecobrary.renthistory.entity.NotPermittedUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

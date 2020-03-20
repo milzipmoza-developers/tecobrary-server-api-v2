@@ -1,11 +1,11 @@
 package com.woowacourse.tecobrary.renthistory.util;
 
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
-import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
-import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
-import com.woowacourse.tecobrary.renthistory.domain.RentUser;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
+import com.woowacourse.tecobrary.renthistory.entity.RentSerial;
+import com.woowacourse.tecobrary.renthistory.entity.RentUser;
 import com.woowacourse.tecobrary.renthistory.ui.dto.*;
-import com.woowacourse.tecobrary.serial.domain.Serial;
+import com.woowacourse.tecobrary.serial.entity.Serial;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

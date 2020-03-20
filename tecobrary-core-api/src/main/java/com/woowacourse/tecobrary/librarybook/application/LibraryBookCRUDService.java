@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.librarybook.application;
 
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookCreateResponseDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;

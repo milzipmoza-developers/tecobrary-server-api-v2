@@ -1,9 +1,9 @@
 package serial.common;
 
-import com.woowacourse.tecobrary.serial.domain.Serial;
-import com.woowacourse.tecobrary.serial.domain.SerialInfo;
-import com.woowacourse.tecobrary.serial.domain.SerialLibraryBook;
-import com.woowacourse.tecobrary.serial.domain.SerialRentStatus;
+import com.woowacourse.tecobrary.serial.entity.Serial;
+import com.woowacourse.tecobrary.serial.entity.SerialInfo;
+import com.woowacourse.tecobrary.serial.entity.SerialLibraryBook;
+import com.woowacourse.tecobrary.serial.entity.SerialRentStatus;
 import librarybook.common.LibraryBookStatic;
 
 public interface SerialStatic extends LibraryBookStatic {

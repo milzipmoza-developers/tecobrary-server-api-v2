@@ -13,7 +13,7 @@ package com.woowacourse.tecobrary.user.application;
 
 import com.woowacourse.tecobrary.user.utils.UserInfoDtoMapper;
 import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
-import com.woowacourse.tecobrary.user.domain.*;
+import com.woowacourse.tecobrary.user.entity.*;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;

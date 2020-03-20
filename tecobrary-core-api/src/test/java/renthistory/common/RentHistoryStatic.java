@@ -1,8 +1,8 @@
 package renthistory.common;
 
-import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
-import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
-import com.woowacourse.tecobrary.renthistory.domain.RentUser;
+import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
+import com.woowacourse.tecobrary.renthistory.entity.RentSerial;
+import com.woowacourse.tecobrary.renthistory.entity.RentUser;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentRequestDto;
 
 public interface RentHistoryStatic {

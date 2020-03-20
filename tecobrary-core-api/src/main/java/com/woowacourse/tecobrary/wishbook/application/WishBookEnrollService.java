@@ -1,10 +1,10 @@
 package com.woowacourse.tecobrary.wishbook.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookEnrollDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
-import com.woowacourse.tecobrary.wishbook.domain.WishBook;
+import com.woowacourse.tecobrary.wishbook.entity.WishBook;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookEnrollResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

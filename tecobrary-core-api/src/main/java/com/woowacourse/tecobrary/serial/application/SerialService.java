@@ -1,8 +1,8 @@
 package com.woowacourse.tecobrary.serial.application;
 
-import com.woowacourse.tecobrary.renthistory.domain.RentSerial;
-import com.woowacourse.tecobrary.serial.domain.Serial;
-import com.woowacourse.tecobrary.serial.domain.SerialRepository;
+import com.woowacourse.tecobrary.renthistory.entity.RentSerial;
+import com.woowacourse.tecobrary.serial.entity.Serial;
+import com.woowacourse.tecobrary.serial.entity.SerialRepository;
 import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;

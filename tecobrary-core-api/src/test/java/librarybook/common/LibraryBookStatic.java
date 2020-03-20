@@ -1,8 +1,8 @@
 package librarybook.common;
 
-import com.woowacourse.tecobrary.common.model.BookCoverUrl;
-import com.woowacourse.tecobrary.common.model.BookInfo;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.common.domain.BookCoverUrl;
+import com.woowacourse.tecobrary.common.domain.BookInfo;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
 
 public interface LibraryBookStatic {
 

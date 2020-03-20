@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.wishbook.util;
 
-import com.woowacourse.tecobrary.wishbook.domain.WishBook;
+import com.woowacourse.tecobrary.wishbook.entity.WishBook;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookDto;
 
 public class WishBookMapper {

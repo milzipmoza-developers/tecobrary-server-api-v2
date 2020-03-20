@@ -1,13 +1,13 @@
 package com.woowacourse.tecobrary.renthistory.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
-import com.woowacourse.tecobrary.renthistory.domain.RentHistory;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryDto;
 import com.woowacourse.tecobrary.renthistory.ui.dto.ReturnHistoryDto;
 import com.woowacourse.tecobrary.renthistory.util.RentHistoryMapper;
 import com.woowacourse.tecobrary.serial.application.SerialService;
-import com.woowacourse.tecobrary.serial.domain.Serial;
+import com.woowacourse.tecobrary.serial.entity.Serial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

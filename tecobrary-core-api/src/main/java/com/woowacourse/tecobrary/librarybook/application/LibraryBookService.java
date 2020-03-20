@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.librarybook.application;
 
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBookRepository;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBookRepository;
 import com.woowacourse.tecobrary.librarybook.exception.DuplicatedLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.exception.NotFoundLibraryBookException;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookDto;

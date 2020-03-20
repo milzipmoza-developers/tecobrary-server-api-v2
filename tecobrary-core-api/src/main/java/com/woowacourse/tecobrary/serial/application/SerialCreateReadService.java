@@ -1,10 +1,10 @@
 package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.librarybook.application.LibraryBookService;
-import com.woowacourse.tecobrary.librarybook.domain.LibraryBook;
+import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
 import com.woowacourse.tecobrary.librarybook.ui.dto.LibraryBookResponseDto;
 import com.woowacourse.tecobrary.librarybook.util.LibraryBookMapper;
-import com.woowacourse.tecobrary.serial.domain.Serial;
+import com.woowacourse.tecobrary.serial.entity.Serial;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
 import com.woowacourse.tecobrary.serial.exception.UniqueConstraintException;
 import com.woowacourse.tecobrary.serial.ui.dto.SerialCreateRequestDto;
