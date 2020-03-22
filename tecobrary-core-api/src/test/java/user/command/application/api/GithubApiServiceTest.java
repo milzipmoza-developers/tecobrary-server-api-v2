@@ -1,10 +1,10 @@
 package user.command.application.api;
 
 import com.woowacourse.tecobrary.TecobraryApplication;
-import com.woowacourse.tecobrary.github.api.GithubApi;
-import com.woowacourse.tecobrary.github.api.GithubApiClient;
-import com.woowacourse.tecobrary.github.api.GithubApiService;
-import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
+import com.woowacourse.tecobrary.web.github.api.GithubApi;
+import com.woowacourse.tecobrary.web.github.api.GithubApiClient;
+import com.woowacourse.tecobrary.web.github.api.GithubApiService;
+import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,7 +45,7 @@ class GithubApiServiceTest implements GithubApiStatic {
             "  \"company\": \"GitHub\",\n" +
             "  \"blog\": \"https://github.com/blog\",\n" +
             "  \"location\": \"San Francisco\",\n" +
-            "  \"email\": \"octocat@com.woowacourse.tecobrary.github.com\",\n" +
+            "  \"email\": \"octocat@com.woowacourse.tecobrary.web.github.com\",\n" +
             "  \"hireable\": false,\n" +
             "  \"bio\": \"There once was...\",\n" +
             "  \"public_repos\": 2,\n" +
@@ -57,7 +57,7 @@ class GithubApiServiceTest implements GithubApiStatic {
             "}";
     private static final String GITHUB_API_EMAIL_RETURN = "[\n" +
             "  {\n" +
-            "    \"email\": \"octocat@com.woowacourse.tecobrary.github.com\",\n" +
+            "    \"email\": \"octocat@com.woowacourse.tecobrary.web.github.com\",\n" +
             "    \"verified\": true,\n" +
             "    \"primary\": true,\n" +
             "    \"visibility\": \"public\"\n" +
@@ -95,9 +95,9 @@ class GithubApiServiceTest implements GithubApiStatic {
     @Test
     void githubUserEmail() {
         given(githubApiClient.userEmail(VIRTUAL_ACCESS_TOKEN)).willReturn(GITHUB_API_EMAIL_RETURN);
-        given(githubApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@com.woowacourse.tecobrary.github.com");
+        given(githubApi.getPrimaryEmail(GITHUB_API_EMAIL_RETURN)).willReturn("octocat@com.woowacourse.tecobrary.web.github.com");
 
-        String expected = "octocat@com.woowacourse.tecobrary.github.com";
+        String expected = "octocat@com.woowacourse.tecobrary.web.github.com";
 
         assertEquals(githubApiService.getGithubUserEmail(VIRTUAL_ACCESS_TOKEN), expected);
     }

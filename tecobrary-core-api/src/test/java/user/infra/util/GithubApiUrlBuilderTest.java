@@ -10,7 +10,7 @@
  */
 package user.infra.util;
 
-import com.woowacourse.tecobrary.github.utils.GithubUserApiUrlBuilder;
+import com.woowacourse.tecobrary.web.github.utils.GithubUserApiUrlBuilder;
 import org.apache.http.client.utils.URIBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

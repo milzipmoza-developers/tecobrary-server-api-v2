@@ -9,7 +9,7 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.github.utils;
+package com.woowacourse.tecobrary.web.github.utils;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Value;

@@ -9,11 +9,11 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.github.api;
+package com.woowacourse.tecobrary.web.github.api;
 
-import com.woowacourse.tecobrary.github.utils.GithubUserApiUrlBuilder;
-import com.woowacourse.tecobrary.github.utils.GsonUtils;
-import com.woowacourse.tecobrary.github.dto.GithubEmailDto;
+import com.woowacourse.tecobrary.web.github.utils.GithubUserApiUrlBuilder;
+import com.woowacourse.tecobrary.web.github.utils.GsonUtils;
+import com.woowacourse.tecobrary.web.github.dto.GithubEmailDto;
 import com.woowacourse.tecobrary.utils.BodyParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.user.utils;
 
-import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
+import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

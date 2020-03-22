@@ -9,10 +9,10 @@
  * All rights reserved
  */
 
-package com.woowacourse.tecobrary.github.api;
+package com.woowacourse.tecobrary.web.github.api;
 
-import com.woowacourse.tecobrary.github.utils.GsonUtils;
-import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
+import com.woowacourse.tecobrary.web.github.utils.GsonUtils;
+import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

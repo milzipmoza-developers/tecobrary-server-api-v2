@@ -1,6 +1,6 @@
 package user.ui;
 
-import com.woowacourse.tecobrary.github.api.GithubApiService;
+import com.woowacourse.tecobrary.web.github.api.GithubApiService;
 import com.woowacourse.tecobrary.user.application.UserGithubService;
 import com.woowacourse.tecobrary.user.ui.GithubUserApiController;
 import common.util.AcceptanceTestUtils;

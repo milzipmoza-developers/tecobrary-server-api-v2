@@ -1,6 +1,6 @@
-package com.woowacourse.tecobrary.tecorvis.api;
+package com.woowacourse.tecobrary.web.tecorvis.api;
 
-import com.woowacourse.tecobrary.tecorvis.dto.SlackBotBookInfoDto;
+import com.woowacourse.tecobrary.web.tecorvis.dto.SlackBotBookInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

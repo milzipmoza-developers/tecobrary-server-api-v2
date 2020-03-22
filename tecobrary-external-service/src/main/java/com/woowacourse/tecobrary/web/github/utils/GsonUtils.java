@@ -1,8 +1,8 @@
-package com.woowacourse.tecobrary.github.utils;
+package com.woowacourse.tecobrary.web.github.utils;
 
 import com.google.gson.Gson;
-import com.woowacourse.tecobrary.github.dto.GithubEmailDto;
-import com.woowacourse.tecobrary.github.dto.GithubUserInfoDto;
+import com.woowacourse.tecobrary.web.github.dto.GithubEmailDto;
+import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 
 import java.util.Arrays;
 import java.util.List;

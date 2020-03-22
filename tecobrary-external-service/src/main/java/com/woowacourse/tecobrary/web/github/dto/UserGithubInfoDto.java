@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.github.dto;
+package com.woowacourse.tecobrary.web.github.dto;
 
 import lombok.*;
 

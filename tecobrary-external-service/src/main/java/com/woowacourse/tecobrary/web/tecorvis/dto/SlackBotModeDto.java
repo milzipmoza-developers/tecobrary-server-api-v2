@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.tecorvis.dto;
+package com.woowacourse.tecobrary.web.tecorvis.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.naver.dto;
+package com.woowacourse.tecobrary.web.naver.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

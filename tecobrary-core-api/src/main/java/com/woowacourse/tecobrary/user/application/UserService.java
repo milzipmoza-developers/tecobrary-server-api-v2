@@ -17,7 +17,7 @@ import com.woowacourse.tecobrary.user.entity.*;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
-import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
+import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

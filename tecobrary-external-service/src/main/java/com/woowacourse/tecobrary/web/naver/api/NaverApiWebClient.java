@@ -1,8 +1,8 @@
-package com.woowacourse.tecobrary.naver.api;
+package com.woowacourse.tecobrary.web.naver.api;
 
-import com.woowacourse.tecobrary.naver.dto.NaverApiDto;
-import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;
-import com.woowacourse.tecobrary.naver.dto.NaverSearchRequestDto;
+import com.woowacourse.tecobrary.web.naver.dto.NaverApiDto;
+import com.woowacourse.tecobrary.web.naver.dto.NaverApiItemDto;
+import com.woowacourse.tecobrary.web.naver.dto.NaverSearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import java.util.List;
 public class NaverApiWebClient {
 
     private static final String REQUEST_SCHEME = "https";
-    private static final String REQUEST_HOST = "openapi.com.woowacourse.tecobrary.naver.com";
+    private static final String REQUEST_HOST = "openapi.com.woowacourse.tecobrary.web.naver.com";
     private static final String REQUEST_PATH = "v1/search/book.json";
     private static final String PARAM_QUERY = "query";
     private static final String PARAM_DISPLAY = "display";

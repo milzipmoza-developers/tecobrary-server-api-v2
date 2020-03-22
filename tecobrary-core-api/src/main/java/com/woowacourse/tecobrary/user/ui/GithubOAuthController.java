@@ -11,7 +11,7 @@
 
 package com.woowacourse.tecobrary.user.ui;
 
-import com.woowacourse.tecobrary.github.utils.GithubUserApiUrlBuilder;
+import com.woowacourse.tecobrary.web.github.utils.GithubUserApiUrlBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

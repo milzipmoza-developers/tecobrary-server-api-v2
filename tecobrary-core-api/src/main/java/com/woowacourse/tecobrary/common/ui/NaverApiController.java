@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.common.ui;
 
-import com.woowacourse.tecobrary.naver.api.NaverApiService;
-import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;
+import com.woowacourse.tecobrary.web.naver.api.NaverApiService;
+import com.woowacourse.tecobrary.web.naver.dto.NaverApiItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

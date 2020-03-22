@@ -1,7 +1,7 @@
-package com.woowacourse.tecobrary.naver.api;
+package com.woowacourse.tecobrary.web.naver.api;
 
-import com.woowacourse.tecobrary.naver.dto.NaverApiItemDto;
-import com.woowacourse.tecobrary.naver.dto.NaverSearchRequestDto;
+import com.woowacourse.tecobrary.web.naver.dto.NaverApiItemDto;
+import com.woowacourse.tecobrary.web.naver.dto.NaverSearchRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

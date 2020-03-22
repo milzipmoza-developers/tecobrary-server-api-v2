@@ -2,7 +2,7 @@ package user.infra.util;
 
 import com.woowacourse.tecobrary.TecobraryApplication;
 import com.woowacourse.tecobrary.user.utils.JwtUtils;
-import com.woowacourse.tecobrary.github.dto.UserJwtInfoDto;
+import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

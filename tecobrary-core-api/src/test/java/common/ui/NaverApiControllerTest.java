@@ -25,9 +25,9 @@ class NaverApiControllerTest extends AcceptanceTestUtils {
                     queryParam("number", "10").
                     filter(document(DOCUMENTATION_OUTPUT_DIRECTORY,
                             requestParameters(
-                                    parameterWithName("keyword").description("com.woowacourse.tecobrary.naver 검색 api 에 전달할 검색어"),
-                                    parameterWithName("page").description("com.woowacourse.tecobrary.naver 검색 api 에 전달할 페이지"),
-                                    parameterWithName("number").description("com.woowacourse.tecobrary.naver 검색 api 에 전달할 한 페이지의 아이템 수")
+                                    parameterWithName("keyword").description("com.woowacourse.tecobrary.web.naver 검색 api 에 전달할 검색어"),
+                                    parameterWithName("page").description("com.woowacourse.tecobrary.web.naver 검색 api 에 전달할 페이지"),
+                                    parameterWithName("number").description("com.woowacourse.tecobrary.web.naver 검색 api 에 전달할 한 페이지의 아이템 수")
                             ),
                             responseFields(
                                     fieldWithPath("[0].title").description("검색 결과의 도서 제목"),
