@@ -1,9 +1,4 @@
-plugins {
-    id 'java'
-}
-
-group 'com.woowacourse'
-version '0.0.1-SNAPSHOT'
+apply plugin: "org.asciidoctor.convert"
 
 sourceCompatibility = 1.8
 

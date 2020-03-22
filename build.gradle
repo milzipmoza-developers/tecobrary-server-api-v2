@@ -6,10 +6,10 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-task testElasticsearchRunner(type: Exec) {
-    workingDir '.'
-    commandLine './test-elasticsearch/run_test_elasticsearch.sh'
-}
+//task testElasticsearchRunner(type: Exec) {
+//    workingDir '.'
+//    commandLine './test-elasticsearch/run_test_elasticsearch.sh'
+//}
 
 //test {
 //    useJUnitPlatform()
@@ -18,11 +18,11 @@ task testElasticsearchRunner(type: Exec) {
 //    finalizedBy 'testElasticsearchKiller'
 //}
 
-task testElasticsearchKiller(type: Exec) {
-    workingDir '.'
-    commandLine './test-elasticsearch/kill_test_elasticsearch.sh'
-    dependsOn 'test'
-}
+//task testElasticsearchKiller(type: Exec) {
+//    workingDir '.'
+//    commandLine './test-elasticsearch/kill_test_elasticsearch.sh'
+//    dependsOn 'test'
+//}
 
 repositories {
     mavenCentral()
