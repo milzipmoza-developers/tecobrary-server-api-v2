@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/http-request.adoc[]
+
+===== request body
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/request-body.adoc[]
+
+===== description
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/request-fields.adoc[]
+
+
+===== HTTP Response
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/http-response.adoc[]
+
+===== response body
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/response-body.adoc[]
+
+===== description
+
+include::{snippets}/wish-book-enroll-controller-test/successfully-enroll/response-fields.adoc[]

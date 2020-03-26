@@ -1,0 +1,20 @@
+===== HTTP Request
+
+include::{snippets}/user-controller-test/fail-find-users-invalid-params/http-request.adoc[]
+
+===== request body
+
+include::{snippets}/user-controller-test/fail-find-users-invalid-params/request-body.adoc[]
+
+===== description
+
+include::{snippets}/user-controller-test/fail-find-users-invalid-params/request-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::{snippets}/user-controller-test/fail-find-users-invalid-params/http-response.adoc[]
+
+===== response body
+
+include::{snippets}/user-controller-test/fail-find-users-invalid-params/response-body.adoc[]

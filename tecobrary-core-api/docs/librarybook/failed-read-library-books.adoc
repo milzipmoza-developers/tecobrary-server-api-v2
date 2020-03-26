@@ -1,0 +1,20 @@
+===== HTTP Request
+
+include::{snippets}/library-book-controller-test/failed-read-library-books/http-request.adoc[]
+
+===== request body
+
+include::{snippets}/library-book-controller-test/failed-read-library-books/request-body.adoc[]
+
+===== description
+
+include::{snippets}/library-book-controller-test/failed-read-library-books/request-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::{snippets}/library-book-controller-test/failed-read-library-books/http-response.adoc[]
+
+===== response body
+
+include::{snippets}/library-book-controller-test/failed-read-library-books/response-body.adoc[]

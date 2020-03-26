@@ -1,0 +1,24 @@
+===== HTTP Request
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/http-request.adoc[]
+
+===== request body
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/request-body.adoc[]
+
+===== description
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/request-parameters.adoc[]
+
+
+===== HTTP Response
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/http-response.adoc[]
+
+===== response body
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/response-body.adoc[]
+
+===== description
+
+include::{snippets}/wish-book-controller-test/successfully-find-wish-books/response-fields.adoc[]
