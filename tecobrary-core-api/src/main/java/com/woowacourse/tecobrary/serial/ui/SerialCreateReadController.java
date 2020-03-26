@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api/v2")
 public class SerialCreateReadController {
 
     private final SerialCreateReadService serialCreateReadService;

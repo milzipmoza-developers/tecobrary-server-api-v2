@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api/v2")
 public class LibraryBookController {
 
     private static final Logger log = LoggerFactory.getLogger(LibraryBookController.class);

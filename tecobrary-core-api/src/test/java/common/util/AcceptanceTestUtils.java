@@ -39,7 +39,7 @@ public class AcceptanceTestUtils {
     }
 
     protected String baseUrl() {
-        return "http://localhost:" + port;
+        return "http://localhost:" + port + "/api/v2";
     }
 
     protected String baseUrl(String path) {

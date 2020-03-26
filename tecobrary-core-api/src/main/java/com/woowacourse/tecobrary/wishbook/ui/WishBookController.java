@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@CrossOrigin
+@RequestMapping("/api/v2")
 public class WishBookController {
 
     private WishBookCRUDService wishBookCRUDService;

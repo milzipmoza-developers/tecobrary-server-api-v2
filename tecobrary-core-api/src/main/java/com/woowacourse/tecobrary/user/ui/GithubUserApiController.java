@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @CrossOrigin(origins = "*")
-@RequestMapping("/")
+@RequestMapping("/api/v2")
 public class GithubUserApiController {
 
     private final GithubApiService githubApiService;

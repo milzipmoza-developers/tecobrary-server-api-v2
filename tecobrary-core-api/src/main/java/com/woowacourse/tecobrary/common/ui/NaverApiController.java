@@ -3,16 +3,14 @@ package com.woowacourse.tecobrary.common.ui;
 import com.woowacourse.tecobrary.web.naver.api.NaverApiService;
 import com.woowacourse.tecobrary.web.naver.dto.NaverApiItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api/v2")
 public class NaverApiController {
 
     private NaverApiService naverApiService;

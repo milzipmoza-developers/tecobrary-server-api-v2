@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @Slf4j
 @CrossOrigin(origins = "*")
-@RequestMapping("/com/woowacourse/tecobrary/github")
+@RequestMapping("/api/v2")
 public class GithubOAuthController {
 
     private final GithubUserApiUrlBuilder githubUserApiUrlBuilder;

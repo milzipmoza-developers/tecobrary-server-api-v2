@@ -22,11 +22,11 @@ class GithubOAuthControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    @DisplayName("[GET] /com.woowacourse.tecobrary.web.github/user/oauth 로 요청시 성공적으로 리다이렉트 된다.")
+    @DisplayName("[GET] /user/oauth 로 요청시 성공적으로 리다이렉트 된다.")
     @Test
     void githubConfirmAuthentication() {
         webTestClient.method(HttpMethod.GET)
-                .uri("/com/woowacourse/tecobrary/github/user/oauth")
+                .uri("/api/v2/user/oauth")
                 .exchange()
                 .expectStatus().isFound();
     }
