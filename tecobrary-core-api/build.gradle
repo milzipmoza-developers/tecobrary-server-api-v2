@@ -1,5 +1,7 @@
 apply plugin: "org.asciidoctor.convert"
 
+sourceCompatibility = '1.8'
+
 ext {
     snippetsDir = file('build/generated-snippets')
 }
