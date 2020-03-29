@@ -1,5 +1,6 @@
-package com.woowacourse.tecobrary.wishbook.entity;
+package com.woowacourse.tecobrary.wishbook.repository;
 
+import com.woowacourse.tecobrary.wishbook.entity.WishBook;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

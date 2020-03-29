@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.renthistory.application;
 
 import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
-import com.woowacourse.tecobrary.renthistory.entity.RentHistoryRepository;
+import com.woowacourse.tecobrary.renthistory.repository.RentHistoryRepository;
 import com.woowacourse.tecobrary.renthistory.ui.dto.RentHistoryRequest;
 import com.woowacourse.tecobrary.renthistory.util.RentHistoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;

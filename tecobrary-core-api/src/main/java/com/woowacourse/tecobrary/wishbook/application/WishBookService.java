@@ -1,9 +1,9 @@
 package com.woowacourse.tecobrary.wishbook.application;
 
-import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.entity.WishBook;
-import com.woowacourse.tecobrary.wishbook.entity.WishBookRepository;
+import com.woowacourse.tecobrary.wishbook.repository.WishBookRepository;
 import com.woowacourse.tecobrary.wishbook.ui.dto.WishBookInfoDto;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

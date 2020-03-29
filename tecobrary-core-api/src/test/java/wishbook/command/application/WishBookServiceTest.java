@@ -4,9 +4,9 @@ import com.woowacourse.tecobrary.wishbook.application.AlreadySoftDeletedWishBook
 import com.woowacourse.tecobrary.wishbook.application.DuplicatedWishBookIsbnException;
 import com.woowacourse.tecobrary.wishbook.application.NotFoundWishBookException;
 import com.woowacourse.tecobrary.wishbook.application.WishBookService;
-import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import com.woowacourse.tecobrary.wishbook.entity.WishBook;
-import com.woowacourse.tecobrary.wishbook.entity.WishBookRepository;
+import com.woowacourse.tecobrary.wishbook.repository.WishBookRepository;
+import com.woowacourse.tecobrary.wishbook.util.WishBookInfoDtoMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,8 +1,12 @@
 package serial.application;
 
 import com.woowacourse.tecobrary.serial.application.SerialService;
-import com.woowacourse.tecobrary.serial.entity.*;
+import com.woowacourse.tecobrary.serial.entity.Serial;
+import com.woowacourse.tecobrary.serial.entity.SerialInfo;
+import com.woowacourse.tecobrary.serial.entity.SerialLibraryBook;
+import com.woowacourse.tecobrary.serial.entity.SerialRentStatus;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
+import com.woowacourse.tecobrary.serial.repository.SerialRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -2,10 +2,10 @@ package com.woowacourse.tecobrary.serial.application;
 
 import com.woowacourse.tecobrary.renthistory.entity.RentSerial;
 import com.woowacourse.tecobrary.serial.entity.Serial;
-import com.woowacourse.tecobrary.serial.entity.SerialRepository;
 import com.woowacourse.tecobrary.serial.exception.AlreadyRentStatusException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialNumberException;
 import com.woowacourse.tecobrary.serial.exception.NotFoundSerialTargetException;
+import com.woowacourse.tecobrary.serial.repository.SerialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

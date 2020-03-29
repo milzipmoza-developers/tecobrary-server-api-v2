@@ -4,7 +4,7 @@ import com.woowacourse.tecobrary.user.application.NotFoundGithubUserException;
 import com.woowacourse.tecobrary.user.application.NotFoundUserException;
 import com.woowacourse.tecobrary.user.application.UserService;
 import com.woowacourse.tecobrary.user.entity.User;
-import com.woowacourse.tecobrary.user.entity.UserRepository;
+import com.woowacourse.tecobrary.user.repository.UserRepository;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;

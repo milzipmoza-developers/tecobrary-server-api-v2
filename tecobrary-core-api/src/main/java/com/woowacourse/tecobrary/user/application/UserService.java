@@ -11,12 +11,16 @@
 
 package com.woowacourse.tecobrary.user.application;
 
-import com.woowacourse.tecobrary.user.utils.UserInfoDtoMapper;
-import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
-import com.woowacourse.tecobrary.user.entity.*;
+import com.woowacourse.tecobrary.user.entity.Authorization;
+import com.woowacourse.tecobrary.user.entity.User;
+import com.woowacourse.tecobrary.user.entity.UserAuthorization;
+import com.woowacourse.tecobrary.user.entity.UserGithubInfo;
+import com.woowacourse.tecobrary.user.repository.UserRepository;
 import com.woowacourse.tecobrary.user.ui.dto.UserAuthDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserInfoDto;
 import com.woowacourse.tecobrary.user.ui.dto.UserNameDto;
+import com.woowacourse.tecobrary.user.utils.UserInfoDtoMapper;
+import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
