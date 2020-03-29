@@ -25,6 +25,6 @@ bootJar {
 }
 
 dependencies {
-    implementation project(':tecobrary-domain')
+    implementation project(':tecobrary-domain-leg')
     implementation project(':tecobrary-external-service')
 }

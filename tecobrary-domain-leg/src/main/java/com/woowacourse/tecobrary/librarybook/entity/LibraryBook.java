@@ -1,9 +1,9 @@
 package com.woowacourse.tecobrary.librarybook.entity;
 
-import com.woowacourse.tecobrary.common.entity.DefaultBook;
-import com.woowacourse.tecobrary.common.entity.ModifiableEntity;
 import com.woowacourse.tecobrary.common.domain.BookCoverUrl;
 import com.woowacourse.tecobrary.common.domain.BookInfo;
+import com.woowacourse.tecobrary.common.entity.DefaultBook;
+import com.woowacourse.tecobrary.common.entity.ModifiableEntity;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

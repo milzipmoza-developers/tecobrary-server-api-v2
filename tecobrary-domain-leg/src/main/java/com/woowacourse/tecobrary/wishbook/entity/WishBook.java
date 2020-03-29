@@ -1,9 +1,9 @@
 package com.woowacourse.tecobrary.wishbook.entity;
 
-import com.woowacourse.tecobrary.common.entity.DefaultBook;
-import com.woowacourse.tecobrary.common.entity.DeletableEntity;
 import com.woowacourse.tecobrary.common.domain.BookCoverUrl;
 import com.woowacourse.tecobrary.common.domain.BookInfo;
+import com.woowacourse.tecobrary.common.entity.DefaultBook;
+import com.woowacourse.tecobrary.common.entity.DeletableEntity;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
