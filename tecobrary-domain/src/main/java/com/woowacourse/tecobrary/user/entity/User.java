@@ -1,4 +1,4 @@
-package com.woowacourse.tecobrary.user;
+package com.woowacourse.tecobrary.user.entity;
 
 import com.woowacourse.tecobrary.common.entity.ModifiableEntity;
 import lombok.*;
