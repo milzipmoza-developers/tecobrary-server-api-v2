@@ -1,0 +1,43 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/renew_tecobrary?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: luffy
+    password: 159456
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+server:
+  port: 9090
+  servlet:
+    session:
+      persistent: false
+      timeout: 0
+
+naver:
+  client_id: a
+  client_secret: a
+
+slackbot:
+  host: http://localhost:5000
+
+github:
+  user:
+    client_id: clientId
+    client_secret: clientSecret
+    redirect_uri: redirectUrl
+  api:
+    scope: scope
+
+jwt:
+  secret: test
