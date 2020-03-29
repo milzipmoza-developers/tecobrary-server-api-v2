@@ -11,12 +11,12 @@
 
 package com.woowacourse.tecobrary.user.application;
 
-import com.woowacourse.tecobrary.web.github.api.GithubApiService;
-import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
-import com.woowacourse.tecobrary.user.utils.UserGithubInfoMapper;
-import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
 import com.woowacourse.tecobrary.user.entity.User;
 import com.woowacourse.tecobrary.user.entity.UserGithubInfo;
+import com.woowacourse.tecobrary.user.utils.UserGithubInfoMapper;
+import com.woowacourse.tecobrary.user.utils.UserJwtDtoConverter;
+import com.woowacourse.tecobrary.web.github.api.GithubApiService;
+import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

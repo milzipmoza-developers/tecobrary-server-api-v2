@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.user.utils;
 
-import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.user.entity.UserGithubInfo;
+import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.web.github.dto.UserGithubInfoDto;
 
 public class UserGithubInfoMapper {

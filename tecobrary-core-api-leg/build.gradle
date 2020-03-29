@@ -1,0 +1,30 @@
+apply plugin: "org.asciidoctor.convert"
+
+sourceCompatibility = '1.8'
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+test {
+    useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
+}
+
+dependencies {
+    implementation project(':tecobrary-domain-leg')
+    implementation project(':tecobrary-external-service')
+}

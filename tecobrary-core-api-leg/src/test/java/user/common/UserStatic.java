@@ -2,9 +2,9 @@ package user.common;
 
 import com.woowacourse.tecobrary.common.domain.Email;
 import com.woowacourse.tecobrary.common.domain.HttpsUrl;
+import com.woowacourse.tecobrary.user.entity.*;
 import com.woowacourse.tecobrary.web.github.dto.GithubUserInfoDto;
 import com.woowacourse.tecobrary.web.github.dto.UserJwtInfoDto;
-import com.woowacourse.tecobrary.user.entity.*;
 
 public interface UserStatic {
     Long TEST_USER_NO = 2L;
