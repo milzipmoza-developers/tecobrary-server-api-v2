@@ -7,4 +7,5 @@ rootProject.name = 'tecobrary'
 include 'tecobrary-domain-leg'
 include 'tecobrary-core-api'
 include 'tecobrary-external-service'
+include 'tecobrary-domain'
 
