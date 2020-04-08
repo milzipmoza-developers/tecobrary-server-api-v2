@@ -1,7 +1,8 @@
 plugins {
-    id "org.asciidoctor.convert" version "1.5.9.2"
+    id 'org.asciidoctor.convert' version '1.5.9.2'
     id 'org.springframework.boot' version '2.1.6.RELEASE'
     id 'java'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -26,6 +27,7 @@ apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenCentral()
+    maven { url "https://plugins.gradle.org/m2" }
 }
 
 subprojects {
@@ -50,6 +52,8 @@ subprojects {
         implementation 'org.apache.httpcomponents:httpclient:4.5.10'
         implementation 'io.jsonwebtoken:jjwt:0.9.1'
         implementation 'mysql:mysql-connector-java'
+        implementation 'com.querydsl:querydsl-jpa'
+        implementation 'com.querydsl:querydsl-apt'
 
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'junit'

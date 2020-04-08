@@ -42,3 +42,6 @@ out/
 
 ### log files ###
 /logs
+
+### query dsl build files ###
+**/generated
