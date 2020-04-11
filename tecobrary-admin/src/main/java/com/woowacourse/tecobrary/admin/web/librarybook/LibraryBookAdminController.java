@@ -1,8 +1,6 @@
 package com.woowacourse.tecobrary.admin.web.librarybook;
 
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookDescResponse;
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookInfoResponse;
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookSearchRequest;
+import com.woowacourse.tecobrary.admin.web.librarybook.dto.*;
 import com.woowacourse.tecobrary.admin.web.librarybook.service.LibraryBookAdminFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,9 +35,8 @@ public class LibraryBookAdminController {
         return null;
     }
 
-    // 책 제거
     @DeleteMapping("/{id}")
-    public LibraryBookDescResponse deleteLibraryBook() {
-        return null;
+    public LibraryBookDeleteResponse deleteLibraryBook(@PathVariable Long id) {
+        return libraryBookAdminFacade.deleteLibraryBook(id);
     }
 }

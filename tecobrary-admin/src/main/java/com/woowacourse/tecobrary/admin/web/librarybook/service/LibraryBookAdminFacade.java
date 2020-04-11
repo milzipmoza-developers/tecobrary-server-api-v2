@@ -1,9 +1,7 @@
 package com.woowacourse.tecobrary.admin.web.librarybook.service;
 
 import com.woowacourse.tecobrary.admin.web.librarybook.converter.LibraryBookConverter;
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookDescResponse;
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookInfoResponse;
-import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookSearchRequest;
+import com.woowacourse.tecobrary.admin.web.librarybook.dto.*;
 import com.woowacourse.tecobrary.domain.librarybook.entity.LibraryBook;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +35,19 @@ public class LibraryBookAdminFacade {
     public LibraryBookDescResponse getLibraryBook(Long id) {
         LibraryBook libraryBook = libraryBookAdminService.findById(id);
         return libraryBookConverter.convertDesc(libraryBook);
+    }
+
+    public LibraryBookDescResponse createLibraryBook(LibraryBookCreateRequest request) {
+        LibraryBook libraryBook = libraryBookAdminService.createLibraryBook(request);
+        return libraryBookConverter.convertDesc(libraryBook);
+    }
+
+    public LibraryBookDeleteResponse deleteLibraryBook(Long id) {
+        boolean result = libraryBookAdminService.deleteById(id);
+        return LibraryBookDeleteResponse.builder()
+                .id(id)
+                .message("삭제 성공")
+                .success(result)
+                .build();
     }
 }
