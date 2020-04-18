@@ -11,9 +11,9 @@ public class LibraryBookConverter {
     public LibraryBookInfoResponse convertInfo(LibraryBook libraryBook) {
         return LibraryBookInfoResponse.builder()
                 .id(libraryBook.getId())
-                .image(libraryBook.getImage())
                 .author(libraryBook.getAuthor())
                 .publisher(libraryBook.getPublisher())
+                .isbn(libraryBook.getIsbn())
                 .bookCounts(libraryBook.getSerialList().size())
                 .build();
     }

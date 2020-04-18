@@ -10,24 +10,24 @@ import lombok.NoArgsConstructor;
 public class LibraryBookInfoResponse {
 
     private Long id;
-    private String image;
     private String title;
     private String author;
     private String publisher;
+    private String isbn;
     private Integer bookCounts;
 
     @Builder
     public LibraryBookInfoResponse(Long id,
-                                   String image,
                                    String title,
                                    String author,
                                    String publisher,
+                                   String isbn,
                                    Integer bookCounts) {
         this.id = id;
-        this.image = image;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
+        this.isbn = isbn;
         this.bookCounts = bookCounts;
     }
 }
