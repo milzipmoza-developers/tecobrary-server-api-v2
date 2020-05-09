@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WishBookRepository extends JpaRepository<WishBook, Long> {
+
+    boolean existsByIsbn(String isbn);
 }

@@ -1,11 +1,10 @@
-package com.woowacourse.tecobrary.wishbook.ui.dto;
+package com.woowacourse.tecobrary.web.wishbook.dto;
+
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@NoArgsConstructor
 @Getter
 @ToString
 public class WishBookInfoDto {
@@ -19,7 +18,13 @@ public class WishBookInfoDto {
     private Long userId;
 
     @Builder
-    public WishBookInfoDto(final String image, final String title, final String author, final String publisher, final String isbn, final String description, final Long userId) {
+    public WishBookInfoDto(String image,
+                           String title,
+                           String author,
+                           String publisher,
+                           String isbn,
+                           String description,
+                           Long userId) {
         this.image = image;
         this.title = title;
         this.author = author;
