@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.web.wishbook.converter;
 
 import com.woowacourse.tecobrary.web.wishbook.dto.WishBookInfoDto;
-import com.woowacourse.tecobrary.wishbook.entity.WishBook;
+import com.woowacourse.tecobrary.domain.wishbook.entity.WishBook;
 import org.springframework.stereotype.Component;
 
 @Component

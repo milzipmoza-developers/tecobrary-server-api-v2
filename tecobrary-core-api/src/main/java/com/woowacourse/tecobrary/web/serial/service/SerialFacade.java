@@ -1,8 +1,7 @@
 package com.woowacourse.tecobrary.web.serial.service;
 
-import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
-import com.woowacourse.tecobrary.serial.entity.Serial;
-import com.woowacourse.tecobrary.serial.repository.SerialRepository;
+import com.woowacourse.tecobrary.domain.serial.entity.Serial;
+import com.woowacourse.tecobrary.domain.serial.repository.SerialRepository;
 import com.woowacourse.tecobrary.web.serial.converter.SerialConverter;
 import com.woowacourse.tecobrary.web.serial.dto.SerialBookInfoDto;
 import com.woowacourse.tecobrary.web.serial.dto.SerialInfoDto;

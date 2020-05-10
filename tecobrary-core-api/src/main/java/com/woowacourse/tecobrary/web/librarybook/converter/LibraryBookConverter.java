@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.web.librarybook.converter;
 
-import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.domain.librarybook.entity.LibraryBook;
 import com.woowacourse.tecobrary.web.librarybook.dto.LibraryBookDetailDto;
 import org.springframework.stereotype.Component;
 

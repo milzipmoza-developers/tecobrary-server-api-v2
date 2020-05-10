@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.web.serial.converter;
 
-import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
-import com.woowacourse.tecobrary.serial.entity.Serial;
+import com.woowacourse.tecobrary.domain.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.domain.serial.entity.Serial;
 import com.woowacourse.tecobrary.web.serial.dto.SerialBookInfoDto;
 import com.woowacourse.tecobrary.web.serial.dto.SerialInfoDto;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.woowacourse.tecobrary.web.librarybook.service;
 
-import com.woowacourse.tecobrary.librarybook.entity.LibraryBook;
-import com.woowacourse.tecobrary.librarybook.repository.LibraryBookRepository;
+import com.woowacourse.tecobrary.domain.librarybook.entity.LibraryBook;
+import com.woowacourse.tecobrary.domain.librarybook.repository.LibraryBookRepository;
 import com.woowacourse.tecobrary.web.librarybook.converter.LibraryBookConverter;
 import com.woowacourse.tecobrary.web.librarybook.dto.LibraryBookDetailDto;
 import com.woowacourse.tecobrary.web.librarybook.exception.LibraryBookNotFoundException;

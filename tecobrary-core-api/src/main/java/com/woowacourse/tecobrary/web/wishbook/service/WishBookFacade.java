@@ -1,15 +1,15 @@
 package com.woowacourse.tecobrary.web.wishbook.service;
 
-import com.woowacourse.tecobrary.user.entity.User;
-import com.woowacourse.tecobrary.user.repository.UserRepository;
+import com.woowacourse.tecobrary.domain.user.entity.User;
+import com.woowacourse.tecobrary.domain.user.repository.UserRepository;
 import com.woowacourse.tecobrary.web.tecorvis.api.SlackBotService;
 import com.woowacourse.tecobrary.web.tecorvis.dto.SlackBotBookInfoDto;
 import com.woowacourse.tecobrary.web.wishbook.converter.WishBookConverter;
 import com.woowacourse.tecobrary.web.wishbook.dto.WishBookInfoDto;
 import com.woowacourse.tecobrary.web.wishbook.exception.WishBookAlreadyExistException;
 import com.woowacourse.tecobrary.web.wishbook.exception.WishBookRequestUserNotFoundException;
-import com.woowacourse.tecobrary.wishbook.entity.WishBook;
-import com.woowacourse.tecobrary.wishbook.repository.WishBookRepository;
+import com.woowacourse.tecobrary.domain.wishbook.entity.WishBook;
+import com.woowacourse.tecobrary.domain.wishbook.repository.WishBookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

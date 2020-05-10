@@ -1,6 +1,6 @@
 package com.woowacourse.tecobrary.web.renthistory.service;
 
-import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
+import com.woowacourse.tecobrary.domain.renthistory.entity.RentHistory;
 import com.woowacourse.tecobrary.web.renthistory.dto.RentHistoryInfoDto;
 import com.woowacourse.tecobrary.web.renthistory.dto.RentResponse;
 import com.woowacourse.tecobrary.web.renthistory.dto.ReturnHistoryInfoDto;

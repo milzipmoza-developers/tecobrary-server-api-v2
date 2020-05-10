@@ -1,9 +1,9 @@
 package com.woowacourse.tecobrary.web.renthistory.service;
 
-import com.woowacourse.tecobrary.renthistory.entity.RentHistory;
-import com.woowacourse.tecobrary.renthistory.repository.RentHistoryRepository;
-import com.woowacourse.tecobrary.serial.entity.Serial;
-import com.woowacourse.tecobrary.user.entity.User;
+import com.woowacourse.tecobrary.domain.renthistory.entity.RentHistory;
+import com.woowacourse.tecobrary.domain.renthistory.repository.RentHistoryRepository;
+import com.woowacourse.tecobrary.domain.serial.entity.Serial;
+import com.woowacourse.tecobrary.domain.user.entity.User;
 import com.woowacourse.tecobrary.web.renthistory.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
