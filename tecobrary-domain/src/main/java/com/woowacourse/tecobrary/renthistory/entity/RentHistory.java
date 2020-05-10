@@ -3,10 +3,7 @@ package com.woowacourse.tecobrary.renthistory.entity;
 import com.woowacourse.tecobrary.common.entity.DeletableEntity;
 import com.woowacourse.tecobrary.serial.entity.Serial;
 import com.woowacourse.tecobrary.user.entity.User;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,6 +26,7 @@ public class RentHistory extends DeletableEntity {
     @JoinColumn(name = "rent_user_id")
     private User user;
 
+    @Builder
     public RentHistory(Serial serial, User user) {
         this.serial = serial;
         this.user = user;
@@ -39,7 +37,7 @@ public class RentHistory extends DeletableEntity {
     }
 
     @Override
-    protected LocalDateTime softDelete() {
+    public LocalDateTime softDelete() {
         return super.softDelete();
     }
 }
