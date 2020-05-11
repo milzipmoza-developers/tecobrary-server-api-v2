@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RentHistoryRepository extends JpaRepository<RentHistory, Long> {
+public interface RentHistoryRepository extends JpaRepository<RentHistory, Long>, RentHistoryRepositoryCustom {
 
     List<RentHistory> findAllByUserIdAndDeletedAtIsNull(Long userId);
 

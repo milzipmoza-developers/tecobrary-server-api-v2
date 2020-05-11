@@ -21,14 +21,14 @@ public class RentHistoryFacade {
     private final RentReturnValidator rentReturnValidator;
 
     public List<RentHistoryInfoDto> findAllByUserId(Long userId) {
-        List<RentHistory> histories = rentHistoryRepository.findAllByUserIdAndDeletedAtIsNotNull(userId);
+        List<RentHistory> histories = rentHistoryRepository.findAllByUserIdAndDeletedAtIsNullWithSerialAndLibraryBook(userId);
         return histories.stream()
                 .map(rentHistoryConverter::convertInfoDto)
                 .collect(Collectors.toList());
     }
 
     public List<ReturnHistoryInfoDto> findAllReturnedByUserId(Long userId) {
-        List<RentHistory> histories = rentHistoryRepository.findAllByUserIdAndDeletedAtIsNull(userId);
+        List<RentHistory> histories = rentHistoryRepository.findAllByUserIdAndDeletedAtIsNotNullWithSerialAndLibraryBook(userId);
         return histories.stream()
                 .map(rentHistoryConverter::convertReturnInfoDto)
                 .collect(Collectors.toList());
