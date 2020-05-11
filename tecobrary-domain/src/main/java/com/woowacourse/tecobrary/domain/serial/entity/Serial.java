@@ -22,7 +22,7 @@ public class Serial extends ModifiableEntity {
     @Column(name = "status")
     private boolean status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_book_id")
     private LibraryBook libraryBook;
 

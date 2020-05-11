@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SerialRepository extends JpaRepository<Serial, Long> {
-
-    List<Serial> findAllByLibraryBookId(Long id);
+public interface SerialRepository extends JpaRepository<Serial, Long>, SerialCustomRepository {
 
     Optional<Serial> findBySerialNumber(Long serialNumber);
-
-    boolean existsBySerialNumber(Long serialNumber);
 }
