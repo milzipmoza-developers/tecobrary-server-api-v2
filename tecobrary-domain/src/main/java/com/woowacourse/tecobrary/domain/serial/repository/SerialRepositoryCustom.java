@@ -5,7 +5,7 @@ import com.woowacourse.tecobrary.domain.serial.entity.Serial;
 import java.util.List;
 import java.util.Optional;
 
-public interface SerialCustomRepository {
+public interface SerialRepositoryCustom {
 
     List<Serial> findAllSerialByLibraryBookId(Long id);
 

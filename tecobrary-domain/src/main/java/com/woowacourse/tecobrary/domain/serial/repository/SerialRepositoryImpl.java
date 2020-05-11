@@ -11,9 +11,9 @@ import java.util.Optional;
 import static com.woowacourse.tecobrary.domain.librarybook.entity.QLibraryBook.libraryBook;
 import static com.woowacourse.tecobrary.domain.serial.entity.QSerial.serial;
 
-public class SerialCustomRepositoryImpl extends QuerydslRepositorySupport implements SerialCustomRepository {
+public class SerialRepositoryImpl extends QuerydslRepositorySupport implements SerialRepositoryCustom {
 
-    public SerialCustomRepositoryImpl() {
+    public SerialRepositoryImpl() {
         super(Serial.class);
     }
 
