@@ -1,12 +1,4 @@
-plugins {
-    id 'java'
-}
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
+apply plugin: 'com.ewerk.gradle.plugins.querydsl'
 
 bootJar {
     enabled = false
@@ -16,4 +8,22 @@ jar {
 }
 
 dependencies {
+}
+
+def querydslSrcDir = "src/main/generated"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslSrcDir
+}
+
+sourceSets.main.java.srcDirs += querydslSrcDir
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
 }

@@ -4,15 +4,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/tecobrary?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-    username: root
-    password: 1234
+    url: jdbc:mysql://localhost:3306/renew_tecobrary?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: luffy
+    password: 159456
   http:
     encoding:
       charset: UTF-8
