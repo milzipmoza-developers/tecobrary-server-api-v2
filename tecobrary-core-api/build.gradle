@@ -28,3 +28,9 @@ dependencies {
     implementation project(':tecobrary-domain')
     implementation project(':tecobrary-external-service')
 }
+
+task copyEnv(type: Copy) {
+    println "${project.rootDir}"
+    from file("${project.rootDir}/tecobrary-env/tecobrary-core-api-v2")
+    into file("${project.rootDir}/tecobrary-core-api/src/main/resources")
+}
