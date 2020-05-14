@@ -1,9 +1,12 @@
 package com.woowacourse.tecobrary.domain.librarybook.entity;
 
 import com.woowacourse.tecobrary.domain.common.entity.ModifiableEntity;
+import com.woowacourse.tecobrary.domain.serial.entity.Serial;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -33,6 +36,9 @@ public class LibraryBook extends ModifiableEntity {
     @Column(length = 500,
             columnDefinition = "varchar(500) default '내용 없음'")
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "libraryBook")
+    private List<Serial> serialList = new ArrayList<>();
 
     @Builder
     public LibraryBook(String image,
