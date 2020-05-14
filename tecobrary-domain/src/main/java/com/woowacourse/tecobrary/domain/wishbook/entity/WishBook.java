@@ -67,20 +67,30 @@ public class WishBook extends DeletableEntity {
         this.user = user;
     }
 
-    public void enrollWishBook(String reason) {
-        this.status = WishBookStatus.ENROLLED;
-        this.reason = reason;
-        this.softDelete();
+    public boolean isHandled() {
+        return status.isHandled();
+    }
+
+    public void enrollWishBook() {
+        handleWishBook("희망도서 등록", WishBookStatus.ENROLLED);
     }
 
     public void cancelWishBook(String reason) {
-        this.status = WishBookStatus.CANCELED;
-        this.reason = reason;
-        this.softDelete();
+        handleWishBook(reason, WishBookStatus.CANCELED);
+    }
+
+    public boolean isEnrolled() {
+        return this.status == WishBookStatus.ENROLLED;
     }
 
     @Override
     protected LocalDateTime softDelete() {
         return super.softDelete();
+    }
+
+    private void handleWishBook(String reason, WishBookStatus status) {
+        this.status = status;
+        this.reason = reason;
+        this.softDelete();
     }
 }
