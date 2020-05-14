@@ -6,7 +6,7 @@ import lombok.Builder;
 
 import java.util.*;
 
-import static com.woowacourse.tecobrary.librarybook.entity.QLibraryBook.libraryBook;
+import static com.woowacourse.tecobrary.domain.librarybook.entity.QLibraryBook.libraryBook;
 
 public class LibraryBookSearchClause {
     private String title;

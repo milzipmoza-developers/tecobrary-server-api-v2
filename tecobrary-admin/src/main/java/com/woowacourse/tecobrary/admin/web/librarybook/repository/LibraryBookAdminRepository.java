@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
-import static com.woowacourse.tecobrary.librarybook.entity.QLibraryBook.libraryBook;
+import static com.woowacourse.tecobrary.domain.librarybook.entity.QLibraryBook.libraryBook;
 
 @Repository
 public class LibraryBookAdminRepository extends QuerydslRepositorySupport {
