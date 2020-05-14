@@ -23,16 +23,14 @@ public class LibraryBookAdminController {
         return libraryBookAdminFacade.getLibraryBooks(pageable, request);
     }
 
-    // 책 상세 조회
     @GetMapping("/{id}")
     public LibraryBookDescResponse getLibraryBook(@PathVariable Long id) {
         return libraryBookAdminFacade.getLibraryBook(id);
     }
 
-    // 책 생성
     @PostMapping
-    public LibraryBookDescResponse createLibraryBook() {
-        return null;
+    public LibraryBookDescResponse createLibraryBook(@RequestBody LibraryBookCreateRequest request) {
+        return libraryBookAdminFacade.createLibraryBook(request);
     }
 
     @DeleteMapping("/{id}")

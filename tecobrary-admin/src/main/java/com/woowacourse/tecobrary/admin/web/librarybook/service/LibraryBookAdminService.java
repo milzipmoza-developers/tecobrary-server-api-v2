@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.admin.web.librarybook.service;
 
+import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookCreateRequest;
 import com.woowacourse.tecobrary.admin.web.librarybook.dto.LibraryBookSearchRequest;
 import com.woowacourse.tecobrary.admin.web.librarybook.repository.LibraryBookAdminRepository;
 import com.woowacourse.tecobrary.admin.web.librarybook.repository.LibraryBookSearchClause;
