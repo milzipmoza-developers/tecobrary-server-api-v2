@@ -17,5 +17,39 @@ spring:
       enabled: true
       force: true
 
+security:
+  oauth2:
+    client:
+      client-id: a
+      client-secret: a
+      access-token-uri: https://accounts.google.com/o/oauth2/token
+      user-authorization-uri: https://accounts.google.com/o/oauth2/auth
+      client-authentication-scheme: form
+      scope: email, profile
+    resource:
+      user-info-uri: https://www.googleapis.com/oauth2/v2/userinfo
+
 server:
   port: 8989
+
+naver:
+  client_id: a
+  client_secret: a
+
+slackbot:
+  host: http://localhost:5000
+
+github:
+  user:
+    client_id: a
+    client_secret: a
+    redirect_uri: http://localhost:8081/auth
+  manager:
+    client_id: a
+    client_secret: a
+    redirect_uri: http://localhost:8082
+  api:
+    scope: USER
+
+jwt:
+  secret: test
