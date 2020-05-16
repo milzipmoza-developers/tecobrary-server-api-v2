@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import Element from 'element-ui'
 import './styles/element-variables.scss'
+import koLang from 'element-ui/lib/locale/lang/ko'
 
 import '@/styles/index.scss' // global css
 import App from './App'
@@ -16,8 +17,10 @@ import './permission' // permission control
 import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 
+
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium' // set element-ui default size
+  size: Cookies.get('size') || 'medium',
+  locale: koLang
 })
 
 // register global utility filters
