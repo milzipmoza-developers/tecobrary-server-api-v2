@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.admin.web.librarybook.repository;
 
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.Builder;
@@ -37,24 +38,28 @@ public class LibraryBookSearchClause {
 
     private BooleanExpression getTitleExpression() {
         return Optional.ofNullable(title)
+                .filter(StringUtils::isNotBlank)
                 .map(libraryBook.title::like)
                 .orElse(null);
     }
 
     private BooleanExpression getAuthorExpression() {
         return Optional.ofNullable(author)
+                .filter(StringUtils::isNotBlank)
                 .map(libraryBook.author::like)
                 .orElse(null);
     }
 
     private BooleanExpression getPublisherExpression() {
         return Optional.ofNullable(publisher)
+                .filter(StringUtils::isNotBlank)
                 .map(libraryBook.publisher::like)
                 .orElse(null);
     }
 
     private BooleanExpression getIsbnExpression() {
         return Optional.ofNullable(isbn)
+                .filter(StringUtils::isNotBlank)
                 .map(libraryBook.isbn::like)
                 .orElse(null);
     }

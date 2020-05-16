@@ -11,6 +11,7 @@ public class LibraryBookConverter {
     public LibraryBookInfoResponse convertInfo(LibraryBook libraryBook) {
         return LibraryBookInfoResponse.builder()
                 .id(libraryBook.getId())
+                .title(libraryBook.getTitle())
                 .author(libraryBook.getAuthor())
                 .publisher(libraryBook.getPublisher())
                 .isbn(libraryBook.getIsbn())

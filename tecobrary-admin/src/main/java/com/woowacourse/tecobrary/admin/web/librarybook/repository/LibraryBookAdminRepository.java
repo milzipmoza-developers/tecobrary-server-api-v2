@@ -25,7 +25,8 @@ public class LibraryBookAdminRepository extends QuerydslRepositorySupport {
     public Page<LibraryBook> findAllByCondition(Pageable pageable, LibraryBookSearchClause searchClause) {
         JPQLQuery<LibraryBook> jpqlQuery = jpaQueryFactory.selectFrom(libraryBook)
                 .where(searchClause.where())
-                .join(libraryBook.serialList)
+                .leftJoin(libraryBook.serialList)
+                .fetchJoin()
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(libraryBook.id.desc());
