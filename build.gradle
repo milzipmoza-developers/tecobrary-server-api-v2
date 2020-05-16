@@ -54,6 +54,7 @@ subprojects {
         implementation 'mysql:mysql-connector-java'
         implementation 'com.querydsl:querydsl-jpa'
         implementation 'com.querydsl:querydsl-apt'
+        implementation 'org.apache.commons:commons-lang3:3.10'
 
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'junit'
@@ -72,8 +73,6 @@ subprojects {
         testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 
         asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-
-        runtimeOnly 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 
         compileOnly 'org.projectlombok:lombok:1.18.8'
         annotationProcessor 'org.projectlombok:lombok:1.18.8'
