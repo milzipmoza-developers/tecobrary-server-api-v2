@@ -1,11 +1,5 @@
 module.exports = {
-  title: 'Vue Element Admin',
-
-  /**
-   * @type {boolean} true | false
-   * @description Whether show the settings right-panel
-   */
-  showSettings: true,
+  title: '테코브러리 어드민',
 
   /**
    * @type {boolean} true | false

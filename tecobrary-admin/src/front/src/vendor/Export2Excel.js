@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {saveAs} from 'file-saver'
+require('script-loader!file-saver');
 import XLSX from 'xlsx'
 
 function generateArray(table) {
@@ -38,8 +38,7 @@ function generateArray(table) {
             c: outRow.length + colspan - 1
           }
         });
-      }
-      ;
+      };
 
       //Handle Value
       outRow.push(cellValue !== "" ? cellValue : null);
@@ -146,20 +145,20 @@ export function export_table_to_excel(id) {
 }
 
 export function export_json_to_excel({
-                                       multiHeader = [],
-                                       header,
-                                       data,
-                                       filename,
-                                       merges = [],
-                                       autoWidth = true,
-                                       bookType = 'xlsx'
-                                     } = {}) {
+  multiHeader = [],
+  header,
+  data,
+  filename,
+  merges = [],
+  autoWidth = true,
+  bookType=  'xlsx'
+} = {}) {
   /* original data */
   filename = filename || 'excel-list'
   data = [...data]
   data.unshift(header);
 
-  for (let i = multiHeader.length - 1; i > -1; i--) {
+  for (let i = multiHeader.length-1; i > -1; i--) {
     data.unshift(multiHeader[i])
   }
 

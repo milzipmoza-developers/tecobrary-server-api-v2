@@ -1,200 +1,200 @@
 <template>
   <div :class="computedClasses" class="material-input__component">
     <div :class="{iconClass:icon}">
-      <i :class="['el-icon-' + icon]" class="el-input__icon material-input__icon" v-if="icon"/>
+      <i v-if="icon" :class="['el-icon-' + icon]" class="el-input__icon material-input__icon" />
       <input
-        :autocomplete="autoComplete"
-        :disabled="disabled"
-        :name="name"
-        :placeholder="fillPlaceHolder"
-        :readonly="readonly"
-        :required="required"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
-        class="material-input"
-        type="email"
         v-if="type === 'email'"
         v-model="currentValue"
-      >
-      <input
-        :autocomplete="autoComplete"
-        :disabled="disabled"
         :name="name"
         :placeholder="fillPlaceHolder"
         :readonly="readonly"
+        :disabled="disabled"
+        :autocomplete="autoComplete"
         :required="required"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
+        type="email"
         class="material-input"
-        type="url"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
+      >
+      <input
         v-if="type === 'url'"
         v-model="currentValue"
-      >
-      <input
-        :autocomplete="autoComplete"
-        :disabled="disabled"
-        :max="max"
-        :maxlength="maxlength"
-        :min="min"
-        :minlength="minlength"
         :name="name"
         :placeholder="fillPlaceHolder"
         :readonly="readonly"
+        :disabled="disabled"
+        :autocomplete="autoComplete"
         :required="required"
-        :step="step"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
+        type="url"
         class="material-input"
-        type="number"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
+      >
+      <input
         v-if="type === 'number'"
         v-model="currentValue"
-      >
-      <input
-        :autocomplete="autoComplete"
+        :name="name"
+        :placeholder="fillPlaceHolder"
+        :step="step"
+        :readonly="readonly"
         :disabled="disabled"
+        :autocomplete="autoComplete"
         :max="max"
         :min="min"
-        :name="name"
-        :placeholder="fillPlaceHolder"
-        :readonly="readonly"
+        :minlength="minlength"
+        :maxlength="maxlength"
         :required="required"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
+        type="number"
         class="material-input"
-        type="password"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
+      >
+      <input
         v-if="type === 'password'"
         v-model="currentValue"
-      >
-      <input
-        :autocomplete="autoComplete"
-        :disabled="disabled"
         :name="name"
         :placeholder="fillPlaceHolder"
         :readonly="readonly"
+        :disabled="disabled"
+        :autocomplete="autoComplete"
+        :max="max"
+        :min="min"
         :required="required"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
+        type="password"
         class="material-input"
-        type="tel"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
+      >
+      <input
         v-if="type === 'tel'"
         v-model="currentValue"
-      >
-      <input
-        :autocomplete="autoComplete"
-        :disabled="disabled"
-        :maxlength="maxlength"
-        :minlength="minlength"
         :name="name"
         :placeholder="fillPlaceHolder"
         :readonly="readonly"
+        :disabled="disabled"
+        :autocomplete="autoComplete"
         :required="required"
-        @blur="handleMdBlur"
-        @focus="handleMdFocus"
-        @input="handleModelInput"
+        type="tel"
         class="material-input"
-        type="text"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
+      >
+      <input
         v-if="type === 'text'"
         v-model="currentValue"
+        :name="name"
+        :placeholder="fillPlaceHolder"
+        :readonly="readonly"
+        :disabled="disabled"
+        :autocomplete="autoComplete"
+        :minlength="minlength"
+        :maxlength="maxlength"
+        :required="required"
+        type="text"
+        class="material-input"
+        @focus="handleMdFocus"
+        @blur="handleMdBlur"
+        @input="handleModelInput"
       >
-      <span class="material-input-bar"/>
+      <span class="material-input-bar" />
       <label class="material-label">
-        <slot/>
+        <slot />
       </label>
     </div>
   </div>
 </template>
 
 <script>
-  // source:https://github.com/wemake-services/vue-material-input/blob/master/src/components/MaterialInput.vue
+// source:https://github.com/wemake-services/vue-material-input/blob/master/src/components/MaterialInput.vue
 
-  export default {
-    name: 'MdInput',
-    props: {
-      /* eslint-disable */
-      icon: String,
-      name: String,
-      type: {
-        type: String,
-        default: 'text'
-      },
-      value: [String, Number],
-      placeholder: String,
-      readonly: Boolean,
-      disabled: Boolean,
-      min: String,
-      max: String,
-      step: String,
-      minlength: Number,
-      maxlength: Number,
-      required: {
-        type: Boolean,
-        default: true
-      },
-      autoComplete: {
-        type: String,
-        default: 'off'
-      },
-      validateEvent: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  name: 'MdInput',
+  props: {
+    /* eslint-disable */
+    icon: String,
+    name: String,
+    type: {
+      type: String,
+      default: 'text'
     },
-    data() {
+    value: [String, Number],
+    placeholder: String,
+    readonly: Boolean,
+    disabled: Boolean,
+    min: String,
+    max: String,
+    step: String,
+    minlength: Number,
+    maxlength: Number,
+    required: {
+      type: Boolean,
+      default: true
+    },
+    autoComplete: {
+      type: String,
+      default: 'off'
+    },
+    validateEvent: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data() {
+    return {
+      currentValue: this.value,
+      focus: false,
+      fillPlaceHolder: null
+    }
+  },
+  computed: {
+    computedClasses() {
       return {
-        currentValue: this.value,
-        focus: false,
-        fillPlaceHolder: null
+        'material--active': this.focus,
+        'material--disabled': this.disabled,
+        'material--raised': Boolean(this.focus || this.currentValue) // has value
       }
-    },
-    computed: {
-      computedClasses() {
-        return {
-          'material--active': this.focus,
-          'material--disabled': this.disabled,
-          'material--raised': Boolean(this.focus || this.currentValue) // has value
+    }
+  },
+  watch: {
+    value(newValue) {
+      this.currentValue = newValue
+    }
+  },
+  methods: {
+    handleModelInput(event) {
+      const value = event.target.value
+      this.$emit('input', value)
+      if (this.$parent.$options.componentName === 'ElFormItem') {
+        if (this.validateEvent) {
+          this.$parent.$emit('el.form.change', [value])
         }
       }
+      this.$emit('change', value)
     },
-    watch: {
-      value(newValue) {
-        this.currentValue = newValue
+    handleMdFocus(event) {
+      this.focus = true
+      this.$emit('focus', event)
+      if (this.placeholder && this.placeholder !== '') {
+        this.fillPlaceHolder = this.placeholder
       }
     },
-    methods: {
-      handleModelInput(event) {
-        const value = event.target.value
-        this.$emit('input', value)
-        if (this.$parent.$options.componentName === 'ElFormItem') {
-          if (this.validateEvent) {
-            this.$parent.$emit('el.form.change', [value])
-          }
-        }
-        this.$emit('change', value)
-      },
-      handleMdFocus(event) {
-        this.focus = true
-        this.$emit('focus', event)
-        if (this.placeholder && this.placeholder !== '') {
-          this.fillPlaceHolder = this.placeholder
-        }
-      },
-      handleMdBlur(event) {
-        this.focus = false
-        this.$emit('blur', event)
-        this.fillPlaceHolder = null
-        if (this.$parent.$options.componentName === 'ElFormItem') {
-          if (this.validateEvent) {
-            this.$parent.$emit('el.form.blur', [this.currentValue])
-          }
+    handleMdBlur(event) {
+      this.focus = false
+      this.$emit('blur', event)
+      this.fillPlaceHolder = null
+      if (this.$parent.$options.componentName === 'ElFormItem') {
+        if (this.validateEvent) {
+          this.$parent.$emit('el.form.blur', [this.currentValue])
         }
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -239,11 +239,9 @@
   .material-input__component {
     margin-top: 36px;
     position: relative;
-
     * {
       box-sizing: border-box;
     }
-
     .iconClass {
       .material-input__icon {
         position: absolute;
@@ -257,16 +255,13 @@
         font-weight: $font-weight-normal;
         pointer-events: none;
       }
-
       .material-label {
         left: $index-has-icon;
       }
-
       .material-input {
         text-indent: $index-has-icon;
       }
     }
-
     .material-input {
       font-size: $font-size-base;
       padding: $spacer $spacer $spacer - $apixel * 10 $spacer / 2;
@@ -275,14 +270,12 @@
       border: none;
       line-height: 1;
       border-radius: 0;
-
       &:focus {
         outline: none;
         border: none;
         border-bottom: 1px solid transparent; // fixes the height issue
       }
     }
-
     .material-label {
       font-weight: $font-weight-normal;
       position: absolute;
@@ -292,37 +285,31 @@
       transition: $transition;
       font-size: $font-size-small;
     }
-
     .material-input-bar {
       position: relative;
       display: block;
       width: 100%;
-
       &:before {
         @extend %base-bar-pseudo;
         left: 50%;
       }
-
       &:after {
         @extend %base-bar-pseudo;
         right: 50%;
       }
     }
-
     // Disabled state:
     &.material--disabled {
       .material-input {
         border-bottom-style: dashed;
       }
     }
-
     // Raised state:
     &.material--raised {
       .material-label {
         @include slided-top();
       }
     }
-
     // Active state:
     &.material--active {
       .material-input-bar {
@@ -336,38 +323,32 @@
 
   .material-input__component {
     background: $color-white;
-
     .material-input {
       background: none;
       color: $color-black;
       text-indent: $index;
       border-bottom: 1px solid $color-grey-light;
     }
-
     .material-label {
       color: $color-grey;
     }
-
     .material-input-bar {
       &:before,
       &:after {
         background: $color-blue;
       }
     }
-
     // Active state:
     &.material--active {
       .material-label {
         color: $color-blue;
       }
     }
-
     // Errors:
     &.material--has-errors {
       &.material--active .material-label {
         color: $color-red;
       }
-
       .material-input-bar {
         &:before,
         &:after {

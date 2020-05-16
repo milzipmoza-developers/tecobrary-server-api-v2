@@ -12,7 +12,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class AdminUserInfoController {
 
-    @GetMapping("/admin/user/info")
+    @GetMapping("/api/security/user")
     public AdminUserDto userInfo() {
         return (AdminUserDto) Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
                 .filter(Authentication::isAuthenticated)

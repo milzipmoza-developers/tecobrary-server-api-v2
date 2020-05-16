@@ -25,10 +25,8 @@ bootJar {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.security.oauth:spring-security-oauth2'
-    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE'
-
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    
     implementation project(':tecobrary-domain')
     implementation project(':tecobrary-external-service')
 }
