@@ -24,10 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .antMatchers(HttpMethod.GET, "/api/librarybooks/**")
-                .hasAnyRole()
+                .hasAnyRole("ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/api/librarybooks/**")
-                .hasAnyRole()
+                .hasAnyRole("ADMIN")
 
                 .anyRequest().authenticated()
                 .and().oauth2Login()

@@ -7,3 +7,9 @@ export const getLibraryBooks = (query) => request({
         page: query.page
     })
 })
+
+export const createLibraryBook = (body) => request({
+    url: '/api/librarybook',
+    method: 'post',
+    body: body
+})
