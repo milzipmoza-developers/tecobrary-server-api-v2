@@ -1,3 +1,7 @@
+plugins {
+    id "com.github.node-gradle.node" version "2.2.0"
+}
+
 apply plugin: "org.asciidoctor.convert"
 
 sourceCompatibility = '1.8'
@@ -30,3 +34,24 @@ dependencies {
     implementation project(':tecobrary-domain')
     implementation project(':tecobrary-external-service')
 }
+
+node {
+    version = "12.14.1"
+    download = true
+    workDir = file("${project.projectDir}/nodejs")
+    npmWorkDir = file("${project.projectDir}/npm")
+}
+
+task installPackages(type: NpmTask) {
+    workingDir = file("${project.projectDir}/src/front")
+    args = ["install"]
+}
+
+task copyEnv(type: Copy) {
+    from file("${project.rootDir}/tecobrary-env/tecobrary-admin")
+    into file("${project.projectDir}/src/main/resources")
+    print(">>> application.yml files copy complete")
+}
+
+compileJava.dependsOn "copyEnv"
+processResources.dependsOn "installPackages"
