@@ -48,4 +48,8 @@ public class Serial extends ModifiableEntity {
         }
         this.status = false;
     }
+
+    public boolean isRent() {
+        return this.status;
+    }
 }

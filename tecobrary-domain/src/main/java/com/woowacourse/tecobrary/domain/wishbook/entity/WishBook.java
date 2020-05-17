@@ -36,6 +36,13 @@ public class WishBook extends DeletableEntity {
             columnDefinition = "varchar(500) default '내용 없음'")
     private String description;
 
+    @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    private WishBookStatus status;
+
+    @Column(nullable = false, length = 100)
+    private String reason;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "wish_book_request_user_id")
     private User user;
@@ -47,6 +54,7 @@ public class WishBook extends DeletableEntity {
                     String publisher,
                     String isbn,
                     String description,
+                    String reason,
                     User user) {
         this.image = image;
         this.title = title;
@@ -54,11 +62,35 @@ public class WishBook extends DeletableEntity {
         this.publisher = publisher;
         this.isbn = isbn;
         this.description = description;
+        this.status = WishBookStatus.REQUESTED;
+        this.reason = reason;
         this.user = user;
+    }
+
+    public boolean isHandled() {
+        return status.isHandled();
+    }
+
+    public void enrollWishBook() {
+        handleWishBook("희망도서 등록", WishBookStatus.ENROLLED);
+    }
+
+    public void cancelWishBook(String reason) {
+        handleWishBook(reason, WishBookStatus.CANCELED);
+    }
+
+    public boolean isEnrolled() {
+        return this.status == WishBookStatus.ENROLLED;
     }
 
     @Override
     protected LocalDateTime softDelete() {
         return super.softDelete();
+    }
+
+    private void handleWishBook(String reason, WishBookStatus status) {
+        this.status = status;
+        this.reason = reason;
+        this.softDelete();
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class NaverApiWebClient {
 
     private static final String REQUEST_SCHEME = "https";
-    private static final String REQUEST_HOST = "openapi.com.woowacourse.tecobrary.web.naver.com";
+    private static final String REQUEST_HOST = "openapi.naver.com";
     private static final String REQUEST_PATH = "v1/search/book.json";
     private static final String PARAM_QUERY = "query";
     private static final String PARAM_DISPLAY = "display";

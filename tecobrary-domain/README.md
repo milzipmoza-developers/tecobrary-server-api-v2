@@ -86,3 +86,20 @@ CREATE TABLE `rent_history` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
+
+### Admin 도메인
+
+```sql
+CREATE TABLE `admin` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`name` varchar(30) NOT NULL,
+`email` varchar(100) NOT NULL,
+`picture` varchar(100) NOT NULL,
+`role` varchar(255) NOT NULL,
+`created_at` datetime NOT NULL,
+`updated_at` datetime NOT NULL,
+`deleted_at` datetime DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `uk_admin_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```

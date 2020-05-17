@@ -4,9 +4,8 @@ pluginManagement {
 	}
 }
 rootProject.name = 'tecobrary'
-include 'tecobrary-domain-leg'
-include 'tecobrary-core-api-leg'
 include 'tecobrary-external-service'
 include 'tecobrary-domain'
 include 'tecobrary-core-api'
+include 'tecobrary-admin'
 
