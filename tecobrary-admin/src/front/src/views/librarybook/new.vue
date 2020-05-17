@@ -21,18 +21,18 @@
       fit
       @current-change="handleSelectionChange"
     >
-      <el-table-column label="제목">
+      <el-table-column align="center" label="제목">
         <span slot-scope="scope" class="link-type" v-html="scope.row.title"
               @click="onClickTitle(scope.$index)"
         ></span>
       </el-table-column>
-      <el-table-column align="center" label="작가">
+      <el-table-column align="center" label="작가" width="300">
         <span slot-scope="scope" v-html="scope.row.author"></span>
       </el-table-column>
-      <el-table-column align="center" label="출판사">
+      <el-table-column align="center" label="출판사" width="300">
         <span slot-scope="scope" v-html="scope.row.publisher"></span>
       </el-table-column>
-      <el-table-column align="center" label="ISBN">
+      <el-table-column align="center" label="ISBN" width="300">
         <span slot-scope="scope" v-html="scope.row.isbn"></span>
       </el-table-column>
     </el-table>
