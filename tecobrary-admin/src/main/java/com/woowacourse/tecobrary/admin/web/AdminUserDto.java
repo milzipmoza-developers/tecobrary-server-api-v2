@@ -22,11 +22,11 @@ public class AdminUserDto implements OAuth2User, Serializable {
     private List<String> roles;
 
     @Builder
-    public AdminUserDto(String name, String email, String picture) {
+    public AdminUserDto(String name, String email, String picture, String role) {
         this.name = name;
         this.email = email;
         this.picture = picture;
-        this.roles = Collections.singletonList("ROLE_ADMIN");
+        this.roles = Collections.singletonList(role);
     }
 
     @Override

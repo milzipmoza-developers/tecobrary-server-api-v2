@@ -1,5 +1,6 @@
 package com.woowacourse.tecobrary.admin.security;
 
+import com.woowacourse.tecobrary.domain.admin.entity.AdminRole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -14,30 +15,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String DEVELOP_ORIGIN = "http://localhost:3000";
+
     private final Environment environment;
     private final UserSecurityService userSecurityService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/login", "/oauth2/authorization/**", "/static/**")
-                .permitAll()
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/login", "/oauth2/authorization/**", "/static/**").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/api/librarybooks/**")
-                .hasAnyRole("ADMIN")
-
-                .antMatchers(HttpMethod.POST, "/api/librarybooks/**")
-                .hasAnyRole("ADMIN")
+                .antMatchers("/api/librarybook/**").hasAnyRole(AdminRole.ROLE_ADMIN.name())
 
                 .anyRequest().authenticated()
-                .and().oauth2Login()
-                .userInfoEndpoint()
-                .userService(userSecurityService);
+                .and().logout().logoutSuccessUrl("/").invalidateHttpSession(true)
+                .and().oauth2Login().userInfoEndpoint().userService(userSecurityService);
 
         if (environment.acceptsProfiles(Profiles.of("local"))) {
             http.oauth2Login()
-                    .defaultSuccessUrl("http://localhost:3000")
-                    .loginPage("http://localhost:3000");
+                    .defaultSuccessUrl(DEVELOP_ORIGIN)
+                    .loginPage(DEVELOP_ORIGIN);
         }
     }
 }
