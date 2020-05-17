@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/oauth2/authorization/**", "/static/**").permitAll()
 
-                .antMatchers("/api/librarybook/**").hasAnyRole(AdminRole.ROLE_ADMIN.name())
+                .antMatchers("/api/librarybook/**").hasAuthority(AdminRole.ROLE_ADMIN.name())
 
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/").invalidateHttpSession(true)
