@@ -29,7 +29,7 @@ public class LibraryBookAdminRepository extends QuerydslRepositorySupport {
                 .fetchJoin()
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(libraryBook.id.desc());
+                .orderBy(libraryBook.id.asc());
 
         QueryResults<LibraryBook> queryResults = jpqlQuery.fetchResults();
 
