@@ -1,37 +1,20 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-editor-container">
-      <div class=" clearfix">
-        <div class="info-container">
-          <span style="font-size:20px;padding-top:20px;display:inline-block;">Dashboard</span>
-          <div>{{ name }}</div>
-          <div>{{ avatar }}</div>
-          <div>{{ roles }}</div>
-        </div>
-      </div>
+      <p>테코브러리 어드민 대시보드</p>
+      <p>권한 문의는 우아한테크코스 슬랙에서 해주세요.</p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import PanThumb from '@/components/PanThumb'
-import GithubCorner from '@/components/GithubCorner'
 
-export default {
-  name: 'DashboardEditor',
-  components: { PanThumb },
+  export default {
+  name: 'Dashboard',
   data() {
     return {
     }
   },
-  computed: {
-    ...mapGetters([
-      'name',
-      'avatar',
-      'roles'
-    ])
-  }
 }
 </script>
 
