@@ -135,17 +135,32 @@
       
       async enrollRequest() {
         const request = this.enroll.book
-        console.log(request)
         try {
           const response = await createLibraryBook(request);
-          console.log(response)
+          Message.info(`${response.title} 등록 성공`)
+          this._initializeEnrollBook()
+          this.enroll.dialog = false
+          this.searchBooks.content = []
+          this.queryForm.keyword = ''
         } catch (e) {
           Message.error("등록 실패" + e)
+          this._initializeEnrollBook()
         }
       },
       
       _strip(text) {
         return text.replace(/<\/?[^>]+(>|$)/g, "")
+      },
+      
+      _initializeEnrollBook() {
+        this.enroll.book = {
+          image: '',
+          title: '',
+          author: '',
+          publisher: '',
+          isbn: '',
+          description: '',
+        }
       }
     }
   }
