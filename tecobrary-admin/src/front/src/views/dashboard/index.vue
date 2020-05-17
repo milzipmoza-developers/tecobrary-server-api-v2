@@ -3,6 +3,7 @@
     <div class="dashboard-editor-container">
       <p>테코브러리 어드민 대시보드</p>
       <p>권한 문의는 우아한테크코스 슬랙에서 해주세요.</p>
+      <!-- TODO: 대시보드에 필요한 정보들을 조합해서 구현한다. -->
     </div>
   </div>
 </template>
