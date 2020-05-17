@@ -3,6 +3,9 @@ import Router from 'vue-router'
 /* Layout */
 import Layout from '@/layout'
 import libraryBookRouter from "./modules/libraryBookRouter";
+import wishBookRouter from "./modules/wishBookRouter";
+import userRouter from "./modules/userRouter";
+import rentHistoryRouter from "./modules/rentHistoryRouter";
 
 Vue.use(Router)
 
@@ -28,7 +31,10 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  userRouter,
   libraryBookRouter,
+  wishBookRouter,
+  rentHistoryRouter,
 
   { path: '*', redirect: '/404', hidden: true }
 ]
