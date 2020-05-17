@@ -21,6 +21,7 @@
     
     <!--  책 리스트  -->
     <el-table
+      empty-text="보유장서가 없습니다."
       :data="libraryBooks.content"
       style="width: 100%; min-height: 400px;"
       highlight-current-row
@@ -87,8 +88,7 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialog.visible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialog.visible = false">Confirm</el-button>
+        <el-button @click="dialog.visible = false">닫기</el-button>
       </span>
     </el-dialog>
   </div>

@@ -117,7 +117,6 @@
       },
 
       handleSelectionChange(val) {
-        console.log(val)
         this.searchBooks.selection = val;
       },
 
@@ -135,7 +134,7 @@
       },
       
       async enrollRequest() {
-        const request = this.searchBooks.selection
+        const request = this.enroll.book
         console.log(request)
         try {
           const response = await createLibraryBook(request);

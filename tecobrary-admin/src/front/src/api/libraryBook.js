@@ -8,10 +8,10 @@ export const getLibraryBooks = (query) => request({
   })
 })
 
-export const createLibraryBook = (body) => request({
+export const createLibraryBook = (data) => request({
   url: '/api/librarybook',
   method: 'post',
-  body: body
+  data: data
 })
 
 export const getLibraryBook = (id) => request({
