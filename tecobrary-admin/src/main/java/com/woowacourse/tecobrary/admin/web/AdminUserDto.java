@@ -26,7 +26,7 @@ public class AdminUserDto implements OAuth2User, Serializable {
         this.name = name;
         this.email = email;
         this.picture = picture;
-        this.roles = Collections.singletonList("ADMIN");
+        this.roles = Collections.singletonList("ROLE_ADMIN");
     }
 
     @Override

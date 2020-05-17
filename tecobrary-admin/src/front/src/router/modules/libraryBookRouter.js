@@ -15,7 +15,7 @@ const libraryBookRouter = {
             component: () => import('@/views/librarybook/index'),
             name: '보유 장서 관리',
             meta: { title: '보유 장서 관리' },
-            roles: ['ADMIN']
+            roles: ['ROLE_ADMIN']
         },
         {
             path: 'new',
