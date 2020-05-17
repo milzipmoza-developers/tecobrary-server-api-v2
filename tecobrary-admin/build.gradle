@@ -47,11 +47,17 @@ task installPackages(type: NpmTask) {
     args = ["install"]
 }
 
+task npmBuild(type: NpmTask) {
+    workingDir = file("${project.projectDir}/src/front")
+    args = ["run", "build"]
+}
+
 task copyEnv(type: Copy) {
     from file("${project.rootDir}/tecobrary-env/tecobrary-admin")
     into file("${project.projectDir}/src/main/resources")
     print(">>> application.yml files copy complete")
 }
 
+npmBuild.dependsOn "installPackages"
 compileJava.dependsOn "copyEnv"
-processResources.dependsOn "installPackages"
+processResources.dependsOn "npmBuild"
