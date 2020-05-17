@@ -33,16 +33,16 @@
       <el-table-column align="center" label="제목">
         <span slot-scope="scope" class="link-type" @click="onClickTitle(scope.row.id)">{{ scope.row.title }}</span>
       </el-table-column>
-      <el-table-column align="center" label="작가">
+      <el-table-column align="center" label="작가" width="200">
         <span slot-scope="scope">{{ scope.row.author }}</span>
       </el-table-column>
-      <el-table-column align="center" label="출판사">
+      <el-table-column align="center" label="출판사" width="200">
         <span slot-scope="scope">{{ scope.row.publisher }}</span>
       </el-table-column>
-      <el-table-column align="center" label="ISBN">
+      <el-table-column align="center" label="ISBN" width="250">
         <span slot-scope="scope">{{ scope.row.isbn }}</span>
       </el-table-column>
-      <el-table-column align="center" label="보유 장서 수">
+      <el-table-column align="center" label="보유 장서 수" width="100">
         <span slot-scope="scope">{{ scope.row.bookCounts }}</span>
       </el-table-column>
     </el-table>
