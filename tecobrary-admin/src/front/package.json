@@ -5,7 +5,7 @@
   "author": "thedevluffy <thedevluffy@gmail.com>",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "npm install && vue-cli-service build --no-clean"
+    "build": "vue-cli-service build --no-clean"
   },
   "dependencies": {
     "axios": "^0.19.2",
