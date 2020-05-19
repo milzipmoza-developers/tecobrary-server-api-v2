@@ -30,9 +30,9 @@ dependencies {
 }
 
 task copyEnv(type: Copy) {
-    println "${project.rootDir}"
-    from file("${project.rootDir}/tecobrary-env/tecobrary-core-api-v2")
-    into file("${project.rootDir}/tecobrary-core-api/src/main/resources")
+    from file("${project.rootDir}/tecobrary-env/tecobrary-core-api")
+    into file("${project.projectDir}/src/main/resources")
+    print(">>> application.yml files copy complete")
 }
 
 compileJava.dependsOn "copyEnv"
