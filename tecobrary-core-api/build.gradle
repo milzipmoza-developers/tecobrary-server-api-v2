@@ -34,3 +34,5 @@ task copyEnv(type: Copy) {
     from file("${project.rootDir}/tecobrary-env/tecobrary-core-api-v2")
     into file("${project.rootDir}/tecobrary-core-api/src/main/resources")
 }
+
+compileJava.dependsOn "copyEnv"
