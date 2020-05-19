@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: local
+  session:
+    store-type: jdbc
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
@@ -28,6 +30,8 @@ spring:
             scope:
               - profile
               - email
+  mvc:
+    static-path-pattern: /static/**
 
 server:
   port: 8989
