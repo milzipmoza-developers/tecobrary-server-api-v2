@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 class HomeControllerTest extends AcceptanceTestUtils {
 
@@ -17,6 +18,7 @@ class HomeControllerTest extends AcceptanceTestUtils {
                 get(baseUrl("/api/v2")).
         then().
                 statusCode(200).
-                body(is("Hello. This is Tecobrary API v2. Welcome !"));
+                body("code", is("200")).
+                body("serverDateTime", is(notNullValue()));
     }
 }
