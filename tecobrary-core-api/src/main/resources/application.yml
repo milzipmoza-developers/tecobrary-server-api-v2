@@ -16,6 +16,10 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
 
 server:
   port: 9090
@@ -23,6 +27,9 @@ server:
     session:
       persistent: false
       timeout: 0
+  error:
+    whitelabel:
+      enabled: false
 
 naver:
   client_id: a
