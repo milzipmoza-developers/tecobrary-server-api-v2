@@ -25,6 +25,10 @@ public class CoreApiResponse<T> {
         return new CoreApiResponse<>("200", "", data);
     }
 
+    public static <T> CoreApiResponse<T> success(String message) {
+        return new CoreApiResponse<>("200", message, null);
+    }
+
     public static <T> CoreApiResponse<T> fail(String code, String message) {
         return new CoreApiResponse<>(code, message, null);
     }
