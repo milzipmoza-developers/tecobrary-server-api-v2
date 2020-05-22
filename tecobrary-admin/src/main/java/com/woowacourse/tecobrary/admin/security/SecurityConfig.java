@@ -28,12 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login", "/oauth2/authorization/**", "/static/**").permitAll()
 
                 .antMatchers("/api/librarybook/**").hasAuthority(AdminRole.ROLE_ADMIN.name())
+                .antMatchers("/api/admin/**").hasAuthority(AdminRole.ROLE_ADMIN.name())
 
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/").invalidateHttpSession(true)
                 .and().oauth2Login().userInfoEndpoint().userService(userSecurityService);
 
-        if (environment.acceptsProfiles(Profiles.of("local"))) {
+        if (environment.acceptsProfiles(Profiles.of("local"))
+                || environment.acceptsProfiles(Profiles.of("localdev"))) {
             http.oauth2Login()
                     .defaultSuccessUrl(DEVELOP_ORIGIN)
                     .loginPage(DEVELOP_ORIGIN);
