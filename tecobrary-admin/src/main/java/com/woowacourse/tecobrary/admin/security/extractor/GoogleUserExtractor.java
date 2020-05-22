@@ -45,6 +45,6 @@ public class GoogleUserExtractor implements UserExtractor {
         Admin admin = adminRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("등록된 유저가 아닙니다."));
 
-        return admin.updateUserInfo(name, picture);
+        return adminRepository.save(admin.updateUserInfo(name, picture));
     }
 }

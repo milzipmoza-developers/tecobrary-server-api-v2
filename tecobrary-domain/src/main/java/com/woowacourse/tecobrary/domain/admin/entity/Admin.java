@@ -41,4 +41,9 @@ public class Admin extends DeletableEntity {
         this.picture = picture;
         return this;
     }
+
+    public Admin updateRole(AdminRole role) {
+        this.role = role;
+        return this;
+    }
 }
