@@ -48,6 +48,7 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
         implementation 'com.google.code.gson:gson:2.8.5'
         implementation 'org.apache.httpcomponents:httpclient:4.5.10'
         implementation 'io.jsonwebtoken:jjwt:0.9.1'
