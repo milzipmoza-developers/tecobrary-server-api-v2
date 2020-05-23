@@ -1,11 +1,14 @@
 package com.woowacourse.tecobrary.admin.web.wishbook.service;
 
-import com.woowacourse.tecobrary.admin.web.wishbook.dto.WishBookCancelRequest;
-import com.woowacourse.tecobrary.admin.web.wishbook.dto.WishBookEnrollRequest;
+import com.woowacourse.tecobrary.admin.web.wishbook.dto.WishBookHandleRequest;
 import com.woowacourse.tecobrary.admin.web.wishbook.dto.WishBookSearchRequest;
+import com.woowacourse.tecobrary.admin.web.wishbook.exception.WishBookAlreadyHandledException;
+import com.woowacourse.tecobrary.admin.web.wishbook.exception.WishBookNotFoundException;
+import com.woowacourse.tecobrary.admin.web.wishbook.exception.WishBookStatusChangeFailedException;
 import com.woowacourse.tecobrary.admin.web.wishbook.repository.WishBookAdminRepository;
 import com.woowacourse.tecobrary.admin.web.wishbook.repository.WishBookSearchClause;
 import com.woowacourse.tecobrary.domain.wishbook.entity.WishBook;
+import com.woowacourse.tecobrary.domain.wishbook.entity.WishBookStatus;
 import com.woowacourse.tecobrary.domain.wishbook.repository.WishBookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,15 +33,27 @@ public class WishBookAdminService {
         return wishBookAdminRepository.findAllByCondition(pageable, searchClause);
     }
 
-    public WishBook enrollWishBook(WishBookEnrollRequest request) {
+    public WishBook handleWishBook(WishBookHandleRequest request) {
+        if (WishBookStatus.ENROLLED == request.getWishBookStatus()) {
+            return enrollWishBook(request);
+        }
+
+        if (WishBookStatus.CANCELED == request.getWishBookStatus()) {
+            return cancelWishBook(request);
+        }
+
+        throw new WishBookStatusChangeFailedException(request.getId());
+    }
+
+    private WishBook enrollWishBook(WishBookHandleRequest request) {
         WishBook wishBook = getWishBook(request.getId());
         checkHandled(wishBook);
-        wishBook.enrollWishBook();
+        wishBook.enrollWishBook(request.getReason());
 
         return wishBook;
     }
 
-    public WishBook cancelWishBook(WishBookCancelRequest request) {
+    private WishBook cancelWishBook(WishBookHandleRequest request) {
         WishBook wishBook = getWishBook(request.getId());
         checkHandled(wishBook);
         wishBook.cancelWishBook(request.getReason());
@@ -48,12 +63,12 @@ public class WishBookAdminService {
 
     private WishBook getWishBook(Long id) {
         return wishBookRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 희망도서 입니다."));
+                .orElseThrow(() -> new WishBookNotFoundException(id));
     }
 
     private void checkHandled(WishBook wishBook) {
         if (wishBook.isHandled()) {
-            throw new IllegalArgumentException("이미 처리된 희망도서 입니다.");
+            throw new WishBookAlreadyHandledException(wishBook.getTitle());
         }
     }
 }

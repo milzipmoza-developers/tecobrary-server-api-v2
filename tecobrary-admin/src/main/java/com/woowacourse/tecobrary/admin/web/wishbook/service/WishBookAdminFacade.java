@@ -34,25 +34,15 @@ public class WishBookAdminFacade {
         return new PageImpl<>(dtos, pageable, wishbooks.getTotalElements());
     }
 
-    public WishBookHandleResponse enrollWishBook(boolean sendMessage, WishBookEnrollRequest request) {
-        WishBook wishBook = wishBookAdminService.enrollWishBook(request);
+    public WishBookHandleResponse handleWishBook(boolean sendMessage, WishBookHandleRequest request) {
+        WishBook wishBook = wishBookAdminService.handleWishBook(request);
 
         sendTecorvisMessage(sendMessage, wishBook);
 
         return WishBookHandleResponse.builder()
                 .id(wishBook.getId())
                 .status(wishBook.getStatus())
-                .message("등록 성공")
-                .build();
-    }
-
-    public WishBookHandleResponse cancelWishBook(WishBookCancelRequest request) {
-        WishBook wishBook = wishBookAdminService.cancelWishBook(request);
-
-        return WishBookHandleResponse.builder()
-                .id(wishBook.getId())
-                .status(wishBook.getStatus())
-                .message("취소 성공")
+                .message("처리 성공")
                 .build();
     }
 

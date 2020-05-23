@@ -24,13 +24,8 @@ public class WishBookAdminController {
     }
 
     @PostMapping
-    public WishBookHandleResponse enrollWishBook(@RequestHeader("Send-Tecorvis-Message") boolean sendMessage,
-                                                 @RequestBody WishBookEnrollRequest request) {
-        return wishBookAdminFacade.enrollWishBook(sendMessage, request);
-    }
-
-    @PutMapping
-    public WishBookHandleResponse cancelWishBook(@RequestBody WishBookCancelRequest request) {
-        return wishBookAdminFacade.cancelWishBook(request);
+    public WishBookHandleResponse handleWishBook(@RequestHeader("Send-Tecorvis-Message") boolean sendMessage,
+                                                 @RequestBody WishBookHandleRequest request) {
+        return wishBookAdminFacade.handleWishBook(sendMessage, request);
     }
 }
