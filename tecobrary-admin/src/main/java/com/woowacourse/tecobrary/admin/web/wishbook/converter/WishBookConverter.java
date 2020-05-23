@@ -15,6 +15,7 @@ public class WishBookConverter {
                 .isbn(wishBook.getIsbn())
                 .status(wishBook.getStatus())
                 .requestUser(wishBook.getUser().getName())
+                .createdAt(wishBook.getCreatedAt())
                 .build();
     }
 }
