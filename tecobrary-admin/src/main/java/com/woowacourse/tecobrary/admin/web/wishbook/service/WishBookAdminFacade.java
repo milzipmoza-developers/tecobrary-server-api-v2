@@ -37,7 +37,8 @@ public class WishBookAdminFacade {
     public WishBookHandleResponse handleWishBook(boolean sendMessage, WishBookHandleRequest request) {
         WishBook wishBook = wishBookAdminService.handleWishBook(request);
 
-        sendTecorvisMessage(sendMessage, wishBook);
+//        TODO: 활성화
+//        sendTecorvisMessage(sendMessage, wishBook);
 
         return WishBookHandleResponse.builder()
                 .id(wishBook.getId())
