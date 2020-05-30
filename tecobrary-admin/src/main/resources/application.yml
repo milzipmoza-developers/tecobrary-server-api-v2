@@ -20,6 +20,8 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
+  main:
+    allow-bean-definition-overriding: true
   security:
     oauth2:
       client:
