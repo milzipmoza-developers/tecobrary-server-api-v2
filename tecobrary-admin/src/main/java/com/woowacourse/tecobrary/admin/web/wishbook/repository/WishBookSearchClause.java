@@ -4,6 +4,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.woowacourse.tecobrary.domain.wishbook.entity.WishBookStatus;
 import lombok.Builder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -33,12 +34,14 @@ public class WishBookSearchClause {
 
     private BooleanExpression getRequestUserExpression() {
         return Optional.ofNullable(requestUser)
+                .filter(StringUtils::isNotBlank)
                 .map(wishBook.user.name::eq)
                 .orElse(null);
     }
 
     private BooleanExpression getStatusExpression() {
         return Optional.ofNullable(status)
+                .filter(obj -> false)
                 .map(wishBook.status::eq)
                 .orElse(null);
     }
