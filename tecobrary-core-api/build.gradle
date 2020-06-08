@@ -25,6 +25,8 @@ bootJar {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
     implementation project(':tecobrary-domain')
     implementation project(':tecobrary-external-service')
 }
