@@ -53,4 +53,9 @@ public class User extends ModifiableEntity {
     public String updateAuthorization(String authorization) {
         return this.authorization = authorization;
     }
+
+    public void updateGithubInfo(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }

@@ -20,6 +20,21 @@ spring:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 34785251855bdf649025
+            clientSecret: 1e641eb1355f0e1e5fe66e6c0f95a48ff2a565dc
+            redirectUri: http://localhost:5000
+            scope:
+              - user:email
+jwt-auth:
+  secret: test
+  expire: 86400000 # 하루
+  redirectUri:
+    - http://localhost:5000/oauth2/redirect
 
 server:
   port: 9090
