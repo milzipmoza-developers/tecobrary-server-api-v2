@@ -27,6 +27,8 @@ bootJar {
 dependencies {
     implementation project(':tecobrary-domain')
     implementation project(':tecobrary-external-service')
+
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 task copyEnv(type: Copy) {
